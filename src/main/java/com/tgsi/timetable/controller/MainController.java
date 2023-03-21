@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import com.tgsi.timetable.Entity.Events;
 import com.tgsi.timetable.repository.EventRepo;
 
+
+//for json testing
 // @Controller // This means that this class is a Controller
 // @RequestMapping(path="/demo") // This means URL's start with /demo (after Application path)
 // public class MainController {
@@ -32,17 +34,28 @@ public class MainController {
     @Autowired
 	private EventRepo eRepo;
 
+    //Dashboard Controller
     @GetMapping("/dashboard")
     public String dash(Model model) {
+        // Get Today Event
         LocalDateTime today = LocalDateTime.now();
         List<Events> events = eRepo.findAll();
         List<Events> todaysEvents = events.stream()
         .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
         .collect(Collectors.toList());
-        model.addAttribute("events", todaysEvents);
+        model.addAttribute("today", todaysEvents);
+
+        // Get Tommorow Event
+        LocalDateTime tom = LocalDateTime.now().plusDays(1);
+        List<Events> tomEvents = events.stream()
+        .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
+        .collect(Collectors.toList());
+        model.addAttribute("tommorow", tomEvents);
         return "dashboard";
     }
 
+
+    //Timetable Controller
     @GetMapping("/timetable")
     public String timetable() {
         return "timetable";

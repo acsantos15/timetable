@@ -9,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
+//event database model
 @Entity
 @Table(name = "events")
 public class Events {
@@ -29,6 +30,8 @@ public class Events {
     @Column(name = "end_time")
     private LocalDateTime endTime;
 
+
+    // getters and setters
 
       public Integer getId() {
         return id;
