@@ -4,20 +4,30 @@ document.addEventListener('DOMContentLoaded', function() {
     headerToolbar: {
         left: 'prev,next today',
         center: 'title',
-        right: 'dayGridMonth,dayGridWeek,timeGridDay,list myCustomButton',
+        right: 'dayGridMonth,timeGridWeek,timeGridDay,list myCustomButton',
         
     },
     customButtons: {
         myCustomButton: {
             text: 'Add Event',
             click: function() {
-            $('#addEvent').show();
+            $('#addEventModal').show();
             }
         },
+    },
+    editable: false,
+    events: {
+        url: '/events',
     },
     height: 680,
     aspectRatio: 3,
     });
 
     calendar.render();
+});
+
+$(document).ready(function(){	
+    $('.btn-close').click(function(e){
+        $('#addEventModal').hide();                 
+    });
 });

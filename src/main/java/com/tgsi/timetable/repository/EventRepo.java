@@ -1,7 +1,6 @@
 package com.tgsi.timetable.repository;
 
 
-
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import com.tgsi.timetable.Entity.Events;

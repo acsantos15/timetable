@@ -12,15 +12,15 @@
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
 
 <!-- Static files -->
-<link th:href="@{/css/style.css}" rel="stylesheet" />
-<script type="text/javascript" th:src="@{/js/fullcalendar.js}"></script>
+<link rel="stylesheet" type="text/css" href="/css/style.css" />
+<script src="/js/fullcalendar.js"></script>
 </head>
 <style>
 
 </style>
 <body>
 	<!-- create navigation bar ( header) -->
-    <div th:replace="header :: header"></div>
+    <div th:replace="~{header :: header}"></div>
       
     <!-- Todays Event Tables -->
     <div class="container">

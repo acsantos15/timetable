@@ -1,4 +1,8 @@
 /* FullCalendar CSS */
 .fc-day-today{
-	background: #198754 !important;
+	background: #e5ff9d !important;
+}
+
+.fc-event {
+    color: 	#198754;
 }

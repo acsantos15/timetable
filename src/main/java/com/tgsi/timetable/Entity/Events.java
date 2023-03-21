@@ -2,6 +2,8 @@ package com.tgsi.timetable.Entity;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -24,11 +26,13 @@ public class Events {
     @Column(name = "description")
     private String description;
     
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(name = "start_time")
-    private LocalDateTime startTime;
+    private LocalDateTime start;
     
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(name = "end_time")
-    private LocalDateTime endTime;
+    private LocalDateTime end;
 
 
     // getters and setters
@@ -58,19 +62,19 @@ public class Events {
       }
 
       public LocalDateTime getStart() {
-        return startTime;
+        return start;
       }
     
-      public void setStart(LocalDateTime startTime) {
-        this.startTime = startTime;
+      public void setStart(LocalDateTime start) {
+        this.start = start;
       }
 
       public LocalDateTime getEnd() {
-        return endTime;
+        return end;
       }
     
-      public void setEnd(LocalDateTime endTime) {
-        this.endTime = endTime;
+      public void setEnd(LocalDateTime end) {
+        this.end = end;
       }
 
 }
