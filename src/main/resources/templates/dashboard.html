@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+<meta charset="ISO-8859-1">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dashboard</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+
+</head>
+<style>
+
+</style>
+<body>
+	<!-- create navigation bar ( header) -->
+    <div th:replace="header :: header"></div>
+      
+
+    <div class="container">
+		
+        <h3>Events for today</h3>
+        
+        <hr/>
+    
+        <table class="table table-bordered table-striped">
+        
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Description</th>
+                    <th>Start</th>
+                    <th>End</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="event : ${events}">
+                    <td th:text="${event.title}"></td>
+                    <td th:text="${event.description}"></td>
+                    <td th:text="${#temporals.format(event.start, 'hh:mm a')}"></td>
+                    <td th:text="${#temporals.format(event.end, 'hh:mm a')}"></td>
+                </tr>
+            </tbody>
+
+
+
+            
+        </table>
+    </div>
+</body>
+</html>

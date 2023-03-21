@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Header</title>
+</head>
+<body>
+  <header>
+    <nav class="navbar bg-success">
+        <div class="container-fluid">
+            <a class="navbar-brand">Timetable</a>
+            <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-light" type="submit">Search</button>
+            </form>
+            <button class="btn btn-outline-dark" type="button">Logout</button>
+        </div>
+    </nav>
+
+    <ul class="nav justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active" aria-current="page" th:href="@{/dashboard}">Dashboard</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/timetable}">Timetable</a>
+        </li>
+    </ul>
+  </header>
+</body>
+</html>
