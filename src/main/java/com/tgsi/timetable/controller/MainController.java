@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tgsi.timetable.Entity.Events;
@@ -47,7 +49,15 @@ public class MainController {
 
     // return the timetable page
     @GetMapping("/timetable")
-    public String timetable(Model model) {
+    public String formEvent(Model model) {
+        model.addAttribute("event", new Events());
+        return "timetable";
+    }
+
+    @PostMapping("/timetable")
+    public String saveEvent(@ModelAttribute Events event, Model model) {
+        eRepo.save(event);
+        model.addAttribute("message", "Event Created");
         return "timetable";
     }
     
