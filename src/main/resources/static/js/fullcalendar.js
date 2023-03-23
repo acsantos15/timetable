@@ -15,24 +15,9 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         },
     },
-    defaultDate: new Date(),
     editable: false,
-    eventLimit: true,
     events: {
         url: '/events',
-    },
-    eventClick: function(info) {
-        $.ajax({
-            url: '/timetable/'+ info.event.id,
-            type: 'GET',
-            success: function(response) {
-                $('#viewEventModal').modal('show');
-                $('#eventTitle').text(response.title);
-                $('#eventDescription').text(response.description);
-                $('#eventStart').text(response.start);
-                $('#eventEnd').text(response.end);
-            }
-        });
     },
     height: 680,
     aspectRatio: 3,
@@ -43,7 +28,17 @@ document.addEventListener('DOMContentLoaded', function() {
 
 $(document).ready(function(){	
     $('.btn-close').click(function(e){
-        $('#addEventModal').hide();                 
+        $('#addEventModal').hide();
+        $('#viewEventModal').hide();           
+    });
+
+    $('#saveEventBtn').click(function(e){
+        $('#addEventModal').hide();    
+        Swal.fire(
+            'Appointment Saved',
+            ' ',
+            'success'
+        )       
     });
 
 

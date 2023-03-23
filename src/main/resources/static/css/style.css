@@ -1,8 +1,58 @@
 /* FullCalendar CSS */
 .fc-day-today{
-	background: #e5ff9d !important;
+	background: #F1D280 !important;
 }
 
 .fc-event {
     color: 	#198754;
 }
+
+/*calendar header*/
+.fc-toolbar h2{
+    display: inline;
+    vertical-align: middle;
+    color: #517C63;
+    font-style: normal;
+    font-weight: 700;
+}
+
+.fc .fc-prev-button, 
+.fc .fc-next-button{
+    background-color: rgba(171, 156, 129, 0.51);
+    padding: 5px;
+}
+
+.fc .fc-prev-button{
+    margin-left:20px;
+
+}
+
+.fc .fc-next-button{
+    margin:5px;
+
+}
+
+.fc .fc-prev-button:hover, 
+.fc .fc-next-button:hover{
+    background-color: #AB9C81;
+}
+
+.fc .fc-button-group .fc-dayGridMonth-button, 
+.fc .fc-button-group .fc-timeGridWeek-button, 
+.fc .fc-button-group .fc-timeGridDay-button, 
+.fc .fc-button-group .fc-list-button{
+    background-color: #75818c;
+}
+
+.fc .fc-myCustomButton-button{
+    background-color: #517C63;
+}
+
+.fc .fc-myCustomButton-button:hover{
+    background-color: #517C63;
+}
+
+.fc .fc-button-primary{
+    border: none;
+}
+

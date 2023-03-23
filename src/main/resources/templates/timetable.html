@@ -12,10 +12,7 @@
 
 <!-- Fullcalendar CDN -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
-
-<!-- SweetAlert CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
+<script src="https://cdn.jsdelivr.net/npm/moment@2.29.4/moment.min.js"></script>
 
 
 <!-- Static files -->
@@ -29,13 +26,13 @@
 
 
     <!-- Calendar div -->
-    <div class="card" style="width: 85%; margin:60px auto 40px auto;">
+    <div class="card" style="width: 85%;">
         <div class="card-body">
           <div id="calendar"></div>
         </div>
     </div>
 
-    <!-- Add event -->
+
     <div class="modal" id="addEventModal" tabindex="-1">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -44,61 +41,70 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="addEventForm" th:action="@{/timetable/save}" th:object="${timetable}" method="post">
+            <form>
               <div class="mb-3">
-                <label for="titleInput" class="form-label">Title</label>
-                <input type="text" class="form-control" id="titleInput" name="title" th:field="*{title}"/>
+                <label for="exampleInputEmail1" class="form-label">Email address</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
               </div>
               <div class="mb-3">
-                <label for="passInput" class="form-label">Description</label>
-                <input type="text" class="form-control" id="descInput" name="description" th:field="*{description}"/>
+                <label for="exampleInputPassword1" class="form-label">Password</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="startpicker">Start</label>
-                <div class="col-sm-10">          
-                    <input class="form-control" type="datetime-local" id="startInput" name="start" th:field="*{start}"/>
-                </div>
+              <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="exampleCheck1">
+                <label class="form-check-label" for="exampleCheck1">Check me out</label>
               </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="endpicker">End</label>
-                <div class="col-sm-10">          
-                    <input class="form-control" type="datetime-local" id="endInput" name="end" th:field="*{end}"/>
-                </div>
-              </div>      
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </form>
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-            <button type="submit" class="btn btn-primary" id="addEventBtn">Save changes</button>
-          </form>
+            <button type="button" class="btn btn-primary">Save changes</button>
           </div>
-        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="reset" class="btn btn-secondary" data-bs-dismiss="modal">Reset</button>
+        <button type="button" class="btn btn-success" id="saveEventBtn">Save</button>
+      </form>
       </div>
     </div>
-    
-    <!-- View Event Modal -->
-    <div class="modal" id="viewEventModal" tabindex="-1">
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Event Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <p class="fw-bold">Title: </p><p id="eventTitle"></p>
-            <p class="fw-bold">Description: </p><p id="eventDescription"></p>
-            <p class="fw-bold">Start: </p><p id="eventStart"></p>
-            <p class="fw-bold">End: </p><p id="eventEnd"></p>
-          </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger">Remove</button>
-            <button type="button" class="btn btn-success">Edit</button>
-          </div>
+  </div>
+
+
+<!-- View Event Modal -->
+<div class="modal" id="viewEventModal" tabindex="-1">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">View Appointment</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="mb-3 row">
+          <label for="viewTitle" class="col-sm2 col-form-label">Title</label>
+          <p id="viewTitle"></p>
+        </div>
+        <div class="mgreetingb-3 row">
+          <label for="viewDesc" class="col-sm-2 col-form-label">Description</label>
+          <p id="viewDesc"></p>
+        </div>
+        <div class="mb-3 row">
+          <label for="viewStart" class="col-sm-2 col-form-label">Start</label>
+          <p id="viewStart"></p>
+        </div>
+        <div class="mb-3 row">
+          <label for="viewEnd" class="col-sm-2 col-form-label">End</label>
+          <p id="viewEnd"></p>
         </div>
       </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-success" data-bs-dismiss="modal">Edit</button>
+        <button type="button" class="btn btn-danger">Remove</button>
+      </div>
     </div>
-
-    
-
+  </div>
+</div>
 </body>
 </html>
 
