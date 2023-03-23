@@ -18,73 +18,92 @@
 <style>
 
 </style>
-<body>
+<body style="background-color: #F7F7F7;">
 	<!-- create navigation bar ( header) -->
     <div th:replace="~{header :: header}"></div>
       
-    <!-- Todays Event Tables -->
-    <div class="container">
+    <div class="card" style="background-color: white; margin:60px; float:left; width:50%;">
+        <!-- Todays Event Tables -->
+    <div class="container" style="padding-top: 20px;">
 		
         <h3>Events for today</h3>
         
         <hr/>
     
-        <table class="table table-bordered table-striped">
-        
-            <thead>
+        <!--i-d-delete ito pag may event na-->
+        <div class="card" style="background-color:cadetblue; margin:10px">
+            <table class="table table-borderless" style="width:100%; color:white;">
                 <tr>
                     <th>Title</th>
-                    <th>Description</th>
-                    <th>Start</th>
-                    <th>End</th>
                 </tr>
-            </thead>
-            <tbody>
+                <tr>
+                    <td>Description</td>
+                </tr>
+                <tr>
+                    <td style="width:25%">Start</td>
+                    <td>End</td>
+                </tr>
+            </table>
+        </div> 
+        <!--hanggang dito-->
+
+        <div class="card" style="background-color:cadetblue; margin:10px">
+            <table class="table table-borderless" style="width:100%; color:white;">
+        
                 <tr th:each="todayevent : ${today}">
-                    <td th:text="${todayevent.title}"></td>
+                    <th th:text="${todayevent.title}"></th>
+                </tr>
+                <tr th:each="todayevent : ${today}">
                     <td th:text="${todayevent.description}"></td>
-                    <td th:text="${#temporals.format(todayevent.start, 'hh:mm a')}"></td>
+                </tr>
+                <tr th:each="todayevent : ${today}">
+                    <td th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" style="width:25%"></td>
                     <td th:text="${#temporals.format(todayevent.end, 'hh:mm a')}"></td>
                 </tr>
-            </tbody>
-
-
-
-            
-        </table>
+            </table>
+        </div>        
     </div>
 
 
-    <!-- Tommorow event table -->
-    <div class="container">
-		
-        <h3>Events for tommorow</h3>
-        
-        <hr/>
-    
-        <table class="table table-bordered table-striped">
-        
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Description</th>
-                    <th>Start</th>
-                    <th>End</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr th:each="tomevent : ${tommorow}">
-                    <td th:text="${tomevent.title}"></td>
-                    <td th:text="${tomevent.description}"></td>
-                    <td th:text="${#temporals.format(tomevent.start, 'hh:mm a')}"></td>
-                    <td th:text="${#temporals.format(tomevent.end, 'hh:mm a')}"></td>
-                </tr>
-            </tbody>
-
-
-
+        <!-- Tommorow event table -->
+        <div class="container">
             
-        </table>
+            <h3>Events for tommorow</h3>
+            
+            <hr/>
+
+            <!--i-d-delete ito pag may event na-->
+            <div class="card" style="background-color:darkslategrey; margin:10px">
+                <table class="table table-borderless" style="width:100%; color:white;">
+                    <tr>
+                        <th>Title</th>
+                    </tr>
+                    <tr>
+                        <td>Description</td>
+                    </tr>
+                    <tr>
+                        <td style="width:25%">Start</td>
+                        <td>End</td>
+                    </tr>
+                </table>
+            </div> 
+            <!--hanggang dito-->
+        
+            <div class="card" style="background-color:darkslategrey; margin:10px">
+                <table class="table table-borderless" style="width:100%; color:white;">
+                    <tr th:each="tomevent : ${tommorow}">
+                        <th th:text="${tomevent.title}"></th>
+                    </tr>
+                    <tr th:each="tomevent : ${tommorow}">
+                        <td th:text="${tomevent.description}"></td>
+                    </tr>
+                    <tr th:each="tomevent : ${tommorow}">
+                        <td th:text="${#temporals.format(tomevent.start, 'hh:mm a')}" style="width:25%"></td>
+                        <td th:text="${#temporals.format(tomevent.end, 'hh:mm a')}"></td>
+                    </tr>
+                </table>
+            </div>             
+        </div>
     </div>
 </body>
 </html>
