@@ -2,18 +2,33 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
-            left: 'prev,next today',
-            center: 'title',
+            left: 'title,prev,next',
+            center:'',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,list myCustomButton',
+            
+        },
+        views: {
             
         },
         customButtons: {
             myCustomButton: {
-                text: 'Add Appointment',
+                text: '+ Add Appointment',
                 click: function() {
                     $('#addEventModal').show();
                 }
             },
+            dayGridMonth: { 
+                text: 'Month' 
+            },
+            timeGridWeek: { 
+                text: 'Week' 
+            },
+            timeGridDay: { 
+                text: 'Day' 
+            },
+            list: { 
+                text: 'List' 
+            }
         },
         editable: true,
         events: {
@@ -25,6 +40,7 @@ document.addEventListener('DOMContentLoaded', function() {
             $('#viewEventModal').show();
             alert('Title: ' + info.event.title);
         }
+
     });
 
     calendar.render();
