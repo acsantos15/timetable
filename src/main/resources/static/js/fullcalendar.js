@@ -1,26 +1,56 @@
 document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
-    headerToolbar: {
-        left: 'prev,next today',
-        center: 'title',
-        right: 'dayGridMonth,timeGridWeek,timeGridDay,list myCustomButton',
-        
-    },
-    customButtons: {
-        myCustomButton: {
-            text: 'Add Event',
-            click: function() {
-            $('#addEventModal').show();
+        headerToolbar: {
+            left: 'title,prev,next',
+            center:'',
+            right: 'dayGridMonth,timeGridWeek,timeGridDay,list myCustomButton',
+            
+        },
+        views: {
+            
+        },
+        customButtons: {
+            myCustomButton: {
+                text: '+ Add Appointment',
+                click: function() {
+                    $('#addEventModal').show();
+                }
+            },
+            dayGridMonth: { 
+                text: 'Month' 
+            },
+            timeGridWeek: { 
+                text: 'Week' 
+            },
+            timeGridDay: { 
+                text: 'Day' 
+            },
+            list: { 
+                text: 'List' 
             }
         },
-    },
-    editable: false,
-    events: {
-        url: '/events',
-    },
-    height: 680,
-    aspectRatio: 3,
+        defaultDate: new Date(),
+        editable: false,
+        eventLimit: true,
+        events: {
+            url: '/events',
+        },
+        eventClick: function(info) {
+            $.ajax({
+                url: '/timetable/'+ info.event.id,
+                type: 'GET',
+                success: function(response) {
+                    $('#viewEventModal').modal('show');
+                    $('#eventTitle').text(response.title);
+                    $('#eventDescription').text(response.description);
+                    $('#eventStart').text(response.start);
+                    $('#eventEnd').text(response.end);
+                }
+            });
+        },
+        height: 680,
+        aspectRatio: 3,
     });
 
     calendar.render();
