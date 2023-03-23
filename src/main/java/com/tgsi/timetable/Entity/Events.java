@@ -27,11 +27,11 @@ public class Events {
     private String description;
     
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Column(name = "start_time")
+    @Column(name = "start")
     private LocalDateTime start;
     
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Column(name = "end_time")
+    @Column(name = "end")
     private LocalDateTime end;
 
 
