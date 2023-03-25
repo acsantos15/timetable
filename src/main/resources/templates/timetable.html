@@ -5,9 +5,11 @@
 <meta charset="ISO-8859-1">
 <title>Timetable</title>
 
-<!-- Bootstrap and Jquery CDN -->
+<!-- Bootstrap CDN -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Jquery CDN -->
 <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 
 <!-- Fullcalendar CDN -->
@@ -37,21 +39,25 @@
 
     <!-- Add event -->
     <div class="modal" id="addEventModal" tabindex="-1">
-      <div class="modal-dialog">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Add Event</h5>
+            <h5 class="modal-title">Modal title</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="addEventForm" th:action="@{/timetable/save}" th:object="${timetable}" method="post">
+            <form id="addEventForm" th:action="@{/add/save}" th:object="${timetable}" method="post">
               <div class="mb-3">
                 <label for="titleInput" class="form-label">Title</label>
                 <input type="text" class="form-control" id="titleInput" name="title" th:field="*{title}"/>
               </div>
               <div class="mb-3">
-                <label for="passInput" class="form-label">Description</label>
+                <label for="descInput" class="form-label">Description</label>
                 <input type="text" class="form-control" id="descInput" name="description" th:field="*{description}"/>
+              </div>
+              <div class="mb-3">
+                <label for="locInput" class="form-label">Location</label>
+                <input type="text" class="form-control" id="locInput" name="location" th:field="*{location}"/>
               </div>
               <div class="form-group">
                 <label class="control-label col-sm-2" for="startpicker">Start</label>
@@ -67,8 +73,54 @@
               </div>      
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="reset" class="btn btn-secondary">Clear</button>
             <button type="submit" class="btn btn-primary" id="addEventBtn">Save changes</button>
+          </form>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!-- Edit event -->
+    <div class="modal" id="editEventModal">
+      <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title">Edit Event</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <form id="editEventForm" method="POST">
+              <input type="hidden" id="editId">
+              <div class="mb-3">
+                <label for="editTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="editTitle" name="title" />
+              </div>
+              <div class="mb-3">
+                <label for="editDesc" class="form-label">Description</label>
+                <input type="text" class="form-control" id="editDesc" name="description"/>
+              </div>
+              <div class="mb-3">
+                <label for="editLoc" class="form-label">Location</label>
+                <input type="text" class="form-control" id="editLoc" name="location"/>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="editStart">Start</label>
+                <div class="col-sm-10">          
+                    <input class="form-control" type="datetime-local" id="editStart" name="start"/>
+                </div>
+              </div>
+              <div class="form-group">
+                <label class="control-label col-sm-2" for="editEnd">End</label>
+                <div class="col-sm-10">          
+                    <input class="form-control" type="datetime-local" id="editEnd" name="end" />
+                </div>
+              </div>      
+          </div>
+          <div class="modal-footer">
+            <button type="reset" class="btn btn-secondary">Clear</button>
+            <button type="submit" class="btn btn-primary" id="saveeditEventBtn">Save changes</button>
           </form>
           </div>
         </div>
@@ -76,29 +128,28 @@
     </div>
     
     <!-- View Event Modal -->
-    <div class="modal" id="viewEventModal" tabindex="-1">
-      <div class="modal-dialog">
+    <div class="modal" id="viewEventModal">
+      <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">Event Details</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
+            <input type="hidden" id="eventId"></input>
             <p class="fw-bold">Title: </p><p id="eventTitle"></p>
             <p class="fw-bold">Description: </p><p id="eventDescription"></p>
+            <p class="fw-bold">Location: </p><p id="eventLocation"></p>
             <p class="fw-bold">Start: </p><p id="eventStart"></p>
             <p class="fw-bold">End: </p><p id="eventEnd"></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger">Remove</button>
-            <button type="button" class="btn btn-success">Edit</button>
+            <button type="button" class="btn btn-danger" id="removeEventBtn">Remove</button>
+            <button type="button" class="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" data-bs-toggle="modal">Edit</button>
           </div>
         </div>
       </div>
     </div>
-
-    
-
 </body>
 </html>
 

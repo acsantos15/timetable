@@ -18,13 +18,16 @@ public class Events {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Long id;
     
     @Column(name = "title")
     private String title;
     
     @Column(name = "description")
     private String description;
+
+    @Column(name = "location")
+    private String location;
     
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     @Column(name = "start")
@@ -37,11 +40,11 @@ public class Events {
 
     // getters and setters
 
-      public Integer getId() {
+      public Long getId() {
         return id;
       }
     
-      public void setId(Integer id) {
+      public void setId(Long id) {
         this.id = id;
       }
     
@@ -59,6 +62,14 @@ public class Events {
     
       public void setDescription(String description) {
         this.description = description;
+      }
+
+      public String getLocation() {
+        return location;
+      }
+    
+      public void setLocation(String location) {
+        this.location = location;
       }
 
       public LocalDateTime getStart() {

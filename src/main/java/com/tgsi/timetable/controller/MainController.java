@@ -2,6 +2,7 @@ package com.tgsi.timetable.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,15 +11,22 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tgsi.timetable.Entity.Events;
 import com.tgsi.timetable.repository.EventRepo;
+
+import jakarta.persistence.Entity;
+import jakarta.transaction.Transactional;
 
 @Controller
 public class MainController {
@@ -46,7 +54,7 @@ public class MainController {
         return "dashboard";
     }
 
-    // Get All events and return a json
+    // Get All Events 
     @GetMapping("/events")
     public @ResponseBody Iterable<Events> getAllEvents() {
       return eRepo.findAll();
@@ -71,22 +79,47 @@ public class MainController {
     
 
     // Save Event
-    @PostMapping("/timetable/save")
+    @PostMapping("/add/save")
     public String saveEvent(@ModelAttribute("timetable") @Validated Events event, BindingResult result) {
         if (result.hasErrors()) {
-            return "timetable"; // Return to the form if there are validation errors
+            return "timetable";
         }
-
-        eRepo.save(event); // Save the event data to the database
-
-        return "redirect:/timetable"; // Redirect to the events list page
+        eRepo.save(event);
+        return "redirect:/timetable";
     }
 
+    // Get Invdividual Event
     @GetMapping("/timetable/{id}")
     @ResponseBody
     public Events getEventById(@PathVariable("id") Long id) {
         return eRepo.findById(id).orElse(null);
     }
 
+    // Delete Event
+    @DeleteMapping("/delete/{id}")
+    @Transactional
+    public ResponseEntity<Void> deleteEvent(@PathVariable("id") Long id) {
+        eRepo.deleteById(id);
+        return ResponseEntity.ok().build();
+    }
+
+    // Edit Event
+    @PutMapping("edit/{id}")
+    public Events updateEvent(@PathVariable("id") Long eventId, @RequestBody Events updatedEvent) {
+        Events existingEvent = eRepo.findById(eventId)
+                                                .orElseThrow(() -> new NotFoundException("Event not found"));
+
+        // Update the fields on the existing event object with values from the updated event object
+        existingEvent.setTitle(updatedEvent.getTitle());
+        existingEvent.setDescription(updatedEvent.getDescription());
+        existingEvent.setLocation(updatedEvent.getLocation());
+        existingEvent.setStart(updatedEvent.getStart());
+        existingEvent.setEnd(updatedEvent.getEnd());
+
+        // Save the updated event object to the database
+        Events savedEvent = eRepo.save(existingEvent);
+
+        return savedEvent;
+    }
     
 }

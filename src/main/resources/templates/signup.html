@@ -5,26 +5,42 @@
    </head>
    <body>
       <h1>Signup</h1>
-      <form method="post" th:action="@{/signup}">
-        <label>FirstName:</label>
-        <input type="text" th:field="${user.firstname}" />
+      <form action="createUser" method="post">
 
-        <label>LastName:</label>
-        <input type="text" th:field="${user.lastname}" />
-
-        <label>Username:</label>
-        <input type="text" th:field="${user.username}" />
-
-        <label>Email:</label>
-        <input type="text" th:field="${user.email}" />
-
-        <label>Password:</label>
-        <input type="text" th:field="${user.password}" />
-
-        <br/><br/>
-
-        <button type="submit">Create account</button>
-      </form>
+         <!-- for user details -->
+         <div class="container">
+             <div class="card-header">PERSONAL INFORMATION</div>
+             <div class="card-body">
+                 <div class="mb-3">
+                     <input class="form-control" type="text" placeholder="First Name" name="firstname">
+                 </div>
+                 <div class="mb-3">
+                     <input class="form-control" type="text" placeholder="Last Name" name="lastname">
+                 </div>
+                 <div class="mb-3">
+                     <input class="form-control" type="text" placeholder="Home Address" name="address">
+                 </div>
+                 <div class="mb-3">
+                     <input class="form-control" type="text" placeholder="Contact No." name="contactNo">
+                 </div>
+             </div>
+             <div class="card-header">ACCOUNT INFORMATION</div>
+             <div class="card-body">
+                 <div class="mb-3">
+                     <input class="form-control" type="text" placeholder="Username" name="username">
+                 </div>
+                 <div class="mb-3">
+                     <input class="form-control" type="email" placeholder="Email" name="email">
+                 </div>
+                 <div class="mb-3">
+                     <input class="form-control" type="password" placeholder="Password" name="password">
+                 </div>
+                 <div class="mb-3">
+                     <input class="form-control" type="password" placeholder="Confirm Password" name="confirmPassword">
+                 </div>
+                 <button type="submit" class="btn" style="background-color: #517C63; color:white">Sign In</button>
+             </div>
+         </div>
 
       <p th:text="${error}" th:if="${error}"></p>
 
