@@ -18,6 +18,12 @@
 <!-- SweetAlert CDN -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
+<!-- FontAwesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+<!-- Moment CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
 
 
 <!-- Static files -->
@@ -29,9 +35,19 @@
 	<!-- create navigation bar ( header) -->
 	<div th:replace="~{header :: header}"></div>
 
+  <!-- Navigation -->
+  <ul class="nav nav-tabs justify-content-center">
+    <li class="nav-item">
+        <a class="nav-link"  th:href="@{/dashboard}"><i class="fa-solid fa-house fa-lg"></i> Dashboard</h></a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" th:href="@{/timetable}"><i class="fa-solid fa-calendar-days"></i> Timetable</a>
+    </li>
+</ul>
+
 
     <!-- Calendar div -->
-    <div class="card" style="width: 85%; margin:60px auto 40px auto;">
+    <div class="card" style="width: 85%; margin:auto;">
         <div class="card-body">
           <div id="calendar"></div>
         </div>
@@ -42,11 +58,11 @@
       <div class="modal-dialog modal-dialog-centered">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Modal title</h5>
+            <h5 class="modal-title">Add Event</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="addEventForm" th:action="@{/add/save}" th:object="${timetable}" method="post">
+            <form id="addEventForm" th:action="@{/add}" th:object="${timetable}" method="post">
               <div class="mb-3">
                 <label for="titleInput" class="form-label">Title</label>
                 <input type="text" class="form-control" id="titleInput" name="title" th:field="*{title}"/>
@@ -91,7 +107,7 @@
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
-            <form id="editEventForm" method="POST">
+            <form id="editEventForm" method="put" th:action="@{/edit/{id}(id=${#editId})}">
               <input type="hidden" id="editId">
               <div class="mb-3">
                 <label for="editTitle" class="form-label">Title</label>

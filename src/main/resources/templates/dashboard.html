@@ -6,10 +6,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Dashboard</title>
 
-<!-- Bootstrap and Jquery CDN -->
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<!-- Bootstrap CDN -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+<!-- Jquery CDN -->
 <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+
+<!-- Fullcalendar CDN -->
 <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
+
+<!-- SweetAlert CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- FontAwesome CDN -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
 <!-- Static files -->
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
@@ -21,72 +32,55 @@
 <body style="background-color: #F7F7F7;">
 	<!-- create navigation bar ( header) -->
     <div th:replace="~{header :: header}"></div>
-      
-    <div class="card" style="background-color: white; margin:60px; float:left; width:50%;">
-        <!-- Todays Event Tables -->
-    <div class="container" style="padding-top: 20px;">
-		
-        <h3>Events for today</h3>
-        
-        <hr/>
 
-        <div class="card" style="background-color:cadetblue; margin:10px">
-            <table class="table table-borderless" style="width:100%; color:white;">
-        
-                <tr th:each="todayevent : ${today}">
-                    <th th:text="${todayevent.title}"></th>
-                </tr>
-                <tr th:each="todayevent : ${today}">
-                    <td th:text="${todayevent.description}"></td>
-                </tr>
-                <tr th:each="todayevent : ${today}">
-                    <td th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" style="width:25%"></td>
-                    <td th:text="${#temporals.format(todayevent.end, 'hh:mm a')}"></td>
-                </tr>
-            </table>
-        </div>        
-    </div>
+    <!-- Navigation -->
+    <ul class="nav nav-tabs justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active"  th:href="@{/dashboard}"><i class="fa-solid fa-house fa-lg"></i> Dashboard</h></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/timetable}"><i class="fa-solid fa-calendar-days"></i> Timetable</a>
+        </li>
+    </ul>
 
-
-        <!-- Tommorow event table -->
-        <div class="container">
-            
-            <h3>Events for tommorow</h3>
-            
-            <hr/>
-
-            <!--i-d-delete ito pag may event na-->
-            <div class="card" style="background-color:darkslategrey; margin:10px">
-                <table class="table table-borderless" style="width:100%; color:white;">
-                    <tr>
-                        <th>Title</th>
-                    </tr>
-                    <tr>
-                        <td>Description</td>
-                    </tr>
-                    <tr>
-                        <td style="width:25%">Start</td>
-                        <td>End</td>
-                    </tr>
-                </table>
-            </div> 
-            <!--hanggang dito-->
-        
-            <div class="card" style="background-color:darkslategrey; margin:10px">
-                <table class="table table-borderless" style="width:100%; color:white;">
-                    <tr th:each="tomevent : ${tommorow}">
-                        <th th:text="${tomevent.title}"></th>
-                    </tr>
-                    <tr th:each="tomevent : ${tommorow}">
-                        <td th:text="${tomevent.description}"></td>
-                    </tr>
-                    <tr th:each="tomevent : ${tommorow}">
-                        <td th:text="${#temporals.format(tomevent.start, 'hh:mm a')}" style="width:25%"></td>
-                        <td th:text="${#temporals.format(tomevent.end, 'hh:mm a')}"></td>
-                    </tr>
-                </table>
-            </div>             
+    
+    <div class="card" style="margin: 20px; width: 50%;">
+        <div class="card-header">
+            <h3>Today</h3>
+        </div>
+        <div class="card-body">
+            <div class="card text-bg-success mb-3" th:each="todayevent : ${today}">
+                <div class="row g-0" >
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h5 class="card-title" th:text="${todayevent.title}"></h5>
+                        <p class="card-text" th:text="${todayevent.description}"></p>
+                        <p class="card-text"><small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
+
+    <div class="card" style="margin: 20px; width: 50%;">
+        <div class="card-header">
+            <h3>Tommorow</h3>
+        </div>
+        <div class="card-body">
+            <div class="card text-bg-success mb-3" th:each="tomevent : ${tommorow}">
+                <div class="row g-0" >
+                    <div class="col-md-8">
+                        <div class="card-body">
+                        <h5 class="card-title" th:text="${tomevent.title}"></h5>
+                        <p class="card-text" th:text="${tomevent.description}"></p>
+                        <p class="card-text"><small th:text="${#temporals.format(tomevent.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(tomevent.start, 'hh:mm a')}" ></small></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>

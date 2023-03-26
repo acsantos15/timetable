@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -79,7 +80,7 @@ public class MainController {
     
 
     // Save Event
-    @PostMapping("/add/save")
+    @PostMapping("/add")
     public String saveEvent(@ModelAttribute("timetable") @Validated Events event, BindingResult result) {
         if (result.hasErrors()) {
             return "timetable";
@@ -104,7 +105,9 @@ public class MainController {
     }
 
     // Edit Event
+    
     @PutMapping("edit/{id}")
+    @ResponseBody
     public Events updateEvent(@PathVariable("id") Long eventId, @RequestBody Events updatedEvent) {
         Events existingEvent = eRepo.findById(eventId)
                                                 .orElseThrow(() -> new NotFoundException("Event not found"));
@@ -121,5 +124,30 @@ public class MainController {
 
         return savedEvent;
     }
+
+    // @PutMapping("/edit/{id}")
+    // @ResponseBody
+    // public ResponseEntity<Events> editEvent(@PathVariable Long id, @RequestBody Events updatedEvent) {
+    //     // 1. Fetch the event from the database using the ID
+    //     Optional<Events> eventOptional = eRepo.findById(id);
+    //     if (!eventOptional.isPresent()) {
+    //         return ResponseEntity.notFound().build();
+    //     }
+    //     Events existingEvent = eventOptional.get();
+
+    //     // 2. Update the fields of the existing event with the new data from the updated event
+    //     existingEvent.setTitle(updatedEvent.getTitle());
+    //     existingEvent.setDescription(updatedEvent.getDescription());
+    //     existingEvent.setLocation(updatedEvent.getLocation());
+    //     existingEvent.setStart(updatedEvent.getStart());
+    //     existingEvent.setEnd(updatedEvent.getEnd());
+    //     // Add more fields as needed
+
+    //     // 3. Save the updated event to the database
+    //     Events savedEvent = eRepo.save(existingEvent);
+
+    //     // 4. Return the updated event in the response
+    //     return ResponseEntity.ok(savedEvent);
+    // }
     
 }

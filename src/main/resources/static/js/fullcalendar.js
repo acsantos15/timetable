@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         },
-        height: 680,
+        height: 650,
         aspectRatio: 3,
     });
 
@@ -51,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function() {
 $(document).ready(function(){	
     // Ajax call to populate edit event
     $('#editEventBtn').click(function(e){
+        e.preventDefault();
         $('#viewEventModal').hide();   
         var eventId = $("#eventId").val();
         $.ajax({
@@ -72,9 +73,52 @@ $(document).ready(function(){
         }); 
     });
 
+    $('#saveeditEventBtn').click(function(e){
+        e.preventDefault();
+        var eventId = $("#editId").val();
+        var title = $("#editTitle").val();
+        var desc = $("#editDesc").val();
+        var loc = $("#editLoc").val();
+        var start = $("#editStart").val();
+        var fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
+        var end = $("#editId").val();
+        var fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
+        var formData = {
+            "title": title,
+            "description": desc,
+            "location": loc,
+            "start": fStart,
+            "end": fEnd,
+        };
+        $.ajax({
+            url: "/edit/" + eventId,
+            type: 'PUT',
+            contentType: "application/json",
+            data: JSON.stringify(formData),
+            success: function(data) {
+                Swal.fire({
+                    title: 'Event Updated',
+                    text: " ",
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Ok'
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                        location.reload(); 
+                    }
+                })
+                
+            },
+            error: function (xhr, status, error) {
+                console.log(xhr.responseText);
+            }
+        });
+    });
+
 
     // Ajax call for removing event
     $('#removeEventBtn').click(function(e){
+        e.preventDefault();
         var eventId = $("#eventId").val();
         Swal.fire({
             title: 'Are you sure?',
@@ -103,28 +147,8 @@ $(document).ready(function(){
         })      
     });
 
-    $('#saveeditEventBtn').click(function(e){
-        var eventId = 13; // the ID of the event to update
-        var updatedEvent = {
-            title: "New Event Name",
-            description: "New Event Description",
-            location: "malolos",
-            start: "2023-03-25 08:40:00",
-            end: "2023-03-25 09:40:001"
-        };
+    
 
-        $.ajax({
-        url: "/edit/" + eventId,
-        type: 'PUT',
-        contentType: "application/json",
-        data: JSON.stringify(updatedEvent),
-        success: function(data) {
-            console.log("Event updated:", data);
-        },
-        error: function(jqXHR, textStatus, errorThrown) {
-            console.error("Error updating event:", textStatus, errorThrown);
-        }
-});
         // var eventId = $("#eventId").val();
         // var formData = $('#editEventForm').serialize();
         // // Send AJAX request to retrieve event details
@@ -141,7 +165,7 @@ $(document).ready(function(){
         //         // handle the error response
         //     }
         // });
-    });
+   
     
 
     // AJAX POST NOT WORKING
