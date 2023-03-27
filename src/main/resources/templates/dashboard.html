@@ -43,44 +43,37 @@
         </li>
     </ul>
 
-    
-    <div class="card" style="margin: 20px; width: 50%;">
-        <div class="card-header">
+    <!--Dashboard-->
+    <div class="card" style="background-color: white; margin:60px; float:left; width:50%;">
+        <!-- Todays Event Tables -->
+        <div class="container" style="padding-top: 20px;">
             <h3>Today</h3>
-        </div>
-        <div class="card-body">
-            <div class="card text-bg-success mb-3" th:each="todayevent : ${today}">
-                <div class="row g-0" >
-                    <div class="col-md-8">
-                        <div class="card-body">
-                        <h5 class="card-title" th:text="${todayevent.title}"></h5>
-                        <p class="card-text" th:text="${todayevent.description}"></p>
-                        <p class="card-text"><small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small></p>
-                        </div>
-                    </div>
+            <hr/>
+            <th:block th:each="todayevent : ${today}">
+                <div class="dash card" style="margin:10px; color:white">
+                    <ul style="list-style-type: none; margin-top: 12px;">
+                        <li th:text="${todayevent.title}" style="font-size: larger; font-weight: bold;"></li>
+                        <li th:text="${todayevent.description}"></li>
+                        <li><small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small></li>
+                    </ul>
                 </div>
-            </div>
+            </th:block>    
         </div>
-    </div>
 
-    <div class="card" style="margin: 20px; width: 50%;">
-        <div class="card-header">
+        <!-- Tommorow event table -->
+        <div class="container">
             <h3>Tommorow</h3>
-        </div>
-        <div class="card-body">
-            <div class="card text-bg-success mb-3" th:each="tomevent : ${tommorow}">
-                <div class="row g-0" >
-                    <div class="col-md-8">
-                        <div class="card-body">
-                        <h5 class="card-title" th:text="${tomevent.title}"></h5>
-                        <p class="card-text" th:text="${tomevent.description}"></p>
-                        <p class="card-text"><small th:text="${#temporals.format(tomevent.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(tomevent.start, 'hh:mm a')}" ></small></p>
-                        </div>
-                    </div>
+            <hr/>
+            <th:block th:each="tomevent : ${tommorow}">
+                <div class="dash2 card" style="margin:10px; color:white">
+                    <ul style="list-style-type: none; margin-top: 12px;">
+                        <li th:text="${tomevent.title}" style="font-size: larger; font-weight: bold;"></li>
+                        <li th:text="${tomevent.description}"></li>
+                        <li><small th:text="${#temporals.format(tomevent.start, 'hh:mm a')}"></small> - <small th:text="${#temporals.format(tomevent.start, 'hh:mm a')}"></small></li>
+                    </ul>
                 </div>
-            </div>
-        </div>
+            </th:block>     
+        </div>  
     </div>
-
 </body>
 </html>
