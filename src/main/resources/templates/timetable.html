@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
 <meta charset="ISO-8859-1">
 <title>Timetable</title>
@@ -24,30 +24,27 @@
 <!-- Moment CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
-
-
 <!-- Static files -->
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <script src="/js/fullcalendar.js"></script>
 
 </head>
 <body style="background-color: #F7F7F7;">
-	<!-- create navigation bar ( header) -->
+  <!-- create navigation bar ( header) -->
 	<div th:replace="~{header :: header}"></div>
 
   <!-- Navigation -->
   <ul class="nav nav-tabs justify-content-center">
     <li class="nav-item">
-        <a class="nav-link"  th:href="@{/dashboard}"><i class="fa-solid fa-house fa-lg"></i> Dashboard</h></a>
+      <a class="nav-link"  th:href="@{/dashboard}"><i class="fa-solid fa-house fa-lg"></i> Dashboard</h></a>
     </li>
     <li class="nav-item">
-        <a class="nav-link active" th:href="@{/timetable}"><i class="fa-solid fa-calendar-days"></i> Timetable</a>
+      <a class="nav-link active" th:href="@{/timetable}"><i class="fa-solid fa-calendar-days"></i> Timetable</a>
     </li>
-</ul>
-
+  </ul>
 
     <!-- Calendar div -->
-    <div class="card" style="width: 85%; margin:auto;">
+    <div class="card" style="width: 85%; margin:50px auto 30px auto;">
         <div class="card-body">
           <div id="calendar"></div>
         </div>
@@ -63,41 +60,40 @@
           </div>
           <div class="modal-body">
             <form id="addEventForm" th:action="@{/add}" th:object="${timetable}" method="post">
-              <div class="mb-3">
-                <label for="titleInput" class="form-label">Title</label>
-                <input type="text" class="form-control" id="titleInput" name="title" th:field="*{title}"/>
+            <div class="mb-3">
+              <label for="titleInput" class="form-label">Title</label>
+              <input type="text" class="form-control" id="titleInput" name="title" th:field="*{title}"/>
+            </div>
+            <div class="mb-3">
+              <label for="descInput" class="form-label">Description</label>
+              <input type="text" class="form-control" id="descInput" name="description" th:field="*{description}"/>
+            </div>
+            <div class="mb-3">
+              <label for="locInput" class="form-label">Location</label>
+              <input type="text" class="form-control" id="locInput" name="location" th:field="*{location}"/>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="startpicker">Start</label>
+              <div class="col-sm-10">          
+                <input class="form-control" type="datetime-local" id="startInput" name="start" th:field="*{start}"/>
               </div>
-              <div class="mb-3">
-                <label for="descInput" class="form-label">Description</label>
-                <input type="text" class="form-control" id="descInput" name="description" th:field="*{description}"/>
+            </div>
+            <div class="form-group">
+              <label class="control-label col-sm-2" for="endpicker">End</label>
+              <div class="col-sm-10">          
+                <input class="form-control" type="datetime-local" id="endInput" name="end" th:field="*{end}"/>
               </div>
-              <div class="mb-3">
-                <label for="locInput" class="form-label">Location</label>
-                <input type="text" class="form-control" id="locInput" name="location" th:field="*{location}"/>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="startpicker">Start</label>
-                <div class="col-sm-10">          
-                    <input class="form-control" type="datetime-local" id="startInput" name="start" th:field="*{start}"/>
-                </div>
-              </div>
-              <div class="form-group">
-                <label class="control-label col-sm-2" for="endpicker">End</label>
-                <div class="col-sm-10">          
-                    <input class="form-control" type="datetime-local" id="endInput" name="end" th:field="*{end}"/>
-                </div>
-              </div>      
+            </div>      
           </div>
           <div class="modal-footer">
             <button type="reset" class="btn btn-secondary">Clear</button>
             <button type="submit" class="btn btn-primary" id="addEventBtn">Save changes</button>
           </form>
           </div>
-        </div>
+        </div>                            
       </div>
     </div>
-
-
+    
     <!-- Edit event -->
     <div class="modal" id="editEventModal">
       <div class="modal-dialog modal-dialog-centered">
@@ -142,7 +138,7 @@
         </div>
       </div>
     </div>
-    
+
     <!-- View Event Modal -->
     <div class="modal" id="viewEventModal">
       <div class="modal-dialog modal-dialog-centered">
@@ -168,4 +164,3 @@
     </div>
 </body>
 </html>
-

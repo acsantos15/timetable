@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
-            left: 'today,prev,next',
-            center:'title',
+            left: 'title,prev,next',
+            center:'',
             right: 'dayGridMonth,timeGridWeek,timeGridDay,list myCustomButton',
             
         },
