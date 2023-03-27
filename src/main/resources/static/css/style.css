@@ -55,6 +55,18 @@
 .fc .fc-button-primary{
     border: none;
 }
+
+.fc a.fc-col-header-cell-cushion{
+    text-decoration: none;
+    color:#AB9C81;
+    font-weight: bold;
+}
+
+.fc a.fc-daygrid-day-number{
+    text-decoration: none;
+    color:#517C63;
+    font-weight: bold;
+}
 /* END FullCalendar CSS */
 
 
