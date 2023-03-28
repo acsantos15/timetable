@@ -23,8 +23,8 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
 <!-- Static files -->
-<link rel="stylesheet" type="text/css" href="/css/style.css" />
-<script src="/js/fullcalendar.js"></script>
+<link rel="stylesheet" type="text/css" href="/css/minicalendar.css" />
+<script src="/js/minicalendar.js"></script>
 </head>
 <style>
 
@@ -44,7 +44,7 @@
     </ul>
 
     <!--Dashboard-->
-    <div class="card" style="background-color: white; margin:50px; float:left; width:50%;">
+    <div class="card" style="background-color: white; margin:50px 0px 50px 50px; float:left; width:50%;">
         <!-- Todays Event Tables -->
         <div class="container" style="padding-top: 20px;">
             <h3>Today</h3>
@@ -75,5 +75,15 @@
             </th:block>     
         </div>  
     </div>
+
+    <div style="float:right; width:45%;">
+        <!-- Calendar div -->
+        <div class="card" style="width: 85%; margin:50px 60px auto auto;">
+            <div class="card-body">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
