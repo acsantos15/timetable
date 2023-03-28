@@ -6,7 +6,7 @@
 /*optional event color*/
 .fc-event {
     background-color: #243442;
-    color: redwhite;
+    color: red;
 }
 .fc-event:hover{
     color:#1a252f
@@ -68,12 +68,14 @@
     text-decoration: none;
     color:#AB9C81;
     font-weight: bold;
+    font-size: 20pt;
 }
 
 .fc a.fc-daygrid-day-number{
     text-decoration: none;
     color:#517C63;
     font-weight: bold;
+    font-size: 15pt;
 }
 
 .fc .fc-timegrid-slot-label-cushion{
@@ -89,7 +91,7 @@
     border-bottom-width: 5px ;
 }
 .nav-tabs .nav-link {
-    color: #a8a8a8;; /* set the font color to gray */
-    font-size: large;
+    color: #d3cccc;; /* set the font color to gray */
+    font-size: 20pt;
   }
 /* END NavBar CSS */
