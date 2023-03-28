@@ -2,9 +2,7 @@
 package com.tgsi.timetable.entity;
 
 import java.time.LocalDateTime;
-
 import org.apache.ibatis.type.Alias;
-
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 

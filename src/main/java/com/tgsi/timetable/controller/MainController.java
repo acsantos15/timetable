@@ -79,14 +79,21 @@ public class MainController {
     @DeleteMapping("/delete/{id}")
     public String deleteEvent(@PathVariable("id")Long id) {
         eMapper.deleteEventById(id);
-        return "redirect:/timetable";
+        return "timetable";
     }
 
-    // // Edit EventeRepo
+    // Edit Event
+    // @PutMapping("edit/{id}")
+    // @ResponseBody
+    // public Events updateEvent (@PathVariable("id") Long id, @RequestBody Events event) {
+    //     event.setId(id);
+    //     eMapper.updatedEvent(event);
+    //     return event;
+    // }
     @PutMapping("edit/{id}")
     @ResponseBody
-    public ResponseEntity<?> updateEvent(@PathVariable("id") Long eventId, @RequestBody Events updatedEvent) {
-        Events existingEvent = eMapper.getEventById(eventId);
+    public ResponseEntity<?> updateEvent(@PathVariable("id") Long id, @RequestBody Events updatedEvent) {
+        Events existingEvent = eMapper.getEventById(id);
         if (existingEvent == null){
             return ResponseEntity.notFound().build();
         }

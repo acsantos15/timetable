@@ -29,7 +29,7 @@ public interface EventMapper {
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertEvent(Events events);
 
-    @Update("UPDATE events SET title = #{title}, description = #{description}, location = #{location}, start = #{start}, end= #{end}")
+    @Update("UPDATE events SET title = #{title}, description = #{description}, location = #{location}, start = #{start}, end= #{end} WHERE id = #{id}")
     void updatedEvent(Events event);
     
     @Delete("DELETE FROM events WHERE id = #{id}")
