@@ -6,7 +6,7 @@
 /*optional event color*/
 .fc-event {
     background-color: #243442;
-    color: white;
+    color: redwhite;
 }
 .fc-event:hover{
     color:#1a252f
@@ -26,8 +26,8 @@
 
 .fc .fc-prev-button, 
 .fc .fc-next-button{
-    background-color: rgba(171, 156, 129, 0.51);
-    padding: 5px;
+    background-color: #517C63;
+    padding: 7px;
 }
 
 .fc .fc-prev-button{
@@ -42,7 +42,7 @@
 
 .fc .fc-prev-button:hover, 
 .fc .fc-next-button:hover{
-    background-color: #AB9C81;
+    background-color: #4d5852;
 }
 
 .fc .fc-button-group .fc-dayGridMonth-button, 
