@@ -2,7 +2,6 @@ package com.tgsi.timetable.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,22 +10,19 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tgsi.timetable.Entity.Events;
+import com.tgsi.timetable.exception.NotFoundException;
 import com.tgsi.timetable.repository.EventRepo;
 
-import jakarta.persistence.Entity;
 import jakarta.transaction.Transactional;
 
 @Controller
@@ -63,13 +59,14 @@ public class MainController {
 
     // Event Form
     @GetMapping("/timetable")
-    public String newEvent(Model model) {
-        model.addAttribute("timetable", new Events());
+    public String newEvent() {
+        // model.addAttribute("timetable", new Events());
         return "timetable";
     }
 
-    // Save Event Using AJAX NOT WORKING
-    // @PostMapping("/timetable/save")
+    // Save Event
+    // @ResponseBody
+    // @PostMapping("/save")
     // public ResponseEntity<String> saveData(@RequestBody Events event) {
     //     // Save the data to the MariaDB database using a JPA repository
     //     eRepo.save(event);
@@ -80,11 +77,9 @@ public class MainController {
     
 
     // Save Event
-    @PostMapping("/add")
-    public String saveEvent(@ModelAttribute("timetable") @Validated Events event, BindingResult result) {
-        if (result.hasErrors()) {
-            return "timetable";
-        }
+    @ResponseBody
+    @PostMapping("/save")
+    public String saveEvent(@RequestBody Events event) {
         eRepo.save(event);
         return "redirect:/timetable";
     }
@@ -105,7 +100,6 @@ public class MainController {
     }
 
     // Edit Event
-    
     @PutMapping("edit/{id}")
     @ResponseBody
     public Events updateEvent(@PathVariable("id") Long eventId, @RequestBody Events updatedEvent) {
@@ -125,29 +119,4 @@ public class MainController {
         return savedEvent;
     }
 
-    // @PutMapping("/edit/{id}")
-    // @ResponseBody
-    // public ResponseEntity<Events> editEvent(@PathVariable Long id, @RequestBody Events updatedEvent) {
-    //     // 1. Fetch the event from the database using the ID
-    //     Optional<Events> eventOptional = eRepo.findById(id);
-    //     if (!eventOptional.isPresent()) {
-    //         return ResponseEntity.notFound().build();
-    //     }
-    //     Events existingEvent = eventOptional.get();
-
-    //     // 2. Update the fields of the existing event with the new data from the updated event
-    //     existingEvent.setTitle(updatedEvent.getTitle());
-    //     existingEvent.setDescription(updatedEvent.getDescription());
-    //     existingEvent.setLocation(updatedEvent.getLocation());
-    //     existingEvent.setStart(updatedEvent.getStart());
-    //     existingEvent.setEnd(updatedEvent.getEnd());
-    //     // Add more fields as needed
-
-    //     // 3. Save the updated event to the database
-    //     Events savedEvent = eRepo.save(existingEvent);
-
-    //     // 4. Return the updated event in the response
-    //     return ResponseEntity.ok(savedEvent);
-    // }
-    
 }
