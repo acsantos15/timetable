@@ -1,40 +1,29 @@
-package com.tgsi.timetable.Entity;
+//Aries
+package com.tgsi.timetable.entity;
 
 import java.time.LocalDateTime;
 
+import org.apache.ibatis.type.Alias;
+
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
 
-//event database model
-@Entity
-@Table(name = "events")
+//Event database model
+@Alias("events")
 public class Events {
     
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     
-    @Column(name = "title")
     private String title;
     
-    @Column(name = "description")
     private String description;
 
-    @Column(name = "location")
     private String location;
     
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Column(name = "start")
     private LocalDateTime start;
     
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    @Column(name = "end")
     private LocalDateTime end;
 
 

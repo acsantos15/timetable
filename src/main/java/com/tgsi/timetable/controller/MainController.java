@@ -1,3 +1,5 @@
+// Aries
+
 package com.tgsi.timetable.controller;
 
 import java.time.LocalDateTime;
@@ -8,43 +10,38 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.tgsi.timetable.Entity.Events;
-import com.tgsi.timetable.exception.NotFoundException;
-import com.tgsi.timetable.repository.EventRepo;
+import com.tgsi.timetable.entity.Events;
+import com.tgsi.timetable.mapper.EventMapper;
 
-import jakarta.transaction.Transactional;
 
 @Controller
 public class MainController {
 
     @Autowired
-	private EventRepo eRepo;
+	private EventMapper eMapper;
 
     //Fetch Data from Database 
     @GetMapping("/dashboard")
-    public String dash(Model model) {
+    public String dashboard(Model model) {
         // Get Today Event
+        List<Events> allEvents = eMapper.getAllEvents();
         LocalDateTime today = LocalDateTime.now();
-        List<Events> events = eRepo.findAll();
-        List<Events> todaysEvents = events.stream()
+        List<Events> todaysEvents = allEvents.stream()
         .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
         .collect(Collectors.toList());
         model.addAttribute("today", todaysEvents);
 
         // Get Tommorow Event
         LocalDateTime tom = LocalDateTime.now().plusDays(1);
-        List<Events> tomEvents = events.stream()
+        List<Events> tomEvents = allEvents.stream()
         .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
         .collect(Collectors.toList());
         model.addAttribute("tommorow", tomEvents);
@@ -54,33 +51,20 @@ public class MainController {
     // Get All Events 
     @GetMapping("/events")
     public @ResponseBody Iterable<Events> getAllEvents() {
-      return eRepo.findAll();
+      return eMapper.getAllEvents();
     }
 
-    // Event Form
+    // Timetable
     @GetMapping("/timetable")
     public String newEvent() {
-        // model.addAttribute("timetable", new Events());
         return "timetable";
     }
-
-    // Save Event
-    // @ResponseBody
-    // @PostMapping("/save")
-    // public ResponseEntity<String> saveData(@RequestBody Events event) {
-    //     // Save the data to the MariaDB database using a JPA repository
-    //     eRepo.save(event);
-
-    //     // Return a success response
-    //     return ResponseEntity.ok("Data saved successfully");
-    // }
-    
 
     // Save Event
     @ResponseBody
     @PostMapping("/save")
     public String saveEvent(@RequestBody Events event) {
-        eRepo.save(event);
+        eMapper.insertEvent(event);
         return "redirect:/timetable";
     }
 
@@ -88,23 +72,24 @@ public class MainController {
     @GetMapping("/timetable/{id}")
     @ResponseBody
     public Events getEventById(@PathVariable("id") Long id) {
-        return eRepo.findById(id).orElse(null);
+        return eMapper.getEventById(id);
     }
 
     // Delete Event
     @DeleteMapping("/delete/{id}")
-    @Transactional
-    public ResponseEntity<Void> deleteEvent(@PathVariable("id") Long id) {
-        eRepo.deleteById(id);
-        return ResponseEntity.ok().build();
+    public String deleteEvent(@PathVariable("id")Long id) {
+        eMapper.deleteEventById(id);
+        return "redirect:/timetable";
     }
 
-    // Edit Event
+    // // Edit EventeRepo
     @PutMapping("edit/{id}")
     @ResponseBody
-    public Events updateEvent(@PathVariable("id") Long eventId, @RequestBody Events updatedEvent) {
-        Events existingEvent = eRepo.findById(eventId)
-                                                .orElseThrow(() -> new NotFoundException("Event not found"));
+    public ResponseEntity<?> updateEvent(@PathVariable("id") Long eventId, @RequestBody Events updatedEvent) {
+        Events existingEvent = eMapper.getEventById(eventId);
+        if (existingEvent == null){
+            return ResponseEntity.notFound().build();
+        }
 
         // Update the fields on the existing event object with values from the updated event object
         existingEvent.setTitle(updatedEvent.getTitle());
@@ -114,9 +99,8 @@ public class MainController {
         existingEvent.setEnd(updatedEvent.getEnd());
 
         // Save the updated event object to the database
-        Events savedEvent = eRepo.save(existingEvent);
-
-        return savedEvent;
+        eMapper.updatedEvent(existingEvent);
+        return ResponseEntity.ok(existingEvent);
     }
 
 }

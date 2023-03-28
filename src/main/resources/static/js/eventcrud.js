@@ -1,7 +1,8 @@
+// Aries
 //Jquery CRUD Events
 $(document).ready(function(){
     
-    // Update Events
+    // Add Events
     $('#addEventForm').submit(function(e){
         e.preventDefault();
         var title = $("#addTitle").val();
@@ -25,7 +26,6 @@ $(document).ready(function(){
             "start": fStart,
             "end": fEnd,
         };
-        alert(title);
         if(start >= end){
             Swal.fire({
                 icon: 'error',
@@ -47,7 +47,7 @@ $(document).ready(function(){
                 data: JSON.stringify(formData),
                 success: function(data) {
                     Swal.fire({
-                        title: 'Event Updated',
+                        title: 'Event Added',
                         text: " ",
                         icon: 'success',
                         showCancelButton: false,
@@ -69,7 +69,7 @@ $(document).ready(function(){
         
     });
 
-    // Ajax call to populate edit event
+    // Populate Edit Event Inputs
     $('#editEventBtn').click(function(e){
         e.preventDefault();
         $('#viewEventModal').hide();   
@@ -162,9 +162,10 @@ $(document).ready(function(){
     });
 
 
-    // Ajax call for removing event
+    // Remove Event
     $('#removeEventBtn').click(function(e){
         e.preventDefault();
+        $('#viewEventModal').hide();
         var eventId = $("#eventId").val();
         Swal.fire({
             title: 'Are you sure?',
@@ -175,15 +176,12 @@ $(document).ready(function(){
             cancelButtonColor: '#d33',
             confirmButtonText: 'Yes, delete it!'
         }).then((result) => {
-        if (result.isConfirmed) {
-            $('#viewEventModal').hide();
+        if (result.isConfirmed) {   
             $.ajax({
                 url: '/delete/' + eventId,
                 type: 'DELETE',
                 success: function(result) {
-
-                  location.reload();
-                  
+                    location.reload() 
                 },
                 error: function(xhr, status, error) {
                   console.error(error);

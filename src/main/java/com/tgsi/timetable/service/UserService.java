@@ -1,10 +1,10 @@
-package com.tgsi.timetable.service;
+// package com.tgsi.timetable.service;
 
-import com.tgsi.timetable.Entity.User;
+// import com.tgsi.timetable.Entity.User;
 
-public interface UserService {
+// public interface UserService {
     
-    public User createUser(User user);
+//     public User createUser(User user);
 
-    public boolean checkEmail(String email);
-}
+//     public boolean checkEmail(String email);
+// }
