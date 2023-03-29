@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
    <head>
-      <title>Signup</title>
+      <title>Edit Profile</title>
       <meta charset="ISO-8859-1">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
@@ -23,67 +23,52 @@
         </div>
     </nav>
 
+    <h3 style="color:#517C63; margin: 0px 0px 30px 15px;">Edit Profile</h3>
+    <!--EDIT USER HERE-->
+    <form action="editUser" method="post">
 
-    <form action="createUser" method="post">
-
-        <!--Profile Picture-->
-        <!--<div style="width:25%; float: left; margin-left: 2%;">
-            <div class="d-flex justify-content-center mb-4">
-                <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
-                class="rounded-circle" alt="example placeholder" style="width: 200px;" />
-            </div>
-            <div class="d-flex justify-content-center">
-                <div class="btn btn-rounded" style="background-color: #517C63;">
-                    <label class="form-label text-white m-1" for="customFile2">Upload Picture</label>
-                    <input type="file" class="form-control d-none" id="customFile2" />
-                </div>
-            </div>
-        </div>-->
-
-
-        <!-- for user details -->
-        <!--style="width:60%; float: right; margin-right: 10%;" //sa container-->
-        <div class="container" style="width:60%;">
-            <div class="card-header" style="color:#517C63; font-weight: bold;">PERSONAL INFORMATION</div>
-            <div class="card-body">
-                <div class="mb-3">
+        <div class="container1" style="width:60%;">
+            <div class="card-headers" style="color:#517C63; font-weight: bold;">PERSONAL INFORMATION</div>
+            <div class="card-bodys">
+                <div class="mb-5">
                     <input class="form-control" type="text" placeholder="First Name" name="firstname">
                 </div>
-                <div class="mb-3">
+                <div class="mb-5">
                     <input class="form-control" type="text" placeholder="Last Name" name="lastname">
                 </div>
-                <div class="mb-3">
+                <div class="mb-5">
                     <input class="form-control" type="text" placeholder="Home Address" name="address">
                 </div>
-                <div class="mb-3">
+                <div class="mb-5">
                     <input class="form-control" type="text" placeholder="Contact No." name="contactNo">
                 </div>
             </div>
 
             <br/><br/>
 
-            <div class="card-header" style="color:#517C63; font-weight: bold;">ACCOUNT INFORMATION</div>
-            <div class="card-body">
-                <div class="mb-3">
+            <div class="card-headers" style="color:#517C63; font-weight: bold;">ACCOUNT INFORMATION</div>
+            <div class="card-bodys">    
+                <div class="mb-5">
                     <input class="form-control" type="text" placeholder="Username" name="username">
                 </div>
-                <div class="mb-3">
+            
+                <!--
+                
+                <div class="mb-5">
                     <input class="form-control" type="email" placeholder="Email" name="email">
                 </div>
-                <div class="mb-3">
+               
+                    -->
+                 <div class="mb-5">
                     <input class="form-control" type="password" placeholder="Password" name="password">
                 </div>
-                <div class="mb-3">
+                <div class="mb-5">
                     <input class="form-control" type="password" placeholder="Confirm Password" name="confirmPassword">
-                </div>
+                </div>    
                 <div style="float: right;">
-                    <button type="submit" class="btn" style="background-color: #517C63; color:white;">Sign In</button>
+                    <button type="submit" class="btn" style="background-color: #517C63; color:white;">Save</button>
                 </div>
-            </div>
-            <!-- Already Have an Account-->
-            <p style="text-align:left; color:#B5A891; margin: 15px 15px 0px 0px;">Already have an account? 
-                <a href="/" style="color:#517C63; font-weight:bold;">Login</a>
-            </p>
+            </div>\
         </div>
 
         <p th:text="${error}" th:if="${error}"></p>
