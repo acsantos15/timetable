@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    // Register
     $('#regForm').submit(function(e){
         e.preventDefault();
         var fname = $("#fname").val();
@@ -53,4 +54,15 @@ $(document).ready(function(){
         }
         
     });
+
+    /* Display success message */
+    var success = /*[[${success}]]*/ null;
+    if (success) {
+        alert(success);
+    }
+    /* Display error message */
+    var error = /*[[${error}]]*/ null;
+    if (error) {
+        alert(error);
+    }
 });

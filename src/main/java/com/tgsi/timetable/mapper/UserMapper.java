@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -34,4 +35,7 @@ public interface UserMapper {
     
     @Delete("DELETE FROM users WHERE id = #{id}")
     void deleteUserById(Long id);
+
+    @Select("SELECT * FROM users WHERE username = #{username} AND pass = #{pass}")
+    Users findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }
