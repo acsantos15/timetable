@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tgsi.timetable.entity.Users;
 import com.tgsi.timetable.mapper.UserMapper;
-import com.tgsi.timetable.service.UserService;
 
 @Controller
 public class UserController {
