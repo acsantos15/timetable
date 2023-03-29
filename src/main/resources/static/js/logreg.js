@@ -26,7 +26,18 @@ $(document).ready(function(){
                 contentType: "application/json",
                 data: JSON.stringify(formData),
                 success: function(response) {
-                    alert(response)
+                    Swal.fire({
+                        title: 'Congratulations!',
+                        text: "Your account has been successfully created!",
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonColor: '#517C63',
+                        confirmButtonText: 'OK'
+                        }).then((result) => {
+                        if (result.isConfirmed) {
+                           window.location.href="/dashboard" //change to login
+                        }
+                        })
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr.responseText);
