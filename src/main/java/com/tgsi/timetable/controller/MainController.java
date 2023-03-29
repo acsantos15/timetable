@@ -54,16 +54,10 @@ public class MainController {
       return eMapper.getAllEvents();
     }
 
-    // Timetable
+    // Event Form
     @GetMapping("/timetable")
-    public String timetable() {
+    public String newEvent() {
         return "timetable";
-    }
-
-    // Edit User Profile
-    @GetMapping("/editprofile")
-    public String editProf() {
-        return "editprofile";
     }
 
     // Save Event
@@ -80,10 +74,9 @@ public class MainController {
     public Events getEventById(@PathVariable("id") Long id) {
         return eMapper.getEventById(id);
     }
-
     // Delete Event
     @DeleteMapping("/delete/{id}")
-    public String deleteEvent(@PathVariable("id")Long id) {
+    public String deleteEvent(@PathVariable("id") Long id) {
         eMapper.deleteEventById(id);
         return "timetable";
     }

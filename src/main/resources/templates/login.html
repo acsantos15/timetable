@@ -5,22 +5,21 @@
    </head>
    <body>
       <h1>Login</h1>
-      <form th:action="@{/login}" th:object="${user}" method="post">
+      <form >
          <label>Email:</label>
-         <input type="text" th:field="*{email}" />
+         <input type="text" />
 
          <label>Password:</label>
-         <input type="password" th:field="*{password}" />
+         <input type="password" />
     
          <br/><br/>
     
          <button type="submit">Login</button>
       </form>
     
-      <p th:text="${error}" th:if="${error}"></p>
     
       <br/><br/>
     
-      <a href="/signup">Create account</a>
+      <a th:href="@{/signup}">Create account</a>
     </body>
 </html>

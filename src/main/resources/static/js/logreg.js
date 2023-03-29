@@ -35,9 +35,9 @@ $(document).ready(function(){
                         confirmButtonText: 'OK'
                         }).then((result) => {
                         if (result.isConfirmed) {
-                           window.location.href="/dashboard" //change to login
+                           window.location.href="/login" //change to login
                         }
-                        })
+                    })
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr.responseText);

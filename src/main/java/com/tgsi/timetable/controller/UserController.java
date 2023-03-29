@@ -40,6 +40,12 @@ public class UserController {
         uMapper.insertUser(user);
         return user;
     }
+
+    //signup page
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
     // @PostMapping("/createUser")
     // @ResponseBody
     // public ResponseEntity<String> registerUser(@RequestBody Users user, @RequestParam("username") String username) {
