@@ -1,36 +1,21 @@
+$(document).ready(function(){
 $('#logoutBtn').click(function(e){
-    e.preventDefault();
-    const swalWithBootstrapButtons = Swal.mixin({
-        customClass: {
-          confirmButton: 'btn btn-success',
-          cancelButton: 'btn btn-danger'
-        },
-        buttonsStyling: false
-      })
-      
-      swalWithBootstrapButtons.fire({
-        title: 'Logout?',
-        text: "Are you sure to Logout",
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: 'Logout',
-        cancelButtonText: 'No, cancel!',
-        reverseButtons: true
-      }).then((result) => {
-        if (result.isConfirmed) {
-          swalWithBootstrapButtons.fire(
-            'Logout Success!',
-            '',
-            'success'
-          )
-        } else if (
-          result.dismiss === Swal.DismissReason.cancel
-        ) {
-          swalWithBootstrapButtons.fire(
-            'Cancelled',
-             '',
-            'error'
-          )
-        }
-      }) 
+  Swal.fire({
+    title: 'Logout?',
+    text: "Are you sure you want to logout?",
+    icon: 'warning',
+    showCancelButton: true,
+    confirmButtonColor: '#3085d6',
+    cancelButtonColor: '#d33',
+    confirmButtonText: 'Yes!'
+  }).then((result) => {
+    if (result.isConfirmed) {
+      Swal.fire(
+        'Logout Success!',
+        '',
+        'success'
+      )
+    }
+  })
+});
 });
