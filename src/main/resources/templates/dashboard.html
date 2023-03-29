@@ -26,6 +26,7 @@
 <link rel="stylesheet" type="text/css" href="/css/minicalendar.css" />
 <script src="/js/minicalendar.js"></script>
 <script src="/js/logreg.js"></script>
+<script src="/js/logout.js"></script>
 </head>
 <style>
 
@@ -55,7 +56,7 @@
                     <ul style="list-style-type: none; margin-top: 12px;">
                         <li th:text="${todayevent.title}" style="font-size: larger; font-weight: bold;"></li>
                         <li th:text="${todayevent.description}"></li>
-                        <li><small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small></li>
+                        <li><small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(todayevent.end, 'hh:mm a')}" ></small></li>
                     </ul>
                 </div>
             </th:block>    
@@ -70,7 +71,7 @@
                     <ul style="list-style-type: none; margin-top: 12px;">
                         <li th:text="${tomevent.title}" style="font-size: larger; font-weight: bold;"></li>
                         <li th:text="${tomevent.description}"></li>
-                        <li><small th:text="${#temporals.format(tomevent.start, 'hh:mm a')}"></small> - <small th:text="${#temporals.format(tomevent.start, 'hh:mm a')}"></small></li>
+                        <li><small th:text="${#temporals.format(tomevent.start, 'hh:mm a')}"></small> - <small th:text="${#temporals.format(tomevent.end, 'hh:mm a')}"></small></li>
                     </ul>
                 </div>
             </th:block>     

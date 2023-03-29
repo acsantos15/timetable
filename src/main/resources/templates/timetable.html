@@ -28,6 +28,8 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <script src="/js/fullcalendar.js"></script>
 <script src="/js/eventcrud.js"></script>
+<script src="/js/logout.js"></script>
+
 
 </head>
 <body style="background-color: #F7F7F7;">
@@ -45,7 +47,7 @@
   </ul>
 
     <!-- Calendar div -->
-    <div class="card" style="width: 85%; margin:50px auto 30px auto;">
+    <div class="card" style="width: 85%; margin:50px auto 80px auto;">
         <div class="card-body">
           <div id="calendar"></div>
         </div>
@@ -54,9 +56,9 @@
     <!-- Add event -->
     <div class="modal" id="addEventModal">
       <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
+        <div style= "background-color: #F7F7F7;"class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Add Event</h5>
+            <h5 style= "color:#517C63; font-weight:bold;" class="modal-title">New Appointment</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
@@ -87,7 +89,7 @@
               </div>     
           </div>
           <div class="modal-footer">
-            <button type="reset" class="btn btn-outline-danger">Clear</button>
+            <button type="reset" class="btn btn-outline-secondary">Clear</button>
             <button type="submit" class="btn btn-success" id="addEventBtn">Save Changes</button>
           </form>
           </div>
@@ -133,7 +135,7 @@
               <p style="color: red;" id="errMsg"></p>     
           </div>
           <div class="modal-footer">
-            <button type="reset" class="btn btn-outline-danger">Discard</button>
+            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Discard</button>
             <button type="submit" class="btn btn-success" id="saveUpEventBtn">Save Changes</button>
           </form>
           </div>

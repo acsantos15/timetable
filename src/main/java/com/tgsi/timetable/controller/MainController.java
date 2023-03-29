@@ -60,6 +60,12 @@ public class MainController {
         return "timetable";
     }
 
+    // Edit User Profile
+    @GetMapping("/editprofile")
+    public String editProf() {
+        return "editprofile";
+    }
+
     // Save Event
     @ResponseBody
     @PostMapping("/save")
@@ -82,6 +88,7 @@ public class MainController {
         return "timetable";
     }
 
+    
     // Edit Event
     // @PutMapping("edit/{id}")
     // @ResponseBody

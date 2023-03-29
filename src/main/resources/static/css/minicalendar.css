@@ -54,7 +54,7 @@
     border-bottom-width: 5px ;
 }
 .nav-tabs .nav-link {
-    color: #a8a8a8;; /* set the font color to gray */
+    color: #d3cccc; /* set the font color to gray */
     font-size: large;
   }
 /* END NavBar CSS */
@@ -86,3 +86,10 @@
     background-color: #355C7D;
 }
 /*End of Dashboard Event Color*/
+
+/*Header CSS*/
+.dropdown-item:hover{
+    background-color: #517c63d7;
+    color:white;
+}
+/*End of Header CSS*/

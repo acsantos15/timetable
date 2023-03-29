@@ -6,7 +6,7 @@
 /*optional event color*/
 .fc-event {
     background-color: #243442;
-    color: red;
+    color: white;
 }
 .fc-event:hover{
     color:#1a252f
@@ -68,7 +68,7 @@
     text-decoration: none;
     color:#AB9C81;
     font-weight: bold;
-    font-size: 20pt;
+    font-size: 17pt;
 }
 
 .fc a.fc-daygrid-day-number{
@@ -81,6 +81,13 @@
 .fc .fc-timegrid-slot-label-cushion{
     color:#AB9C81;
 }
+
+
+.fc .fc-list-day-text{
+    color:#AB9C81;
+}
+
+@media screen and (max-width:767px) { .fc-toolbar.fc-header-toolbar {font-size: 50%}}
 /* END FullCalendar CSS */
 
 
@@ -91,7 +98,17 @@
     border-bottom-width: 5px ;
 }
 .nav-tabs .nav-link {
-    color: #d3cccc;; /* set the font color to gray */
-    font-size: 20pt;
+    color: #d3cccc; /* set the font color to gray */
+    font-size: large;
   }
 /* END NavBar CSS */
+
+/*Header CSS*/
+.navbar{
+    background-color: #517C63;
+}
+.dropdown-item:hover{
+    background-color: #517c63d7;
+    color:white;
+}
+/*End of Header CSS*/

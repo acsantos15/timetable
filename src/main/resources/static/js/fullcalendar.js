@@ -40,8 +40,12 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         },
-        height: 650,
-        aspectRatio: 3,
+        eventTimeFormat: { // like '14:30:00'
+            hour: '2-digit',
+            minute: '2-digit',
+            meridiem: 'short'
+        },
+        aspectRatio: 2,
     });
 
     calendar.render();
