@@ -40,6 +40,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
         },
+        eventTimeFormat: { // like '14:30:00'
+            hour: '2-digit',
+            minute: '2-digit',
+            meridiem: 'short'
+        },
         height: 650,
         aspectRatio: 3,
     });
