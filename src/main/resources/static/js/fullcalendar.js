@@ -9,6 +9,7 @@ document.addEventListener('DOMContentLoaded', function() {
             right: 'dayGridMonth,timeGridWeek,timeGridDay,list myCustomButton',
             
         },
+        initialView: "timeGridWeek",
         customButtons: {
             myCustomButton: {
                 text: '+ Add Appointment',

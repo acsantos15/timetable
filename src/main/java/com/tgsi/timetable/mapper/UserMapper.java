@@ -13,16 +13,16 @@ import com.tgsi.timetable.entity.Users;
 
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * FROM Users WHERE id = #{id}")
+    @Select("SELECT * FROM users WHERE id = #{id}")
     Users getUserById(Long id);
 
     @Select("SELECT * FROM users")
     List<Users> getAllUser();
 
-    @Select("SELECT * FROM Users WHERE username = #{username}")
+    @Select("SELECT * FROM users WHERE username = #{username}")
     Users findByUsername(String username);
 
-    @Select("SELECT * FROM Users WHERE email = #{email}")
+    @Select("SELECT * FROM users WHERE email = #{email}")
     Users findByEmail(String email);
 
     @Insert("INSERT INTO users (fname, lname, address, contact, username, email, pass) VALUES (#{fname}, #{lname}, #{address}, #{contact}, #{username}, #{email}, #{pass})")
