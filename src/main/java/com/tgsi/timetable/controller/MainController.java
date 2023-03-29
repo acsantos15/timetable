@@ -56,7 +56,7 @@ public class MainController {
 
     // Timetable
     @GetMapping("/timetable")
-    public String newEvent() {
+    public String timetable() {
         return "timetable";
     }
 

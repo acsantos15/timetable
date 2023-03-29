@@ -17,9 +17,15 @@ public interface UserMapper {
     Users getUserById(Long id);
 
     @Select("SELECT * FROM users")
-    List<Users> getAllEvents();
+    List<Users> getAllUser();
 
-    @Insert("INSERT INTO users (fname, lname, email, pass) VALUES (#{fname}, #{lname}, #{email}, #{pass})")
+    @Select("SELECT * FROM Users WHERE username = #{username}")
+    Users findByUsername(String username);
+
+    @Select("SELECT * FROM Users WHERE email = #{email}")
+    Users findByEmail(String email);
+
+    @Insert("INSERT INTO users (fname, lname, address, contact, username, email, pass) VALUES (#{fname}, #{lname}, #{address}, #{contact}, #{username}, #{email}, #{pass})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertUser(Users users);
 

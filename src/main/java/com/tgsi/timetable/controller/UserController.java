@@ -1,37 +1,56 @@
-// package com.tgsi.timetable.controller;
+package com.tgsi.timetable.controller;
 
-// import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.stereotype.Controller;
-// import org.springframework.ui.Model;
-// import org.springframework.validation.BindingResult;
-// import org.springframework.validation.annotation.Validated;
-// import org.springframework.web.bind.annotation.GetMapping;
-// import org.springframework.web.bind.annotation.ModelAttribute;
-// import org.springframework.web.bind.annotation.PostMapping;
-// import org.springframework.web.bind.annotation.RequestBody;
-// import org.springframework.web.bind.annotation.ResponseBody;
-// import com.tgsi.timetable.Entity.Users;
-// import com.tgsi.timetable.mapper.UserRepo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
-// @Controller
-// public class UserController {
+import com.tgsi.timetable.entity.Users;
+import com.tgsi.timetable.mapper.UserMapper;
+import com.tgsi.timetable.service.UserService;
 
-//    @Autowired
-//    private UserRepo uRepo;
+@Controller
+public class UserController {
 
-//     //signup page
-//     @GetMapping("/signup")
-//     public String newEvent() {
-//         return "signup";
-//     }
+   @Autowired
+   private UserMapper uMapper;
 
-//     // Save Event
-//     @ResponseBody
-//     @PostMapping("/createUser")
-//     public String saveEvent(@RequestBody Users user) {
-//         uRepo.save(user);
-//         return "redirect:/login";
-//     }
+    //signup page
+    @GetMapping("/signup")
+    public String signup() {
+        return "signup";
+    }
+
+    @GetMapping("/users")
+    public @ResponseBody Iterable<Users> getAllUsers() {
+      return uMapper.getAllUser();
+    }
+
+    // Register User
+    @PostMapping("/createUser")
+    @ResponseBody
+    public Users createUser(@RequestBody Users user) {
+        uMapper.insertUser(user);
+        return user;
+    }
+    // @PostMapping("/createUser")
+    // @ResponseBody
+    // public ResponseEntity<String> registerUser(@RequestBody Users user, @RequestParam("username") String username) {
+    //     Users existUsername = uMapper.findByUsername(username);
+    //     if(existUsername != null){
+    //         return ResponseEntity.ok().body("UUsername already");
+    //     }
+    //     uMapper.insertUser(user);
+    //     return ResponseEntity.ok().body("User Registered");
+    // }
 
 //    // Signup Form
 // //    @GetMapping("/signup")
@@ -109,5 +128,5 @@
 //    //    session.removeAttribute("user");
 //    //    return "redirect:/login";
 //    // }
-// }
+}
 
