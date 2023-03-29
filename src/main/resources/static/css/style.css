@@ -102,3 +102,13 @@
     font-size: large;
   }
 /* END NavBar CSS */
+
+/*Header CSS*/
+.navbar{
+    background-color: #517C63;
+}
+.dropdown-item:hover{
+    background-color: #517c63d7;
+    color:white;
+}
+/*End of Header CSS*/

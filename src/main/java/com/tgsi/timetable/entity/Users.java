@@ -3,7 +3,7 @@ package com.tgsi.timetable.entity;
 
 import org.apache.ibatis.type.Alias;
 
-//Event database model
+//Users database model
 @Alias("users")
 public class Users {
     
