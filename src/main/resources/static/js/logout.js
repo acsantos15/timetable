@@ -1,8 +1,8 @@
 $(document).ready(function(){
 $('#logoutBtn').click(function(e){
   Swal.fire({
-    title: 'Logout?',
-    text: "Are you sure you want to logout?",
+    title: 'Are you sure you want to logout?',
+    text: "You will be returned to login screen",
     icon: 'warning',
     showCancelButton: true,
     confirmButtonColor: '#3085d6',
