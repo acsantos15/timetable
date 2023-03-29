@@ -45,8 +45,7 @@ document.addEventListener('DOMContentLoaded', function() {
             minute: '2-digit',
             meridiem: 'short'
         },
-        height: 650,
-        aspectRatio: 3,
+        aspectRatio: 2,
     });
 
     calendar.render();
