@@ -10,11 +10,7 @@ $('#logoutBtn').click(function(e){
     confirmButtonText: 'Yes!'
   }).then((result) => {
     if (result.isConfirmed) {
-      Swal.fire(
-        'Logout Success!',
-        '',
-        'success'
-      )
+      location.href="/logout"
     }
   })
 });
