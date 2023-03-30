@@ -127,5 +127,14 @@ public class MainController {
             return "editprofile";
         }
     }
+        //Display Profile
+        @GetMapping("/profile")
+        public String showProfile(HttpSession session) {
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }else{
+            return "profile";
+        }}
 
 }
