@@ -2,6 +2,8 @@
 package com.tgsi.timetable.entity;
 
 import java.time.LocalDateTime;
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -17,6 +19,8 @@ public class Events {
     private String description;
 
     private String location;
+    
+    private List<Users> people;
     
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime start;
@@ -57,6 +61,14 @@ public class Events {
     
       public void setLocation(String location) {
         this.location = location;
+      }
+
+      public List<Users> getPeople() {
+        return people;
+      }
+    
+      public void setPeople(List<Users> people) {
+        this.people = people;
       }
 
       public LocalDateTime getStart() {

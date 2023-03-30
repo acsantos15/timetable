@@ -1,13 +1,11 @@
+// Aries
+
 package com.tgsi.timetable.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -61,7 +59,7 @@ public class UserController {
         if (user != null && user.getPass().equals(password)) {
             session.setAttribute("user", user);
             model.addAttribute("success", "Login Successfully");
-            return "redirect:/dashboard";
+            return "dashboard";
         } else {
             model.addAttribute("error", "Invalid username or password");
             return "login";
@@ -73,5 +71,7 @@ public class UserController {
         session.removeAttribute("user");
         return "redirect:/login";
     }
+
+    
 }
 

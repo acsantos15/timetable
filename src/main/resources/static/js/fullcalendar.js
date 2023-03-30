@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('#eventTitle').text(response.title);
                     $('#eventDescription').text(response.description);
                     $('#eventLocation').text(response.location);
+                    $('#eventPeople').text(response.people);
                     $('#eventStart').text(response.start);
                     $('#eventEnd').text(response.end);
                 }

@@ -97,13 +97,6 @@ public class MainController {
 
     
     // Edit Event
-    // @PutMapping("edit/{id}")
-    // @ResponseBody
-    // public Events updateEvent (@PathVariable("id") Long id, @RequestBody Events event) {
-    //     event.setId(id);
-    //     eMapper.updatedEvent(event);
-    //     return event;
-    // }
     @PutMapping("edit/{id}")
     @ResponseBody
     public ResponseEntity<?> updateEvent(@PathVariable("id") Long id, @RequestBody Events updatedEvent) {
@@ -122,6 +115,17 @@ public class MainController {
         // Save the updated event object to the database
         eMapper.updatedEvent(existingEvent);
         return ResponseEntity.ok(existingEvent);
+    }
+
+    // editprofile page
+    @GetMapping("/editprofile")
+    public String editprofile(HttpSession session) {
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }else{
+            return "editprofile";
+        }
     }
 
 }
