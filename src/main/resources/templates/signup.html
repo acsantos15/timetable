@@ -30,19 +30,13 @@
 
    <body style="background-color: #F7F7F7;">
     <!--header-->
-    <nav class="navbar" style="background-color: #517C63;">
+    <nav class="navbar" style="background-color: #2C9447; margin-bottom: 50px;">
         <div class="container-fluid">
             <a class="navbar-brand fw-bolder" th:href="@{/}" style="color: white">
                 <i class="fa-solid fa-calendar-days"></i> TIMETABLE
             </a>
         </div>
     </nav>
-
-    <p style="text-align:right; color:#B5A891; margin: 10px 15px 0px 0px;">Already have an account? 
-        <a href="/" style="color:#517C63; font-weight:bold;">Login</a>
-    </p>
-    <h3 style="color:#517C63; margin: 0px 0px 30px 15px;">Create Account</h3>
-    
 
         <!--Profile Picture-->
         <!--<div style="width:25%; float: left; margin-left: 2%;">
@@ -63,7 +57,7 @@
         <!--style="width:60%; float: right; margin-right: 10%;" //sa container-->
         <form id="regForm">
         <div class="container" style="width:60%;">
-            <div class="card-header" style="color:#517C63; font-weight: bold;">PERSONAL INFORMATION</div>
+            <div class="card-header" style="color:#2C9447; font-weight: bold;">PERSONAL INFORMATION</div>
             <div class="card-body">
                 <div class="mb-3">
                     <input class="form-control" type="text" placeholder="First Name" id="fname" name="fname">
@@ -81,7 +75,7 @@
 
             <br/><br/>
 
-            <div class="card-header" style="color:#517C63; font-weight: bold;">ACCOUNT INFORMATION</div>
+            <div class="card-header" style="color:#2C9447; font-weight: bold;">ACCOUNT INFORMATION</div>
             <div class="card-body">
                 <div class="mb-3">
                     <input class="form-control" type="text" placeholder="Username" id="username" name="username">
@@ -96,12 +90,12 @@
                     <input class="form-control" type="password" id="conpass" placeholder="Confirm Password">
                 </div>
                 <div style="float: right;">
-                    <button type="submit" class="btn" style="background-color: #517C63; color:white;">Sign In</button>
+                    <button type="submit" class="btn" style="background-color: #2C9447; color:white;">Sign In</button>
                 </div>
             </div>
             <!-- Already Have an Account-->
             <p style="text-align:left; color:#B5A891; margin: 15px 15px 0px 0px;">Already have an account? 
-                <a th:href="@{/login}" style="color:#517C63; font-weight:bold;">Login</a>
+                <a th:href="@{/login}" style="color:#2C9447; font-weight:bold;">Login</a>
             </p>
         </div>
         </form>

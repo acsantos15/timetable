@@ -1,114 +1,96 @@
 /* FullCalendar CSS */
 .fc-day-today{
-	background: #aab9c5e5 !important;
+	background: #accdec !important;
 }
-
 /*optional event color*/
 .fc-event {
-    background-color: #243442;
+    background-color: #073f6c;
     color: white;
 }
 .fc-event:hover{
-    color:#1a252f
+    color:#2f1a1a
 }
 .fc-daygrid-event-dot{
-    border-color: #379c61;
+    border-color: rgba(1, 156, 0);
 }
-
 /*calendar header*/
 .fc-toolbar h2{
     display: inline;
     vertical-align: middle;
-    color: #517C63;
+    color: #2C9447;
     font-style: normal;
     font-weight: 700;
 }
-
 .fc .fc-prev-button, 
 .fc .fc-next-button{
-    background-color: #517C63;
+    background-color: #2C9447;
     padding: 7px;
 }
-
 .fc .fc-prev-button{
     margin-left:20px;
-
 }
-
 .fc .fc-next-button{
     margin:5px;
-
 }
-
 .fc .fc-prev-button:hover, 
 .fc .fc-next-button:hover{
-    background-color: #4d5852;
+    background-color: #a6d3ba;
+    color: #2C9447;
 }
-
 .fc .fc-button-group .fc-dayGridMonth-button, 
 .fc .fc-button-group .fc-timeGridWeek-button, 
 .fc .fc-button-group .fc-timeGridDay-button, 
 .fc .fc-button-group .fc-list-button{
-    background-color: #75818c;
+    background-color: #85acd1;
 }
-
 .fc .fc-myCustomButton-button{
-    background-color: #517C63;
+    background-color: #2C9447;
 }
-
 .fc .fc-myCustomButton-button:hover{
-    background-color: #517C63;
+    background-color: #2C9447;
 }
-
 .fc .fc-button-primary{
     border: none;
 }
-
 .fc a.fc-col-header-cell-cushion{
     text-decoration: none;
-    color:#AB9C81;
+    color: #1a252f;
     font-weight: bold;
     font-size: 17pt;
 }
-
 .fc a.fc-daygrid-day-number{
     text-decoration: none;
-    color:#517C63;
+    color:#073f6c;
     font-weight: bold;
     font-size: 15pt;
 }
-
 .fc .fc-timegrid-slot-label-cushion{
-    color:#AB9C81;
+    color:#1a252f;
 }
-
-
 .fc .fc-list-day-text{
-    color:#AB9C81;
+    color:#1a252f;
 }
-
 @media screen and (max-width:767px) { .fc-toolbar.fc-header-toolbar {font-size: 50%}}
 /* END FullCalendar CSS */
 
-
 /*  NavBar CSS */
 .nav-tabs .nav-link.active {
-    border-bottom-color: #517C63; /* set the line color to green */
-    color: #517C63;
+    border-bottom-color: #073f6c; /* set the line color to green */
+    color: #2C9447;
     border-bottom-width: 5px ;
 }
 .nav-tabs .nav-link {
     color: #d3cccc; /* set the font color to gray */
     font-size: large;
-  }
+}
 /* END NavBar CSS */
 
 /*Header CSS*/
 .navbar{
-    background-color: #517C63;
+    background-color: #2C9447;
 }
 .dropdown-item:hover{
-    background-color: #517c63d7;
+    background-color: #2C9447;
     color:white;
 }
 /*End of Header CSS*/
