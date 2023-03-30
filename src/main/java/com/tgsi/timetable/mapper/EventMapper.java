@@ -25,6 +25,9 @@ public interface EventMapper {
     @Select("SELECT * FROM events")
     List<Events> getAllEvents();
 
+    @Select("SELECT * FROM event_user")
+    List<Events> getAllPeople();
+
     @Insert("INSERT INTO events (title, description, location, start, end) VALUES (#{title}, #{description}, #{location}, #{start}, #{end})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertEvent(Events events);

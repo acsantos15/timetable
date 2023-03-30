@@ -36,7 +36,7 @@ $(document).ready(function(){
                         confirmButtonText: 'OK'
                         }).then((result) => {
                         if (result.isConfirmed) {
-                           window.location.href="/login" //change to login
+                           location.href="/login" //change to login
                         }
                     })
                 },
@@ -56,13 +56,5 @@ $(document).ready(function(){
     });
 
     /* Display success message */
-    var success = /*[[${success}]]*/ null;
-    if (success) {
-        alert(success);
-    }
-    /* Display error message */
-    var error = /*[[${error}]]*/ null;
-    if (error) {
-        alert(error);
-    }
+    
 });

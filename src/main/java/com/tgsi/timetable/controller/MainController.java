@@ -97,13 +97,6 @@ public class MainController {
 
     
     // Edit Event
-    // @PutMapping("edit/{id}")
-    // @ResponseBody
-    // public Events updateEvent (@PathVariable("id") Long id, @RequestBody Events event) {
-    //     event.setId(id);
-    //     eMapper.updatedEvent(event);
-    //     return event;
-    // }
     @PutMapping("edit/{id}")
     @ResponseBody
     public ResponseEntity<?> updateEvent(@PathVariable("id") Long id, @RequestBody Events updatedEvent) {

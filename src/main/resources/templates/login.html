@@ -47,3 +47,16 @@
       <a th:href="@{/signup}">Create account</a>
     </body>
 </html>
+<script th:inline="javascript">
+   $(document).ready(function(){
+      var success = /*[[${success}]]*/ null;
+      if (success) {
+         alert(success);
+      }
+      /* Display error message */
+      var error = /*[[${error}]]*/ null;
+      if (error) {
+         alert(error);
+      }
+   });
+</script>

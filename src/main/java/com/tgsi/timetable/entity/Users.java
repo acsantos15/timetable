@@ -1,6 +1,8 @@
 // Aries
 package com.tgsi.timetable.entity;
 
+import java.util.List;
+
 import org.apache.ibatis.type.Alias;
 
 //Users database model
@@ -15,7 +17,7 @@ public class Users {
     private String username;
     private String email;
     private String password;
-    
+    private List<Events> events;
 
 
     // getters and setters
@@ -82,6 +84,14 @@ public class Users {
     
       public void setPass(String password) {
         this.password = password;
+      }
+
+      public List<Events> getEvents() {
+        return events;
+      }
+    
+      public void setEvents(List<Events> events) {
+        this.events = events;
       }
 
 
