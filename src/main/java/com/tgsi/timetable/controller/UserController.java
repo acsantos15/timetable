@@ -73,5 +73,11 @@ public class UserController {
         session.removeAttribute("user");
         return "redirect:/login";
     }
+
+    // editprofile page
+    @GetMapping("/editprofile")
+    public String editprofile() {
+        return "editprofile";
+    }
 }
 
