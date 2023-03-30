@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -13,16 +14,16 @@ import com.tgsi.timetable.entity.Users;
 
 @Mapper
 public interface UserMapper {
-    @Select("SELECT * FROM Users WHERE id = #{id}")
+    @Select("SELECT * FROM users WHERE id = #{id}")
     Users getUserById(Long id);
 
     @Select("SELECT * FROM users")
     List<Users> getAllUser();
 
-    @Select("SELECT * FROM Users WHERE username = #{username}")
+    @Select("SELECT * FROM users WHERE username = #{username}")
     Users findByUsername(String username);
 
-    @Select("SELECT * FROM Users WHERE email = #{email}")
+    @Select("SELECT * FROM users WHERE email = #{email}")
     Users findByEmail(String email);
 
     @Insert("INSERT INTO users (fname, lname, address, contact, username, email, pass) VALUES (#{fname}, #{lname}, #{address}, #{contact}, #{username}, #{email}, #{pass})")
@@ -34,4 +35,7 @@ public interface UserMapper {
     
     @Delete("DELETE FROM users WHERE id = #{id}")
     void deleteUserById(Long id);
+
+    @Select("SELECT * FROM users WHERE username = #{username} AND pass = #{pass}")
+    Users findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 }

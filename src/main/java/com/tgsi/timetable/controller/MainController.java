@@ -19,7 +19,10 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tgsi.timetable.entity.Events;
+import com.tgsi.timetable.entity.Users;
 import com.tgsi.timetable.mapper.EventMapper;
+
+import jakarta.servlet.http.HttpSession;
 
 
 @Controller
@@ -30,22 +33,28 @@ public class MainController {
 
     //Fetch Data from Database 
     @GetMapping("/dashboard")
-    public String dashboard(Model model) {
-        // Get Today Event
-        List<Events> allEvents = eMapper.getAllEvents();
-        LocalDateTime today = LocalDateTime.now();
-        List<Events> todaysEvents = allEvents.stream()
-        .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
-        .collect(Collectors.toList());
-        model.addAttribute("today", todaysEvents);
+    public String dashboard(HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }else{
+            // Get Today Event
+            List<Events> allEvents = eMapper.getAllEvents();
+            LocalDateTime today = LocalDateTime.now();
+            List<Events> todaysEvents = allEvents.stream()
+            .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
+            .collect(Collectors.toList());
+            model.addAttribute("today", todaysEvents);
 
-        // Get Tommorow Event
-        LocalDateTime tom = LocalDateTime.now().plusDays(1);
-        List<Events> tomEvents = allEvents.stream()
-        .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
-        .collect(Collectors.toList());
-        model.addAttribute("tommorow", tomEvents);
-        return "dashboard";
+            // Get Tommorow Event
+            LocalDateTime tom = LocalDateTime.now().plusDays(1);
+            List<Events> tomEvents = allEvents.stream()
+            .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
+            .collect(Collectors.toList());
+            model.addAttribute("tommorow", tomEvents);
+            return "dashboard";
+        }
+        
     }
 
     // Get All Events 
@@ -54,10 +63,15 @@ public class MainController {
       return eMapper.getAllEvents();
     }
 
-    // Event Form
+    // Timetable Page
     @GetMapping("/timetable")
-    public String newEvent() {
-        return "timetable";
+    public String timetablePage(HttpSession session) {
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }else{
+            return "timetable";
+        }
     }
 
     // Save Event

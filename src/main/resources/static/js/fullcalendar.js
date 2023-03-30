@@ -6,9 +6,10 @@ document.addEventListener('DOMContentLoaded', function() {
         headerToolbar: {
             left: 'title,prev,next',
             center:'',
-            right: 'dayGridMonth,timeGridWeek,timeGridDay,list myCustomButton',
+            right: 'timeGridWeek,dayGridMonth,timeGridDay,list myCustomButton',
             
         },
+        initialView: 'timeGridWeek',
         customButtons: {
             myCustomButton: {
                 text: '+ Add Appointment',
