@@ -38,6 +38,8 @@ public class MainController {
         if (user == null) {
             return "redirect:/login";
         }else{
+            String username = user.getUsername();
+            model.addAttribute("username", username);
             // Get Today Event
             List<Events> allEvents = eMapper.getAllEvents();
             LocalDateTime today = LocalDateTime.now();
@@ -65,11 +67,13 @@ public class MainController {
 
     // Timetable Page
     @GetMapping("/timetable")
-    public String timetablePage(HttpSession session) {
+    public String timetablePage(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
         }else{
+            String username = user.getUsername();
+            model.addAttribute("username", username);
             return "timetable";
         }
     }
@@ -88,6 +92,14 @@ public class MainController {
     public Events getEventById(@PathVariable("id") Long id) {
         return eMapper.getEventById(id);
     }
+
+    @GetMapping("/events/{eventId}/users")
+    @ResponseBody
+    public List<Users> getAllUsersForEvent(@PathVariable Long eventId) {
+        return eMapper.getUsersByEventId(eventId);
+    }
+
+    
     // Delete Event
     @DeleteMapping("/delete/{id}")
     public String deleteEvent(@PathVariable("id") Long id) {
