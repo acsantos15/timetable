@@ -9,6 +9,7 @@ import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
@@ -24,9 +25,6 @@ public interface EventMapper {
 
     @Select("SELECT * FROM events")
     List<Events> getAllEvents();
-
-    @Select("SELECT * FROM event_user")
-    List<Events> getAllPeople();
 
     @Insert("INSERT INTO events (title, description, location, start, end) VALUES (#{title}, #{description}, #{location}, #{start}, #{end})")
     @Options(useGeneratedKeys = true, keyProperty = "id")

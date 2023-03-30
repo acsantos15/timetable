@@ -20,7 +20,14 @@ $(document).ready(function(){
             "email": email,
             "pass": pass,
         };
-        if(pass == conpass){
+        if(pass.length < 8){
+            Swal.fire(
+                'Password should have atlest 8 characters!',
+                '',
+                'warning'
+            )
+        }
+        else if(pass == conpass){
             $.ajax({
                 url: "/createUser",
                 type: 'POST',
@@ -54,7 +61,4 @@ $(document).ready(function(){
         }
         
     });
-
-    /* Display success message */
-    
 });

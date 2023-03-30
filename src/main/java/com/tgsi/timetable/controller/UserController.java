@@ -59,7 +59,7 @@ public class UserController {
         if (user != null && user.getPass().equals(password)) {
             session.setAttribute("user", user);
             model.addAttribute("success", "Login Successfully");
-            return "dashboard";
+            return "redirect:/dashboard";
         } else {
             model.addAttribute("error", "Invalid username or password");
             return "login";

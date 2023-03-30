@@ -31,9 +31,9 @@ public class MainController {
     @Autowired
 	private EventMapper eMapper;
 
-    //Fetch Data from Database 
+    //Fetch events for todat and tommorow
     @GetMapping("/dashboard")
-    public String dashboard(HttpSession session, Model model) {
+    public String dashboard(Model model, HttpSession session) {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
