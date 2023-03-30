@@ -59,7 +59,7 @@ public class UserController {
         if (user != null && user.getPass().equals(password)) {
             session.setAttribute("user", user);
             model.addAttribute("success", "Login Successfully");
-            return "redirect:/dashboard";
+            return "dashboard";
         } else {
             model.addAttribute("error", "Invalid username or password");
             return "login";
@@ -72,10 +72,6 @@ public class UserController {
         return "redirect:/login";
     }
 
-    // editprofile page
-    @GetMapping("/editprofile")
-    public String editprofile() {
-        return "editprofile";
-    }
+    
 }
 

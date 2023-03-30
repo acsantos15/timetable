@@ -117,4 +117,15 @@ public class MainController {
         return ResponseEntity.ok(existingEvent);
     }
 
+    // editprofile page
+    @GetMapping("/editprofile")
+    public String editprofile(HttpSession session) {
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        }else{
+            return "editprofile";
+        }
+    }
+
 }
