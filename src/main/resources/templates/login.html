@@ -76,3 +76,15 @@
      </form> 
     </body>
 </html>
+<script th:inline="javascript">
+  $(document).ready(function(){ 
+     /* Display error message */
+     var error = /*[[${error}]]*/ null;
+     if (error) {
+       Swal.fire(
+         'Oops!',
+         'Wrong credentials!',
+         'error'
+       )}
+  });
+</script>

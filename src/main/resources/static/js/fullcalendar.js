@@ -35,10 +35,20 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('#eventId').val(response.id);
                     $('#eventTitle').text(response.title);
                     $('#eventDescription').text(response.description);
-                    $('#eventLocation').text(response.location);
                     $('#eventPeople').text(response.people);
                     $('#eventStart').text(response.start);
                     $('#eventEnd').text(response.end);
+                    // alert(response.id)
+                    // $.ajax({
+                    //     url: "/events/"+response.id+"/users",
+                    //     type: 'GET',
+                    //     success: function(response) {
+                    //         $("#user_list").html(html);
+                    //     },
+                    //     error: function(jqXHR, textStatus, errorThrown) {
+                    //         console.log("Error: " + textStatus + ": " + errorThrown);
+                    //     }
+                    // });
                 }
             });
         },

@@ -22,7 +22,7 @@ $(document).ready(function(){
         };
         if(pass.length < 8){
             Swal.fire(
-                'Password should have atlest 8 characters!',
+                'Password should have atleast 8 characters',
                 '',
                 'warning'
             )

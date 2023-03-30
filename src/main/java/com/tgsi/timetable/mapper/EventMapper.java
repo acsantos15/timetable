@@ -10,10 +10,13 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
 import org.apache.ibatis.annotations.Param;
 import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.tgsi.timetable.entity.Events;
+import com.tgsi.timetable.entity.UserEvent;
+import com.tgsi.timetable.entity.Users;
 
 @Mapper
 public interface EventMapper {
@@ -35,4 +38,14 @@ public interface EventMapper {
     
     @Delete("DELETE FROM events WHERE id = #{id}")
     void deleteEventById(Long id);
+
+    @Select("SELECT users.name " +
+    "FROM users " +
+    "INNER JOIN event_user ON users.id = event_user.user_id " +
+    "WHERE event_user.event_id = #{eventId}")
+    @Results({
+    @Result(property = "fname", column = "fname")
+    // Define other properties of the User class
+    })
+    List<Users> getUsersByEventId(@Param("eventId") Long eventId);
 }
