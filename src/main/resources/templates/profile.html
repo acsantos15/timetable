@@ -37,7 +37,7 @@
             </form>
             <div class="btn-group">
               <button type="button" class="btn dropdown-toggle" style="background-color: #2C9447; color:white;" data-bs-toggle="dropdown" aria-expanded="false">
-                Logout
+                <span th:text="${username}"></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" th:href="@{/dashboard}">Dashboard</a></li>
@@ -47,30 +47,32 @@
         </div>
     </nav>
 
-    <h3 style="color:#2C9447; margin: 30px 0px 30px 15px;">Personal Profile</h3>
-
-    <form action="editUser" method="post">
-
-        <div class="container1">
-            <div class="card" style="width:45%; height: 350px; float:left; margin-left: 60px; padding:30px;">
-
-<form action="showprofile" method="post">
-    <div>
-    
-            <input type="hidden" id="eventId"></input>
-                <p class="fw-bold">First Name: </p><p id="userFname"></p>
-                <p class="fw-bold">Last Name: </p><p id="userLname"></p>
-                <p class="fw-bold">Addres: </p><p id="userAddress"></p>
-                <p class="fw-bold">Contact Number: </p><p id="userContact"></p>
-                <p class="fw-bold">Username: </p><p id="userName"></p>
-                <p class="fw-bold">Email: </p><p id="userEmail"></p>
-    
-                <button th:href="@{/editprofile}" id="editProfileBtn">Edit</button>
-        </div>
-    
-        <p th:text="${error}" th:if="${error}"></p>
-        
-    
+    <div class="container1">
+      <div class="card" style="margin: 60px; padding:30px;">
+          <div class="card-headers" style="color:#2C9447; font-weight: bold; margin-bottom: 15px;">PERSONAL INFORMATION</div>
+      <div class="card-bodys">
+          <div class="mb-4">
+              <p>Name</p><span th:text="${fname}"></span>&nbsp;<span th:text="${lname}"></span>
+          </div>
+          <div class="mb-4">
+              <p>Address</p><span th:text="${address}"></span>
+          </div>
+          <div class="mb-4">
+            <p>Contact No.</p><span th:text="${contact}"></span>
+          </div>
+          <div class="mb-4">
+            <p>Username</p><span th:text="${username}"></span>
+          </div>
+          <div class="mb-4">
+            <p>Email</p><span th:text="${email}"></span>
+          </div>
+          <div style="float: right;">
+            <a th:href="@{/editprofile}" class="btn" style="background-color: #2C9447; color:white;">Edit Profile</a>
+          </div>
+      </div>
+      </div>
+      
+  </div>
         <br/><br/>
     </body>
     </html>

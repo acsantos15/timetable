@@ -36,14 +36,14 @@
             <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
             <div class="btn-group">
-              <button type="button" class="btn dropdown-toggle" style="background-color: #2C9447; color:white;" data-bs-toggle="dropdown" aria-expanded="false">
-                Logout
-              </button>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item" th:href="@{/dashboard}">Dashboard</a></li>
-                <li><a class="dropdown-item" id="logoutBtn">Logout</a></li>
-              </ul>
-            </div>
+                <button type="button" class="btn dropdown-toggle" style="background-color: #2C9447; color:white;" data-bs-toggle="dropdown" aria-expanded="false">
+                  <span th:text="${username}"></span>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-end">
+                  <li><a class="dropdown-item" th:href="@{/dashboard}">Dashboard</a></li>
+                  <li><a class="dropdown-item" id="logoutBtn">Logout</a></li>
+                </ul>
+              </div>
         </div>
     </nav>
 
