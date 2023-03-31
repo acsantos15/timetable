@@ -20,9 +20,11 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             },
         },
+        selectable: true,
         defaultDate: new Date(),
         editable: false,
         eventLimit: true,
+        slotMaxTime: "20:00:00",
         events: {
             url: '/events',
         },
