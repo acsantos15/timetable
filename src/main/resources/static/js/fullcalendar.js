@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function() {
         defaultDate: new Date(),
         editable: false,
         eventLimit: true,
+        slotMinTime: "06:00:00",
         slotMaxTime: "20:00:00",
         events: {
             url: '/events',
