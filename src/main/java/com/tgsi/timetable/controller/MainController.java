@@ -30,7 +30,7 @@ public class MainController {
     @Autowired
     private EventMapper eMapper;
 
-    //Fetch events for todat and tommorow
+    // Fetch events for todat and tommorow
     @GetMapping("/dashboard")
     public String dashboard(Model model, HttpSession session) {
         Users user = (Users) session.getAttribute("user");
@@ -54,6 +54,12 @@ public class MainController {
                     .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
                     .collect(Collectors.toList());
             model.addAttribute("tommorow", tomEvents);
+
+            // Get User Name
+            String fname = user.getFname();
+            model.addAttribute("fname", fname);
+            String lname = user.getLname();
+            model.addAttribute("lname", lname);
             return "dashboard";
         }
 
@@ -72,8 +78,11 @@ public class MainController {
         if (user == null) {
             return "redirect:/login";
         } else {
-            String username = user.getUsername();
-            model.addAttribute("username", username);
+            // Get User Name
+            String fname = user.getFname();
+            model.addAttribute("fname", fname);
+            String lname = user.getLname();
+            model.addAttribute("lname", lname);
             return "timetable";
         }
     }
@@ -135,8 +144,11 @@ public class MainController {
         if (user == null) {
             return "redirect:/login";
         } else {
-            String username = user.getUsername();
-            model.addAttribute("username", username);
+            // Get User Name
+            String fname = user.getFname();
+            model.addAttribute("fname", fname);
+            String lname = user.getLname();
+            model.addAttribute("lname", lname);
             return "editprofile";
         }
     }
@@ -148,6 +160,7 @@ public class MainController {
         if (user == null) {
             return "redirect:/login";
         } else {
+            // Get User Information
             String fname = user.getFname();
             model.addAttribute("fname", fname);
             String lname = user.getLname();

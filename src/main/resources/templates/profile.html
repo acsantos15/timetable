@@ -37,7 +37,7 @@
             </form>
             <div class="btn-group">
               <button type="button" class="btn dropdown-toggle" style="background-color: #2C9447; color:white;" data-bs-toggle="dropdown" aria-expanded="false">
-                <span th:text="${username}"></span>
+                <span th:text="${fname}"></span>&nbsp;<span th:text="${fname}"></span>
               </button>
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item" th:href="@{/dashboard}">Dashboard</a></li>
@@ -55,6 +55,9 @@
       <li class="nav-item">
           <a class="nav-link" th:href="@{/timetable}"><i class="fa-solid fa-calendar-days"></i> Timetable</a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link active" th:href="@{/profile}"><i class="fa-solid fa-user"></i> Profile</a>
+      </li>
     </ul>
 
     <div class="container1">
@@ -62,19 +65,19 @@
           <div class="card-headers" style="color:#2C9447; font-weight: bold; margin-bottom: 15px;">PERSONAL INFORMATION</div>
       <div class="card-bodys">
           <div class="mb-4">
-              <p>Name</p><span th:text="${fname}"></span>&nbsp;<span th:text="${lname}"></span>
+              <h5>Name</h5><span th:text="${fname}"></span>&nbsp;<span th:text="${lname}"></span>
           </div>
           <div class="mb-4">
-              <p>Address</p><span th:text="${address}"></span>
+              <h5>Address</h5><span th:text="${address}"></span>
           </div>
           <div class="mb-4">
-            <p>Contact No.</p><span th:text="${contact}"></span>
+            <h5>Contact No.</h5><span th:text="${contact}"></span>
           </div>
           <div class="mb-4">
-            <p>Username</p><span th:text="${username}"></span>
+            <h5>Username</h5><span th:text="${username}"></span>
           </div>
           <div class="mb-4">
-            <p>Email</p><span th:text="${email}"></span>
+            <h5>Email</h5><span th:text="${email}"></span>
           </div>
           <div style="float: right;">
             <a th:href="@{/editprofile}" class="btn" style="background-color: #2C9447; color:white;">Edit Profile</a>
