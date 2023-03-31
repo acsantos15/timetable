@@ -24,12 +24,11 @@ import com.tgsi.timetable.mapper.EventMapper;
 
 import jakarta.servlet.http.HttpSession;
 
-
 @Controller
 public class MainController {
 
     @Autowired
-	private EventMapper eMapper;
+    private EventMapper eMapper;
 
     //Fetch events for todat and tommorow
     @GetMapping("/dashboard")
@@ -37,7 +36,7 @@ public class MainController {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
-        }else{
+        } else {
             String username = user.getUsername();
             Long userid = user.getId();
             model.addAttribute("username", username);
@@ -45,25 +44,25 @@ public class MainController {
             List<Events> allEvents = eMapper.getUserEvent(userid);
             LocalDateTime today = LocalDateTime.now();
             List<Events> todaysEvents = allEvents.stream()
-            .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
-            .collect(Collectors.toList());
+                    .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
+                    .collect(Collectors.toList());
             model.addAttribute("today", todaysEvents);
 
             // Get Tommorow Event
             LocalDateTime tom = LocalDateTime.now().plusDays(1);
             List<Events> tomEvents = allEvents.stream()
-            .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
-            .collect(Collectors.toList());
+                    .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
+                    .collect(Collectors.toList());
             model.addAttribute("tommorow", tomEvents);
             return "dashboard";
         }
-        
+
     }
 
-    // Get All Events 
+    // Get All Events
     @GetMapping("/events")
     public @ResponseBody Iterable<Events> getAllEvents() {
-      return eMapper.getAllEvents();
+        return eMapper.getAllEvents();
     }
 
     // Timetable Page
@@ -72,7 +71,7 @@ public class MainController {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
-        }else{
+        } else {
             String username = user.getUsername();
             model.addAttribute("username", username);
             return "timetable";
@@ -100,7 +99,6 @@ public class MainController {
         return eMapper.getUsersByEventId(eventId);
     }
 
-    
     // Delete Event
     @DeleteMapping("/delete/{id}")
     public String deleteEvent(@PathVariable("id") Long id) {
@@ -108,17 +106,17 @@ public class MainController {
         return "timetable";
     }
 
-    
     // Edit Event
     @PutMapping("edit/{id}")
     @ResponseBody
     public ResponseEntity<?> updateEvent(@PathVariable("id") Long id, @RequestBody Events updatedEvent) {
         Events existingEvent = eMapper.getEventById(id);
-        if (existingEvent == null){
+        if (existingEvent == null) {
             return ResponseEntity.notFound().build();
         }
 
-        // Update the fields on the existing event object with values from the updated event object
+        // Update the fields on the existing event object with values from the updated
+        // event object
         existingEvent.setTitle(updatedEvent.getTitle());
         existingEvent.setDescription(updatedEvent.getDescription());
         existingEvent.setLocation(updatedEvent.getLocation());
@@ -132,23 +130,37 @@ public class MainController {
 
     // editprofile page
     @GetMapping("/editprofile")
-    public String editProfile(HttpSession session) {
+    public String editprofile(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
-        }else{
+        } else {
+            String username = user.getUsername();
+            model.addAttribute("username", username);
             return "editprofile";
         }
     }
-        //Display Profile
-        @GetMapping("/profile")
-        public String profilePage(HttpSession session) {
+
+    // Display Profile
+    @GetMapping("/profile")
+    public String showprofile(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
-        }else{
+        } else {
+            String fname = user.getFname();
+            model.addAttribute("fname", fname);
+            String lname = user.getLname();
+            model.addAttribute("lname", lname);
+            String address = user.getAddress();
+            model.addAttribute("address", address);
+            String contact = user.getContact();
+            model.addAttribute("contact", contact);
+            String username = user.getUsername();
+            model.addAttribute("username", username);
+            String email = user.getEmail();
+            model.addAttribute("email", email);
             return "profile";
         }
     }
-
 }
