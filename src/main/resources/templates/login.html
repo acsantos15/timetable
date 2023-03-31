@@ -28,7 +28,7 @@
    <body style="background-color: #2c9447;">
       <form action="#" th:action="@{/login}" method="post">
         <section>
-            <div class="container py-5 h-1000">
+            <div class="container py-5 h-1000" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;">
               <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-xl-10">
                   <div class="card" style="border-radius: 1rem;">
@@ -61,7 +61,9 @@
                             </div>
           
                             <br/>
-                            <p class="mb-5 pb-lg-2" style="color: #9C9A97;">Not a member yet? <a th:href="@{/signup}">Create an account</a>
+                            <!-- Already Have an Account-->
+                            <p style="text-align:left; color:#9C9A97; margin: 15px 15px 0px 0px;">Not a member yet? 
+                              <a th:href="@{/signup}" style="color:#2C9447; font-weight:bold;">Create an account</a>
                             </p>
                           </form>
           

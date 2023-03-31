@@ -25,7 +25,7 @@
 
 </head>
 <body style="background-color: #F7F7F7;">
-
+    <!-- Header -->
     <nav class="navbar" style="background-color: #2C9447;">
         <div class="container-fluid">
             <a class="navbar-brand fw-bolder" th:href="@{/dashboard}" style="color: white">
@@ -46,6 +46,16 @@
             </div>
         </div>
     </nav>
+
+    <!-- Navigation -->
+    <ul class="nav nav-tabs justify-content-center">
+      <li class="nav-item">
+          <a class="nav-link"  th:href="@{/dashboard}"><i class="fa-solid fa-grip mr-1"></i> Dashboard</h></a>
+      </li>
+      <li class="nav-item">
+          <a class="nav-link" th:href="@{/timetable}"><i class="fa-solid fa-calendar-days"></i> Timetable</a>
+      </li>
+    </ul>
 
     <div class="container1">
       <div class="card" style="margin: 60px; padding:30px;">
