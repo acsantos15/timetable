@@ -39,13 +39,19 @@ public interface EventMapper {
     @Delete("DELETE FROM events WHERE id = #{id}")
     void deleteEventById(Long id);
 
-    @Select("SELECT users.name " +
+    @Select("SELECT users.fname, users.lname " +
     "FROM users " +
-    "INNER JOIN event_user ON users.id = event_user.user_id " +
-    "WHERE event_user.event_id = #{eventId}")
+    "INNER JOIN user_event ON users.id = user_event.user_id " +
+    "WHERE user_event.event_id = #{eventId}")
     @Results({
-    @Result(property = "fname", column = "fname")
-    // Define other properties of the User class
+    @Result(property = "fname", column = "fname"),
+    @Result(property = "lname", column = "lname")
     })
     List<Users> getUsersByEventId(@Param("eventId") Long eventId);
+
+    @Select("SELECT * " +
+    "FROM events " +
+    "INNER JOIN user_event ON events.id = user_event.event_id " +
+    "WHERE user_event.user_id = #{userid}")
+    List<Events> getUserEvent(@Param("userid") Long userid);
 }

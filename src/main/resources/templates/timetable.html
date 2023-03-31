@@ -24,6 +24,10 @@
 <!-- Moment CDN -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
+<!-- Select2 CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
 <!-- Static files -->
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <script src="/js/fullcalendar.js"></script>
@@ -75,14 +79,13 @@
                 <label for="addLoc" class="form-label"></label>
                 <input type="text" class="form-control" id="addLoc" name="location" placeholder="Location" required/>
               </div>
+
               <div class="mb-3">
-                <label for="addPeople" class="form-label"></label>
-                <input type="text" class="form-control" id="addPeople" name="people" placeholder="Participant/s" required/>
-              </div>
-              <ul class="list-group">
-                <li class="list-group-item">Name 1</li>
-                <li class="list-group-item">Name 2</li>
-              </ul>
+                <label for="addPart" class="form-label">Participant/s:</label>
+                <select class="participant" name="states[]" multiple="multiple" style="width: 100%">
+                  <option th:each="people : ${people}" th:value="${people.id}" th:text="${people.fname}"></option>
+                </select>
+              </div> 
               <div class="form-group">
                 <label class="control-label col-sm-2" for="addStart"></label>
                 <div class="col-sm-10">          
@@ -165,7 +168,7 @@
             <p class="fw-bold">Description: </p><p id="eventDescription"></p>
             <p class="fw-bold">Location: </p><p id="eventLocation"></p>
             <p class="fw-bold">Participant:
-              <ul class="list-group" id="user_list">
+              <ul class="list-group" id="participant">
               </ul>
             <p class="fw-bold">Start: </p><p id="eventStart"></p>
             <p class="fw-bold">End: </p><p id="eventEnd"></p>

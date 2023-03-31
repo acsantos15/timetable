@@ -38,17 +38,19 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('#eventPeople').text(response.people);
                     $('#eventStart').text(response.start);
                     $('#eventEnd').text(response.end);
-                    // alert(response.id)
-                    // $.ajax({
-                    //     url: "/events/"+response.id+"/users",
-                    //     type: 'GET',
-                    //     success: function(response) {
-                    //         $("#user_list").html(html);
-                    //     },
-                    //     error: function(jqXHR, textStatus, errorThrown) {
-                    //         console.log("Error: " + textStatus + ": " + errorThrown);
-                    //     }
-                    // });
+                    $.ajax({
+                        url: "/events/"+response.id+"/users",
+                        type: 'GET',
+                        success: function(response) {
+                            var people = response;
+                            $.each(people, function(index, people){
+                                $("#participant").append("<li class='list-group-item'>"+people.fname+"</li>");
+                            })
+                        },
+                        error: function(jqXHR, textStatus, errorThrown) {
+                            console.log("Error: " + textStatus + ": " + errorThrown);
+                        }
+                    });
                 }
             });
         },

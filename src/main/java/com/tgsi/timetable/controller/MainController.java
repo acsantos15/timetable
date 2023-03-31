@@ -39,9 +39,10 @@ public class MainController {
             return "redirect:/login";
         }else{
             String username = user.getUsername();
+            Long userid = user.getId();
             model.addAttribute("username", username);
             // Get Today Event
-            List<Events> allEvents = eMapper.getAllEvents();
+            List<Events> allEvents = eMapper.getUserEvent(userid);
             LocalDateTime today = LocalDateTime.now();
             List<Events> todaysEvents = allEvents.stream()
             .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
@@ -131,7 +132,7 @@ public class MainController {
 
     // editprofile page
     @GetMapping("/editprofile")
-    public String editprofile(HttpSession session) {
+    public String editProfile(HttpSession session) {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
@@ -141,12 +142,13 @@ public class MainController {
     }
         //Display Profile
         @GetMapping("/profile")
-        public String showProfile(HttpSession session) {
+        public String profilePage(HttpSession session) {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
         }else{
             return "profile";
-        }}
+        }
+    }
 
 }

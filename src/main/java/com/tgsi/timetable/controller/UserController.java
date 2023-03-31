@@ -2,6 +2,8 @@
 
 package com.tgsi.timetable.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -29,10 +31,18 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public @ResponseBody Iterable<Users> getAllUsers() {
+    public @ResponseBody Iterable<Users> getAllUsers(Model model) {
       return uMapper.getAllUser();
     }
 
+    @GetMapping("/people")
+    public String populateUser(Model model) {
+      List<Users> people = uMapper.getAllUser();
+      model.addAttribute("people", people);
+      return "user-form";
+    }
+
+    
     // Register User
     @PostMapping("/createUser")
     @ResponseBody

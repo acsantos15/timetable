@@ -191,4 +191,13 @@ $(document).ready(function(){
         })      
     });
 
+    // Clear append
+    $("#viewEventModal").on('hidden.bs.modal', function(){
+        $('#participant').empty();
+    })
+
+    // Select 2
+    $('.participant').select2();
+    
+
 });
