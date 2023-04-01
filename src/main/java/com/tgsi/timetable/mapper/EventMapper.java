@@ -54,4 +54,12 @@ public interface EventMapper {
     "INNER JOIN user_event ON events.id = user_event.event_id " +
     "WHERE user_event.user_id = #{userid}")
     List<Events> getUserEvent(@Param("userid") Long userid);
+
+    @Insert("<script>" +
+    "INSERT INTO user_event (event_id, user_id) VALUES " +
+    "<foreach item='participantId' collection='participantIds' separator=','>" +
+    "(#{eventId}, #{participantId})" +
+    "</foreach>" +
+    "</script>")
+    void insertEventParticipants(@Param("eventId") Long eventId, @Param("participantIds") List<Long> participantIds);
 }

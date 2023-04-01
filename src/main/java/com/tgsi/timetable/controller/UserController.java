@@ -3,16 +3,19 @@
 package com.tgsi.timetable.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tgsi.timetable.entity.UserEvent;
 import com.tgsi.timetable.entity.Users;
 import com.tgsi.timetable.mapper.UserMapper;
 
@@ -30,19 +33,12 @@ public class UserController {
         return "signup";
     }
 
+    // Get all users
     @GetMapping("/users")
     public @ResponseBody Iterable<Users> getAllUsers(Model model) {
       return uMapper.getAllUser();
     }
-
-    @GetMapping("/people")
-    public String populateUser(Model model) {
-      List<Users> people = uMapper.getAllUser();
-      model.addAttribute("people", people);
-      return "user-form";
-    }
-
-    
+  
     // Register User
     @PostMapping("/createUser")
     @ResponseBody
@@ -57,6 +53,7 @@ public class UserController {
         return "login";
     }
 
+    // Login page
     @GetMapping("/")
     public String showLoginForm2() {
         return "login";
@@ -75,7 +72,8 @@ public class UserController {
             return "login";
         }
     }
-
+    
+    // Logout remove httpsession
     @GetMapping("/logout")
     public String logout(HttpSession session) {
         session.removeAttribute("user");

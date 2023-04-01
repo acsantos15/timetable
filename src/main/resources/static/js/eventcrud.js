@@ -1,6 +1,12 @@
 // Aries
 //Jquery CRUD Events
 $(document).ready(function(){
+
+    $('#saveuser').click(function(e){
+        e.preventDefault();
+        
+        
+    })
     
     // Add Events
     $('#addEventForm').submit(function(e){
@@ -8,6 +14,7 @@ $(document).ready(function(){
         var title = $("#addTitle").val();
         var desc = $("#addDesc").val();
         var loc = $("#addLoc").val();
+        var people = $("#userSelect").val()
         var start = $("#addStart").val();
         var end = $("#addEnd").val();
         var fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
@@ -45,20 +52,36 @@ $(document).ready(function(){
                 type: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(formData),
-                success: function(data) {
-                    Swal.fire({
-                        title: 'Event Added',
-                        text: " ",
-                        icon: 'success',
-                        showCancelButton: false,
-                        confirmButtonText: 'Ok'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload(); 
-                            $("#addEventForm").trigger("reset");
-                        }
-                    })
+                success: function(eventId) {
                     
+                    var formData = {
+                        "eventId": eventId,
+                        "participantIds": people,
+                    };
+                    $.ajax({
+                        url: "/saveEventParticipants",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(formData),
+                        success: function(result) {
+                            Swal.fire({
+                                title: 'Event Added',
+                                text: " ",
+                                icon: 'success',
+                                showCancelButton: false,
+                                confirmButtonText: 'Ok'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload(); 
+                                    $("#addEventForm").trigger("reset");
+                                }
+                            })
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr.responseText);
+                        }
+                    });
+                          
                 },
                 error: function (xhr, status, error) {
                     console.log(xhr.responseText);
@@ -196,8 +219,30 @@ $(document).ready(function(){
         $('#participant').empty();
     })
 
-    // Select 2
-    $('.participant').select2();
-    
+    // Populate participants
+    $('.participant').select2({
+        multiple: true
+    });
+    $.ajax({
+        url: '/users',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            // Get the underlying select element
+            var select = $('#userSelect');
+            // Loop through the response data and add new options to the dropdown
+            $.each(response, function(index, item) {
+            select.append($('<option>', {
+                value: item.id,
+                text: item.fname
+            }));
+            });
 
+            // Trigger the change event to update the Select2 dropdown
+            select.trigger('change');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Error: " + textStatus + " " + errorThrown);
+        }
+    });
 });

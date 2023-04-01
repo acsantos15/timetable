@@ -4,6 +4,7 @@ package com.tgsi.timetable.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tgsi.timetable.entity.Events;
@@ -30,7 +32,7 @@ public class MainController {
     @Autowired
     private EventMapper eMapper;
 
-    // Fetch events for todat and tommorow
+    // Fetch events for today and tommorow
     @GetMapping("/dashboard")
     public String dashboard(Model model, HttpSession session) {
         Users user = (Users) session.getAttribute("user");
@@ -90,9 +92,26 @@ public class MainController {
     // Save Event
     @ResponseBody
     @PostMapping("/save")
-    public String saveEvent(@RequestBody Events event) {
+    public Long saveEvent(@RequestBody Events event) {
         eMapper.insertEvent(event);
-        return "redirect:/timetable";
+        Long eventId = event.getId();
+        return eventId;
+    }
+
+    // @PostMapping("/saveEventParticipants")
+    // @ResponseBody
+    // public String saveEventParticipants(@RequestParam Long eventId, @RequestParam List<Long> participantIds) {
+    //     eMapper.insertEventParticipants(eventId, participantIds);
+    //     return "Success";
+    // }
+
+    @PostMapping("/saveEventParticipants")
+    @ResponseBody
+    public String saveEventParticipants(@RequestBody Map<String, Object> payload) {
+        Long eventId = ((Number) payload.get("eventId")).longValue();
+        List<Long> participantIds = (List<Long>) payload.get("participantIds");
+        eMapper.insertEventParticipants(eventId, participantIds);
+        return "Success";
     }
 
     // Get Invdividual Event
@@ -102,6 +121,7 @@ public class MainController {
         return eMapper.getEventById(id);
     }
 
+    // Fetch participant for event
     @GetMapping("/events/{eventId}/users")
     @ResponseBody
     public List<Users> getAllUsersForEvent(@PathVariable Long eventId) {
