@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tgsi.timetable.entity.Events;
@@ -98,13 +97,7 @@ public class MainController {
         return eventId;
     }
 
-    // @PostMapping("/saveEventParticipants")
-    // @ResponseBody
-    // public String saveEventParticipants(@RequestParam Long eventId, @RequestParam List<Long> participantIds) {
-    //     eMapper.insertEventParticipants(eventId, participantIds);
-    //     return "Success";
-    // }
-
+    // Save Participant
     @PostMapping("/saveEventParticipants")
     @ResponseBody
     public String saveEventParticipants(@RequestBody Map<String, Object> payload) {
@@ -144,8 +137,7 @@ public class MainController {
             return ResponseEntity.notFound().build();
         }
 
-        // Update the fields on the existing event object with values from the updated
-        // event object
+        // event object 
         existingEvent.setTitle(updatedEvent.getTitle());
         existingEvent.setDescription(updatedEvent.getDescription());
         existingEvent.setLocation(updatedEvent.getLocation());

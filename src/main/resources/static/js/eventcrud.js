@@ -76,15 +76,9 @@ $(document).ready(function(){
                                     $("#addEventForm").trigger("reset");
                                 }
                             })
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(xhr.responseText);
                         }
                     });
-                          
-                },
-                error: function (xhr, status, error) {
-                    console.log(xhr.responseText);
+                        
                 }
             });
 
@@ -97,11 +91,28 @@ $(document).ready(function(){
         e.preventDefault();
         $('#viewEventModal').hide();   
         var eventId = $("#eventId").val();
+
+        // Populate participants input
+        $.ajax({
+            url: "/events/"+eventId+"/users",
+            type: 'GET',
+            dataType: 'json',
+            success: function(response) {
+                var select = $('#edituserSelect');
+                $.each(response, function(index, name) {
+                    select.find('option[value="' + name.id + '"]').attr('selected', 'v');
+                });
+                select.trigger('change');
+            }
+        });
         $.ajax({
             url: "/timetable/" + eventId,
             type: "GET",
             contentType: "application/json",
             success: function (data) {
+                $('.editparticipant').select2({
+                    multiple: true
+                });
                 $('#editEventModal').show();
                 $('#editId').val(data.id);
                 $('#editTitle').val(data.title);
@@ -109,12 +120,11 @@ $(document).ready(function(){
                 $('#editLoc').val(data.location);
                 $('#editStart').val(data.start);
                 $('#editEnd').val(data.end); 
-            },
-            error: function (xhr, status, error) {
-                console.log(xhr.responseText);
             }
         }); 
     });
+
+    
 
     // Update Events
     $('#editEventForm').submit(function(e){
@@ -141,12 +151,15 @@ $(document).ready(function(){
             "start": fStart,
             "end": fEnd,
         };
+        
+        //  if Start is earlier than end
         if(start >= end){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
                 text: 'Appointment start should be later than end',
             })
+        // if time difference is less than 30 mins
         }else if(diffMins < 30){
             Swal.fire({
                 icon: 'error',
@@ -161,6 +174,7 @@ $(document).ready(function(){
                 contentType: "application/json",
                 data: JSON.stringify(formData),
                 success: function(data) {
+
                     Swal.fire({
                         title: 'Event Updated',
                         text: " ",
@@ -174,9 +188,6 @@ $(document).ready(function(){
                         }
                     })
                     
-                },
-                error: function (xhr, status, error) {
-                    console.log(xhr.responseText);
                 }
             });
 
@@ -205,9 +216,6 @@ $(document).ready(function(){
                 type: 'DELETE',
                 success: function(result) {
                     location.reload() 
-                },
-                error: function(xhr, status, error) {
-                  console.error(error);
                 }
             });
         }
@@ -219,18 +227,28 @@ $(document).ready(function(){
         $('#participant').empty();
     })
 
-    // Populate participants
+    // $('#editEventModal').on('hidden.bs.modal', function (e) {
+    //     e.preventDefault();
+    //     var select = $('#edituserSelect');
+    //     select.val(null).trigger('change');
+    // });
+    $(".btn-close").click(function(){
+        $('#edituserSelect').find('option').removeAttr('selected');
+    })
+    // Populate all participants
     $('.participant').select2({
         multiple: true
     });
+    $('.editparticipant').select2({
+        multiple: true
+    });
+
     $.ajax({
         url: '/users',
         type: 'GET',
         dataType: 'json',
         success: function(response) {
-            // Get the underlying select element
-            var select = $('#userSelect');
-            // Loop through the response data and add new options to the dropdown
+            var select = $('#edituserSelect');
             $.each(response, function(index, item) {
             select.append($('<option>', {
                 value: item.id,
@@ -238,7 +256,26 @@ $(document).ready(function(){
             }));
             });
 
-            // Trigger the change event to update the Select2 dropdown
+            select.trigger('change');
+        },
+        error: function(jqXHR, textStatus, errorThrown) {
+            console.log("Error: " + textStatus + " " + errorThrown);
+        }
+    });
+
+    $.ajax({
+        url: '/users',
+        type: 'GET',
+        dataType: 'json',
+        success: function(response) {
+            var select = $('#userSelect');
+            $.each(response, function(index, item) {
+            select.append($('<option>', {
+                value: item.id,
+                text: item.fname
+            }));
+            });
+
             select.trigger('change');
         },
         error: function(jqXHR, textStatus, errorThrown) {
