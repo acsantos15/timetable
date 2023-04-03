@@ -26,6 +26,7 @@
 <link rel="stylesheet" type="text/css" href="/css/minicalendar.css" />
 <script src="/js/minicalendar.js"></script>
 <script src="/js/logout.js"></script>
+<script src="/js/dashboard.js"></script>
 </head>
 <style>
 
@@ -52,7 +53,7 @@
             <hr/>
             <th:block th:each="todayevent : ${today}">
                 <div class="dash card" style="margin:10px; color:white">
-                    <ul style="list-style-type: none; margin-top: 12px;">
+                    <ul style="list-style-type: none; margin-top: 12px;"> 
                         <li th:text="${todayevent.title}" style="font-size: larger; font-weight: bold;"></li>
                         <li th:text="${todayevent.description}"></li>
                         <li><small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(todayevent.end, 'hh:mm a')}" ></small></li>

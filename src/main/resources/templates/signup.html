@@ -54,29 +54,29 @@
                       <form id="regForm">
                         <h5 style="color: #2C9447; font-weight: bold;">Personal Information</h5>
                         <div class="mb-4" style="width:48%; float:left">
-                          <input class="form-control" type="text" placeholder="First Name" id="fname" name="fname">
+                          <input class="form-control" type="text" placeholder="First Name" id="fname" name="fname" maxlength="50" required>
                         </div>
                         <div class="mb-4" style="width:48%; float:right">
-                            <input class="form-control" type="text" placeholder="Last Name" id="lname" name="lname">
+                            <input class="form-control" type="text" placeholder="Last Name" id="lname" name="lname" maxlength="50" required>
                         </div>
                         <div class="mb-4" style="width:48%; float:left">
-                            <input class="form-control" type="text" placeholder="Home Address" id="address" name="address">
+                            <input class="form-control" type="text" placeholder="Home Address" id="address" name="address" maxlength="100" required> 
                         </div>
                         <div class="mb-4" style="width:48%; float:right">
-                            <input class="form-control" type="text" placeholder="Contact No." id="contact" name="contact">
+                            <input class="form-control" type="text" pattern="[0-9]{11}" placeholder="Contact No." id="contact" name="contact" maxlength="11" required>
                         </div>
                         <h5 style="color: #2C9447; font-weight: bold;">Account Information</h5>
                         <div class="mb-4" style="width:48%; float:left">
-                          <input class="form-control" type="text" placeholder="Username" id="username" name="username">
+                          <input class="form-control" type="text" placeholder="Username" id="username" name="username" maxlength="50"  required>
                         </div>
                         <div class="mb-4" style="width:48%; float:right">
-                            <input class="form-control" type="email" placeholder="Email" id="email" name="email">
+                            <input class="form-control" type="email" placeholder="Email" id="email" name="email" maxlength="50" required>
                         </div>
                         <div class="mb-4" style="width:48%; float:left">
-                            <input class="form-control" type="password" placeholder="Password" id="pass" name="pass">
+                            <input class="form-control" type="password" placeholder="Password" id="pass" name="pass" maxlength="50" required>
                         </div>
                         <div class="mb-4" style="width:48%; float:right">
-                            <input class="form-control" type="password" id="conpass" placeholder="Confirm Password">
+                            <input class="form-control" type="password" id="conpass" placeholder="Confirm Password" required>
                         </div>
                         <span id="errMsg" style="color:red "></span>
                         <div style="float: right;">

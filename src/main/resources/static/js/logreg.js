@@ -21,7 +21,7 @@ $(document).ready(function(){
             "pass": pass,
         };
         if(pass.length < 8){
-            $("#errMsg").text("Password should have atleast 8 characters").delay(3000).fadeOut();
+            $("#errMsg").show().text("Password should have atleast 8 characters").delay(3000).fadeOut();
         }
         else if(pass == conpass){
             $.ajax({
@@ -49,7 +49,7 @@ $(document).ready(function(){
                 }
             });
         }else{
-            $("#errMsg").text("Password don't match").delay(3000).fadeOut();
+            $("#errMsg").show().text("Password don't match").delay(3000).fadeOut();
         }
         
     });

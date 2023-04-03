@@ -69,15 +69,15 @@
             <form id="addEventForm">
               <div class="mb-3">
                 <label for="addTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="addTitle" name="title" placeholder="Title" required/>
+                <input type="text" class="form-control" id="addTitle" name="title" placeholder="Title" maxlength="100" required/>
               </div>
               <div class="mb-3">
                 <label for="addDesc" class="form-label">Description</label>
-                <input type="textarea" class="form-control" id="addDesc" name="description" placeholder="Description" required/>
+                <input type="textarea" class="form-control" id="addDesc" name="description" placeholder="Description" maxlength="100" required/>
               </div>
               <div class="mb-3">
                 <label for="addLoc" class="form-label">Location</label>
-                <input type="text" class="form-control" id="addLoc" name="location" placeholder="Location" required/>
+                <input type="text" class="form-control" id="addLoc" name="location" placeholder="Location" maxlength="100" required/>
               </div>
 
               <div class="mb-3">
@@ -96,7 +96,8 @@
                 <div class="col-sm-10">          
                     <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" min="06:30:00" max="20:00:00" required/>
                 </div>
-              </div>     
+              </div>  
+              <span id="errMsg" style="color:red "></span>   
           </div>
           <div class="modal-footer">
             <button type="reset" class="btn btn-outline-secondary">Clear</button>
@@ -120,15 +121,15 @@
               <input type="hidden" id="editId">
               <div class="mb-3">
                 <label for="editTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="editTitle" name="title" required/>
+                <input type="text" class="form-control" id="editTitle" name="title" maxlength="100" required/>
               </div>
               <div class="mb-3">
                 <label for="editDesc" class="form-label">Description</label>
-                <input type="textarea" class="form-control" id="editDesc" name="description" required/>
+                <input type="textarea" class="form-control" id="editDesc" name="description" maxlength="100" required/>
               </div>
               <div class="mb-3">
                 <label for="editLoc" class="form-label">Location</label>
-                <input type="text" class="form-control" id="editLoc" name="location" required/>
+                <input type="text" class="form-control" id="editLoc" name="location" maxlength="100" required/>
               </div>
               <div class="mb-3">
                 <label for="edituserSelect" class="form-label">Participant/s:</label>

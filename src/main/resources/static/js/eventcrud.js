@@ -4,8 +4,7 @@ $(document).ready(function(){
 
     $('#saveuser').click(function(e){
         e.preventDefault();
-        
-        
+    
     })
     
     // Add Events
@@ -22,6 +21,10 @@ $(document).ready(function(){
         var sTime = moment(start).format('HH');
         var eTime = moment(end).format('HH');
 
+        var curTime = moment().format('HH:mm');
+        var startTime = moment(start).format('HH:mm');
+        var endTime = moment(start).format('HH:mm');
+
         var sTimeStamp = Date.parse(start);
         var eTimeStamp = Date.parse(end);
 
@@ -35,25 +38,16 @@ $(document).ready(function(){
             "start": fStart,
             "end": fEnd,
         };
-        if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: '6am to 7pm only',
-            })
+        if(curTime > startTime){
+            $("#errMsg").show().text("Time has already passed").delay(3000).fadeOut();
+        }
+        else if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
+            $("#errMsg").show().text("6am to 7pm only").delay(3000).fadeOut();
         }
         else if(start >= end){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Appointment start should be later than end',
-            })
+            $("#errMsg").show().text("Appointment start should be later than end").delay(3000).fadeOut();
         }else if(diffMins < 30){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Appointment should be atleast 30 mins',
-            })
+            $("#errMsg").show().text("Appointment should be atleast 30 mins").delay(3000).fadeOut();
         }
         else{
             $.ajax({
@@ -243,6 +237,8 @@ $(document).ready(function(){
     // });
     $(".btn-close").click(function(){
         $('#edituserSelect').find('option').removeAttr('selected');
+        $('#editEventForm').trigger("reset");
+        $('#addEventForm').trigger("reset");
     })
     // Populate all participants
     $('.participant').select2({
