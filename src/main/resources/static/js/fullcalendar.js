@@ -38,7 +38,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('#eventId').val(response.id);
                     $('#eventTitle').text(response.title);
                     $('#eventDescription').text(response.description);
-                    $('#eventPeople').text(response.people);
+                    $('#eventLocation').text(response.location);
                     $('#eventStart').text(response.start);
                     $('#eventEnd').text(response.end);
                     $.ajax({
