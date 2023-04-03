@@ -47,19 +47,7 @@
         </div>
     </nav>
 
-    <!-- Navigation -->
-    <ul class="nav nav-tabs justify-content-center">
-      <li class="nav-item">
-          <a class="nav-link"  th:href="@{/dashboard}"><i class="fa-solid fa-grip mr-1"></i> Dashboard</h></a>
-      </li>
-      <li class="nav-item">
-          <a class="nav-link" th:href="@{/timetable}"><i class="fa-solid fa-calendar-days"></i> Timetable</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link active" th:href="@{/profile}"><i class="fa-solid fa-user"></i> Profile</a>
-      </li>
-    </ul>
-
+    <a th:href="@{/timetable}" style="text-decoration: none;"><h3 style="color:#2C9447; margin: 30px 0px 20px 25px;">Back to Timetable</h3></a>
     <div class="container1">
       <div class="card" style="margin: 60px; padding:30px;">
           <div class="card-headers" style="color:#2C9447; font-weight: bold; margin-bottom: 15px;">PERSONAL INFORMATION</div>
