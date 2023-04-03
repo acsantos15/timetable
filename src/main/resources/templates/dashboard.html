@@ -31,7 +31,7 @@
 <style>
 
 </style>
-<body style="background-color: #F7F7F7;">
+<body style="background-color: #DEDBD3;">
 	<!-- create navigation bar ( header) -->
     <div th:replace="~{header :: header}"></div>
 
@@ -49,7 +49,7 @@
     <div class="card" style="background-color: white; margin:50px 0px 50px 50px; float:left; width:50%;">
         <!-- Todays Event Tables -->
         <div class="container" style="padding-top: 20px;">
-            <h3>Today</h3>
+            <h3 style="color: rgb(82, 10, 10);">Today</h3>
             <hr/>
             <th:block th:each="todayevent : ${today}">
                 <div class="dash card" style="margin:10px; color:white">
@@ -64,7 +64,7 @@
 
         <!-- Tommorow event table -->
         <div class="container">
-            <h3>Tommorow</h3>
+            <h3 style="color: rgb(82, 10, 10);">Tommorow</h3>
             <hr/>
             <th:block th:each="tomevent : ${tommorow}">
                 <div class="dash2 card" style="margin:10px; color:white">
