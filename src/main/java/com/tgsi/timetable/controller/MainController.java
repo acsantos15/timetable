@@ -156,11 +156,19 @@ public class MainController {
         if (user == null) {
             return "redirect:/login";
         } else {
-            // Get User Name
+            // Get User Information
             String fname = user.getFname();
             model.addAttribute("fname", fname);
             String lname = user.getLname();
             model.addAttribute("lname", lname);
+            String address = user.getAddress();
+            model.addAttribute("address", address);
+            String contact = user.getContact();
+            model.addAttribute("contact", contact);
+            String username = user.getUsername();
+            model.addAttribute("username", username);
+            String email = user.getEmail();
+            model.addAttribute("email", email);
             return "editprofile";
         }
     }

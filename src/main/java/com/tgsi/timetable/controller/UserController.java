@@ -11,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -45,6 +46,27 @@ public class UserController {
     public Users createUser(@RequestBody Users user) {
         uMapper.insertUser(user);
         return user;
+    }
+
+    // Edit User
+    @PutMapping("edit/{id}")
+    @ResponseBody
+    public ResponseEntity<?> updateEvent(@PathVariable("id") Long id, @RequestBody Events updatedEvent) {
+        Events existingEvent = eMapper.getEventById(id);
+        if (existingEvent == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        // event object 
+        existingEvent.setTitle(updatedEvent.getTitle());
+        existingEvent.setDescription(updatedEvent.getDescription());
+        existingEvent.setLocation(updatedEvent.getLocation());
+        existingEvent.setStart(updatedEvent.getStart());
+        existingEvent.setEnd(updatedEvent.getEnd());
+
+        // Save the updated event object to the database
+        eMapper.updatedEvent(existingEvent);
+        return ResponseEntity.ok(existingEvent);
     }
 
     // Login page

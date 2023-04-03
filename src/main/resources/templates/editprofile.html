@@ -69,16 +69,16 @@
                 <div class="card-headers" style="color:#2C9447; font-weight: bold; margin-bottom: 15px;">PERSONAL INFORMATION</div>
             <div class="card-bodys">
                 <div class="mb-4">
-                    <input class="form-control" type="text" placeholder="First Name" name="firstname">
+                    <input class="form-control" type="text" placeholder="First Name" name="firstname" th:value="${fname}">
                 </div>
                 <div class="mb-4">
-                    <input class="form-control" type="text" placeholder="Last Name" name="lastname">
+                    <input class="form-control" type="text" placeholder="Last Name" name="lastname" th:value="${lname}">
                 </div>
                 <div class="mb-4">
-                    <input class="form-control" type="text" placeholder="Home Address" name="address">
+                    <input class="form-control" type="text" placeholder="Home Address" name="address" th:value="${address}">
                 </div>
                 <div class="mb-4">
-                    <input class="form-control" type="text" placeholder="Contact No." name="contactNo">
+                    <input class="form-control" type="text" placeholder="Contact No." name="contactNo" th:value="${contact}">
                 </div>
             </div>
             </div>
@@ -87,17 +87,17 @@
                 <div class="card-headers" style="color:#2C9447; font-weight: bold; margin-bottom: 15px;">ACCOUNT INFORMATION</div>
             <div class="card-bodys">    
                 <div class="mb-4">
-                    <input class="form-control" type="text" placeholder="Username" name="username">
+                    <input class="form-control" type="text" placeholder="Username" name="username" th:value="${username}">
                 </div>
             
-                <!--
+                
                 <div class="mb-5">
-                    <input class="form-control" type="email" placeholder="Email" name="email">
+                    <input class="form-control" type="email" placeholder="Email" name="email" th:value="${email}">
                 </div>
-                    -->
+                   
 
                  <div class="mb-4">
-                    <input class="form-control" type="password" placeholder="Password" name="password">
+                    <input class="form-control" type="password" placeholder="Password" name="password" th:value="${pass}">
                 </div>
                 <div class="mb-4">
                     <input class="form-control" type="password" placeholder="Confirm Password" name="confirmPassword">
