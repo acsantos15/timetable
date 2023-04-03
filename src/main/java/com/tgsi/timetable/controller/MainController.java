@@ -80,6 +80,8 @@ public class MainController {
             return "redirect:/login";
         } else {
             // Get User Name
+            Long loggedId = user.getId();
+            model.addAttribute("loggedId", loggedId);
             String fname = user.getFname();
             model.addAttribute("fname", fname);
             String lname = user.getLname();
@@ -147,6 +149,13 @@ public class MainController {
         // Save the updated event object to the database
         eMapper.updatedEvent(existingEvent);
         return ResponseEntity.ok(existingEvent);
+    }
+
+
+    @DeleteMapping("/delete/{eventId}/edit")
+    public ResponseEntity<Void> deleteParticipantsByEventId(@PathVariable Long eventId) {
+        eMapper.deleteParticipant(eventId);
+        return ResponseEntity.ok().build();
     }
 
     // editprofile page

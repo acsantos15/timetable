@@ -72,10 +72,7 @@ public interface EventMapper {
     "</script>")
     void insertEventParticipants(@Param("eventId") Long eventId, @Param("participantIds") List<Long> participantIds);
 
-    // Update participant
-    @Insert("INSERT INTO participants (event_id, name) VALUES (#{eventId}, #{name})")
-    void insertParticipant(Users participant);
-
-    @Delete("DELETE FROM participants WHERE event_id = #{eventId}")
-    void deleteParticipantsForEvent(Long eventId);
+    // // Update participant
+    @Delete("DELETE FROM user_event WHERE event_id = #{eventId}")
+    void deleteParticipant(Long eventId);
 }

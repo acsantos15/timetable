@@ -2,11 +2,6 @@
 //Jquery CRUD Events
 $(document).ready(function(){
 
-    $('#saveuser').click(function(e){
-        e.preventDefault();
-    
-    })
-    
     // Add Events
     $('#addEventForm').submit(function(e){
         e.preventDefault();
@@ -21,10 +16,6 @@ $(document).ready(function(){
         var sTime = moment(start).format('HH');
         var eTime = moment(end).format('HH');
 
-        var curTime = moment().format('HH:mm');
-        var startTime = moment(start).format('HH:mm');
-        var endTime = moment(start).format('HH:mm');
-
         var sTimeStamp = Date.parse(start);
         var eTimeStamp = Date.parse(end);
 
@@ -38,10 +29,7 @@ $(document).ready(function(){
             "start": fStart,
             "end": fEnd,
         };
-        if(curTime > startTime){
-            $("#errMsg").show().text("Time has already passed").delay(3000).fadeOut();
-        }
-        else if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
+        if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
             $("#errMsg").show().text("6am to 7pm only").delay(3000).fadeOut();
         }
         else if(start >= end){
@@ -128,7 +116,6 @@ $(document).ready(function(){
     });
 
     
-
     // Update Events
     $('#editEventForm').submit(function(e){
         e.preventDefault();
@@ -136,14 +123,14 @@ $(document).ready(function(){
         var title = $("#editTitle").val();
         var desc = $("#editDesc").val();
         var loc = $("#editLoc").val();
+        var people = $("#edituserSelect").val()
         var start = $("#editStart").val();
         var end = $("#editEnd").val();
         var fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
         var fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
+        var sTime = moment(start).format('HH');
+        var eTime = moment(end).format('HH');
 
-        var curTime = moment().format('HH:mm');
-        var startTime = moment(start).format('HH:mm');
-        var endTime = moment(start).format('HH:mm');
 
         var sTimeStamp = Date.parse(start);
         var eTimeStamp = Date.parse(end);
@@ -159,10 +146,7 @@ $(document).ready(function(){
             "end": fEnd,
         };
         
-        if(curTime > startTime){
-            $("#erreditMsg").show().text("Time has already passed").delay(3000).fadeOut();
-        }
-        else if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
+        if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
             $("#erreditMsg").show().text("6am to 7pm only").delay(3000).fadeOut();
         }
         else if(start >= end){
@@ -171,6 +155,7 @@ $(document).ready(function(){
             $("#erreditMsg").show().text("Appointment should be atleast 30 mins").delay(3000).fadeOut();
         }
         else{
+            
             $.ajax({
                 url: "/edit/" + eventId,
                 type: 'PUT',
@@ -178,6 +163,28 @@ $(document).ready(function(){
                 data: JSON.stringify(formData),
                 success: function(data) {
 
+                    // Remove participant Ajax
+                    $.ajax({
+                        url: "/delete/" + eventId +"/edit",
+                        type: "DELETE",
+                        success: function(result) {        
+                        }
+                    });
+                }
+            });
+
+            var peopleData = {
+                "eventId": eventId,
+                "participantIds": people,
+            };
+            var st = JSON.stringify(peopleData)
+            alert(st)
+            $.ajax({
+                url: "/saveEventParticipants",
+                type: "POST",
+                contentType: "application/json",
+                data: st,
+                success: function(response) {
                     Swal.fire({
                         title: 'Event Updated',
                         text: " ",
@@ -190,7 +197,9 @@ $(document).ready(function(){
                             $("#editEventForm").trigger("reset");
                         }
                     })
-                    
+                },
+                error: function(jqXHR, textStatus, errorThrown) {
+                    console.log("Error: " + textStatus + " " + errorThrown);
                 }
             });
 
@@ -225,11 +234,17 @@ $(document).ready(function(){
         })      
     });
 
+    // Prevent user to input past datetime
+    var now = new Date();
+    var offset = now.getTimezoneOffset() * 60000; // Convert to milliseconds
+    var localDate = new Date(now.getTime() - offset).toISOString().slice(0, 16);
+    $('input[type="datetime-local"]').attr('min', localDate);
+
     // Clear append
     $("#viewEventModal").on('hidden.bs.modal', function(){
         $('#participant').empty();
     })
-    
+
     $(".btn-close").click(function(){
         $('#edituserSelect').find('option').removeAttr('selected');
         $('#editEventForm').trigger("reset");
