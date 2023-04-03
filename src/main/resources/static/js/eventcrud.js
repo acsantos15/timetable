@@ -19,6 +19,8 @@ $(document).ready(function(){
         var end = $("#addEnd").val();
         var fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
         var fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
+        var sTime = moment(start).format('HH');
+        var eTime = moment(end).format('HH');
 
         var sTimeStamp = Date.parse(start);
         var eTimeStamp = Date.parse(end);
@@ -33,7 +35,14 @@ $(document).ready(function(){
             "start": fStart,
             "end": fEnd,
         };
-        if(start >= end){
+        if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
+            Swal.fire({
+                icon: 'error',
+                title: 'Oops...',
+                text: '6am to 7pm only',
+            })
+        }
+        else if(start >= end){
             Swal.fire({
                 icon: 'error',
                 title: 'Oops...',
@@ -100,7 +109,7 @@ $(document).ready(function(){
             success: function(response) {
                 var select = $('#edituserSelect');
                 $.each(response, function(index, name) {
-                    select.find('option[value="' + name.id + '"]').attr('selected', 'v');
+                    select.find('option[value="' + name.id + '"]').attr('selected', 'selected');
                 });
                 select.trigger('change');
             }
