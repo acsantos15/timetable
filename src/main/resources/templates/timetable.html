@@ -69,26 +69,26 @@
             <form id="addEventForm">
               <div class="mb-3">
                 <label for="addTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="addTitle" name="title" placeholder="Title" required/>
+                <input type="text" class="form-control" id="addTitle" name="title" placeholder="Title" maxlength="100" required/>
               </div>
               <div class="mb-3">
                 <label for="addDesc" class="form-label">Description</label>
-                <input type="textarea" class="form-control" id="addDesc" name="description" placeholder="Description" required/>
+                <input type="textarea" class="form-control" id="addDesc" name="description" placeholder="Description" maxlength="100" required/>
               </div>
               <div class="mb-3">
                 <label for="addLoc" class="form-label">Location</label>
-                <input type="text" class="form-control" id="addLoc" name="location" placeholder="Location" required/>
+                <input type="text" class="form-control" id="addLoc" name="location" placeholder="Location" maxlength="100" required/>
               </div>
 
               <div class="mb-3">
                 <label for="addPart" class="form-label">Participant/s:</label>
-                <select class="participant" id="userSelect" name="peoples[]" multiple="multiple" style="width: 100%">
+                <select class="participant" id="userSelect" name="peoples[]" multiple="multiple" style="width: 100%" required>
                 </select>
               </div> 
               <div class="form-group">
                 <label class="control-label col-sm-2" for="addStart">Start</label>
                 <div class="col-sm-10">          
-                    <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" min="06:00:00" max="19:30:00" required/>
+                    <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" min="T06:00" max="T19:30" required/>
                 </div>
               </div>
               <div class="form-group">
@@ -96,7 +96,8 @@
                 <div class="col-sm-10">          
                     <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" min="06:30:00" max="20:00:00" required/>
                 </div>
-              </div>     
+              </div>  
+              <span id="errMsg" style="color:red "></span>   
           </div>
           <div class="modal-footer">
             <button type="reset" class="btn btn-outline-secondary">Clear</button>
@@ -120,15 +121,15 @@
               <input type="hidden" id="editId">
               <div class="mb-3">
                 <label for="editTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="editTitle" name="title" required/>
+                <input type="text" class="form-control" id="editTitle" name="title" maxlength="100" required/>
               </div>
               <div class="mb-3">
                 <label for="editDesc" class="form-label">Description</label>
-                <input type="textarea" class="form-control" id="editDesc" name="description" required/>
+                <input type="textarea" class="form-control" id="editDesc" name="description" maxlength="100" required/>
               </div>
               <div class="mb-3">
                 <label for="editLoc" class="form-label">Location</label>
-                <input type="text" class="form-control" id="editLoc" name="location" required/>
+                <input type="text" class="form-control" id="editLoc" name="location" maxlength="100" required/>
               </div>
               <div class="mb-3">
                 <label for="edituserSelect" class="form-label">Participant/s:</label>
@@ -147,12 +148,12 @@
                     <input class="form-control" type="datetime-local" id="editEnd" name="end" required/>
                 </div>
               </div> 
-              <p style="color: red;" id="errMsg"></p>     
+              <p style="color: red;" id="erreditMsg"></p>     
           </div>
           <div class="modal-footer">
             <button type="reset" class="btn btn-outline-secondary">Clear</button>
             <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Discard</button>
-            <button type="submit" class="btn btn-success" id="saveUpEventBtn">Save Changes</button>
+            <button type="submit" class="btn btn-success" id="saveUpEventBtn">Save</button>
           </form>
           </div>
         </div>
@@ -179,7 +180,7 @@
             <p class="fw-bold">End: </p><p id="eventEnd"></p>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="removeEventBtn">Remove</button>
+            <button type="button" class="btn btn-danger" id="removeEventBtn">Delete</button>
             <button type="button" class="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" data-bs-toggle="modal">Edit</button>
           </div>
         </div>

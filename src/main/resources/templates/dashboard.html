@@ -26,11 +26,12 @@
 <link rel="stylesheet" type="text/css" href="/css/minicalendar.css" />
 <script src="/js/minicalendar.js"></script>
 <script src="/js/logout.js"></script>
+<script src="/js/dashboard.js"></script>
 </head>
 <style>
 
 </style>
-<body style="background-color: #F7F7F7;">
+<body style="background-color: #DEDBD3;">
 	<!-- create navigation bar ( header) -->
     <div th:replace="~{header :: header}"></div>
 
@@ -48,11 +49,11 @@
     <div class="card" style="background-color: white; margin:50px 0px 50px 50px; float:left; width:50%;">
         <!-- Todays Event Tables -->
         <div class="container" style="padding-top: 20px;">
-            <h3>Today</h3>
+            <h3 style="color: rgb(82, 10, 10);">Today</h3>
             <hr/>
             <th:block th:each="todayevent : ${today}">
                 <div class="dash card" style="margin:10px; color:white">
-                    <ul style="list-style-type: none; margin-top: 12px;">
+                    <ul style="list-style-type: none; margin-top: 12px;"> 
                         <li th:text="${todayevent.title}" style="font-size: larger; font-weight: bold;"></li>
                         <li th:text="${todayevent.description}"></li>
                         <li><small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(todayevent.end, 'hh:mm a')}" ></small></li>
@@ -63,7 +64,7 @@
 
         <!-- Tommorow event table -->
         <div class="container">
-            <h3>Tommorow</h3>
+            <h3 style="color: rgb(82, 10, 10);">Tommorow</h3>
             <hr/>
             <th:block th:each="tomevent : ${tommorow}">
                 <div class="dash2 card" style="margin:10px; color:white">

@@ -4,8 +4,7 @@ $(document).ready(function(){
 
     $('#saveuser').click(function(e){
         e.preventDefault();
-        
-        
+    
     })
     
     // Add Events
@@ -19,6 +18,12 @@ $(document).ready(function(){
         var end = $("#addEnd").val();
         var fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
         var fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
+        var sTime = moment(start).format('HH');
+        var eTime = moment(end).format('HH');
+
+        var curTime = moment().format('HH:mm');
+        var startTime = moment(start).format('HH:mm');
+        var endTime = moment(start).format('HH:mm');
 
         var sTimeStamp = Date.parse(start);
         var eTimeStamp = Date.parse(end);
@@ -33,18 +38,16 @@ $(document).ready(function(){
             "start": fStart,
             "end": fEnd,
         };
-        if(start >= end){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Appointment start should be later than end',
-            })
+        if(curTime > startTime){
+            $("#errMsg").show().text("Time has already passed").delay(3000).fadeOut();
+        }
+        else if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
+            $("#errMsg").show().text("6am to 7pm only").delay(3000).fadeOut();
+        }
+        else if(start >= end){
+            $("#errMsg").show().text("Appointment start should be later than end").delay(3000).fadeOut();
         }else if(diffMins < 30){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Appointment should be atleast 30 mins',
-            })
+            $("#errMsg").show().text("Appointment should be atleast 30 mins").delay(3000).fadeOut();
         }
         else{
             $.ajax({
@@ -100,7 +103,7 @@ $(document).ready(function(){
             success: function(response) {
                 var select = $('#edituserSelect');
                 $.each(response, function(index, name) {
-                    select.find('option[value="' + name.id + '"]').attr('selected', 'v');
+                    select.find('option[value="' + name.id + '"]').attr('selected', 'selected');
                 });
                 select.trigger('change');
             }
@@ -138,6 +141,10 @@ $(document).ready(function(){
         var fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
         var fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
 
+        var curTime = moment().format('HH:mm');
+        var startTime = moment(start).format('HH:mm');
+        var endTime = moment(start).format('HH:mm');
+
         var sTimeStamp = Date.parse(start);
         var eTimeStamp = Date.parse(end);
 
@@ -152,20 +159,16 @@ $(document).ready(function(){
             "end": fEnd,
         };
         
-        //  if Start is earlier than end
-        if(start >= end){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Appointment start should be later than end',
-            })
-        // if time difference is less than 30 mins
+        if(curTime > startTime){
+            $("#erreditMsg").show().text("Time has already passed").delay(3000).fadeOut();
+        }
+        else if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
+            $("#erreditMsg").show().text("6am to 7pm only").delay(3000).fadeOut();
+        }
+        else if(start >= end){
+            $("#erreditMsg").show().text("Appointment start should be later than end").delay(3000).fadeOut();
         }else if(diffMins < 30){
-            Swal.fire({
-                icon: 'error',
-                title: 'Oops...',
-                text: 'Appointment should be atleast 30 mins',
-            })
+            $("#erreditMsg").show().text("Appointment should be atleast 30 mins").delay(3000).fadeOut();
         }
         else{
             $.ajax({
@@ -234,11 +237,14 @@ $(document).ready(function(){
     // });
     $(".btn-close").click(function(){
         $('#edituserSelect').find('option').removeAttr('selected');
+        $('#editEventForm').trigger("reset");
+        $('#addEventForm').trigger("reset");
     })
     // Populate all participants
     $('.participant').select2({
         multiple: true
     });
+
     $('.editparticipant').select2({
         multiple: true
     });

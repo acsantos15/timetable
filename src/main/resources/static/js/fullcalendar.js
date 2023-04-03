@@ -17,6 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('#addEventModal').modal({
                         backdrop: 'static'
                       }).modal('show');
+                    const date = new Date();
+
+                    var now = new Date();
+                    now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
+                    document.getElementById('addStart').value = now.toISOString().slice(0,16);
+                    document.getElementById('addEnd').value = now.toISOString().slice(0,16);
                 }
             },
         },
@@ -38,7 +44,7 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('#eventId').val(response.id);
                     $('#eventTitle').text(response.title);
                     $('#eventDescription').text(response.description);
-                    $('#eventPeople').text(response.people);
+                    $('#eventLocation').text(response.location);
                     $('#eventStart').text(response.start);
                     $('#eventEnd').text(response.end);
                     $.ajax({

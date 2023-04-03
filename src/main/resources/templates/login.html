@@ -25,45 +25,46 @@
         <link rel="stylesheet" type="text/css" href="/css/style.css" />
         <script src="/js/logreg.js"></script>
    </head>
-   <body style="background-color: #2c9447;">
+   <body style="background-color: #537557;">
       <form action="#" th:action="@{/login}" method="post">
         <section>
             <div class="container py-5 h-1000" style="position: absolute; left: 0; right: 0; top: 0; bottom: 0; margin: auto;">
               <div class="row d-flex justify-content-center align-items-center h-100">
                 <div class="col col-xl-10">
-                  <div class="card" style="border-radius: 1rem;">
+                  <div class="card" style="border-radius: 1rem; background-color: #DEDBD3;">
                     <div class="row g-0">
                       <div class="col-md-6 col-lg-5 d-none d-md-block">
                         <img src="https://www.tsukiden.com.ph/wp-content/uploads/2018/10/Tsuki_Puzzle-e1580178754271.png"
                           alt="login form" class="img-fluid" style="border-radius: 1rem 0 0 1rem; height:100%;" />
                       </div>
-                      <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                        <div class="card-body p-4 p-lg-5 text-black">
-        
-                          <form>
-          
-                            <div class="d-flex align-items-center mb-3 pb-1">
-                              <i class="fa-solid fa-calendar-days fa-7x fa-bounce" style="color:#2c944846; text-align: center;"></i>
+                      <div class="col-md-6 col-lg-7 d-flex align-items-center" >
+                        <div class="card-body p-4 p-lg-5 text-black" >
+                            
+                          <form >
+
+                            <div class="d-flex mb-3 pb-1" style="margin-left: 35%;">
+                              <!-- <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQpCtTJzjxiz-C9SxaKo2mYMN3BZ1xJhR0xTGesW-sEr9A9HqJRKemBDrRq2jyfJHc29ho&usqp=CAU" style="height:4.8em"> -->
                               <br/><br/>
-                              <span class="h1 fw-bold mb-0" style="color: #2c9447; font-weight: bold; font-size: 60px;">Log in</span>
+                              <p class="h1 fw-bold mb-0" style="color:rgb(88, 17, 17); font-weight: bold; font-size: 60px;">Log in</p>
                             </div>
-                    
+                            
                             <div class="form-outline mb-4">
-                              <input type="text" id="form2Example17" class="form-control form-control-lg" name="username" placeholder="Email or Username"/>
+                              <input type="text" id="form2Example17" class="form-control form-control-lg" name="username" placeholder="Username"/>
                             </div>
           
                             <div class="form-outline mb-4">
                               <input type="password" id="form2Example27" class="form-control form-control-lg" name="password" placeholder="Password"/>
                             </div>
-          
-                            <div class="pt-1 mb-4">
-                              <button class="btn btn-success btn-lg btn-block" type="submit">Login</button>
+                            <span id="errMsg" style="color:red "></span>
+                            
+                            <div class="pt-1 mb-4" style="float:right">
+                              <button class="rounded" style="background-color: #7993A0; color: white;padding: 10px;" type="submit">Login</button>
                             </div>
-          
-                            <br/>
+                            
+                            
                             <!-- Already Have an Account-->
-                            <p style="text-align:left; color:#9C9A97; margin: 15px 15px 0px 0px;">Not a member yet? 
-                              <a th:href="@{/signup}" style="color:#2C9447; font-weight:bold;">Create an account</a>
+                            <div style="float: right;">
+                            <p style="text-align:left; color:#726F6C; margin: 60px 30px 0px 0px;">Don't have an account? <a th:href="@{/signup}" style="color:#517341; font-weight:bold;"> Create an account</a>
                             </p>
                           </form>
           
@@ -83,10 +84,7 @@
      /* Display error message */
      var error = /*[[${error}]]*/ null;
      if (error) {
-       Swal.fire(
-         'Oops!',
-         'Wrong credentials!',
-         'error'
-       )}
+        $("#errMsg").text("Wrong Credentials!").delay(3000).fadeOut();
+     }
   });
 </script>
