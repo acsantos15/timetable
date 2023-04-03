@@ -229,12 +229,7 @@ $(document).ready(function(){
     $("#viewEventModal").on('hidden.bs.modal', function(){
         $('#participant').empty();
     })
-
-    // $('#editEventModal').on('hidden.bs.modal', function (e) {
-    //     e.preventDefault();
-    //     var select = $('#edituserSelect');
-    //     select.val(null).trigger('change');
-    // });
+    
     $(".btn-close").click(function(){
         $('#edituserSelect').find('option').removeAttr('selected');
         $('#editEventForm').trigger("reset");

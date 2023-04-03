@@ -3,15 +3,18 @@
 package com.tgsi.timetable.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.tgsi.timetable.entity.UserEvent;
 import com.tgsi.timetable.entity.Users;
 import com.tgsi.timetable.mapper.UserMapper;
 
@@ -44,24 +47,25 @@ public class UserController {
     }
 
     // Edit User
-    @PutMapping("edit/{id}")
+    @PutMapping("edituser/{id}")
     @ResponseBody
-    public ResponseEntity<?> updateEvent(@PathVariable("id") Long id, @RequestBody Events updatedEvent) {
-        Events existingEvent = eMapper.getEventById(id);
-        if (existingEvent == null) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody Users updatedUser) {
+        Users existingUser = uMapper.getUserById(id);
+        if (existingUser == null) {
             return ResponseEntity.notFound().build();
         }
 
         // event object 
-        existingEvent.setTitle(updatedEvent.getTitle());
-        existingEvent.setDescription(updatedEvent.getDescription());
-        existingEvent.setLocation(updatedEvent.getLocation());
-        existingEvent.setStart(updatedEvent.getStart());
-        existingEvent.setEnd(updatedEvent.getEnd());
+        existingUser.setFname(updatedUser.getFname());
+        existingUser.setLname(updatedUser.getLname());
+        existingUser.setAddress(updatedUser.getAddress());
+        existingUser.setContact(updatedUser.getContact());
+        existingUser.setUsername(updatedUser.getUsername());
+        existingUser.setEmail(updatedUser.getEmail());
 
         // Save the updated event object to the database
-        eMapper.updatedEvent(existingEvent);
-        return ResponseEntity.ok(existingEvent);
+        uMapper.updatedUser(existingUser);
+        return ResponseEntity.ok(existingUser);
     }
 
     // Login page
