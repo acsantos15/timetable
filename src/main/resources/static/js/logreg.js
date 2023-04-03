@@ -21,11 +21,7 @@ $(document).ready(function(){
             "pass": pass,
         };
         if(pass.length < 8){
-            Swal.fire(
-                'Password should have atleast 8 characters',
-                '',
-                'warning'
-            )
+            $("#errMsg").text("Password should have atleast 8 characters").delay(3000).fadeOut();
         }
         else if(pass == conpass){
             $.ajax({
@@ -53,11 +49,7 @@ $(document).ready(function(){
                 }
             });
         }else{
-            Swal.fire(
-                'Password dont match!',
-                'You clicked the button!',
-                'warning'
-            )
+            $("#errMsg").text("Password don't match").delay(3000).fadeOut();
         }
         
     });
