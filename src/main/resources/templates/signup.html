@@ -35,14 +35,15 @@
               <div class="card" style="border-radius: 1rem;">
                 <div class="row g-0">
                   <div class="col-md-6 col-lg-5 d-none d-md-block">
-                     <!-- Avatar
-                    <span class="h1 fw-bold mb-0" style="color: #2c9447; font-weight: bold; font-size: 40px; margin-left: 10%;">Create Account</span>
+                     <!--Avatar-->
+                    <div style="margin-top: 5%; margin-left: 5%;margin-bottom: 5%;">
+                    <span class="h1 fw-bold mb-0" style="color: #2c9447; font-weight: bold; font-size: 40px;">Create Account</span></div>
                     <div class="d-flex justify-content-center mb-4">
                       <img src="https://mdbootstrap.com/img/Photos/Others/placeholder-avatar.jpg"
                         class="rounded-circle" alt="example placeholder" style="width: 200px;" />
-                    </div> -->
+                    </div>
                     <div class="d-flex justify-content-center">
-                      <div class="rounded" style="background-color: #2c9447; padding: 5px; margin-left: 10%;">
+                      <div class="rounded" style="background-color: #2c9447; padding: 5px; margin-left: 15px;">
                         <label class="form-label text-white m-1" for="customFile2">Upload Picture</label>
                         <input type="file" class="form-control d-none" id="customFile2" />
                       </div>
@@ -56,7 +57,7 @@
                           <i class="fa-solid fa-calendar-days fa-7x fa-bounce" style="color:#2c944846; text-align: center;"></i>
                           <br/><br/>              
                         </div> -->
-
+                        <h5 style="color: #2C9447; font-weight: bold;">Personal Information</h5>
                         <div class="mb-4" style="width:48%; float:left">
                           <input class="form-control" type="text" placeholder="First Name" id="fname" name="fname">
                         </div>
@@ -69,6 +70,7 @@
                         <div class="mb-4" style="width:48%; float:right">
                             <input class="form-control" type="text" placeholder="Contact No." id="contact" name="contact">
                         </div>
+                        <h5 style="color: #2C9447; font-weight: bold;">Account Information</h5>
                         <div class="mb-4" style="width:48%; float:left">
                           <input class="form-control" type="text" placeholder="Username" id="username" name="username">
                         </div>
@@ -83,13 +85,16 @@
                         </div>
       
                         <div style="float: right;">
-                          <button type="submit" class="btn" style="background-color: #2C9447; color:white;">Sign In</button>
+                          <button type="submit" class="btn" style="background-color: #2C9447; color:white;">Sign Up</button>
                       </div>
       
                         <!-- Already Have an Account-->
-                        <p style="text-align:left; color:#9C9A97; margin: 15px 15px 0px 0px;">Already have an account? 
+                       
+                        <div style="float: right;">
+                        <p style="text-align:left; color:#9C9A97; margin: 35px 100px 0px 0px;">Already have an account? 
                           <a th:href="@{/login}" style="color:#2C9447; font-weight:bold;">Login</a>
                         </p>
+                        </div>
                       </form>
                     </div>
                   </div>
