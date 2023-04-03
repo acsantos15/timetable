@@ -46,29 +46,30 @@ $(document).ready(function(){
                 success: function(eventId) {
                     
                     var formData = {
-                        "eventId": eventId,
+                        "eventId": 36,
                         "participantIds": people,
                     };
-                    $.ajax({
-                        url: "/saveEventParticipants",
-                        type: "POST",
-                        contentType: "application/json",
-                        data: JSON.stringify(formData),
-                        success: function(result) {
-                            Swal.fire({
-                                title: 'Event Added',
-                                text: " ",
-                                icon: 'success',
-                                showCancelButton: false,
-                                confirmButtonText: 'Ok'
-                            }).then((result) => {
-                                if (result.isConfirmed) {
-                                    location.reload(); 
-                                    $("#addEventForm").trigger("reset");
-                                }
-                            })
-                        }
-                    });
+                    var json = JSON.stringify(formData);
+                    // $.ajax({
+                    //     url: "/saveEventParticipants",
+                    //     type: "POST",
+                    //     contentType: "application/json",
+                    //     data: JSON.stringify(formData),
+                    //     success: function(result) {
+                    //         Swal.fire({
+                    //             title: 'Event Added',
+                    //             text: " ",
+                    //             icon: 'success',
+                    //             showCancelButton: false,
+                    //             confirmButtonText: 'Ok'
+                    //         }).then((result) => {
+                    //             if (result.isConfirmed) {
+                    //                 location.reload(); 
+                    //                 $("#addEventForm").trigger("reset");
+                    //             }
+                    //         })
+                    //     }
+                    // });
                         
                 }
             });
@@ -167,41 +168,38 @@ $(document).ready(function(){
                     $.ajax({
                         url: "/delete/" + eventId +"/edit",
                         type: "DELETE",
-                        success: function(result) {        
+                        success: function(eventId) {     
+
+                            var formData = {
+                                "eventId": eventId,
+                                "participantIds": people,
+                            };
+                            $.ajax({
+                                url: "/saveEventParticipants",
+                                type: "POST",
+                                contentType: "application/json",
+                                data: JSON.stringify(formData),
+                                success: function(result) {
+                                    alert(data)
+                                    Swal.fire({
+                                        title: 'Event Updated',
+                                        text: " ",
+                                        icon: 'success',
+                                        showCancelButton: false,
+                                        confirmButtonText: 'Ok'
+                                    }).then((result) => {
+                                        if (result.isConfirmed) {
+                                            location.reload(); 
+                                            $("#addEventForm").trigger("reset");
+                                        }
+                                    })
+                                }
+                            });  
+
                         }
                     });
                 }
-            });
-
-            var peopleData = {
-                "eventId": eventId,
-                "participantIds": people,
-            };
-            var st = JSON.stringify(peopleData)
-            alert(st)
-            $.ajax({
-                url: "/saveEventParticipants",
-                type: "POST",
-                contentType: "application/json",
-                data: st,
-                success: function(response) {
-                    Swal.fire({
-                        title: 'Event Updated',
-                        text: " ",
-                        icon: 'success',
-                        showCancelButton: false,
-                        confirmButtonText: 'Ok'
-                    }).then((result) => {
-                        if (result.isConfirmed) {
-                            location.reload(); 
-                            $("#editEventForm").trigger("reset");
-                        }
-                    })
-                },
-                error: function(jqXHR, textStatus, errorThrown) {
-                    console.log("Error: " + textStatus + " " + errorThrown);
-                }
-            });
+            });    
 
         }
         
@@ -245,11 +243,13 @@ $(document).ready(function(){
         $('#participant').empty();
     })
 
+    // Resert form when close
     $(".btn-close").click(function(){
         $('#edituserSelect').find('option').removeAttr('selected');
         $('#editEventForm').trigger("reset");
         $('#addEventForm').trigger("reset");
     })
+
     // Populate all participants
     $('.participant').select2({
         multiple: true

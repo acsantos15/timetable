@@ -5,6 +5,7 @@ package com.tgsi.timetable.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.atomic.LongAccumulator;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -102,6 +103,7 @@ public class MainController {
     // Save Participant
     @PostMapping("/saveEventParticipants")
     @ResponseBody
+    @SuppressWarnings("unchecked")
     public String saveEventParticipants(@RequestBody Map<String, Object> payload) {
         Long eventId = ((Number) payload.get("eventId")).longValue();
         List<Long> participantIds = (List<Long>) payload.get("participantIds");
@@ -153,9 +155,10 @@ public class MainController {
 
 
     @DeleteMapping("/delete/{eventId}/edit")
-    public ResponseEntity<Void> deleteParticipantsByEventId(@PathVariable Long eventId) {
+    @ResponseBody
+    public Long deleteParticipantsByEventId(@PathVariable Long eventId) {
         eMapper.deleteParticipant(eventId);
-        return ResponseEntity.ok().build();
+        return eventId;
     }
 
     // editprofile page
