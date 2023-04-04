@@ -47,5 +47,9 @@ public interface UserMapper {
     // Return user by email and password (Login)
     @Select("SELECT * FROM users WHERE username = #{username} AND pass = #{pass}")
     Users findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
+
+    // Search User Details
+    @Select("SELECT * FROM users WHERE fname LIKE CONCAT('%',#{fname},'%') OR lname LIKE CONCAT('%',#{lname},'%') OR address LIKE CONCAT('%',#{address},'%') OR contact LIKE CONCAT('%',#{contact},'%') OR username LIKE CONCAT('%',#{username},'%') OR email LIKE CONCAT('%',#{email},'%')")
+    List<Users> searchUser(String searchWord);
     
 }

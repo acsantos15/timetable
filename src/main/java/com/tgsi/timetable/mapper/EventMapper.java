@@ -63,6 +63,13 @@ public interface EventMapper {
     "WHERE user_event.user_id = #{userid}")
     List<Events> getUserEvent(@Param("userid") Long userid);
 
+    // Return events by user id string
+    @Select("SELECT * " +
+    "FROM events " +
+    "INNER JOIN user_event ON events.id = user_event.event_id " +
+    "WHERE user_event.user_id = #{userid}")
+    List<Events> getUserbyEventId(@Param("userid") String userid);
+
     // Insert participant to the event
     @Insert("<script>" +
     "INSERT INTO user_event (event_id, user_id) VALUES " +

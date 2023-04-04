@@ -46,30 +46,30 @@ $(document).ready(function(){
                 success: function(eventId) {
                     
                     var formData = {
-                        "eventId": 36,
+                        "eventId": eventId,
                         "participantIds": people,
                     };
                     var json = JSON.stringify(formData);
-                    // $.ajax({
-                    //     url: "/saveEventParticipants",
-                    //     type: "POST",
-                    //     contentType: "application/json",
-                    //     data: JSON.stringify(formData),
-                    //     success: function(result) {
-                    //         Swal.fire({
-                    //             title: 'Event Added',
-                    //             text: " ",
-                    //             icon: 'success',
-                    //             showCancelButton: false,
-                    //             confirmButtonText: 'Ok'
-                    //         }).then((result) => {
-                    //             if (result.isConfirmed) {
-                    //                 location.reload(); 
-                    //                 $("#addEventForm").trigger("reset");
-                    //             }
-                    //         })
-                    //     }
-                    // });
+                    $.ajax({
+                        url: "/saveEventParticipants",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(formData),
+                        success: function(result) {
+                            Swal.fire({
+                                title: 'Event Added',
+                                text: " ",
+                                icon: 'success',
+                                showCancelButton: false,
+                                confirmButtonText: 'Ok'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload(); 
+                                    $("#addEventForm").trigger("reset");
+                                }
+                            })
+                        }
+                    });
                         
                 }
             });
@@ -180,7 +180,6 @@ $(document).ready(function(){
                                 contentType: "application/json",
                                 data: JSON.stringify(formData),
                                 success: function(result) {
-                                    alert(data)
                                     Swal.fire({
                                         title: 'Event Updated',
                                         text: " ",
