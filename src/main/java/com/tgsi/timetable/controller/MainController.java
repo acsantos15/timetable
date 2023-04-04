@@ -5,7 +5,6 @@ package com.tgsi.timetable.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.LongAccumulator;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -83,8 +82,12 @@ public class MainController {
 
     // Get All Events
     @GetMapping("/events")
-    public @ResponseBody Iterable<Events> getAllEvents() {
-        return eMapper.getAllEvents();
+    public @ResponseBody Iterable<Events> getAllEvents(HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        // Get User Name
+        Long loggedId = user.getId();
+        model.addAttribute("loggedId", loggedId);
+        return eMapper.getUserEvent(loggedId);
     }
 
     // Timetable Page
@@ -174,7 +177,7 @@ public class MainController {
         return eventId;
     }
 
-    // editprofile page
+    // ditprofile page
     @GetMapping("/editprofile")
     public String editprofile(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
