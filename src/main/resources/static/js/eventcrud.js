@@ -50,26 +50,26 @@ $(document).ready(function(){
                         "participantIds": people,
                     };
                     var json = JSON.stringify(formData);
-                    // $.ajax({
-                    //     url: "/saveEventParticipants",
-                    //     type: "POST",
-                    //     contentType: "application/json",
-                    //     data: JSON.stringify(formData),
-                    //     success: function(result) {
-                    //         Swal.fire({
-                    //             title: 'Event Added',
-                    //             text: " ",
-                    //             icon: 'success',
-                    //             showCancelButton: false,
-                    //             confirmButtonText: 'Ok'
-                    //         }).then((result) => {
-                    //             if (result.isConfirmed) {
-                    //                 location.reload(); 
-                    //                 $("#addEventForm").trigger("reset");
-                    //             }
-                    //         })
-                    //     }
-                    // });
+                    $.ajax({
+                        url: "/saveEventParticipants",
+                        type: "POST",
+                        contentType: "application/json",
+                        data: JSON.stringify(formData),
+                        success: function(result) {
+                            Swal.fire({
+                                title: 'Event Added',
+                                text: " ",
+                                icon: 'success',
+                                showCancelButton: false,
+                                confirmButtonText: 'Ok'
+                            }).then((result) => {
+                                if (result.isConfirmed) {
+                                    location.reload(); 
+                                    $("#addEventForm").trigger("reset");
+                                }
+                            })
+                        }
+                    });
                         
                 }
             });

@@ -18,11 +18,13 @@ document.addEventListener('DOMContentLoaded', function() {
                         backdrop: 'static'
                       }).modal('show');
                     const date = new Date();
+                    var fEnd = moment(end).add(30,'minutes').format('YYYY-MM-DD HH:mm');
+                    var end = $("#addEnd").val(fEnd);
 
                     var now = new Date();
                     now.setMinutes(now.getMinutes() - now.getTimezoneOffset());
                     document.getElementById('addStart').value = now.toISOString().slice(0,16);
-                    document.getElementById('addEnd').value = now.toISOString().slice(0,16);
+                    // document.getElementById('addEnd').value = now.toISOString().slice(0,16);
                 }
             },
         },
