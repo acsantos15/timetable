@@ -26,7 +26,16 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             },
         },
+        allDaySlot: false,
+        allDayDefault: false,
         selectable: true,
+        select: function(info) {
+            $("#addEventModal").modal("show")
+            var fStart = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
+            var fEnd = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
+            $("#addStart").val(fStart);
+            $("#addEnd").val(fEnd);
+        },
         defaultDate: new Date(),
         editable: false,
         eventLimit: true,
