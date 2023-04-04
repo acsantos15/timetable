@@ -50,12 +50,26 @@ public class MainController {
                     .collect(Collectors.toList());
             model.addAttribute("today", todaysEvents);
 
+            // Dashboard Display Today Event
+            if (todaysEvents.isEmpty()) {
+                model.addAttribute("todayResponse", "NoData");
+            } else {
+                model.addAttribute("todayResponse", todaysEvents);
+            }
+
             // Get Tommorow Event
             LocalDateTime tom = LocalDateTime.now().plusDays(1);
             List<Events> tomEvents = allEvents.stream()
                     .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
                     .collect(Collectors.toList());
             model.addAttribute("tommorow", tomEvents);
+
+            // Dashboard Display Tommorow Event
+            if (tomEvents.isEmpty()) {
+                model.addAttribute("tommorowResponse", "NoData");
+            } else {
+                model.addAttribute("tommorowResponse", tomEvents);
+            }
 
             // Get User Name
             String fname = user.getFname();
@@ -141,7 +155,7 @@ public class MainController {
             return ResponseEntity.notFound().build();
         }
 
-        // event object 
+        // event object
         existingEvent.setTitle(updatedEvent.getTitle());
         existingEvent.setDescription(updatedEvent.getDescription());
         existingEvent.setLocation(updatedEvent.getLocation());
@@ -152,7 +166,6 @@ public class MainController {
         eMapper.updatedEvent(existingEvent);
         return ResponseEntity.ok(existingEvent);
     }
-
 
     @DeleteMapping("/delete/{eventId}/edit")
     @ResponseBody
