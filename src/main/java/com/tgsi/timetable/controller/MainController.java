@@ -69,9 +69,14 @@ public class MainController {
 
     // Get All Events
     @GetMapping("/events")
-    public @ResponseBody Iterable<Events> getAllEvents() {
-        return eMapper.getAllEvents();
+    public @ResponseBody Iterable<Events> getAllEvents(HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        // Get User Name
+        Long loggedId = user.getId();
+        model.addAttribute("loggedId", loggedId);
+        return eMapper.getUserEvent(loggedId);
     }
+    
 
     // Timetable Page
     @GetMapping("/timetable")
@@ -154,6 +159,7 @@ public class MainController {
     }
 
 
+    // Delete event
     @DeleteMapping("/delete/{eventId}/edit")
     @ResponseBody
     public Long deleteParticipantsByEventId(@PathVariable Long eventId) {
@@ -161,7 +167,7 @@ public class MainController {
         return eventId;
     }
 
-    // editprofile page
+    // ditprofile page
     @GetMapping("/editprofile")
     public String editprofile(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
