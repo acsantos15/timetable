@@ -189,7 +189,7 @@ $(document).ready(function(){
                                     }).then((result) => {
                                         if (result.isConfirmed) {
                                             location.reload(); 
-                                            $("#addEventForm").trigger("reset");
+                                            $("#editEventForm").trigger("reset");
                                         }
                                     })
                                 }

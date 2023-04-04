@@ -1,23 +1,23 @@
 /* FullCalendar CSS */
 .fc-day-today{
-	background: #accdec !important;
+	background: #7993A0 !important;
 }
 /*calendar header*/
 .fc-toolbar{
-    background-color: #2C9447;
+    background-color: #7993A0;
     border-radius: 5px;
     padding-left: 10px;
 }
 .fc-toolbar h2{
     display: inline;
-    vertical-align: middle;
+    vertical-align: middle; 
     color: white;
     font-style: normal;
     font-weight: 700;
 }
 .fc .fc-prev-button, 
 .fc .fc-next-button{
-    background-color: #2C9447;
+    background-color: #7993A0;
     padding: 5px;
     border: none;
 }
@@ -29,12 +29,12 @@
 }
 .fc a.fc-col-header-cell-cushion{
     text-decoration: none;
-    color:#073f6c;
+    color:#517c63;
     font-weight: bold;
 }
 .fc a.fc-daygrid-day-number{
     text-decoration: none;
-    color:#2C9447;
+    color:black;
     font-weight: bold;
 }
 /* END FullCalendar CSS */
@@ -43,11 +43,11 @@
 /*  NavBar CSS */
 .nav-tabs .nav-link.active {
     border-bottom-color: #073f6c; /* set the line color to green */
-    color: #2C9447;
+    color: #537557;
     border-bottom-width: 5px ;
 }
 .nav-tabs .nav-link {
-    color: #d3cccc; /* set the font color to gray */
+    color: #a4a1a1; /* set the font color to gray */
     font-size: large;
 }
 /* END NavBar CSS */
@@ -77,7 +77,7 @@
 
 /*Header CSS*/
 .dropdown-item:hover{
-    background-color: #2C9447;
+    background-color: #537557;
     color:white;
 }
 /*End of Header CSS*/

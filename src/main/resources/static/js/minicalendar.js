@@ -7,7 +7,8 @@ document.addEventListener('DOMContentLoaded', function() {
             right:''
         },
         defaultDate: new Date(),
-        height: 500,
+        height: 350,
+        contentHeight: 100,
         aspectRatio: 3,
     });
 
