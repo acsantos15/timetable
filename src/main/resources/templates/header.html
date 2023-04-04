@@ -31,9 +31,9 @@
             <a class="navbar-brand " th:href="@{/dashboard}" style="color: white; font-family: Verdana, Geneva, Tahoma, sans-serif;">
               <i class="fa-sharp fa-regular fa-calendar-days" ></i> TIMETABLE
             </a>
-            <form class="d-flex" role="search"> 
+            <form class="d-flex" role="search" th:action="@{/search}" id="searchForm" method="GET"> 
               <!--SEARCH BAR-->
-            <input class="form-control me-2" type="search" value="" id="search" placeholder="Search" aria-label="Search" onchange="openPage">
+            <input class="form-control me-2" type="search" id="searchWord" name="searchWord" placeholder="Search" aria-label="Search" required>
             <button class="btn btn-outline-light" type="submit">Search</button>
             </form>
             <!--SEARCH BAR-->

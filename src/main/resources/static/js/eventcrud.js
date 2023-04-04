@@ -46,7 +46,7 @@ $(document).ready(function(){
                 success: function(eventId) {
                     
                     var formData = {
-                        "eventId": 36,
+                        "eventId": eventId,
                         "participantIds": people,
                     };
                     var json = JSON.stringify(formData);
@@ -180,7 +180,6 @@ $(document).ready(function(){
                                 contentType: "application/json",
                                 data: JSON.stringify(formData),
                                 success: function(result) {
-                                    alert(data)
                                     Swal.fire({
                                         title: 'Event Updated',
                                         text: " ",
