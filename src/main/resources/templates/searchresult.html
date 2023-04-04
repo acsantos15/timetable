@@ -34,25 +34,28 @@
 <body style="background-color: #DEDBD3;">
 	<!-- create navigation bar ( header) -->
     <div th:replace="~{header :: header}"></div>
+    <a th:href="@{/timetable}" style="text-decoration: none;"><h3 style="color:#2C9447; margin: 30px 0px 20px 25px;">Back to Timetable</h3></a>
     Search Result
     <table class="table table-striped">
         <thead>
           <tr>
             <th scope="col">Id</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Schedule</th>
+            <th scope="col">Name</th>
+            <th scope="col">Today Schedule</th>
           </tr>
         </thead>
         <tbody>
           <tr th:each="result: ${users}">
             <td th:text="${result.id}"></td>
-            <td th:text="${result.fname}"></td>
-            <td th:text="${result.lname}"></td>
-            <td th:each="events: @{events}">
-                <!-- <ul th:text="${events.id}"></ul> -->
+            <td th:text="${result.fname}+' '+${result.lname}"></td>
+            <td>
+              <ul class="list-group" th:each="event : ${events}">
+                <li class="list-group-item" th:text="${event.title}+':  '+${#temporals.format(event.start, 'hh:mm a')}+' - '+${#temporals.format(event.end, 'hh:mm a')}"></li>
+              </ul>
+              Free time: <li class="list-group-item" ></li>
             </td>
           </tr>
+          
         </tbody>
       </table>
 

@@ -67,8 +67,9 @@ public interface EventMapper {
     @Select("SELECT * " +
     "FROM events " +
     "INNER JOIN user_event ON events.id = user_event.event_id " +
-    "WHERE user_event.user_id = #{userid}")
-    List<Events> getUserbyEventId(@Param("userid") String userid);
+    "WHERE user_event.user_id IN (#{userIds}) " +
+    "AND events.start >= #{startTime} AND events.end <= #{endTime}")
+    List<Events> getUserbyEventId(@Param("userIds") String userIds, @Param("startTime") LocalDateTime startTime, @Param("endTime") LocalDateTime endTime);
 
     // Insert participant to the event
     @Insert("<script>" +

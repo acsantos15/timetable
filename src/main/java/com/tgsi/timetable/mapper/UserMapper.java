@@ -49,7 +49,7 @@ public interface UserMapper {
     Users findByUsernameAndPassword(@Param("username") String username, @Param("password") String password);
 
     // Search User Details
-    @Select("SELECT * FROM users WHERE fname LIKE CONCAT('%',#{fname},'%') OR lname LIKE CONCAT('%',#{lname},'%') OR address LIKE CONCAT('%',#{address},'%') OR contact LIKE CONCAT('%',#{contact},'%') OR username LIKE CONCAT('%',#{username},'%') OR email LIKE CONCAT('%',#{email},'%')")
+    @Select("SELECT * FROM users WHERE fname LIKE CONCAT('%',#{fname},'%') OR lname LIKE CONCAT('%',#{lname},'%') OR username LIKE CONCAT('%',#{username},'%')")
     List<Users> searchUser(String searchWord);
     
 }

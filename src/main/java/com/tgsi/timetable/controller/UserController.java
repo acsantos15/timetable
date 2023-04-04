@@ -2,9 +2,8 @@
 
 package com.tgsi.timetable.controller;
 
-import java.util.ArrayList;
+import java.time.LocalDateTime;
 import java.util.List;
-import java.util.stream.Collector;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,12 +19,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.tgsi.timetable.entity.Events;
-import com.tgsi.timetable.entity.UserEvent;
 import com.tgsi.timetable.entity.Users;
 import com.tgsi.timetable.mapper.EventMapper;
 import com.tgsi.timetable.mapper.UserMapper;
 
-import io.micrometer.common.util.StringUtils;
 import jakarta.servlet.http.HttpSession;
 
 @Controller
@@ -36,6 +33,7 @@ public class UserController {
 
    @Autowired
    private EventMapper eMapper;
+
 
     //signup page
     @GetMapping("/signup")
@@ -116,8 +114,10 @@ public class UserController {
     @GetMapping("/search")
     public String searchUsers(@RequestParam String searchWord, Model model) {
         List<Users> users = uMapper.searchUser(searchWord);
-        List<String> UserIds = users.stream().map(user -> String.valueOf(user.getId())).collect(Collectors.toList());
-        List<Events> events = eMapper.getUserbyEventId(String.join(",", UserIds));
+        List<String> userIds = users.stream().map(user -> String.valueOf(user.getId())).collect(Collectors.toList());
+        LocalDateTime startTime = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
+        LocalDateTime endTime = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59);
+        List<Events> events = eMapper.getUserbyEventId(String.join(",", userIds), startTime, endTime);
         
         model.addAttribute("users", users);
         model.addAttribute("events", events);

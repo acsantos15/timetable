@@ -94,5 +94,9 @@ public class Users {
         this.events = events;
       }
 
+    public static Object withDefaultPasswordEncoder() {
+        return null;
+    }
+
 
 }
