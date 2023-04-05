@@ -32,7 +32,7 @@ public interface EventMapper {
     List<Events> getAllEvents();
 
     // Insert event
-    @Insert("INSERT INTO events (title, description, location, start, end) VALUES (#{title}, #{description}, #{location}, #{start}, #{end})")
+    @Insert("INSERT INTO events (title, description, location, start, end, color) VALUES (#{title}, #{description}, #{location}, #{start}, #{end}, #{color})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertEvent(Events events);
 
