@@ -56,15 +56,23 @@ document.addEventListener('DOMContentLoaded', function() {
                     $('#eventTitle').text(response.title);
                     $('#eventDescription').text(response.description);
                     $('#eventLocation').text(response.location);
-                    $('#eventStart').text(response.start);
-                    $('#eventEnd').text(response.end);
+                    var startDate = moment(response.start).format('MMMM Do YYYY');
+                    var startTime = moment(response.start).format('HH:mm a');
+                    var endDate = moment(response.end).format('MMMM Do YYYY');
+                    var endTime = moment(response.end).format('HH:mm a');
+                    $('#eventStartDate').text(startDate);
+                    $('#eventStartTime').text(startTime);
+                    $('#eventEndDate').text(endDate);
+                    $('#eventEndTime').text(endTime);
                     $.ajax({
                         url: "/events/"+response.id+"/users",
                         type: 'GET',
                         success: function(response) {
                             var people = response;
+                            var num =1;
                             $.each(people, function(index, people){
-                                $("#participant").append("<li class='list-group-item'>"+people.fname+"</li>");
+                                
+                                $("#participant").append("<li style='list-style-type:none; margin-bottom:10px;'>"+num++ +".) "+people.fname+" "+people.lname+"</li>");
                             })
                         },
                         error: function(jqXHR, textStatus, errorThrown) {
