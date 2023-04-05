@@ -5,7 +5,6 @@ package com.tgsi.timetable.controller;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.atomic.LongAccumulator;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,12 +49,26 @@ public class MainController {
                     .collect(Collectors.toList());
             model.addAttribute("today", todaysEvents);
 
+            // Dashboard Display Today Event
+            if (todaysEvents.isEmpty()) {
+                model.addAttribute("todayResponse", "NoData");
+            } else {
+                model.addAttribute("todayResponse", todaysEvents);
+            }
+
             // Get Tommorow Event
             LocalDateTime tom = LocalDateTime.now().plusDays(1);
             List<Events> tomEvents = allEvents.stream()
                     .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
                     .collect(Collectors.toList());
             model.addAttribute("tommorow", tomEvents);
+
+            // Dashboard Display Tommorow Event
+            if (tomEvents.isEmpty()) {
+                model.addAttribute("tommorowResponse", "NoData");
+            } else {
+                model.addAttribute("tommorowResponse", tomEvents);
+            }
 
             // Get User Name
             String fname = user.getFname();
@@ -76,7 +89,6 @@ public class MainController {
         model.addAttribute("loggedId", loggedId);
         return eMapper.getUserEvent(loggedId);
     }
-    
 
     // Timetable Page
     @GetMapping("/timetable")
@@ -146,7 +158,7 @@ public class MainController {
             return ResponseEntity.notFound().build();
         }
 
-        // event object 
+        // event object
         existingEvent.setTitle(updatedEvent.getTitle());
         existingEvent.setDescription(updatedEvent.getDescription());
         existingEvent.setLocation(updatedEvent.getLocation());
@@ -158,8 +170,6 @@ public class MainController {
         return ResponseEntity.ok(existingEvent);
     }
 
-
-    // Delete event
     @DeleteMapping("/delete/{eventId}/edit")
     @ResponseBody
     public Long deleteParticipantsByEventId(@PathVariable Long eventId) {
