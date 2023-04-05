@@ -37,7 +37,7 @@ public interface EventMapper {
     void insertEvent(Events events);
 
     // Update event
-    @Update("UPDATE events SET title = #{title}, description = #{description}, location = #{location}, start = #{start}, end= #{end} WHERE id = #{id}")
+    @Update("UPDATE events SET title = #{title}, description = #{description}, location = #{location}, start = #{start}, end= #{end}, color= #{color} WHERE id = #{id}")
     void updatedEvent(Events event);
     
     // Delete event

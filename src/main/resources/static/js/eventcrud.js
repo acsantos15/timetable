@@ -110,6 +110,7 @@ $(document).ready(function(){
                 $('#editTitle').val(data.title);
                 $('#editDesc').val(data.description);
                 $('#editLoc').val(data.location);
+                $('#editColor').val(data.color);
                 $('#editStart').val(data.start);
                 $('#editEnd').val(data.end); 
             }
@@ -124,6 +125,7 @@ $(document).ready(function(){
         var title = $("#editTitle").val();
         var desc = $("#editDesc").val();
         var loc = $("#editLoc").val();
+        var color = $("#editColor").val();
         var people = $("#edituserSelect").val()
         var start = $("#editStart").val();
         var end = $("#editEnd").val();
@@ -143,6 +145,7 @@ $(document).ready(function(){
             "title": title,
             "description": desc,
             "location": loc,
+            "color": color,
             "start": fStart,
             "end": fEnd,
         };

@@ -156,11 +156,24 @@
                   <option value="Center of Excellence 3">Center of Excellence 3</option>
                 </select>
               </div>
+
               <div class="mb-3">
                 <label for="edituserSelect" class="form-label">Participant/s:</label>
                 <select class="editparticipant" id="edituserSelect" name="editpeoples[]" multiple="multiple" style="width: 100%">
                 </select>
               </div> 
+              <div class="mb-3">
+                <label for="editColor" class="form-label">Event Color</label>
+                <input type="color" class="form-control form-control-color" id="editColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
+                <datalist id="colorPreset">
+                  <option>#537C78</option>
+                  <option>#F8B195</option>
+                  <option>#6C5B78</option>
+                  <option>#B26565</option>
+                  <option>#355C7D</option>
+                </datalist>
+              </div>
+
               <div class="row g-3">
                 <div class="col">
                   <label class="control-label col-sm-2" for="addStart">Start</label>
