@@ -8,6 +8,7 @@ $(document).ready(function(){
         var title = $("#addTitle").val();
         var desc = $("#addDesc").val();
         var loc = $("#addLoc").val();
+        var color = $("#addColor").val();
         var people = $("#userSelect").val()
         var start = $("#addStart").val();
         var end = $("#addEnd").val();
@@ -21,11 +22,11 @@ $(document).ready(function(){
 
         var diffMs = Math.abs(sTimeStamp - eTimeStamp);
         var diffMins = Math.floor(diffMs / 1000 /60);
-
         var formData = {
             "title": title,
             "description": desc,
             "location": loc,
+            "color": color,
             "start": fStart,
             "end": fEnd,
         };
@@ -43,8 +44,7 @@ $(document).ready(function(){
                 type: 'POST',
                 contentType: "application/json",
                 data: JSON.stringify(formData),
-                success: function(eventId) {
-                    
+                success: function(eventId) {                  
                     var formData = {
                         "eventId": eventId,
                         "participantIds": people,

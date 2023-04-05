@@ -3,10 +3,10 @@
 	background: #accdec !important;
 }
 /*optional event color*/
-.fc-event {
+/* .fc-event {
     background-color: #355C7D;
     color: white;
-}
+} */
 .fc-event:hover{
     color:#000000
 }

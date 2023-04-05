@@ -19,6 +19,8 @@ public class Events {
     private String description;
 
     private String location;
+
+    private String color;
     
     private List<Users> people;
     
@@ -61,6 +63,14 @@ public class Events {
     
       public void setLocation(String location) {
         this.location = location;
+      }
+
+      public String getColor() {
+        return color;
+      }
+    
+      public void setColor(String color) {
+        this.color = color;
       }
 
       public List<Users> getPeople() {

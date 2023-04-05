@@ -46,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
         events: {
             url: '/events',
         },
+        eventRender: function(info){
+            info.el.style.backgroundColor = info.event.extendedProps.info.color;
+        },
         eventClick: function(info) {
             $.ajax({
                 url: '/timetable/'+ info.event.id,
