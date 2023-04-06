@@ -59,7 +59,7 @@
             </th:block>
             <!-- Today's Event = true -->
             <th:block th:each="todayevent : ${today}">
-                <div class="dash card" style="margin:10px; color:white">
+                <div class="dash card" style="margin:10px; color:white" th:id="${todayevent.id}">
                     <ul style="list-style-type: none; margin-top: 12px;"> 
                         <li th:text="${todayevent.title}" style="font-size: larger; font-weight: bold;"></li>
                         <li th:text="${todayevent.description}"></li>
@@ -81,7 +81,7 @@
             </th:block>
             <!-- Tomorrow's Event = true -->
             <th:block th:each="tomevent : ${tommorow}">
-                <div class="dash2 card" style="margin:10px; color:white">
+                <div class="dash2 card" style="margin:10px; color:white" th:id="${tomevent.id}">
                     <ul style="list-style-type: none; margin-top: 12px;">
                         <li th:text="${tomevent.title}" style="font-size: larger; font-weight: bold;"></li>
                         <li th:text="${tomevent.description}"></li>
@@ -100,6 +100,24 @@
             </div>
         </div>
     </div>
+    <!-- Participant Modal -->
+    <div class="modal" id="peopleModal">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Participant</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <ul class="list-group" id="participant">
+                </ul>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
 
 </body>
 </html>

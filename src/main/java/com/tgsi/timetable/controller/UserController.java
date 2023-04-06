@@ -8,6 +8,7 @@ import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,8 @@ public class UserController {
    @Autowired
    private EventMapper eMapper;
 
+   @Autowired
+   private BCryptPasswordEncoder bCryptPasswordEncoder;
 
     //signup page
     @GetMapping("/signup")
@@ -48,11 +51,26 @@ public class UserController {
     }
   
     // Register User
+    // @PostMapping("/createUser")
+    // @ResponseBody
+    // public Users createUser(@RequestBody Users user) {
+    //     if (uMapper.findByUsername(null)(user.getUsername()) != null) {
+    //         return ResponseEntity.badRequest().body("Username is already taken.");
+    //     }
+    //     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
+
+    //     uMapper.insertUser(user);
+    //     return user;
+    // }
     @PostMapping("/createUser")
     @ResponseBody
-    public Users createUser(@RequestBody Users user) {
+    public ResponseEntity<?> signUp(@RequestBody Users user) {
+        if (uMapper.findByUsername(user.getUsername()) != null) {
+            return ResponseEntity.badRequest().body("Username is already taken.");
+        }
+        user.setPass(bCryptPasswordEncoder.encode(user.getPass()));
         uMapper.insertUser(user);
-        return user;
+        return ResponseEntity.ok("User registered successfully.");
     }
 
     // Edit User
@@ -90,10 +108,10 @@ public class UserController {
     }
 
     // Login httpsession
-    @PostMapping("/login")
+    @PostMapping("/loginUser")
     public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
         Users user = uMapper.findByUsername(username);
-        if (user != null && user.getPass().equals(password)) {
+        if (user != null && bCryptPasswordEncoder.matches(password, user.getPass()))  {
             session.setAttribute("user", user);
             model.addAttribute("success", "Login Successfully");
             return "redirect:/dashboard";

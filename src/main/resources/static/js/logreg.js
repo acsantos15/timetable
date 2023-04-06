@@ -44,8 +44,7 @@ $(document).ready(function(){
                     })
                 },
                 error: function (xhr, status, error) {
-                    console.log(xhr.responseText);
-                    console.log(formData)
+                    $("#errMsg").show().text(xhr.responseText).delay(3000).fadeOut();
                 }
             });
         }else{
