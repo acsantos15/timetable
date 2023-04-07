@@ -4,14 +4,17 @@ package com.tgsi.timetable.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,17 +54,6 @@ public class UserController {
     }
   
     // Register User
-    // @PostMapping("/createUser")
-    // @ResponseBody
-    // public Users createUser(@RequestBody Users user) {
-    //     if (uMapper.findByUsername(null)(user.getUsername()) != null) {
-    //         return ResponseEntity.badRequest().body("Username is already taken.");
-    //     }
-    //     user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
-
-    //     uMapper.insertUser(user);
-    //     return user;
-    // }
     @PostMapping("/createUser")
     @ResponseBody
     public ResponseEntity<?> signUp(@RequestBody Users user) {
@@ -73,6 +65,36 @@ public class UserController {
         return ResponseEntity.ok("User registered successfully.");
     }
 
+    // Display Profile
+    @GetMapping("/profile")
+    public String showprofile(HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        } else {
+            // Get User Information
+            Long userid = user.getId();
+            Users dbUser = uMapper.getUserById(userid);
+            model.addAttribute("user", dbUser);
+            return "profile";
+        }
+    }
+
+    // editprofile page
+    @GetMapping("/editprofile")
+    public String editprofile(HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        if (user == null) {
+            return "redirect:/login";
+        } else {
+            // Get User Information
+            Long userid = user.getId();
+            Users dbUser = uMapper.getUserById(userid);
+            model.addAttribute("user", dbUser);
+            return "editprofile";
+        }
+    }
+
     // Edit User
     @PutMapping("edituser/{id}")
     @ResponseBody
@@ -82,6 +104,12 @@ public class UserController {
             return ResponseEntity.notFound().build();
         }
 
+        // Check if updated username already exists
+        Users Usernames = uMapper.findByUsername(updatedUser.getUsername());
+        if (Usernames != null && !Usernames.getId().equals(id)) {
+            return ResponseEntity.badRequest().body("Username already exists.");
+        }
+        
         // event object 
         existingUser.setFname(updatedUser.getFname());
         existingUser.setLname(updatedUser.getLname());
@@ -91,9 +119,38 @@ public class UserController {
         existingUser.setEmail(updatedUser.getEmail());
 
         // Save the updated event object to the database
-        uMapper.updatedUser(existingUser);
+        uMapper.updateUser(existingUser);
         return ResponseEntity.ok(existingUser);
     }
+
+     // Edit User pass
+     @PutMapping("editpass/{id}")
+     @ResponseBody
+     public ResponseEntity<?> updatePass(@PathVariable("id") Long id, @RequestBody Map<String, String> passMap) {
+         Users existingUser = uMapper.getUserById(id);
+         if (existingUser == null) {
+             return ResponseEntity.notFound().build();
+         }
+     
+         String oldPass = passMap.get("oldpass");
+         String newPass = passMap.get("newpass");
+     
+         // Check if old password is correct
+         if (!BCrypt.checkpw(oldPass, existingUser.getPass())) {
+             return ResponseEntity.badRequest().body("Wrong old password");
+         }
+     
+         // Hash and set the new password
+         String hashedPass = BCrypt.hashpw(newPass, BCrypt.gensalt());
+         existingUser.setPass(hashedPass);
+     
+         // Save the updated user object to the database
+         uMapper.updateUser(existingUser);
+     
+         return ResponseEntity.ok(existingUser);
+    }
+
+    
 
     // Login page
     @GetMapping("/login")

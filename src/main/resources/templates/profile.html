@@ -20,7 +20,7 @@
 
 <!-- Static files -->
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
-<script src="/js/logout.js"></script>
+<script src="/js/logreg.js"></script>
 
 
 </head>
@@ -53,19 +53,19 @@
           <div class="card-headers" style="color:#2C9447; font-weight: bold; margin-bottom: 15px;">PERSONAL INFORMATION</div>
       <div class="card-bodys">
           <div class="mb-4">
-              <h5>Name</h5><span th:text="${fname}"></span>&nbsp;<span th:text="${lname}"></span>
+              <h5>Name</h5><span id="pname" th:text="${user.fname} + ' ' +${user.lname}"></span>
           </div>
           <div class="mb-4">
-              <h5>Address</h5><span th:text="${address}"></span>
+              <h5>Address</h5><span id="paddress" th:text="${user.address}"></span>
           </div>
           <div class="mb-4">
-            <h5>Contact No.</h5><span th:text="${contact}"></span>
+            <h5>Contact No.</h5><span id="pcontact" th:text="${user.contact}"></span>
           </div>
           <div class="mb-4">
-            <h5>Username</h5><span th:text="${username}"></span>
+            <h5>Username</h5><span id="pusername" th:text="${user.username}"></span>
           </div>
           <div class="mb-4">
-            <h5>Email</h5><span th:text="${email}"></span>
+            <h5>Email</h5><span id="pemail" th:text="${user.email}"></span>
           </div>
           <div style="float: right;">
             <a th:href="@{/editprofile}" class="btn" style="background-color: #2C9447; color:white;">Edit Profile</a>

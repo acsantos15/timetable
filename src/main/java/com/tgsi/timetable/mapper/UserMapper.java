@@ -31,14 +31,18 @@ public interface UserMapper {
     @Select("SELECT * FROM users WHERE email = #{email}")
     Users findByEmail(String email);
 
+    // Return user by pass
+    @Select("SELECT * FROM users WHERE pass = #{pass}")
+    Users findByPass(String pass);
+
     // Insert user
     @Insert("INSERT INTO users (fname, lname, address, contact, username, email, pass) VALUES (#{fname}, #{lname}, #{address}, #{contact}, #{username}, #{email}, #{pass})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void insertUser(Users users);
 
     // Update user
-    @Update("UPDATE users SET fname = #{fname}, lname = #{lname}, email = #{email}, pass = #{pass}")
-    void updatedUser(Users event);
+    @Update("UPDATE users SET fname = #{fname}, lname = #{lname}, address=#{address}, contact=#{contact}, username=#{username}, email = #{email}, pass = #{pass} WHERE id = #{id}")
+    void updateUser(Users event);
     
     // Delete User
     @Delete("DELETE FROM users WHERE id = #{id}")
