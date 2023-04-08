@@ -1,5 +1,5 @@
 $(document).ready(function(){
-    // Register
+    // Register User
     $('#regForm').submit(function(e){
         e.preventDefault();
         var fname = $("#fname").val();
@@ -54,6 +54,7 @@ $(document).ready(function(){
     });
 
 
+    // Logout 
     $('#logoutBtn').click(function(e){
         Swal.fire({
           title: 'Are you sure you want to logout?',

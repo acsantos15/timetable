@@ -68,6 +68,9 @@ $(document).ready(function(){
                                     $("#addEventForm").trigger("reset");
                                 }
                             })
+                        },
+                        error: function (xhr, status, error) {
+                            console.log(xhr.responseText)
                         }
                     });
                         
@@ -77,6 +80,7 @@ $(document).ready(function(){
         }
         
     });
+    // Add Events Ends
 
     // Populate Edit Event Inputs
     $('#editEventBtn').click(function(e){
@@ -167,7 +171,6 @@ $(document).ready(function(){
                 data: JSON.stringify(formData),
                 success: function(data) {
 
-                    // Remove participant Ajax
                     $.ajax({
                         url: "/delete/" + eventId +"/edit",
                         type: "DELETE",
@@ -206,6 +209,7 @@ $(document).ready(function(){
         }
         
     });
+    // Update Events End
 
 
     // Remove Event
@@ -240,7 +244,7 @@ $(document).ready(function(){
     var localDate = new Date(now.getTime() - offset).toISOString().slice(0, 16);
     $('input[type="datetime-local"]').attr('min', localDate);
 
-    // Clear append
+    // Clear append of participant
     $("#viewEventModal").on('hidden.bs.modal', function(){
         $('#participant').empty();
     })
@@ -253,6 +257,7 @@ $(document).ready(function(){
     })
 
     // Populate all participants
+    $('.search').select2();
     $('.participant').select2({
         multiple: true
     });
@@ -300,4 +305,5 @@ $(document).ready(function(){
             console.log("Error: " + textStatus + " " + errorThrown);
         }
     });
+    // Populate all participants end
 });

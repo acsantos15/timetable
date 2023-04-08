@@ -1,4 +1,5 @@
 $(document).ready(function(){
+    // Change to pass btn
     $('#passcard').hide();
     $('#changePassBtn').click(function(e){
         e.preventDefault();
@@ -14,6 +15,7 @@ $(document).ready(function(){
         $('#passcard').hide();
     });
 
+    // Edit User Details
     $('#userForm').submit(function(e){
         e.preventDefault();
         var userId = $("#userId").val();
@@ -33,7 +35,6 @@ $(document).ready(function(){
             "email": email,
         };
         
-        // Edit user details
         $.ajax({
             url: "/edituser/" + userId,
             type: 'PUT',
@@ -59,13 +60,13 @@ $(document).ready(function(){
              
     });
 
+    // Change Password
     $('#userpassForm').submit(function(event) {
         event.preventDefault();
         var userId = $("#passId").val();
         var oldpass = $("#oldpass").val();
         var newpass = $("#newpass").val();
         var conpass = $("#conpass").val();
-        // Get the form data
         var formData = {
           "oldpass": oldpass,
           "newpass": newpass

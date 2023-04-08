@@ -187,15 +187,26 @@ public class UserController {
 
     // Search users
     @GetMapping("/search")
-    public String searchUsers(@RequestParam String searchWord, Model model) {
+    public String searchUsers(@RequestParam String searchWord, Model model, HttpSession session) {
+        Users loggeduser = (Users) session.getAttribute("user");
         List<Users> users = uMapper.searchUser(searchWord);
         List<String> userIds = users.stream().map(user -> String.valueOf(user.getId())).collect(Collectors.toList());
         LocalDateTime startTime = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
         LocalDateTime endTime = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59);
         List<Events> events = eMapper.getUserbyEventId(String.join(",", userIds), startTime, endTime);
-        
-        model.addAttribute("users", users);
-        model.addAttribute("events", events);
+
+        if (users.isEmpty()) {
+            model.addAttribute("userresult", "nouser");
+        } else {
+            model.addAttribute("users", users);
+            if(events.isEmpty()){
+                model.addAttribute("eventresult", "noevent");
+            }else{
+                model.addAttribute("events", events);
+            }
+            
+        }
+        model.addAttribute("user", loggeduser);
         return "searchresult";
     }
 

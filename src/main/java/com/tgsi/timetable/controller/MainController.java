@@ -24,6 +24,7 @@ import com.tgsi.timetable.entity.Users;
 import com.tgsi.timetable.mapper.EventMapper;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class MainController {
@@ -70,11 +71,7 @@ public class MainController {
                 model.addAttribute("tommorowResponse", tomEvents);
             }
 
-            // Get User Name
-            String fname = user.getFname();
-            model.addAttribute("fname", fname);
-            String lname = user.getLname();
-            model.addAttribute("lname", lname);
+            model.addAttribute("user", user);
             return "dashboard";
         }
 
@@ -84,7 +81,6 @@ public class MainController {
     @GetMapping("/events")
     public @ResponseBody Iterable<Events> getAllEvents(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
-        // Get User Name
         Long loggedId = user.getId();
         model.addAttribute("loggedId", loggedId);
         return eMapper.getUserEvent(loggedId);
@@ -97,24 +93,21 @@ public class MainController {
         if (user == null) {
             return "redirect:/login";
         } else {
-            // Get User Name
             Long loggedId = user.getId();
             model.addAttribute("loggedId", loggedId);
-            String fname = user.getFname();
-            model.addAttribute("fname", fname);
-            String lname = user.getLname();
-            model.addAttribute("lname", lname);
+
+            model.addAttribute("user", user);
             return "timetable";
         }
     }
 
     // Save Event
-    @ResponseBody
     @PostMapping("/save")
-    public Long saveEvent(@RequestBody Events event) {
+    @ResponseBody
+    public ResponseEntity<Long> saveEvent(@RequestBody Events event) {
         eMapper.insertEvent(event);
         Long eventId = event.getId();
-        return eventId;
+        return ResponseEntity.ok(eventId);
     }
 
     // Save Participant

@@ -22,11 +22,17 @@
 <!-- FontAwesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
+<!-- Select2 CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+
 <!-- Static files -->
 <link rel="stylesheet" type="text/css" href="/css/minicalendar.css" />
 <script src="/js/minicalendar.js"></script>
 <script src="/js/logreg.js"></script>
 <script src="/js/dashboard.js"></script>
+<script src="/js/search.js"></script>
 </head>
 <style>
 
@@ -35,29 +41,20 @@
 	<!-- create navigation bar ( header) -->
     <div th:replace="~{header :: header}"></div>
     <a th:href="@{/timetable}" style="text-decoration: none;"><h3 style="color:#2C9447; margin: 30px 0px 20px 25px;">Back to Timetable</h3></a>
-    Search Result
-    <table class="table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">Id</th>
-            <th scope="col">Name</th>
-            <th scope="col">Today Schedule</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr th:each="result: ${users}">
-            <td th:text="${result.id}"></td>
-            <td th:text="${result.fname}+' '+${result.lname}"></td>
-            <td>
-              <ul class="list-group" th:each="event : ${events}">
-                <li class="list-group-item" th:text="${event.title}+':  '+${#temporals.format(event.start, 'hh:mm a')}+' - '+${#temporals.format(event.end, 'hh:mm a')}"></li>
-              </ul>
-              Free time: <li class="list-group-item" ></li>
-            </td>
-          </tr>
-          
-        </tbody>
-      </table>
-
+    <th:block th:each="result: ${users}">
+        <h1 th:text="${result.fname}+' '+${result.lname} +' Today Schedule'"></h1>
+    </th:block>
+    <td th:if="${eventresult == 'noevent'}">
+      <h3>No Appointment for Today</h3>
+    </td>
+    <th:block th:each="event : ${events}">
+        <div class="dash card" style="margin:10px; color:white">
+            <ul style="list-style-type: none; margin-top: 12px;"> 
+                <li th:text="${event.title}" style="font-size: larger; font-weight: bold;"></li>
+                <li th:text="${event.description}"></li>
+                <li><small th:text="${#temporals.format(event.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(event.end, 'hh:mm a')}" ></small></li>
+            </ul>
+        </div>
+    </th:block>
 </body>
 </html>

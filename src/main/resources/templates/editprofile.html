@@ -22,11 +22,11 @@
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
 <script src="/js/userprofile.js"></script>
 <script src="/js/logreg.js"></script>
+<script src="/js/search.js"></script>
 
 
 </head>
 <body style="background-color: #F7F7F7;">
-
     <div th:replace="~{header :: header}"></div>
 
     <h3 style="color:#2C9447; margin: 30px 0px 30px 15px;">Edit Profile</h3>
@@ -84,7 +84,7 @@
                         <input class="form-control" type="password" placeholder="Old Password" name="oldpass" id="oldpass">
                     </div>
                     <div class="mb-4">
-                        <input class="form-control" type="password" placeholder="Password" name="password" id="newpass">
+                        <input class="form-control" type="password" placeholder="New Password" name="password" id="newpass">
                     </div>
                     <div class="mb-4">
                         <input class="form-control" type="password" placeholder="Confirm Password" id="conpass" name="conpass">

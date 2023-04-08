@@ -7,28 +7,37 @@ import java.util.List;
 import org.apache.ibatis.type.Alias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotNull;
+
 
 //Event database model
 @Alias("events")
 public class Events {
     
-    private Long id;
-    
-    private String title;
-    
-    private String description;
+  @NotNull
+  private Long id;
+  
+  @NotNull
+  private String title;
+  
+  @NotNull
+  private String description;
+  
+  @NotNull
+  private String location;
 
-    private String location;
-
-    private String color;
-    
-    private List<Users> people;
-    
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime start;
-    
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime end;
+  @NotNull
+  private String color;
+  
+  private List<Users> people;
+  
+  @NotNull
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+  private LocalDateTime start;
+  
+  @NotNull
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+  private LocalDateTime end;
 
 
     // getters and setters
