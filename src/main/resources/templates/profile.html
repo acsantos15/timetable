@@ -12,11 +12,21 @@
 <!-- Jquery CDN -->
 <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 
+<!-- Fullcalendar CDN -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
+
 <!-- SweetAlert CDN -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- FontAwesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+<!-- Moment CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+<!-- Select2 CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <!-- Static files -->
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
@@ -25,7 +35,7 @@
 
 
 </head>
-<body style="background-color: #F7F7F7;">
+<body style="background-color: #DEDBD3;">
     <!-- Header -->
     <div th:replace="~{header :: header}"></div>
     <!-- <nav class="navbar" style="background-color: #2C9447;">
@@ -49,33 +59,35 @@
         </div>
     </nav> -->
 
-    <a th:href="@{/timetable}" style="text-decoration: none;"><h3 style="color:#2C9447; margin: 30px 0px 20px 25px;">Back to Timetable</h3></a>
     <div class="container1">
       <div class="card" style="margin: 60px; padding:30px;">
-          <div class="card-headers" style="color:#2C9447; font-weight: bold; margin-bottom: 15px;">PERSONAL INFORMATION</div>
-      <div class="card-bodys">
-          <div class="mb-4">
-              <h5>Name</h5><span id="pname" th:text="${user.fname} + ' ' +${user.lname}"></span>
-          </div>
-          <div class="mb-4">
-              <h5>Address</h5><span id="paddress" th:text="${user.address}"></span>
-          </div>
-          <div class="mb-4">
-            <h5>Contact No.</h5><span id="pcontact" th:text="${user.contact}"></span>
-          </div>
-          <div class="mb-4">
-            <h5>Username</h5><span id="pusername" th:text="${user.username}"></span>
-          </div>
-          <div class="mb-4">
-            <h5>Email</h5><span id="pemail" th:text="${user.email}"></span>
-          </div>
-          <div style="float: right;">
-            <a th:href="@{/editprofile}" class="btn" style="background-color: #2C9447; color:white;">Edit Profile</a>
-          </div>
+        <div class="card-headers" style="margin-bottom: 15px;">
+          <h5 style="color: #7993a0; font-weight: bold;">PERSONAL INFORMATION</h5>
+        </div>
+        <div class="card-bodys">
+            <div class="mb-4">
+                <h5>Name</h5><span id="pname" th:text="${user.fname} + ' ' +${user.lname}"></span>
+            </div>
+            <div class="mb-4">
+                <h5>Address</h5><span id="paddress" th:text="${user.address}"></span>
+            </div>
+            <div class="mb-4">
+              <h5>Contact No.</h5><span id="pcontact" th:text="${user.contact}"></span>
+            </div>
+            <div class="mb-4">
+              <h5>Username</h5><span id="pusername" th:text="${user.username}"></span>
+            </div>
+            <div class="mb-4">
+              <h5>Email</h5><span id="pemail" th:text="${user.email}"></span>
+            </div>
+            <div style="float: right;">
+              <a th:href="@{/timetable}" class="btn btn-secondary">Back to Timetable</a>
+              <a th:href="@{/editprofile}" class="btn" style="background-color: #537557; color:white;">Edit Profile</a>
+            </div>
+        </div>
       </div>
-      </div>
-      
   </div>
-        <br/><br/>
-    </body>
-    </html>
+  <br/><br/>
+
+</body>
+</html>
