@@ -92,7 +92,7 @@ public class UserController {
 
     // editprofile page
     @GetMapping("/editprofile")
-    public String editprofile(HttpSession session, Model model) {
+    public String editprofile(@Valid HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";

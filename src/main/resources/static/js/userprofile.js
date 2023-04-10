@@ -34,29 +34,34 @@ $(document).ready(function(){
             "username": username,
             "email": email,
         };
+        if(fname ==="" || lname ==="" || address ==="" || username ===""){
+            $("#errMsg").show().text("Blank input not allowed").delay(3000).fadeOut();
+        }else{
+            $.ajax({
+                url: "/edituser/" + userId,
+                type: 'PUT',
+                contentType: "application/json",
+                data: JSON.stringify(formData),
+                success: function(data) {
+                    Swal.fire({
+                        title: 'Details Updated',
+                        text: "",
+                        icon: 'success',
+                        showCancelButton: false,
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            location.href="/profile" 
+                        }
+                    })
+                
+                },error: function (xhr, status, error) {
+                    $("#errMsg").show().text(xhr.responseText).delay(3000).fadeOut();
+                }
+            }); 
+        }
         
-        $.ajax({
-            url: "/edituser/" + userId,
-            type: 'PUT',
-            contentType: "application/json",
-            data: JSON.stringify(formData),
-            success: function(data) {
-                Swal.fire({
-                    title: 'Details Updated',
-                    text: "",
-                    icon: 'success',
-                    showCancelButton: false,
-                    confirmButtonText: 'Ok'
-                }).then((result) => {
-                    if (result.isConfirmed) {
-                        location.href="/profile" 
-                    }
-                })
-            
-            },error: function (xhr, status, error) {
-                $("#errMsg").show().text(xhr.responseText).delay(3000).fadeOut();
-            }
-        });  
+         
              
     });
 

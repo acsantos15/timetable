@@ -2,11 +2,11 @@ $(document).ready(function(){
     // Register User
     $('#regForm').submit(function(e){
         e.preventDefault();
-        var fname = $("#fname").val();
-        var lname = $("#lname").val();
-        var address = $("#address").val();
+        var fname = $("#fname").val().trim();
+        var lname = $("#lname").val().trim();
+        var address = $("#address").val().trim();
         var contact = $("#contact").val();
-        var username = $("#username").val();
+        var username = $("#username").val().trim();
         var email = $("#email").val();
         var pass = $("#pass").val();
         var conpass = $("#conpass").val();
@@ -22,6 +22,8 @@ $(document).ready(function(){
         };
         if(pass.length < 8){
             $("#errMsg").show().text("Password should have atleast 8 characters").delay(3000).fadeOut();
+        }else if(fname ==="" || lname ==="" || address ==="" || username ===""){
+            $("#errMsg").show().text("Blank input not allowed").delay(3000).fadeOut();
         }
         else if(pass == conpass){
             $.ajax({
