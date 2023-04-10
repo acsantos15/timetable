@@ -12,11 +12,21 @@
 <!-- Jquery CDN -->
 <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 
+<!-- Fullcalendar CDN -->
+<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
+
 <!-- SweetAlert CDN -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 <!-- FontAwesome CDN -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+<!-- Moment CDN -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+<!-- Select2 CDN -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
 <!-- Static files -->
 <link rel="stylesheet" type="text/css" href="/css/style.css" />
@@ -26,58 +36,76 @@
 
 
 </head>
-<body style="background-color: #F7F7F7;">
+<body style="background-color: #DEDBD3;">
     <div th:replace="~{header :: header}"></div>
 
-    <h3 style="color:#2C9447; margin: 30px 0px 30px 15px;">Edit Profile</h3>
+    <h3 style="color:rgb(82, 10, 10); margin: 30px 0px 30px 30px;">Edit Profile</h3>
+
     <!--EDIT USER HERE-->
-    
+    <div class="container1">
+        <form id="userForm" method="put">
+            <div class="row" style="margin:0 60px 0 60px">
+                <div class="col">
+                    <div class="card" style="padding:30px;" id="picard">
+                        <div class="card-headers" style="margin-bottom: 15px;">
+                            <h5 style="color: #7993a0; font-weight: bold;">PERSONAL INFORMATION</h5>
+                        </div>
+                        <div class="card-bodys">
+                            <input type="hidden" id="userId" th:value="${user.id}">
+                            <div class="mb-4">
+                                <label>First Name:</label>
+                                <input class="form-control" id="editFname" type="text" placeholder="First Name" name="firstname" th:value="${user.fname}">
+                            </div>
+                            <div class="mb-4">
+                                <label>Last Name:</label>
+                                <input class="form-control" id="editLname" type="text" placeholder="Last Name" name="lastname" th:value="${user.lname}">
+                            </div>
+                            <div class="mb-4">
+                                <label>Address:</label>
+                                <input class="form-control" id="editAddress" type="text" placeholder="Home Address" name="address" th:value="${user.address}">
+                            </div>
+                            <div class="mb-4">
+                                <label>Contact No.:</label>
+                                <input class="form-control" id="editContact" type="text" placeholder="Contact No." name="contactNo" th:value="${user.contact}">
+                            </div>
+                        </div>
+                    </div>
+                </div>
 
-        <div class="container1">
-            <form id="userForm" method="put">
-                <div class="card" style="width:45%; height: 350px; float:left; margin-left: 60px; padding:30px;" id="picard">
-                    <div class="card-headers" style="color:#2C9447; font-weight: bold; margin-bottom: 15px;">PERSONAL INFORMATION</div>
-                <div class="card-bodys">
-                    <input type="hidden" id="userId" th:value="${user.id}">
-                    <div class="mb-4">
-                        <input class="form-control" id="editFname" type="text" placeholder="First Name" name="firstname" th:value="${user.fname}">
-                    </div>
-                    <div class="mb-4">
-                        <input class="form-control" id="editLname" type="text" placeholder="Last Name" name="lastname" th:value="${user.lname}">
-                    </div>
-                    <div class="mb-4">
-                        <input class="form-control" id="editAddress" type="text" placeholder="Home Address" name="address" th:value="${user.address}">
-                    </div>
-                    <div class="mb-4">
-                        <input class="form-control" id="editContact" type="text" placeholder="Contact No." name="contactNo" th:value="${user.contact}">
-                    </div>
-                </div>
-                </div>
+                <div class="col">
+                    <div class="card" style="padding:30px;" id="aicard">
+                        <div class="card-headers" style="margin-bottom: 15px;">
+                            <h5 style="color: #7993a0; font-weight: bold;">ACCOUNT INFORMATION</h5>
+                        </div>
+                        <div class="card-bodys">    
+                            <div class="mb-4">
+                                <label>Username:</label>
+                                <input class="form-control" id="editUsername" type="text" placeholder="Username" name="username" th:value="${user.username}">
+                            </div>
+                            <div class="mb-5">
+                                <label>Email Address:</label>
+                                <input class="form-control" id="editEmail" type="email" placeholder="Email" name="email" th:value="${user.email}">
+                            </div>
 
-                <div class="card" style="width:45%; height: 350px; float:right; margin-right: 60px; padding:30px;" id="aicard">
-                    <div class="card-headers" style="color:#2C9447; font-weight: bold; margin-bottom: 15px;">ACCOUNT INFORMATION</div>
-                <div class="card-bodys">    
-                    <div class="mb-4">
-                        <input class="form-control" id="editUsername" type="text" placeholder="Username" name="username" th:value="${user.username}">
-                    </div>
-                
-                    
-                    <div class="mb-5">
-                        <input class="form-control" id="editEmail" type="email" placeholder="Email" name="email" th:value="${user.email}">
-                    </div>
-                    <span id="errMsg" style="color:red "></span><br>
-                    <button type="button" class="btn btn-success btn-sm" id="changePassBtn">Change Password</button>
-                    
-                    <div style="float: right;">
-                        <button type="submit" class="btn" style="background-color: #2C9447; color:white;">Save</button>
-                    </div>
-                </div>
-                </div>
-            </form>
+                            <span id="errMsg" style="color:red "></span><br>
 
-            <form id="userpassForm">
-                <div class="card" style="width:45%; height: 350px; float:left; margin-left: 60px; padding:30px;" id="passcard">
-                    <div class="card-headers" style="color:#2C9447; font-weight: bold; margin-bottom: 15px;">PASSWORD</div>
+                            <div style="float: right;">
+                                <a th:href="@{/profile}" type="button" class="btn btn-outline-danger">Cancel</a>
+                                <button type="button" class="btn btn-secondary" id="changePassBtn">Change Password</button>
+                                <button type="submit" class="btn" style="background-color: #537557; color:white;">Save</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+
+        <!-- CHANGE PASSWORD -->
+        <form id="userpassForm">
+            <div class="card" style="width:45%; height: 350px; float:left; margin-left: 60px; padding:30px;" id="passcard">
+                <div class="card-headers" style="margin-bottom: 15px;">
+                    <h5 style="color: #7993a0; font-weight: bold;">CHANGE PASSWORD</h5>
+                </div>
                 <div class="card-bodys">
                     <input type="hidden" id="passId" th:value="${user.id}">
                     <div class="mb-4">
@@ -89,17 +117,21 @@
                     <div class="mb-4">
                         <input class="form-control" type="password" placeholder="Confirm Password" id="conpass" name="conpass">
                     </div>   
+
                     <span id="passerrMsg" style="color:red "></span>
-                    <button type="button" class="btn btn-success btn-sm" id="cancelPassBtn">Cancel</button>
-                    <button type="submit" class="btn btn-success btn-sm" id="savePassBtn">Save Password</button>
-                </div>
-                </div>
-            </form>
-            
-        </div>
 
-        <p th:text="${error}" th:if="${error}"></p>
+                    <div style="float:right;">
+                        <button type="button" class="btn btn-outline-danger" id="cancelPassBtn">Cancel</button>
+                        <button type="submit" class="btn" style="background-color: #537557; color:white;" id="savePassBtn">Save Password</button>
+                    </div>
+                </div>
+            </div>
+        </form>
+        
+    </div>
 
-        <br/><br/>
+    <p th:text="${error}" th:if="${error}"></p>
+
+    <br/><br/>
 </body>
 </html>

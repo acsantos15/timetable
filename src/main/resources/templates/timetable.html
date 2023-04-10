@@ -2,43 +2,43 @@
 <html xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
-<meta charset="ISO-8859-1">
-<title>Timetable</title>
+  <meta charset="ISO-8859-1">
+  <title>Timetable</title>
 
-<!-- Bootstrap CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Bootstrap CDN -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-<!-- Jquery CDN -->
-<script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+  <!-- Jquery CDN -->
+  <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
 
-<!-- Fullcalendar CDN -->
-<script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
+  <!-- Fullcalendar CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
 
-<!-- SweetAlert CDN -->
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <!-- SweetAlert CDN -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-<!-- FontAwesome CDN -->
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+  <!-- FontAwesome CDN -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
 
-<!-- Moment CDN -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+  <!-- Moment CDN -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
 
-<!-- Select2 CDN -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+  <!-- Select2 CDN -->
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
 
-<!-- Static files -->
-<link rel="stylesheet" type="text/css" href="/css/style.css" />
-<script src="/js/fullcalendar.js"></script>
-<script src="/js/eventcrud.js"></script>
-<script src="/js/logreg.js"></script>
-<script src="/js/search.js"></script>
+  <!-- Static files -->
+  <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  <script src="/js/fullcalendar.js"></script>
+  <script src="/js/eventcrud.js"></script>
+  <script src="/js/logreg.js"></script>
+  <script src="/js/search.js"></script>
 
 </head>
 <body style="background-color: #DEDBD3;">
   <!-- create navigation bar ( header) -->
-	<div th:replace="~{header :: header}"></div>
+  <div th:replace="~{header :: header}"></div>
 
   <!-- Navigation -->
   <ul class="nav nav-tabs justify-content-center">
@@ -46,197 +46,218 @@
       <a class="nav-link"  th:href="@{/dashboard}"><i class="fa-solid fa-grip"></i> Dashboard</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link active" th:href="@{/timetable}"><i class="fa-sharp fa-regular fa-calendar-days"></i>Timetable</a>
+      <a class="nav-link active" th:href="@{/timetable}"><i class="fa-sharp fa-regular fa-calendar-days"></i> Timetable</a>
     </li>
   </ul>
 
-    <!-- Calendar div -->
-    <div class="card" style="width: 85%; margin:50px auto 80px auto;">
-        <div class="card-body">
-          <div id="calendar"></div>
+  <!-- Calendar div -->
+  <div class="card" style="width: 85%; margin:50px auto 80px auto;">
+    <div class="card-body">
+      <div id="calendar"></div>
+    </div>
+  </div>
+
+  <!-- Add event Modal -->
+  <div class="modal" id="addEventModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div style= "background-color: white;"class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">New Appointment</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
-    </div>
 
-    <!-- Add event modal -->
-    <div class="modal" id="addEventModal">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div style= "background-color: white;"class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">New Appointment</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        <div class="modal-body">
+          <form id="addEventForm">
+          <div class="mb-3">
+            <label for="addTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="addTitle" name="title" maxlength="100" required/>
           </div>
-          <div class="modal-body">
-            <form id="addEventForm">
-              <div class="mb-3">
-                <label for="addTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="addTitle" name="title" maxlength="100" required/>
-              </div>
-              <div class="mb-3">
-                <label for="addDesc" class="form-label">Description</label>
-                <textarea type="textarea" class="form-control" id="addDesc" name="description" maxlength="100" rows="3" required></textarea>
-              </div>
-              <div class="mb-3">
-                <label for="addLoc" class="form-label">Location</label>
-                <select class="form-select" aria-label="Default select example" id="addLoc" name="location" required>
-                  <option value="" selected disabled></option>
-                  <option value="Center of Excellence 1">Center of Excellence 1</option>
-                  <option value="Center of Excellence 2">Center of Excellence 2</option>
-                  <option value="Center of Excellence 3">Center of Excellence 3</option>
-                </select>
-              </div>
-              <div class="mb-3">
-                <label for="addColor" class="form-label">Event Color</label>
-                <input type="color" class="form-control form-control-color" id="addColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
-                <datalist id="colorPreset">
-                  <option>#537C78</option>
-                  <option>#F8B195</option>
-                  <option>#6C5B78</option>
-                  <option>#B26565</option>
-                  <option>#355C7D</option>
-                </datalist>
-              </div>
 
-              <div class="mb-3">
-                <label for="addPart" class="form-label">Participant/s:</label>
-                <select class="participant" id="userSelect" name="peoples[]" multiple="multiple" style="width: 100%" required>
-                </select>
-              </div> 
+          <div class="mb-3">
+            <label for="addDesc" class="form-label">Description</label>
+            <textarea type="textarea" class="form-control" id="addDesc" name="description" maxlength="100" rows="3" required></textarea>
+          </div>
 
-              <div class="row g-3">
-                <div class="col">
-                  <label class="control-label col-sm-2" for="addStart">Start</label>
-                    <div class="col-sm-15">          
-                        <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" min="T06:00" max="T19:30" required/>
-                    </div>
-                </div>
-                <div class="col">
-                  <label class="control-label col-sm-2" for="addEnd">End</label>
-                    <div class="col-sm-15">          
-                        <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" min="06:30:00" max="20:00:00" required/>
-                    </div>
-                </div>
-              </div>
-              <span id="errMsg" style="color:red "></span>   
+          <div class="mb-3">
+            <label for="addLoc" class="form-label">Location</label>
+            <select class="form-select" aria-label="Default select example" id="addLoc" name="location" required>
+              <option value="" selected disabled></option>
+              <option value="Center of Excellence 1">Center of Excellence 1</option>
+              <option value="Center of Excellence 2">Center of Excellence 2</option>
+              <option value="Center of Excellence 3">Center of Excellence 3</option>
+            </select>
           </div>
-          <div class="modal-footer">
-            <button type="reset" class="btn btn-outline-secondary">Clear</button>
-            <button type="submit" class="btn btn-success" id="addEventBtn">Save Changes</button>
-          </form>
-          </div>
-        </div>                            
-      </div>
-    </div>
-    
-    <!-- Edit event Modal -->
-    <div class="modal" id="editEventModal">
-      <div class="modal-dialog modal-dialog-centered modal-lg">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Edit Event</h5>
-            <button type="buttonThis meeting w" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <form id="editEventForm" method="put" th:action="@{/edit/{id}(id=${#editId})}">
-              <input type="hidden" id="editId">
-              <div class="mb-3">
-                <label for="editTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="editTitle" name="title" maxlength="100" required/>
-              </div>
-              <div class="mb-3">
-                <label for="editDesc" class="form-label">Description</label>
-                <input type="textarea" class="form-control" id="editDesc" name="description" maxlength="100" required/>
-              </div>
-              <div class="mb-3">
-                <label for="editLoc" class="form-label">Location</label>
-                <select class="form-select" aria-label="Default select example" id="editLoc" name="location" required>
-                  <option value="" selected disabled></option>
-                  <option value="Center of Excellence 1">Center of Excellence 1</option>
-                  <option value="Center of Excellence 2">Center of Excellence 2</option>
-                  <option value="Center of Excellence 3">Center of Excellence 3</option>
-                </select>
-              </div>
 
-              <div class="mb-3">
-                <label for="edituserSelect" class="form-label">Participant/s:</label>
-                <select class="editparticipant" id="edituserSelect" name="editpeoples[]" multiple="multiple" style="width: 100%">
-                </select>
-              </div> 
-              <div class="mb-3">
-                <label for="editColor" class="form-label">Event Color</label>
-                <input type="color" class="form-control form-control-color" id="editColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
-                <datalist id="colorPreset">
-                  <option>#537C78</option>
-                  <option>#F8B195</option>
-                  <option>#6C5B78</option>
-                  <option>#B26565</option>
-                  <option>#355C7D</option>
-                </datalist>
-              </div>
+          <div class="mb-3">
+            <label for="addColor" class="form-label">Event Color</label>
+            <input type="color" class="form-control form-control-color" id="addColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
+            <datalist id="colorPreset">
+              <option>#537C78</option>
+              <option>#F8B195</option>
+              <option>#6C5B78</option>
+              <option>#B26565</option>
+              <option>#355C7D</option>
+            </datalist>
+          </div>
 
-              <div class="row g-3">
-                <div class="col">
-                  <label class="control-label col-sm-2" for="addStart">Start</label>
-                    <div class="col-sm-15">          
-                        <input class="form-control" type="datetime-local" id="editStart" name="start" required/>
-                    </div>
-                </div>
-                <div class="col">
-                  <label class="control-label col-sm-2" for="addEnd">End</label>
-                    <div class="col-sm-15">          
-                        <input class="form-control" type="datetime-local" id="editEnd" name="end" required/>
-                    </div>
-                </div>
-              </div>
-              <p style="color: red;" id="erreditMsg"></p>     
-          </div>
-          <div class="modal-footer">
-            <button type="reset" class="btn btn-outline-secondary">Clear</button>
-            <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Discard</button>
-            <button type="submit" class="btn btn-success" id="saveUpEventBtn">Save</button>
-          </form>
-          </div>
-        </div>
-      </div>
-    </div>
+          <div class="mb-3">
+            <label for="addPart" class="form-label">Participant/s:</label>
+            <select class="participant" id="userSelect" name="peoples[]" multiple="multiple" style="width: 100%" required>
+              <option th:value="${loggedId}" th:text="${user.fname}" selected></option>
+            </select>
+          </div> 
 
-    <!-- View Event Modal -->
-    <div class="modal" id="viewEventModal">
-      <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h5 class="modal-title">Event Details</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-          </div>
-          <div class="modal-body">
-            <input type="hidden" id="eventId"></input>
-            <p class="fw-bold">Title: </p><p id="eventTitle"></p>
-            <p class="fw-bold">Description: </p><p id="eventDescription"></p>
-            <p class="fw-bold">Location: </p><p id="eventLocation"></p>
-            <p class="fw-bold">Participant:</p>
-              <ul class="list-group" id="participant">
-              </ul>
-            <div class="row align-items-center">
-              <div class="col">
-                <p class="fw-bold">Start:</p>
-                <p style="display: inline;">Date: </p><p id="eventStartDate" style="display: inline;"></p>
-                <br/>
-                <p style="display: inline;">Time: </p><p id="eventStartTime" style="display: inline;"></p>
-              </div>
-              <div class="col">
-                <p class="fw-bold">End: </p>
-                <p style="display: inline;">Date: </p><p id="eventEndDate" style="display: inline;"></p>
-                <br/>
-                <p style="display: inline;">Time: </p><p id="eventEndTime" style="display: inline;"></p>
+          <div class="row g-3">
+            <div class="col">
+              <label class="control-label col-sm-2" for="addStart">Start</label>
+              <div class="col-sm-15">          
+                <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" min="T06:00" max="T19:30" required/>
               </div>
             </div>
-              
+            <div class="col">
+              <label class="control-label col-sm-2" for="addEnd">End</label>
+              <div class="col-sm-15">          
+                <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" min="06:30:00" max="20:00:00" required/>
+              </div>
+            </div>
           </div>
-          <div class="modal-footer">
-            <button type="button" class="btn btn-danger" id="removeEventBtn">Delete</button>
-            <button type="button" class="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" data-bs-toggle="modal">Edit</button>
-          </div>
+
+          <span id="errMsg" style="color:red "></span>   
         </div>
+
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-outline-secondary">Clear</button>
+          <button type="submit" class="btn btn-success" id="addEventBtn">Save Changes</button>
+          </form>
+        </div>
+      </div>                            
+    </div>
+  </div>
+
+  <!-- Edit event -->
+  <div class="modal" id="editEventModal">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Edit Event</h5>
+          <button type="buttonThis meeting w" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <form id="editEventForm" method="put" th:action="@{/edit/{id}(id=${#editId})}">
+          <input type="hidden" id="editId">
+
+          <div class="mb-3">
+            <label for="editTitle" class="form-label">Title</label>
+            <input type="text" class="form-control" id="editTitle" name="title" maxlength="100" required/>
+          </div>
+
+          <div class="mb-3">
+            <label for="editDesc" class="form-label">Description</label>
+            <input type="textarea" class="form-control" id="editDesc" name="description" maxlength="100" required/>
+          </div>
+
+          <div class="mb-3">
+            <label for="editLoc" class="form-label">Location</label>
+            <select class="form-select" aria-label="Default select example" id="editLoc" name="location" required>
+              <option value="" selected disabled></option>
+              <option value="Center of Excellence 1">Center of Excellence 1</option>
+              <option value="Center of Excellence 2">Center of Excellence 2</option>
+              <option value="Center of Excellence 3">Center of Excellence 3</option>
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="edituserSelect" class="form-label">Participant/s:</label>
+            <select class="editparticipant" id="edituserSelect" name="editpeoples[]" multiple="multiple" style="width: 100%">
+            </select>
+          </div>
+
+          <div class="mb-3">
+            <label for="editColor" class="form-label">Event Color</label>
+            <input type="color" class="form-control form-control-color" id="editColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
+            <datalist id="colorPreset">
+              <option>#537C78</option>
+              <option>#F8B195</option>
+              <option>#6C5B78</option>
+              <option>#B26565</option>
+              <option>#355C7D</option>
+            </datalist>
+          </div>
+
+          <div class="row g-3">
+            <div class="col">
+              <label class="control-label col-sm-2" for="addStart">Start</label>
+              <div class="col-sm-15">          
+                <input class="form-control" type="datetime-local" id="editStart" name="start" required/>
+              </div>
+            </div>
+            <div class="col">
+              <label class="control-label col-sm-2" for="addEnd">End</label>
+              <div class="col-sm-15">          
+                <input class="form-control" type="datetime-local" id="editEnd" name="end" required/>
+              </div>
+            </div>
+          </div>
+
+          <p style="color: red;" id="erreditMsg"></p>     
+        </div>
+
+        <div class="modal-footer">
+          <button type="reset" class="btn btn-outline-secondary">Clear</button>
+          <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Discard</button>
+          <button type="submit" class="btn btn-success" id="saveUpEventBtn">Save</button>
+          </form>
+        </div>
+
       </div>
     </div>
+  </div>
+
+  <!-- View Event Modal -->
+  <div class="modal" id="viewEventModal">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+
+        <div class="modal-header">
+          <h5 class="modal-title">Event Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+
+        <div class="modal-body">
+          <input type="hidden" id="eventId"></input>
+          <p class="fw-bold">Title: </p><p id="eventTitle"></p>
+          <p class="fw-bold">Description: </p><p id="eventDescription"></p>
+          <p class="fw-bold">Location: </p><p id="eventLocation"></p>
+          <p class="fw-bold">Participant:</p>
+          <ul class="list-group" id="participant"></ul>
+
+          <div class="row align-items-center">
+            <div class="col">
+              <p class="fw-bold">Start:</p>
+              <p style="display: inline;">Date: </p><p id="eventStartDate" style="display: inline;"></p>
+              <br/>
+              <p style="display: inline;">Time: </p><p id="eventStartTime" style="display: inline;"></p>
+            </div>
+            <div class="col">
+              <p class="fw-bold">End: </p>
+              <p style="display: inline;">Date: </p><p id="eventEndDate" style="display: inline;"></p>
+              <br/>
+              <p style="display: inline;">Time: </p><p id="eventEndTime" style="display: inline;"></p>
+            </div>
+          </div>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="btn btn-danger" id="removeEventBtn">Delete</button>
+          <button type="button" class="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" data-bs-toggle="modal">Edit</button>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
 </body>
 </html>
