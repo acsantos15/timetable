@@ -27,7 +27,7 @@ $(document).ready(function() {
             var select = $('#searchWord');
             $.each(response.users, function(index, item) {
                 var option = $('<option>', {
-                    value: item.fname,
+                    value: item.id,
                     text: item.fname + ' ' + item.lname
                 });
                 select.append(option);

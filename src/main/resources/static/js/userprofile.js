@@ -44,7 +44,7 @@ $(document).ready(function(){
                 data: JSON.stringify(formData),
                 success: function(data) {
                     Swal.fire({
-                        title: 'Details Updated',
+                        title: 'Profile Updated',
                         text: "",
                         icon: 'success',
                         showCancelButton: false,
@@ -88,7 +88,7 @@ $(document).ready(function(){
                 success: function(result) {
                     Swal.fire({
                         title: 'Password Changed',
-                        text: "You will be automtically logout",
+                        text: "You will be automatically logout",
                         icon: 'success',
                         showCancelButton: false,
                         confirmButtonText: 'Ok'
