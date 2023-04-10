@@ -5,9 +5,9 @@ $(document).ready(function(){
     // Add Events
     $('#addEventForm').submit(function(e){
         e.preventDefault();
-        var title = $("#addTitle").val();
-        var desc = $("#addDesc").val();
-        var loc = $("#addLoc").val();
+        var title = $("#addTitle").val().trim();
+        var desc = $("#addDesc").val().trim();
+        var loc = $("#addLoc").val().trim();
         var color = $("#addColor").val();
         var people = $("#userSelect").val()
         var start = $("#addStart").val();
@@ -32,6 +32,8 @@ $(document).ready(function(){
         };
         if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
             $("#errMsg").show().text("6am to 7pm only").delay(3000).fadeOut();
+        }else if(title ==="" || desc ==="" || loc ===""){
+            $("#errMsg").show().text("Blank input not allowed").delay(3000).fadeOut();
         }
         else if(start >= end){
             $("#errMsg").show().text("Appointment start should be later than end").delay(3000).fadeOut();
@@ -68,9 +70,6 @@ $(document).ready(function(){
                                     $("#addEventForm").trigger("reset");
                                 }
                             })
-                        },
-                        error: function (xhr, status, error) {
-                            console.log(xhr.responseText)
                         }
                     });
                         
@@ -126,9 +125,9 @@ $(document).ready(function(){
     $('#editEventForm').submit(function(e){
         e.preventDefault();
         var eventId = $("#editId").val();
-        var title = $("#editTitle").val();
-        var desc = $("#editDesc").val();
-        var loc = $("#editLoc").val();
+        var title = $("#editTitle").val().trim();
+        var desc = $("#editDesc").val().trim();
+        var loc = $("#editLoc").val().trim();
         var color = $("#editColor").val();
         var people = $("#edituserSelect").val()
         var start = $("#editStart").val();
@@ -156,6 +155,8 @@ $(document).ready(function(){
         
         if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
             $("#erreditMsg").show().text("6am to 7pm only").delay(3000).fadeOut();
+        }else if(title ==="" || desc ==="" || loc ===""){
+            $("#errMsg").show().text("Blank input not allowed").delay(3000).fadeOut();
         }
         else if(start >= end){
             $("#erreditMsg").show().text("Appointment start should be later than end").delay(3000).fadeOut();
@@ -272,12 +273,13 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(response) {
             var select = $('#edituserSelect');
-            $.each(response, function(index, item) {
-            select.append($('<option>', {
-                value: item.id,
-                text: item.fname
-            }));
-            });
+            $.each(response.users, function(index, item) {
+                var option = $('<option>', {
+                    value: item.id,
+                    text: item.fname + ' ' + item.lname
+                });
+                select.append(option);
+                });
 
             select.trigger('change');
         },
@@ -292,11 +294,19 @@ $(document).ready(function(){
         dataType: 'json',
         success: function(response) {
             var select = $('#userSelect');
-            $.each(response, function(index, item) {
-            select.append($('<option>', {
+            var loggedId = response.loggedId;
+
+            $.each(response.users, function(index, item) {
+            var option = $('<option>', {
                 value: item.id,
-                text: item.fname
-            }));
+                text: item.fname + ' ' + item.lname
+            });
+
+            if (item.id === loggedId) {
+                option.attr('selected', 'selected');
+            }
+            
+            select.append(option);
             });
 
             select.trigger('change');

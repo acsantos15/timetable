@@ -25,12 +25,13 @@ $(document).ready(function() {
         dataType: 'json',
         success: function(response) {
             var select = $('#searchWord');
-            $.each(response, function(index, item) {
-            select.append($('<option>', {
-                value: item.fname,
-                text: item.fname + " " + item.lname
-            }));
-            });
+            $.each(response.users, function(index, item) {
+                var option = $('<option>', {
+                    value: item.fname,
+                    text: item.fname + ' ' + item.lname
+                });
+                select.append(option);
+                });
 
             select.trigger('change');
         },

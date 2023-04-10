@@ -104,7 +104,7 @@ public class MainController {
     // Save Event
     @PostMapping("/save")
     @ResponseBody
-    public ResponseEntity<Long> saveEvent(@RequestBody Events event) {
+    public ResponseEntity<Long> saveEvent(@Valid @RequestBody Events event) {
         eMapper.insertEvent(event);
         Long eventId = event.getId();
         return ResponseEntity.ok(eventId);
@@ -137,15 +137,15 @@ public class MainController {
 
     // Delete Event
     @DeleteMapping("/delete/{id}")
-    public String deleteEvent(@PathVariable("id") Long id) {
+    public ResponseEntity<Void> deleteEvent(@PathVariable Long id) {
         eMapper.deleteEventById(id);
-        return "timetable";
+        return ResponseEntity.noContent().build();
     }
 
     // Edit Event
     @PutMapping("edit/{id}")
     @ResponseBody
-    public ResponseEntity<?> updateEvent(@PathVariable("id") Long id, @RequestBody Events updatedEvent) {
+    public ResponseEntity<?> updateEvent(@Valid @PathVariable("id") Long id, @RequestBody Events updatedEvent) {
         Events existingEvent = eMapper.getEventById(id);
         if (existingEvent == null) {
             return ResponseEntity.notFound().build();

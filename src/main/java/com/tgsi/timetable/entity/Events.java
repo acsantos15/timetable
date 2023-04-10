@@ -7,26 +7,32 @@ import java.util.List;
 import org.apache.ibatis.type.Alias;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 
 
 //Event database model
 @Alias("events")
 public class Events {
     
-  @NotNull
+  
   private Long id;
   
-  @NotNull
+  @NotBlank
+  @Size(max = 100)
   private String title;
   
-  @NotNull
+  @NotBlank
+  @Size(max = 100)
   private String description;
   
-  @NotNull
+  @NotBlank
+  @Size(max = 100)
   private String location;
 
-  @NotNull
+  @NotBlank
+  @Size(max = 15)
   private String color;
   
   private List<Users> people;

@@ -5,17 +5,41 @@ import java.util.List;
 
 import org.apache.ibatis.type.Alias;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
+
 //Users database model
 @Alias("users")
 public class Users {
     
     private Long id;
+
+    @NotBlank
+    @Size(max = 50)
     private String fname;
+
+    @NotBlank
+    @Size(max = 50)
     private String lname;
+
+    @NotBlank
+    @Size(max = 100)
     private String address;
+
+    @NotBlank
+    @Size(max = 11)
     private String contact;
+
+    @NotBlank
+    @Size(max = 50)
     private String username;
+
+    @NotBlank
+    @Size(max = 50)
     private String email;
+
+    @NotBlank
+    @Size(max = 100)
     private String password;
     private List<Events> events;
 

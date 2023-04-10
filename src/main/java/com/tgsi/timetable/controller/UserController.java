@@ -3,6 +3,7 @@
 package com.tgsi.timetable.controller;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -28,6 +29,7 @@ import com.tgsi.timetable.mapper.EventMapper;
 import com.tgsi.timetable.mapper.UserMapper;
 
 import jakarta.servlet.http.HttpSession;
+import jakarta.validation.Valid;
 
 @Controller
 public class UserController {
@@ -49,14 +51,22 @@ public class UserController {
 
     // Get all users
     @GetMapping("/users")
-    public @ResponseBody Iterable<Users> getAllUsers(Model model) {
-      return uMapper.getAllUser();
+    public @ResponseBody Map<String, Object> getAllUsers(HttpSession session, Model model) {
+        Users user = (Users) session.getAttribute("user");
+        Long loggedId = user.getId();
+        model.addAttribute("loggedId", loggedId);
+        
+        Map<String, Object> response = new HashMap<>();
+        response.put("loggedId", loggedId);
+        response.put("users", uMapper.getAllUser());
+        
+        return response;
     }
   
     // Register User
     @PostMapping("/createUser")
     @ResponseBody
-    public ResponseEntity<?> signUp(@RequestBody Users user) {
+    public ResponseEntity<?> signUp(@Valid @RequestBody Users user) {
         if (uMapper.findByUsername(user.getUsername()) != null) {
             return ResponseEntity.badRequest().body("Username is already taken.");
         }
