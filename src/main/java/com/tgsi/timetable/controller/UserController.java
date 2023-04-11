@@ -205,19 +205,25 @@ public class UserController {
         LocalDateTime endTime = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59);
         List<Events> events = eMapper.getUserbyEventId(String.join(",", userIds), startTime, endTime);
 
-        if (users.isEmpty()) {
-            model.addAttribute("userresult", "nouser");
+        if (loggeduser == null) {
+            return "redirect:/login";
         } else {
-            model.addAttribute("users", users);
-            if(events.isEmpty()){
-                model.addAttribute("eventresult", "noevent");
-            }else{
-                model.addAttribute("events", events);
+            if (users.isEmpty()) {
+                model.addAttribute("userresult", "nouser");
+            } else {
+                model.addAttribute("users", users);
+                if(events.isEmpty()){
+                    model.addAttribute("eventresult", "noevent");
+                }else{
+                    model.addAttribute("events", events);
+                }
+                
             }
-            
+            model.addAttribute("user", loggeduser);
+            return "searchresult";
         }
-        model.addAttribute("user", loggeduser);
-        return "searchresult";
+
+        
     }
 
     

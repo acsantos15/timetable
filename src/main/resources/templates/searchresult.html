@@ -40,21 +40,62 @@
 <body style="background-color: #DEDBD3;">
 	<!-- create navigation bar ( header) -->
     <div th:replace="~{header :: header}"></div>
-    <a th:href="@{/timetable}" style="text-decoration: none;"><h3 style="color:#2C9447; margin: 30px 0px 20px 25px;">Back to Timetable</h3></a>
-    <th:block th:each="result: ${users}">
-        <h1 th:text="${result.fname}+' '+${result.lname} +' Today Schedule'"></h1>
-    </th:block>
-    <td th:if="${eventresult == 'noevent'}">
-      <h3>No Appointment for Today</h3>
-    </td>
-    <th:block th:each="event : ${events}">
-        <div class="dash card" style="margin:10px; color:white">
-            <ul style="list-style-type: none; margin-top: 12px;"> 
-                <li th:text="${event.title}" style="font-size: larger; font-weight: bold;"></li>
-                <li th:text="${event.description}"></li>
-                <li><small th:text="${#temporals.format(event.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(event.end, 'hh:mm a')}" ></small></li>
-            </ul>
+
+    <div class="col">
+        <div style="color:#2C9447; margin: 30px 0px 0px 60px;">
+            <a th:href="@{/timetable}"><i class="fa-regular fa-circle-left fa-xl" style="color: #2c9447;"></i></a>
+            <div style="display:inline-block;">
+               <h3> Search Result</h3>
+            </div>
         </div>
-    </th:block>
+    </div>
+    
+    <div class="row justify-content-center" style="margin:30px 50px 50px 50px;">
+        <div class="col">
+            <div class="card" style="padding:30px;">
+                
+                <div class="card-headers" style="margin-bottom: 15px;">
+                    <h5 style="color: #7993a0; font-weight: bold;">PERSONAL INFORMATION</h5>
+                </div>
+                <div class="card-bodys">
+                    <th:block th:each="result: ${users}">
+                        <!-- <h1 th:text="${result.fname}+' '+${result.lname} +' Today Schedule'"></h1> -->
+                        <div class="mb-4">
+                            <h5>Name</h5><span th:text="${result.fname} + ' ' +${result.lname}"></span>
+                        </div>
+                        <div class="mb-4">
+                            <h5>Username</h5><span th:text="${result.username}"></span>
+                        </div>
+                        <div class="mb-4">
+                            <h5>Email</h5><span th:text="${result.email}"></span>
+                        </div>
+                    </th:block>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card" style="padding:30px;">
+                <th:block th:each="uname: ${users}">
+                    <h4 style="color: rgb(82, 10, 10);"><span th:text="${uname.username}"></span>'s Schedule for Today</h4>
+                </th:block>
+                <td th:if="${eventresult == 'noevent'}">
+                    <div class="dash card" style="margin:10px; color:white; padding: 20px 0 20px 0;">
+                        <div class="d-flex align-items-center justify-content-center" style="font-size: larger; font-weight: bold;">No Appointment for Today</div>
+                    </div>
+                </td>
+                <th:block th:each="event : ${events}">
+                    <div class="dash card" style="margin:10px; color:white">
+                        <ul style="list-style-type: none; margin-top: 12px;"> 
+                            <li th:text="${event.title}" style="font-size: larger; font-weight: bold;"></li>
+                            <li th:text="${event.description}"></li>
+                            <li><small th:text="${#temporals.format(event.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(event.end, 'hh:mm a')}" ></small></li>
+                        </ul>
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+
+
 </body>
 </html>

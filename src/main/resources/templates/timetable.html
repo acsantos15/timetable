@@ -69,9 +69,22 @@
 
         <div class="modal-body">
           <form id="addEventForm">
-          <div class="mb-3">
-            <label for="addTitle" class="form-label">Title</label>
-            <input type="text" class="form-control" id="addTitle" name="title" maxlength="100" required/>
+          <div class="mb-3 row">
+            <div class="col-md-10">
+              <label for="addTitle" class="form-label">Title</label>
+              <input type="text" class="form-control" id="addTitle" name="title" maxlength="100" required/>
+            </div>
+            <div class="col-sm-2">
+              <label for="addColor" class="form-label">Event Color</label>
+              <input type="color" class="form-control form-control-color" id="addColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
+              <datalist id="colorPreset">
+                <option>#537C78</option>
+                <option>#F8B195</option>
+                <option>#6C5B78</option>
+                <option>#B26565</option>
+                <option>#355C7D</option>
+              </datalist>
+            </div>
           </div>
 
           <div class="mb-3">
@@ -87,18 +100,6 @@
               <option value="Center of Excellence 2">Center of Excellence 2</option>
               <option value="Center of Excellence 3">Center of Excellence 3</option>
             </select>
-          </div>
-
-          <div class="mb-3">
-            <label for="addColor" class="form-label">Event Color</label>
-            <input type="color" class="form-control form-control-color" id="addColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
-            <datalist id="colorPreset">
-              <option>#537C78</option>
-              <option>#F8B195</option>
-              <option>#6C5B78</option>
-              <option>#B26565</option>
-              <option>#355C7D</option>
-            </datalist>
           </div>
 
           <div class="mb-3">
@@ -126,8 +127,8 @@
         </div>
 
         <div class="modal-footer">
-          <button type="reset" class="btn btn-outline-secondary">Clear</button>
-          <button type="submit" class="btn btn-success" id="addEventBtn">Save Changes</button>
+          <button type="reset" class="btn btn-outline-secondary"><i class="fa-solid fa-eraser me-2"></i>Clear</button>
+          <button type="submit" class="btn btn-success" id="addEventBtn"><i class="fa-solid fa-floppy-disk me-2"></i>Save Changes</button>
           </form>
         </div>
       </div>                            
@@ -148,14 +149,28 @@
           <form id="editEventForm" method="put" th:action="@{/edit/{id}(id=${#editId})}">
           <input type="hidden" id="editId">
 
-          <div class="mb-3">
-            <label for="editTitle" class="form-label">Title</label>
-            <input type="text" class="form-control" id="editTitle" name="title" maxlength="100" required/>
+          <div class="mb-3 row">
+              <div class="col-md-10">
+                <label for="editTitle" class="form-label">Title</label>
+                <input type="text" class="form-control" id="editTitle" name="title" maxlength="100" required/>
+              </div>
+              <div class="col-sm-2">
+                <label for="editColor" class="form-label">Event Color</label>
+                <input type="color" class="form-control form-control-color" id="editColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
+                <datalist id="colorPreset">
+                  <option>#537C78</option>
+                  <option>#F8B195</option>
+                  <option>#6C5B78</option>
+                  <option>#B26565</option>
+                  <option>#355C7D</option>
+                </datalist>
+              </div>
+            
           </div>
 
           <div class="mb-3">
             <label for="editDesc" class="form-label">Description</label>
-            <input type="textarea" class="form-control" id="editDesc" name="description" maxlength="100" required/>
+            <textarea type="textarea" class="form-control" id="editDesc" name="description" maxlength="100" rows="3" required></textarea>
           </div>
 
           <div class="mb-3">
@@ -172,18 +187,6 @@
             <label for="edituserSelect" class="form-label">Participant/s:</label>
             <select class="editparticipant" id="edituserSelect" name="editpeoples[]" multiple="multiple" style="width: 100%">
             </select>
-          </div>
-
-          <div class="mb-3">
-            <label for="editColor" class="form-label">Event Color</label>
-            <input type="color" class="form-control form-control-color" id="editColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
-            <datalist id="colorPreset">
-              <option>#537C78</option>
-              <option>#F8B195</option>
-              <option>#6C5B78</option>
-              <option>#B26565</option>
-              <option>#355C7D</option>
-            </datalist>
           </div>
 
           <div class="row g-3">
@@ -205,9 +208,9 @@
         </div>
 
         <div class="modal-footer">
-          <button type="reset" class="btn btn-outline-secondary">Clear</button>
+          <button type="reset" class="btn btn-outline-secondary"><i class="fa-solid fa-eraser me-2"></i>Clear</button>
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Discard</button>
-          <button type="submit" class="btn btn-success" id="saveUpEventBtn">Save</button>
+          <button type="submit" class="btn btn-success" id="saveUpEventBtn"><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
           </form>
         </div>
 
@@ -250,8 +253,8 @@
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="removeEventBtn">Delete</button>
-          <button type="button" class="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" data-bs-toggle="modal">Edit</button>
+          <button type="button" class="btn btn-danger" id="removeEventBtn"><i class="fa-solid fa-trash me-2"></i>Delete</button>
+          <button type="button" class="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" data-bs-toggle="modal"><i class="fa-solid fa-pen-to-square me-2"></i>Edit</button>
         </div>
 
       </div>
