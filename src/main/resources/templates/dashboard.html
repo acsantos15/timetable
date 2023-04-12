@@ -61,7 +61,7 @@
 
                 <!-- Today's Event Tables -->
                 <div class="container" style="padding-top: 20px;">
-                    <h3 style="color: rgb(82, 10, 10);">Today</h3>
+                    <h3 style="color: rgb(82, 10, 10); font-weight: bolder;">Today</h3>
                     <hr/>
 
                     <!-- Today's Event = null -->
@@ -70,10 +70,12 @@
                             <div class="d-flex align-items-center justify-content-center" style="font-size: larger; font-weight: bold;">No Event for Today</div>
                         </div>
                     </th:block>
+                    
+                    <br/>
 
                     <!-- Today's Event = true -->
                     <th:block th:each="todayevent : ${today}">
-                        <div class="dash card" style="margin:10px; color:white;" th:style="'background-color:' + ${todayevent.color}" th:id="${todayevent.id}">
+                        <div class="dash card" th:style="'background-color:' + ${todayevent.color}+'; margin:10px; color:white;'" th:id="${todayevent.id}">
                             <ul style="list-style-type: none; margin-top: 12px;"> 
                                 <li th:text="${todayevent.title}" style="font-size: larger; font-weight: bold;"></li>
                                 <li th:text="${todayevent.description}"></li>
@@ -84,8 +86,8 @@
                 </div>
 
                 <!-- Tommorow event table -->
-                <div class="container" style="padding-bottom: 20px;">
-                    <h3 style="color: rgb(82, 10, 10);">Tommorow</h3>
+                <div class="container" style="padding-bottom: 20px; padding-top: 20px;">
+                    <h3 style="color: rgb(82, 10, 10); font-weight: bolder;">Tommorow</h3>
                     <hr/>
 
                     <!-- Tomorrow's Event = null -->
@@ -97,7 +99,7 @@
 
                     <!-- Tomorrow's Event = true -->
                     <th:block th:each="tomevent : ${tommorow}">
-                        <div class="dash2 card" style="margin:10px; color:white" th:style="'background-color:' + ${tomevent.color}" th:id="${tomevent.id}">
+                        <div class="dash2 card" th:style="'background-color:' + ${tomevent.color}+'; margin:10px; color:white;'" th:id="${tomevent.id}">
                             <ul style="list-style-type: none; margin-top: 12px;">
                                 <li th:text="${tomevent.title}" style="font-size: larger; font-weight: bold;"></li>
                                 <li th:text="${tomevent.description}"></li>
@@ -133,6 +135,5 @@
             </div>
         </div>
     </div>
-
 </body>
 </html>

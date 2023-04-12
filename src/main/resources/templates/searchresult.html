@@ -36,9 +36,6 @@
 <script src="/js/dashboard.js"></script>
 <script src="/js/search.js"></script>
 </head>
-<style>
-
-</style>
 <body style="background-color: #DEDBD3;">
 	<!-- create navigation bar ( header) -->
     <div th:replace="~{header :: header}"></div>
@@ -46,12 +43,11 @@
     <div class="col">
         <div style="color:rgb(82, 10, 10); margin: 30px 0px 0px 60px;">
             <a th:href="@{/timetable}"><i class="fa-regular fa-circle-left fa-2xl" style="color: rgb(82, 10, 10);"></i></a>
-            <div style="display:inline-block;">
-               <h3> Search Result</h3>
-            </div>
         </div>
     </div>
-    
+    <div style="margin: 30px 0px 0px 60px; color: #537557; font-weight: bold;">
+        <h3> Search Result</h3>
+    </div>    
     <div class="row justify-content-center" style="margin:30px 50px 50px 50px;">
         <div class="col">
             <div class="card" style="padding:30px;">
@@ -61,7 +57,6 @@
                 </div>
                 <div class="card-bodys">
                     <th:block th:each="result: ${users}">
-                        <!-- <h1 th:text="${result.fname}+' '+${result.lname} +' Today Schedule'"></h1> -->
                         <div class="mb-4">
                             <h5>Name</h5><span th:text="${result.fname} + ' ' +${result.lname}"></span>
                         </div>
@@ -86,7 +81,7 @@
                     </div>
                 </td>
                 <th:block th:each="event : ${events}">
-                    <div class="dash card" style="margin:10px; color:white" th:style="'background-color:' + ${event.color}">
+                    <div class="dash card" th:style="'background-color:' + ${event.color}+'; margin:10px; color:white;'">
                         <ul style="list-style-type: none; margin-top: 12px;"> 
                             <li th:text="${event.title}" style="font-size: larger; font-weight: bold;"></li>
                             <li th:text="${event.description}"></li>
@@ -97,7 +92,5 @@
             </div>
         </div>
     </div>
-
-
 </body>
 </html>
