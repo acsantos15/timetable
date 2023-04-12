@@ -79,12 +79,12 @@
                     <h4 style="color: rgb(82, 10, 10);"><span th:text="${uname.username}"></span>'s Schedule for Today</h4>
                 </th:block>
                 <td th:if="${eventresult == 'noevent'}">
-                    <div class="dash card" style="margin:10px; color:white; padding: 20px 0 20px 0;">
+                    <div class="dash card" style="margin:10px; color:white; padding: 20px 0 20px 0; background-color: rgb(68, 66, 66);">
                         <div class="d-flex align-items-center justify-content-center" style="font-size: larger; font-weight: bold;">No Appointment for Today</div>
                     </div>
                 </td>
                 <th:block th:each="event : ${events}">
-                    <div class="dash card" style="margin:10px; color:white">
+                    <div class="dash card" style="margin:10px; color:white" th:style="'background-color:' + ${event.color}">
                         <ul style="list-style-type: none; margin-top: 12px;"> 
                             <li th:text="${event.title}" style="font-size: larger; font-weight: bold;"></li>
                             <li th:text="${event.description}"></li>
