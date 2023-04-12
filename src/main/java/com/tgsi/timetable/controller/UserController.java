@@ -15,7 +15,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -108,7 +107,7 @@ public class UserController {
     // Edit User
     @PutMapping("edituser/{id}")
     @ResponseBody
-    public ResponseEntity<?> updateUser(@PathVariable("id") Long id, @RequestBody Users updatedUser) {
+    public ResponseEntity<?> updateUser(@Valid @PathVariable("id") Long id, @RequestBody Users updatedUser) {
         Users existingUser = uMapper.getUserById(id);
         if (existingUser == null) {
             return ResponseEntity.notFound().build();
@@ -136,7 +135,7 @@ public class UserController {
      // Edit User pass
      @PutMapping("editpass/{id}")
      @ResponseBody
-     public ResponseEntity<?> updatePass(@PathVariable("id") Long id, @RequestBody Map<String, String> passMap) {
+     public ResponseEntity<?> updatePass(@Valid @PathVariable("id") Long id, @RequestBody Map<String, String> passMap) {
          Users existingUser = uMapper.getUserById(id);
          if (existingUser == null) {
              return ResponseEntity.notFound().build();

@@ -16,7 +16,6 @@ import jakarta.validation.constraints.Size;
 @Alias("events")
 public class Events {
     
-  
   private Long id;
   
   @NotBlank

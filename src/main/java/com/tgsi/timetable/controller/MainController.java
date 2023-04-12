@@ -114,7 +114,7 @@ public class MainController {
     @PostMapping("/saveEventParticipants")
     @ResponseBody
     @SuppressWarnings("unchecked")
-    public String saveEventParticipants(@RequestBody Map<String, Object> payload) {
+    public String saveEventParticipants(@Valid @RequestBody Map<String, Object> payload) {
         Long eventId = ((Number) payload.get("eventId")).longValue();
         List<Long> participantIds = (List<Long>) payload.get("participantIds");
         eMapper.insertEventParticipants(eventId, participantIds);

@@ -231,6 +231,7 @@ $(document).ready(function(){
             $.ajax({
                 url: '/delete/' + eventId,
                 type: 'DELETE',
+                contentType: "application/json",
                 success: function(result) {
                     location.reload() 
                 }
