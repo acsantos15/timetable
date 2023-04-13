@@ -52,29 +52,6 @@
 }
 /* END NavBar CSS */
 
-/*Dashboard Event Color*/
-/* .dash:nth-of-type(5n+1),
-.dash2:nth-of-type(5n+5){
-    background-color: #B26565;
-}
-.dash:nth-of-type(5n+2),
-.dash2:nth-of-type(5n+4){
-    background-color: #F8B195;
-}
-.dash:nth-of-type(5n+3),
-.dash2:nth-of-type(5n+3){
-    background-color: #537C78;
-}
-.dash:nth-of-type(5n+4),
-.dash2:nth-of-type(5n+2){
-    background-color: #6C5B78;
-}
-.dash:nth-of-type(5n+5),
-.dash2:nth-of-type(5n+1){
-    background-color: #355C7D;
-} */
-/*End of Dashboard Event Color*/
-
 /*Header CSS*/
 .dropdown-item:hover{
     background-color: #537557;

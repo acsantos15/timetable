@@ -69,7 +69,12 @@
 .fc .fc-list-day-text{
     color:#1a252f;
 }
-@media screen and (max-width:767px) { .fc-toolbar.fc-header-toolbar {font-size: 50%}}
+@media screen and (max-width:767px) { 
+    .fc-toolbar.fc-header-toolbar {
+        font-size: 50%;
+        display:block
+    }
+}
 /* END FullCalendar CSS */
 
 /*  NavBar CSS */
