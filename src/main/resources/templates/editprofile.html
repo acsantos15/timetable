@@ -40,33 +40,32 @@
 <body style="background-color: #DEDBD3;">
     <div th:replace="~{header :: header}"></div>
 
-    <h3 style="color:rgb(82, 10, 10); margin: 30px 0px 30px 30px;">Edit Profile</h3>
-
     <!--EDIT USER HERE-->
-    <div class="container1">
+    <div class="container1" style="margin: 60px;">
         <form id="userForm" method="put">
-            <div class="row" style="margin:0 60px 0 60px">
+            <div class="row">
                 <div class="col">
                     <div class="card" style="padding:30px;" id="picard">
                         <div class="card-headers" style="margin-bottom: 15px;">
+                            <h3 style="color: rgb(82, 10, 10); font-weight: bolder; margin-bottom: 15px;">Edit Profile</h3>
                             <h5 style="color: #7993a0; font-weight: bold;">PERSONAL INFORMATION</h5>
                         </div>
                         <div class="card-bodys">
                             <input type="hidden" id="userId" th:value="${user.id}">
                             <div class="mb-4">
-                                <label>First Name:</label>
+                                <label style="font-weight: bold;">First Name:</label>
                                 <input class="form-control" id="editFname" type="text" placeholder="First Name" name="firstname" th:value="${user.fname}">
                             </div>
                             <div class="mb-4">
-                                <label>Last Name:</label>
+                                <label style="font-weight: bold;">Last Name:</label>
                                 <input class="form-control" id="editLname" type="text" placeholder="Last Name" name="lastname" th:value="${user.lname}">
                             </div>
                             <div class="mb-4">
-                                <label>Address:</label>
+                                <label style="font-weight: bold;">Address:</label>
                                 <input class="form-control" id="editAddress" type="text" placeholder="Home Address" name="address" th:value="${user.address}">
                             </div>
                             <div class="mb-4">
-                                <label>Contact No.:</label>
+                                <label style="font-weight: bold;">Contact No.:</label>
                                 <input class="form-control" id="editContact" type="text" placeholder="Contact No." name="contactNo" th:value="${user.contact}">
                             </div>
                         </div>
@@ -80,11 +79,11 @@
                         </div>
                         <div class="card-bodys">    
                             <div class="mb-4">
-                                <label>Username:</label>
+                                <label style="color: rgb(82, 10, 10); font-weight: bold;">Username:</label>
                                 <input class="form-control" id="editUsername" type="text" placeholder="Username" name="username" th:value="${user.username}">
                             </div>
                             <div class="mb-5">
-                                <label>Email Address:</label>
+                                <label style="color: rgb(82, 10, 10); font-weight: bold;">Email Address:</label>
                                 <input class="form-control" id="editEmail" type="email" placeholder="Email" name="email" th:value="${user.email}">
                             </div>
 

@@ -44,27 +44,32 @@
     <div class="container1">
       <div class="card" style="margin: 60px; padding:30px;">
         <div class="card-headers" style="margin-bottom: 15px;">
-          <h5 style="color: #7993a0; font-weight: bold;">PERSONAL INFORMATION</h5>
+            <h3 style="color: rgb(82, 10, 10); font-weight: bolder; margin-left: 5px;">My Profile</h3>
         </div>
         <div class="card-bodys">
             <div class="mb-4">
-                <h5>Name</h5><span id="pname" th:text="${user.fname} + ' ' +${user.lname}"></span>
+                <h6 style="color: #7993a0; font-weight: bold;">Name</h6>
+                <span id="pname" th:text="${user.fname} + ' ' +${user.lname}"></span>
             </div>
             <div class="mb-4">
-                <h5>Address</h5><span id="paddress" th:text="${user.address}"></span>
+                <h6 style="color: #7993a0; font-weight: bold;">Address</h6>
+                <span id="paddress" th:text="${user.address}"></span>
             </div>
             <div class="mb-4">
-              <h5>Contact No.</h5><span id="pcontact" th:text="${user.contact}"></span>
+                <h6 style="color: #7993a0; font-weight: bold;">Contact No.</h6>
+                <span id="pcontact" th:text="${user.contact}"></span>
             </div>
             <div class="mb-4">
-              <h5>Username</h5><span id="pusername" th:text="${user.username}"></span>
+                <h6 style="color: #7993a0; font-weight: bold;">Username</h6>
+                <span id="pusername" th:text="${user.username}"></span>
             </div>
             <div class="mb-4">
-              <h5>Email</h5><span id="pemail" th:text="${user.email}"></span>
+                <h6 style="color: #7993a0; font-weight: bold;">Email</h6>
+                <span id="pemail" th:text="${user.email}"></span>
             </div>
             <div style="float: right;">
-              <a th:href="@{/timetable}" class="btn btn-secondary">Back to Timetable</a>
-              <a th:href="@{/editprofile}" class="btn" style="background-color: #537557; color:white;">Edit Profile</a>
+                <a th:href="@{/timetable}" class="btn btn-secondary">Back to Timetable</a>
+                <a th:href="@{/editprofile}" class="btn" style="background-color: #537557; color:white;">Edit Profile</a>
             </div>
         </div>
       </div>

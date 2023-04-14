@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded', function() {
             meridiem: 'short'
         },
         dayHeaderContent: (args) => {
-            return moment(args.date).format('ddd[\r\n]D')
+            return moment(args.date).format('ddd[\r\n]D').toUpperCase();
         }
     });
 
