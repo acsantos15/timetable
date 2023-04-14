@@ -73,7 +73,7 @@
         <div class="col">
             <div class="card" style="padding:30px;">
                 <th:block th:each="uname: ${users}">
-                    <h4 style="color: rgb(82, 10, 10);"><span th:text="${uname.username}"></span>'s Schedule for Today</h4>
+                    <h4 style="color: rgb(82, 10, 10);"><span th:text="${#strings.capitalize(uname.username)}"></span>'s Schedule for Today</h4>
                 </th:block>
                 <td th:if="${eventresult == 'noevent'}">
                     <div class="dash card" style="margin:10px; color:white; padding: 20px 0 20px 0; background-color: rgb(68, 66, 66);">

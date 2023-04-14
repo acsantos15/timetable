@@ -13,12 +13,15 @@
 .fc-daygrid-event-dot{
     border-color: #537557;
 }
+.fc a.fc-event{
+    color: #537557;
+}
 /*calendar header*/
-.fc-toolbar h2{
+.fc .fc-toolbar-title{
     display: inline;
     vertical-align: middle;
     color: rgb(82, 10, 10);
-    font-style: 15px;
+    font-size: 20px;
     font-weight: 700;
 }
 .fc .fc-prev-button, 
@@ -37,6 +40,7 @@
     background-color: rgb(168, 101, 101);
     color: white;
 }
+.fc .fc-today-button,
 .fc .fc-button-group .fc-dayGridMonth-button, 
 .fc .fc-button-group .fc-timeGridWeek-button, 
 .fc .fc-button-group .fc-timeGridDay-button, 
@@ -68,6 +72,9 @@
 }
 .fc .fc-list-day-text{
     color:#1a252f;
+}
+.fc .fc-col-header-cell-cushion{
+    white-space: pre;
 }
 @media screen and (max-width:767px) { 
     .fc .fc-toolbar.fc-header-toolbar {

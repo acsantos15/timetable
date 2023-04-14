@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         headerToolbar: {
-            left: 'title,prev,next',
+            left: 'title,prev,next,today',
             center:'',
             right: 'timeGridWeek,dayGridMonth,timeGridDay,list myCustomButton',
             
@@ -39,8 +39,10 @@ document.addEventListener('DOMContentLoaded', function() {
             $("#addEnd").val(fEnd);
         },
         defaultDate: new Date(),
+        aspectRatio: 2,
         editable: false,
         eventLimit: true,
+        nowIndicator: true,
         slotMinTime: "06:00:00",
         slotMaxTime: "20:00:00",
         events: {
@@ -89,6 +91,9 @@ document.addEventListener('DOMContentLoaded', function() {
             hour: '2-digit',
             minute: '2-digit',
             meridiem: 'short'
+        },
+        dayHeaderContent: (args) => {
+            return moment(args.date).format('ddd[\r\n]D')
         }
     });
 
