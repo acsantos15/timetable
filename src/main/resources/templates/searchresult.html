@@ -40,36 +40,46 @@
 	<!-- create navigation bar ( header) -->
     <div th:replace="~{header :: header}"></div>
 
+    <!-- Back Button -->
     <div class="col">
         <div style="color:rgb(82, 10, 10); margin: 30px 0px 0px 60px;">
             <a th:href="@{/timetable}"><i class="fa-regular fa-circle-left fa-2xl" style="color: rgb(82, 10, 10);"></i></a>
         </div>
     </div>
+
+    <!-- Label -->
     <div style="margin: 30px 0px 0px 60px; color: #537557; font-weight: bold;">
         <h3> Search Result</h3>
-    </div>    
+    </div>
+
     <div class="row justify-content-center" style="margin:30px 50px 50px 50px;">
+
+        <!-- Searched User Account Information -->
         <div class="col">
             <div class="card" style="padding:30px;">
-                
                 <div class="card-headers" style="margin-bottom: 15px;">
                     <h5 style="color: #7993a0; font-weight: bold;">ACCOUNT INFORMATION</h5>
                 </div>
                 <div class="card-bodys">
                     <th:block th:each="result: ${users}">
                         <div class="mb-4">
-                            <h5>Name</h5><span th:text="${result.fname} + ' ' +${result.lname}"></span>
+                            <h6 style="font-weight: bold;">Name</h6>
+                            <span th:text="${result.fname} + ' ' +${result.lname}"></span>
                         </div>
                         <div class="mb-4">
-                            <h5>Username</h5><span th:text="${result.username}"></span>
+                            <h6 style="font-weight: bold;">Username</h6>
+                            <span th:text="${result.username}"></span>
                         </div>
                         <div class="mb-4">
-                            <h5>Email</h5><span th:text="${result.email}"></span>
+                            <h6 style="font-weight: bold;">Email</h6>
+                            <span th:text="${result.email}"></span>
                         </div>
                     </th:block>
                 </div>
             </div>
         </div>
+
+        <!-- Searched User Schedule -->
         <div class="col">
             <div class="card" style="padding:30px;">
                 <th:block th:each="uname: ${users}">
