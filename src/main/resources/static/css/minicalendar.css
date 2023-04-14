@@ -1,10 +1,10 @@
 /* FullCalendar CSS */
 .fc-day-today{
-	background: #7993A0 !important;
+	background: #8aa78d !important;
 }
 /*calendar header*/
 .fc-toolbar{
-    background-color: #7993A0;
+    background-color: #8aa78d;
     border-radius: 5px;
     padding-left: 10px;
 }
@@ -17,7 +17,7 @@
 }
 .fc .fc-prev-button, 
 .fc .fc-next-button{
-    background-color: #7993A0;
+    background-color: #8aa78d;
     padding: 5px;
     border: none;
 }
@@ -42,7 +42,7 @@
 
 /*  NavBar CSS */
 .nav-tabs .nav-link.active {
-    border-bottom-color: #073f6c; /* set the line color to green */
+    border-bottom-color: #537557; /* set the line color to green */
     color: #537557;
     border-bottom-width: 5px ;
 }
@@ -51,29 +51,6 @@
     font-size: large;
 }
 /* END NavBar CSS */
-
-/*Dashboard Event Color*/
-/* .dash:nth-of-type(5n+1),
-.dash2:nth-of-type(5n+5){
-    background-color: #B26565;
-}
-.dash:nth-of-type(5n+2),
-.dash2:nth-of-type(5n+4){
-    background-color: #F8B195;
-}
-.dash:nth-of-type(5n+3),
-.dash2:nth-of-type(5n+3){
-    background-color: #537C78;
-}
-.dash:nth-of-type(5n+4),
-.dash2:nth-of-type(5n+2){
-    background-color: #6C5B78;
-}
-.dash:nth-of-type(5n+5),
-.dash2:nth-of-type(5n+1){
-    background-color: #355C7D;
-} */
-/*End of Dashboard Event Color*/
 
 /*Header CSS*/
 .dropdown-item:hover{

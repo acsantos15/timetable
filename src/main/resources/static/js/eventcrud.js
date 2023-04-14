@@ -216,7 +216,6 @@ $(document).ready(function(){
     // Remove Event
     $('#removeEventBtn').click(function(e){
         e.preventDefault();
-        $('#viewEventModal').hide();
         var eventId = $("#eventId").val();
         Swal.fire({
             title: 'Are you sure?',
@@ -236,6 +235,9 @@ $(document).ready(function(){
                     location.reload() 
                 }
             });
+        }else{
+            $('#viewEventModal').hide();
+            location.reload() 
         }
         })      
     });

@@ -1,6 +1,6 @@
 /* FullCalendar CSS */
 .fc-day-today{
-	background: #accdec !important;
+	background: #f1f1f1 !important;
 }
 /*optional event color*/
 /* .fc-event {
@@ -41,7 +41,7 @@
 .fc .fc-button-group .fc-timeGridWeek-button, 
 .fc .fc-button-group .fc-timeGridDay-button, 
 .fc .fc-button-group .fc-list-button{
-    background-color: #7993a0;
+    background-color: #8aa78d;
 }
 .fc .fc-myCustomButton-button{
     background-color: #537557;
@@ -69,12 +69,18 @@
 .fc .fc-list-day-text{
     color:#1a252f;
 }
-@media screen and (max-width:767px) { .fc-toolbar.fc-header-toolbar {font-size: 50%}}
+@media screen and (max-width:767px) { 
+    .fc .fc-toolbar.fc-header-toolbar {
+        font-size: 50%;
+        display: block;
+        text-align: center;
+    }
+}
 /* END FullCalendar CSS */
 
 /*  NavBar CSS */
 .nav-tabs .nav-link.active {
-    border-bottom-color: #073f6c; /* set the line color to green */
+    border-bottom-color: #537557; /* set the line color to green */
     color: #537557;
     border-bottom-width: 5px ;
 }

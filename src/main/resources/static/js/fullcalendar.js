@@ -89,8 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
             hour: '2-digit',
             minute: '2-digit',
             meridiem: 'short'
-        },
-        aspectRatio: 2,
+        }
     });
 
     calendar.render();
