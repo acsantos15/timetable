@@ -53,7 +53,7 @@
   </ul>
 
   <!-- Calendar div -->
-    <div class="card" style="width: 85%; margin:50px auto 50px auto; padding:20px;">
+  <div class="card" style="width: 85%; margin:50px auto 50px auto; padding:20px;">
     <h3 style="color: rgb(82, 10, 10); font-weight: bolder; margin-left: 5px;"><span th:text="${#strings.capitalize(user.username)}"></span>'s Timetable</h3>
     <div class="card-body">
       <div id="calendar"></div>
@@ -107,8 +107,7 @@
 
           <div class="mb-3">
             <label for="addPart" class="form-label">Participant/s:</label>
-            <select class="participant" id="userSelect" name="peoples[]" multiple="multiple" style="width: 100%" required>
-            </select>
+            <select class="participant" id="userSelect" name="peoples[]" multiple="multiple" style="width: 100%" required></select>
           </div> 
 
           <div class="row g-3">
@@ -126,9 +125,11 @@
             </div>
           </div>
 
+          <!-- Error Message -->
           <span id="errMsg" style="color:red "></span>   
         </div>
 
+        <!-- Buttons -->
         <div class="modal-footer">
           <button type="reset" class="btn btn-outline-secondary"><i class="fa-solid fa-eraser me-2"></i>Clear</button>
           <button type="submit" class="btn btn-success" id="addEventBtn"><i class="fa-solid fa-floppy-disk me-2"></i>Save Changes</button>
@@ -153,21 +154,21 @@
           <input type="hidden" id="editId">
 
           <div class="mb-3 row">
-              <div class="col-md-10">
-                <label for="editTitle" class="form-label">Title</label>
-                <input type="text" class="form-control" id="editTitle" name="title" maxlength="100" required/>
-              </div>
-              <div class="col-sm-2">
-                <label for="editColor" class="form-label">Event Color</label>
-                <input type="color" class="form-control form-control-color" id="editColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
-                <datalist id="colorPreset">
-                  <option>#537C78</option>
-                  <option>#F8B195</option>
-                  <option>#6C5B78</option>
-                  <option>#B26565</option>
-                  <option>#355C7D</option>
-                </datalist>
-              </div>           
+            <div class="col-md-10">
+              <label for="editTitle" class="form-label">Title</label>
+              <input type="text" class="form-control" id="editTitle" name="title" maxlength="100" required/>
+            </div>
+            <div class="col-sm-2">
+              <label for="editColor" class="form-label">Event Color</label>
+              <input type="color" class="form-control form-control-color" id="editColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
+              <datalist id="colorPreset">
+                <option>#537C78</option>
+                <option>#F8B195</option>
+                <option>#6C5B78</option>
+                <option>#B26565</option>
+                <option>#355C7D</option>
+              </datalist>
+            </div>           
           </div>
 
           <div class="mb-3">
@@ -187,8 +188,7 @@
 
           <div class="mb-3">
             <label for="edituserSelect" class="form-label">Participant/s:</label>
-            <select class="editparticipant" id="edituserSelect" name="editpeoples[]" multiple="multiple" style="width: 100%">
-            </select>
+            <select class="editparticipant" id="edituserSelect" name="editpeoples[]" multiple="multiple" style="width: 100%"></select>
           </div>
 
           <div class="row g-3">
@@ -206,8 +206,11 @@
             </div>
           </div>
 
+          <!-- Error Message -->
           <p style="color: red;" id="erreditMsg"></p>     
         </div>
+
+        <!-- Buttons -->
         <div class="modal-footer">
           <button type="reset" class="btn btn-outline-secondary"><i class="fa-solid fa-eraser me-2"></i>Clear</button>
           <button type="button" class="btn btn-outline-danger" data-bs-dismiss="modal" aria-label="Close">Discard</button>
@@ -217,6 +220,7 @@
       </div>
     </div>
   </div>
+
   <!-- View Event Modal -->
   <div class="modal" id="viewEventModal">
     <div class="modal-dialog modal-dialog-centered">
@@ -250,6 +254,7 @@
           </div>
         </div>
 
+        <!-- Buttons -->
         <div class="modal-footer">
           <button type="button" class="btn btn-danger" id="removeEventBtn"><i class="fa-solid fa-trash me-2"></i>Delete</button>
           <button type="button" class="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" data-bs-toggle="modal"><i class="fa-solid fa-pen-to-square me-2"></i>Edit</button>

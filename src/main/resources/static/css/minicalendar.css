@@ -37,6 +37,9 @@
     color:black;
     font-weight: bold;
 }
+.fc .fc-daygrid-day-frame .fc-daygrid-day-events{
+    min-height: auto;
+}
 /* END FullCalendar CSS */
 
 
