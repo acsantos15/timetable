@@ -41,32 +41,37 @@
     <!-- Header -->
     <div th:replace="~{header :: header}"></div>
     
+    <!-- Label -->
     <div class="container1">
       <div class="card" style="margin: 60px; padding:30px;">
         <div class="card-headers" style="margin-bottom: 15px;">
-            <h3 style="color: rgb(82, 10, 10); font-weight: bolder; margin-left: 5px;">My Profile</h3>
+            <h3 style="color: rgb(82, 10, 10); font-weight: bolder;">My Profile</h3>
         </div>
+
+        <!-- Display Profile -->
         <div class="card-bodys">
             <div class="mb-4">
-                <h6 style="color: #7993a0; font-weight: bold;">Name</h6>
+                <h6 style="font-weight: bold;">Name</h6>
                 <span id="pname" th:text="${user.fname} + ' ' +${user.lname}"></span>
             </div>
             <div class="mb-4">
-                <h6 style="color: #7993a0; font-weight: bold;">Address</h6>
+                <h6 style="font-weight: bold;">Address</h6>
                 <span id="paddress" th:text="${user.address}"></span>
             </div>
             <div class="mb-4">
-                <h6 style="color: #7993a0; font-weight: bold;">Contact No.</h6>
+                <h6 style="font-weight: bold;">Contact No.</h6>
                 <span id="pcontact" th:text="${user.contact}"></span>
             </div>
             <div class="mb-4">
-                <h6 style="color: #7993a0; font-weight: bold;">Username</h6>
+                <h6 style="font-weight: bold;">Username</h6>
                 <span id="pusername" th:text="${user.username}"></span>
             </div>
             <div class="mb-4">
-                <h6 style="color: #7993a0; font-weight: bold;">Email</h6>
+                <h6 style="font-weight: bold;">Email</h6>
                 <span id="pemail" th:text="${user.email}"></span>
             </div>
+
+            <!-- Buttons -->
             <div style="float: right;">
                 <a th:href="@{/timetable}" class="btn btn-secondary">Back to Timetable</a>
                 <a th:href="@{/editprofile}" class="btn" style="background-color: #537557; color:white;">Edit Profile</a>

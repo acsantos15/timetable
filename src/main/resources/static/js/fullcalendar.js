@@ -38,6 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
             $("#addStart").val(fStart);
             $("#addEnd").val(fEnd);
         },
+        selectAllow: function(select) {
+            return moment().diff(select.start, 'days' + 'time') <= 0
+         },
         defaultDate: new Date(),
         aspectRatio: 2,
         editable: false,

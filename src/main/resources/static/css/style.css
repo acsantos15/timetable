@@ -40,14 +40,15 @@
     background-color: rgb(168, 101, 101);
     color: white;
 }
-.fc .fc-today-button,
 .fc .fc-button-group .fc-dayGridMonth-button, 
 .fc .fc-button-group .fc-timeGridWeek-button, 
 .fc .fc-button-group .fc-timeGridDay-button, 
 .fc .fc-button-group .fc-list-button{
     background-color: #8aa78d;
 }
-.fc .fc-myCustomButton-button{
+.fc .fc-myCustomButton-button,
+.fc .fc-today-button,
+.fc .fc-button-primary:disabled{
     background-color: #537557;
 }
 .fc .fc-myCustomButton-button:hover{
