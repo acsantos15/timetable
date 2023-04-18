@@ -112,6 +112,10 @@ span.select2-container {
     z-index:9999;
     width: 100%;
 }
+
+#searchWord + span.select2-container {
+    z-index:0;
+}
 /* End of Select2 */
 
 /* Modal CSS */
