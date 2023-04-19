@@ -39,7 +39,7 @@ document.addEventListener('DOMContentLoaded', function() {
             $("#addEnd").val(fEnd);
         },
         selectAllow: function(select) {
-            return moment().diff(select.start, 'days' + 'time') <= 0
+            return moment().diff(select.start, 'days', 'time') <= 0
          },
         defaultDate: new Date(),
         aspectRatio: 2,

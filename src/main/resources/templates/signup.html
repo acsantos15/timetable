@@ -35,17 +35,17 @@
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-10">
           <div class="card" style="border-radius: 1rem; background-color: #DEDBD3;;">
-            <div class="row g-0">
 
-              <!-- Left -->
-              <div class="col-md-6 col-lg-5 d-none d-md-block">
-                <div style="margin-top: 5%; margin-left: 5%;margin-bottom: 5%;">
-                <span class="h1 fw-bold mb-0" style="color: rgb(88, 17, 17); font-weight: bold; font-size: 40px;">Create Account</span></div>  
+              <!-- Header -->
+              <div class="card-header">
+                <div style="margin: 20px 0 20px 30px;">
+                  <span class="h1 fw-bold mb-0" style="color: rgb(88, 17, 17); font-weight: bold; font-size: 40px;">Create Account</span>
+                </div>  
               </div>
 
-              <!-- Right -->
-              <div class="col-md-6 col-lg-7 d-flex align-items-center">
-                <div class="card-body p-4 p-lg-5 text-black">
+              <!-- Body -->
+              <div class="d-flex align-items-center">
+                <div class="card-body" style="margin: 0 30px 30px 30px">
                   <form id="regForm">
                     <h5 style="color: #7993a0; font-weight: bold;">Personal Information</h5>
 
@@ -88,15 +88,12 @@
                     </div>
 
                     <!-- Already Have an Account?-->
-                    <div style="float: right;">
-                      <p style="text-align:left; color:#726F6C; margin: 35px 100px 0px 0px;">Already have an account? 
-                        <a th:href="@{/login}" style="color:#517341; font-weight:bold;">Login</a>
-                      </p>
-                    </div>
+                    <p style="text-align:left; color:#726F6C; margin: 35px 100px 0px 0px;">Already have an account? 
+                      <a th:href="@{/login}" style="color:#517341; font-weight:bold;">Login</a>
+                    </p>
                   </form>
                 </div>
               </div>
-            </div>
           </div>
         </div>
       </div>
