@@ -34,8 +34,6 @@ public class MainController {
     @Autowired
     private EventMapper eMapper;
 
-    private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather?q=Pasay&units=metric&appid=b5e35da3557f68bd8edc2b6032dddc77";
-
     // Fetch events for today and tommorow
     @GetMapping("/dashboard")
     public String dashboard(Model model, HttpSession session) {
@@ -86,15 +84,6 @@ public class MainController {
 
     }
 
-    
-
-    // @GetMapping("/weather/{city}")
-    // public String showWeather(@PathVariable String city, Model model) {
-    //     String apiUrl = API_URL.replace("{city}", city).replace("{apiKey}", API_KEY);
-    //     WeatherData weatherData = new RestTemplate().getForObject(apiUrl, WeatherData.class);
-    //     model.addAttribute("weatherData", weatherData);
-    //     return "weather";
-    // }
 
     // Get All Events
     @GetMapping("/events")
