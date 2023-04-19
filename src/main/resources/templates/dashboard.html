@@ -55,6 +55,11 @@
     </ul>
 
     <div class="row justify-content-center" style="margin:50px;">
+
+        <h1>Weather in Pasig</h1>
+        <p>Temperature: [[${weatherData.main.temp}]]&deg;C</p>
+        <p>Humidity: [[${weatherData.main.humidity}]]%</p>
+        <p>Weather Description: <span th:text="${weatherData.weather[0].description}"></span></p>
         <!--Dashboard-->
         <div class="col-lg-8 mb-3">
             <div class="card" style="background-color: white;">

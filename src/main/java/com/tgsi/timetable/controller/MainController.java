@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.client.RestTemplate;
 
 import com.tgsi.timetable.entity.Events;
 import com.tgsi.timetable.entity.Users;
+import com.tgsi.timetable.entity.WeatherData;
 import com.tgsi.timetable.mapper.EventMapper;
 
 import jakarta.servlet.http.HttpSession;
@@ -31,6 +33,8 @@ public class MainController {
 
     @Autowired
     private EventMapper eMapper;
+
+    private static final String API_URL = "https://api.openweathermap.org/data/2.5/weather?q=Pasay&units=metric&appid=b5e35da3557f68bd8edc2b6032dddc77";
 
     // Fetch events for today and tommorow
     @GetMapping("/dashboard")
@@ -71,11 +75,26 @@ public class MainController {
                 model.addAttribute("tommorowResponse", tomEvents);
             }
 
+            // OpenWeather API
+            String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Pasig&units=metric&appid=b5e35da3557f68bd8edc2b6032dddc77";
+            WeatherData weatherData = new RestTemplate().getForObject(apiUrl, WeatherData.class);
+            model.addAttribute("weatherData", weatherData);
+
             model.addAttribute("user", user);
             return "dashboard";
         }
 
     }
+
+    
+
+    // @GetMapping("/weather/{city}")
+    // public String showWeather(@PathVariable String city, Model model) {
+    //     String apiUrl = API_URL.replace("{city}", city).replace("{apiKey}", API_KEY);
+    //     WeatherData weatherData = new RestTemplate().getForObject(apiUrl, WeatherData.class);
+    //     model.addAttribute("weatherData", weatherData);
+    //     return "weather";
+    // }
 
     // Get All Events
     @GetMapping("/events")
