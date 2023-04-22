@@ -34,7 +34,7 @@ public interface EventMapper {
     // Insert event
     @Insert("INSERT INTO events (title, description, location, start, end, color) VALUES (#{title}, #{description}, #{location}, #{start}, #{end}, #{color})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void insertEvent(Events events);
+    Long insertEvent(Events events);
 
     // Update event
     @Update("UPDATE events SET title = #{title}, description = #{description}, location = #{location}, start = #{start}, end= #{end}, color= #{color} WHERE id = #{id}")

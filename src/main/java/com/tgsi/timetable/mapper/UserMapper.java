@@ -38,7 +38,7 @@ public interface UserMapper {
     // Insert user
     @Insert("INSERT INTO users (fname, lname, address, contact, username, email, pass) VALUES (#{fname}, #{lname}, #{address}, #{contact}, #{username}, #{email}, #{pass})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
-    void insertUser(Users users);
+    Long insertUser(Users users);
 
     // Update user
     @Update("UPDATE users SET fname = #{fname}, lname = #{lname}, address=#{address}, contact=#{contact}, username=#{username}, email = #{email}, pass = #{pass} WHERE id = #{id}")

@@ -32,11 +32,13 @@ import jakarta.validation.Valid;
 public class MainController {
 
     @Autowired
-    private EventMapper eMapper;
+    public EventMapper eMapper;
 
-    // Fetch events for today and tommorow
+    // Dashboard Page
     @GetMapping("/dashboard")
     public String dashboard(Model model, HttpSession session) {
+
+        // Check Session If User Is Logged In
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
             return "redirect:/login";
@@ -44,7 +46,8 @@ public class MainController {
             String username = user.getUsername();
             Long userid = user.getId();
             model.addAttribute("username", username);
-            // Get Today Event
+
+            //Fetch Events For Today
             List<Events> allEvents = eMapper.getUserEvent(userid);
             LocalDateTime today = LocalDateTime.now();
             List<Events> todaysEvents = allEvents.stream()
@@ -59,7 +62,7 @@ public class MainController {
                 model.addAttribute("todayResponse", todaysEvents);
             }
 
-            // Get Tommorow Event
+            // Fetch Events For Tommorow
             LocalDateTime tom = LocalDateTime.now().plusDays(1);
             List<Events> tomEvents = allEvents.stream()
                     .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
@@ -73,7 +76,7 @@ public class MainController {
                 model.addAttribute("tommorowResponse", tomEvents);
             }
 
-            // OpenWeather API
+            // Open Weather API 
             String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Pasig&units=metric&appid=b5e35da3557f68bd8edc2b6032dddc77";
             WeatherData weatherData = new RestTemplate().getForObject(apiUrl, WeatherData.class);
             model.addAttribute("weatherData", weatherData);
@@ -85,7 +88,7 @@ public class MainController {
     }
 
 
-    // Get All Events
+    // Get All Events Of Logged User
     @GetMapping("/events")
     public @ResponseBody Iterable<Events> getAllEvents(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
@@ -121,7 +124,6 @@ public class MainController {
     // Save Participant
     @PostMapping("/saveEventParticipants")
     @ResponseBody
-    @SuppressWarnings("unchecked")
     public String saveEventParticipants(@Valid @RequestBody Map<String, Object> payload) {
         Long eventId = ((Number) payload.get("eventId")).longValue();
         List<Long> participantIds = (List<Long>) payload.get("participantIds");
@@ -136,7 +138,7 @@ public class MainController {
         return eMapper.getEventById(id);
     }
 
-    // Fetch participant for event
+    // Fetch Participant For Event
     @GetMapping("/events/{eventId}/users")
     @ResponseBody
     public List<Users> getAllUsersForEvent(@PathVariable Long eventId) {
@@ -159,7 +161,7 @@ public class MainController {
             return ResponseEntity.notFound().build();
         }
 
-        // event object
+        // Event Object
         existingEvent.setTitle(updatedEvent.getTitle());
         existingEvent.setDescription(updatedEvent.getDescription());
         existingEvent.setLocation(updatedEvent.getLocation());
@@ -167,11 +169,12 @@ public class MainController {
         existingEvent.setStart(updatedEvent.getStart());
         existingEvent.setEnd(updatedEvent.getEnd());
 
-        // Save the updated event object to the database
+        // Save Updated Object to Database
         eMapper.updatedEvent(existingEvent);
         return ResponseEntity.ok(existingEvent);
     }
 
+    // Delete Participant For Event
     @DeleteMapping("/delete/{eventId}/edit")
     @ResponseBody
     public Long deleteParticipantsByEventId(@PathVariable Long eventId) {

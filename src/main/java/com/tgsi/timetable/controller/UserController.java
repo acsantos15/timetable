@@ -34,13 +34,13 @@ import jakarta.validation.Valid;
 public class UserController {
 
    @Autowired
-   private UserMapper uMapper;
+   public UserMapper uMapper;
 
    @Autowired
    private EventMapper eMapper;
 
    @Autowired
-   private BCryptPasswordEncoder bCryptPasswordEncoder;
+   public BCryptPasswordEncoder bCryptPasswordEncoder;
 
     //signup page
     @GetMapping("/signup")
@@ -224,6 +224,8 @@ public class UserController {
 
         
     }
+
+    
 
     
 }
