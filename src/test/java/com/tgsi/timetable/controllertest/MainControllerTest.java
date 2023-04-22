@@ -18,6 +18,7 @@ import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -33,16 +34,11 @@ import jakarta.servlet.http.HttpSession;
 @SpringBootTest
 public class MainControllerTest {
 
-    @Mock
+    @Autowired
     private EventMapper eMapper;
 
-    @InjectMocks
+    @Autowired
     private MainController mainController;
-    
-    @BeforeEach
-    void setUp() {
-        MockitoAnnotations.openMocks(this);
-    }
     
     // Test Fetching Datas On Dashboard
     @Test
@@ -142,18 +138,9 @@ public class MainControllerTest {
     // Test Updating Event
     @Test
     public void testUpdateEvent() {
-
-         // create a mock user
-         Events event = new Events();
-         event.setTitle("John");
-         event.setDescription("Doe");
-         event.setLocation("123 Main St");
-         event.setStart(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS));
-        event.setEnd(LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS).plusHours(1));
-        event.setColor("#12345");
  
-         // id yo update
-         Long userId = eMapper.insertEvent(event);
+         // id from database
+         Long eventId = 43L;
 
         // create an updated event
         Events updatedEvent = new Events();
