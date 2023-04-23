@@ -135,7 +135,7 @@ public class MainControllerTest {
     @Test
     public void testUpdateEvent() {
  
-         // id from database
+         // Event id from database
          Long eventId = 43L;
 
         // create an updated event
