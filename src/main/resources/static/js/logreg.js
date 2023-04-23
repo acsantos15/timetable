@@ -2,6 +2,8 @@ $(document).ready(function(){
     // Register User
     $('#regForm').submit(function(e){
         e.preventDefault();
+
+        // All Form Input Value
         var fname = $("#fname").val().trim();
         var lname = $("#lname").val().trim();
         var address = $("#address").val().trim();
@@ -11,6 +13,7 @@ $(document).ready(function(){
         var pass = $("#pass").val();
         var conpass = $("#conpass").val();
 
+        // FormData
         var formData = {
             "fname": fname,
             "lname": lname,
@@ -20,6 +23,7 @@ $(document).ready(function(){
             "email": email,
             "pass": pass,
         };
+        // Form Validation
         if(pass.length < 8){
             $("#errMsg").show().text("Password should have atleast 8 characters").delay(3000).fadeOut();
         }else if(fname ==="" || lname ==="" || address ==="" || username ===""){

@@ -1,4 +1,7 @@
+
 $(document).ready(function() {
+
+  // Show Participant When Click an event for today
   $("div.dash.card").click(function() {
       var eventid = $(this).attr("id");
       $.ajax({
@@ -16,6 +19,7 @@ $(document).ready(function() {
 
   });
 
+  // Show Participant When Click an event for tommorow
   $("div.dash2.card").click(function() {
     var eventid = $(this).attr("id");
     $.ajax({

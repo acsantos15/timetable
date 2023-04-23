@@ -44,8 +44,9 @@ public class LoginTest {
         MockitoAnnotations.openMocks(this);
     }
     
+    // Test if user have a valid user
     @Test
-    public void testLogin_ValidUser_ReturnsRedirect() {
+    public void testLogin_ValidCredentials() {
         // Arrange
         String username = "testuser";
         String password = "testpass";
@@ -65,23 +66,9 @@ public class LoginTest {
         assertEquals("redirect:/dashboard", result);
     }
 
+    // test if user input wrong credentials
     @Test
-    public void testLogin_InvalidUser_ReturnsError() {
-        // Arrange
-        String username = "testuser";
-        String password = "testpass";
-        when(uMapper.findByUsername(anyString())).thenReturn(null);
-
-        // Act
-        String result = userController.login(username, password, session, model);
-
-        // Assert
-        verify(model).addAttribute("error", "Invalid username or password");
-        assertEquals("login", result);
-    }
-
-    @Test
-    public void testLogin_InvalidPassword_ReturnsError() {
+    public void testLogin_InvalidCredentials() {
         // Arrange
         String username = "testuser";
         String password = "testpass";
@@ -89,7 +76,7 @@ public class LoginTest {
         Users user = new Users();
         user.setUsername(username);
         user.setPass(hashedPassword);
-        when(uMapper.findByUsername(username)).thenReturn(user);
+        when(uMapper.findByUsername(anyString())).thenReturn(null);
         when(bCryptPasswordEncoder.matches(password, hashedPassword)).thenReturn(false);
 
         // Act

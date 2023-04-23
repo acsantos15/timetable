@@ -5,6 +5,8 @@ $(document).ready(function(){
     // Add Events
     $('#addEventForm').submit(function(e){
         e.preventDefault();
+
+        // All Input Value
         var title = $("#addTitle").val().trim();
         var desc = $("#addDesc").val().trim();
         var loc = $("#addLoc").val().trim();
@@ -22,6 +24,8 @@ $(document).ready(function(){
 
         var diffMs = Math.abs(sTimeStamp - eTimeStamp);
         var diffMins = Math.floor(diffMs / 1000 /60);
+
+        // FormData
         var formData = {
             "title": title,
             "description": desc,
@@ -30,6 +34,8 @@ $(document).ready(function(){
             "start": fStart,
             "end": fEnd,
         };
+
+        // Form Validation
         if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
             $("#errMsg").show().text("6am to 7pm only").delay(3000).fadeOut();
         }else if(title ==="" || desc ==="" || loc ===""){
@@ -124,6 +130,8 @@ $(document).ready(function(){
     // Update Events
     $('#editEventForm').submit(function(e){
         e.preventDefault();
+
+        // All Input Value
         var eventId = $("#editId").val();
         var title = $("#editTitle").val().trim();
         var desc = $("#editDesc").val().trim();
@@ -143,7 +151,8 @@ $(document).ready(function(){
 
         var diffMs = Math.abs(sTimeStamp - eTimeStamp);
         var diffMins = Math.floor(diffMs / 1000 /60);
-
+        
+        // FormData
         var formData = {
             "title": title,
             "description": desc,
@@ -153,6 +162,7 @@ $(document).ready(function(){
             "end": fEnd,
         };
         
+        // Form Validation
         if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
             $("#erreditMsg").show().text("6am to 7pm only").delay(3000).fadeOut();
         }else if(title ==="" || desc ==="" || loc ===""){
@@ -269,7 +279,8 @@ $(document).ready(function(){
     $('.editparticipant').select2({
         multiple: true
     });
-
+    
+    // Populate Edit Event Modal
     $.ajax({
         url: '/users',
         type: 'GET',
@@ -291,6 +302,7 @@ $(document).ready(function(){
         }
     });
 
+    // Populate Add Event Modal
     $.ajax({
         url: '/users',
         type: 'GET',
