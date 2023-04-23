@@ -42,7 +42,7 @@ public interface UserMapper {
 
     // Update user
     @Update("UPDATE users SET fname = #{fname}, lname = #{lname}, address=#{address}, contact=#{contact}, username=#{username}, email = #{email}, pass = #{pass} WHERE id = #{id}")
-    void updateUser(Users event);
+    void updateUser(Users users);
     
     // Delete User
     @Delete("DELETE FROM users WHERE id = #{id}")

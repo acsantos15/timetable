@@ -71,7 +71,7 @@ public class UserController {
         }
         user.setPass(bCryptPasswordEncoder.encode(user.getPass()));
         uMapper.insertUser(user);
-        return ResponseEntity.ok("User registered successfully.");
+        return ResponseEntity.noContent().build();
     }
 
     // Display Profile
@@ -107,7 +107,7 @@ public class UserController {
     // Edit User
     @PutMapping("edituser/{id}")
     @ResponseBody
-    public ResponseEntity<?> updateUser(@Valid @PathVariable("id") Long id, @RequestBody Users updatedUser) {
+    public ResponseEntity<?> updateUser(@Valid @PathVariable Long id, @RequestBody Users updatedUser) {
         Users existingUser = uMapper.getUserById(id);
         if (existingUser == null) {
             return ResponseEntity.notFound().build();
