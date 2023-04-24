@@ -47,7 +47,7 @@ public class LoginTest {
     // Test if user have a valid user
     @Test
     public void testLogin_ValidCredentials() {
-        // Arrange
+        
         String username = "testuser";
         String password = "testpass";
         String hashedPassword = "hashedtestpass";
@@ -57,10 +57,8 @@ public class LoginTest {
         when(uMapper.findByUsername(username)).thenReturn(user);
         when(bCryptPasswordEncoder.matches(password, hashedPassword)).thenReturn(true);
 
-        // Act
         String result = userController.login(username, password, session, model);
 
-        // Assert
         verify(session).setAttribute("user", user);
         verify(model).addAttribute("success", "Login Successfully");
         assertEquals("redirect:/dashboard", result);
@@ -69,7 +67,6 @@ public class LoginTest {
     // test if user input wrong credentials
     @Test
     public void testLogin_InvalidCredentials() {
-        // Arrange
         String username = "testuser";
         String password = "testpass";
         String hashedPassword = "hashedtestpass";
@@ -79,10 +76,8 @@ public class LoginTest {
         when(uMapper.findByUsername(anyString())).thenReturn(null);
         when(bCryptPasswordEncoder.matches(password, hashedPassword)).thenReturn(false);
 
-        // Act
         String result = userController.login(username, password, session, model);
 
-        // Assert
         verify(model).addAttribute("error", "Invalid username or password");
         assertEquals("login", result);
     }
