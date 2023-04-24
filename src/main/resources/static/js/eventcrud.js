@@ -6,6 +6,9 @@ $(document).ready(function(){
     $('#addEventForm').submit(function(e){
         e.preventDefault();
 
+        // Disable submit button after click once
+        $('#addEventBtn').prop('disabled',true);
+
         // All Input Value
         var title = $("#addTitle").val().trim();
         var desc = $("#addDesc").val().trim();
@@ -34,6 +37,8 @@ $(document).ready(function(){
             "start": fStart,
             "end": fEnd,
         };
+
+        
 
         // Form Validation
         if (sTime > 19 || sTime <6 || eTime > 19 || eTime <6){
@@ -130,6 +135,9 @@ $(document).ready(function(){
     // Update Events
     $('#editEventForm').submit(function(e){
         e.preventDefault();
+
+        // Disable submit button after click once
+        $('#saveUpEventBtn').prop('disabled',true);
 
         // All Input Value
         var eventId = $("#editId").val();
@@ -245,9 +253,6 @@ $(document).ready(function(){
                     location.reload() 
                 }
             });
-        }else{
-            $('#viewEventModal').hide();
-            location.reload() 
         }
         })      
     });

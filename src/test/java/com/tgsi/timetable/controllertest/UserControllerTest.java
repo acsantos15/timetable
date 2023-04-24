@@ -1,7 +1,6 @@
 package com.tgsi.timetable.controllertest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
@@ -16,11 +15,9 @@ import java.util.List;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -102,39 +99,6 @@ public class UserControllerTest {
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("Username is already taken.", response.getBody());
     }
-    
-    
-    // Test Updating User
-    // @Test
-    // public void testUpdateEvent() {
-
-    //     // User id from database
-    //     Long userId = 14L;
-
-    //     // create an updated event
-    //     Users updatedUser = new Users();
-    //     updatedUser.setFname("updatedfname");
-    //     updatedUser.setLname("updatedlname");
-    //     updatedUser.setAddress("updatedaddress");
-    //     updatedUser.setContact("09123456789");
-    //     updatedUser.setUsername("updatedusername");
-    //     updatedUser.setEmail("updated@email.com");
-
-    //     // call the updateEvent method
-    //     ResponseEntity<?> responseEntity = userController.updateUser(userId, updatedUser);
-
-    //     // check that the event was updated
-    //     assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
-
-    //     // retrieve the event from the database and check that it matches the updated event
-    //     Users updatedDbUser = uMapper.getUserById(userId);
-    //     assertEquals(updatedUser.getFname(), updatedDbUser.getFname());
-    //     assertEquals(updatedUser.getLname(), updatedDbUser.getLname());
-    //     assertEquals(updatedUser.getAddress(), updatedDbUser.getAddress());
-    //     assertEquals(updatedUser.getContact(), updatedDbUser.getContact());
-    //     assertEquals(updatedUser.getUsername(), updatedDbUser.getUsername());
-    //     assertEquals(updatedUser.getEmail(), updatedDbUser.getEmail());
-    // }
 
 
     // Test search function
@@ -171,6 +135,5 @@ public class UserControllerTest {
         assertTrue(model.containsAttribute("events"));
         assertEquals(events, model.getAttribute("events"));
     }
-
     
 }
