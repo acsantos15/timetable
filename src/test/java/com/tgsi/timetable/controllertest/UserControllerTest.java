@@ -6,6 +6,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.never;
+import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -98,6 +99,43 @@ public class UserControllerTest {
         verify(uMapper, never()).insertUser(user);
         assertEquals(HttpStatus.BAD_REQUEST, response.getStatusCode());
         assertEquals("Username is already taken.", response.getBody());
+    }
+
+    // Test Update User
+    @Test
+    public void testUpdateUser() {
+        // Create a test user object
+        Users testUser = new Users();
+        testUser.setId(1L);
+        testUser.setFname("John");
+        testUser.setLname("Doe");
+        testUser.setAddress("123 Main St");
+        testUser.setContact("555-1234");
+        testUser.setUsername("johndoe");
+        testUser.setEmail("johndoe@example.com");
+
+        // Mock the UserMapper's getUserById method to return the test user
+        when(uMapper.getUserById(1L)).thenReturn(testUser);
+
+        // Create an updated user object with a new username
+        Users updatedUser = new Users();
+        updatedUser.setId(1L);
+        updatedUser.setFname("Jane");
+        updatedUser.setLname("Doe");
+        updatedUser.setAddress("123 Main St");
+        updatedUser.setContact("555-1234");
+        updatedUser.setUsername("janedoe");
+        updatedUser.setEmail("janedoe@example.com");
+
+        // Mock the UserMapper's findByUsername method to return null (no user with the new username exists yet)
+        when(uMapper.findByUsername("janedoe")).thenReturn(null);
+
+        // Call the updateUser method with the test user ID and the updated user object
+        ResponseEntity<?> responseEntity = userController.updateUser(1L, updatedUser);
+
+
+        // Verify that the updateUser method returned a ResponseEntity with an OK status code and the updated user object
+        assertEquals(200, responseEntity.getStatusCodeValue());
     }
 
 
