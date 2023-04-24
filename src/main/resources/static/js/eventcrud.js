@@ -6,9 +6,6 @@ $(document).ready(function(){
     $('#addEventForm').submit(function(e){
         e.preventDefault();
 
-        // Disable submit button after click once
-        $('#addEventBtn').prop('disabled',true);
-
         // All Input Value
         var title = $("#addTitle").val().trim();
         var desc = $("#addDesc").val().trim();
@@ -52,6 +49,10 @@ $(document).ready(function(){
             $("#errMsg").show().text("Appointment should be atleast 30 mins").delay(3000).fadeOut();
         }
         else{
+
+            // Disable submit button after click once
+            $('#addEventBtn').prop('disabled',true);
+
             $.ajax({
                 url: "/save",
                 type: 'POST',
@@ -136,9 +137,6 @@ $(document).ready(function(){
     $('#editEventForm').submit(function(e){
         e.preventDefault();
 
-        // Disable submit button after click once
-        $('#saveUpEventBtn').prop('disabled',true);
-
         // All Input Value
         var eventId = $("#editId").val();
         var title = $("#editTitle").val().trim();
@@ -182,6 +180,9 @@ $(document).ready(function(){
             $("#erreditMsg").show().text("Appointment should be atleast 30 mins").delay(3000).fadeOut();
         }
         else{
+
+            // Disable submit button after click once
+            $('#saveUpEventBtn').prop('disabled',true);
             
             $.ajax({
                 url: "/edit/" + eventId,
