@@ -97,8 +97,11 @@ document.addEventListener('DOMContentLoaded', function() {
         },
         dayHeaderContent: (args) => {
             return moment(args.date).format('ddd[\r\n]D').toUpperCase();
-        }
+        },
+
     });
+
+
 
     calendar.render();
 });
