@@ -24,6 +24,7 @@ import com.tgsi.timetable.entity.Events;
 import com.tgsi.timetable.entity.Users;
 import com.tgsi.timetable.entity.WeatherData;
 import com.tgsi.timetable.mapper.EventMapper;
+import com.tgsi.timetable.mapper.UserMapper;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -33,6 +34,9 @@ public class MainController {
 
     @Autowired
     public EventMapper eMapper;
+
+    @Autowired
+    public UserMapper uMapper;
 
     // Dashboard Page
     @GetMapping("/dashboard")
@@ -105,7 +109,8 @@ public class MainController {
             return "redirect:/login";
         } else {
             Long loggedId = user.getId();
-            model.addAttribute("loggedId", loggedId);
+            Users dbUser = uMapper.getUserById(loggedId);
+            model.addAttribute("loggedId", dbUser);
 
             model.addAttribute("user", user);
             return "timetable";
