@@ -61,7 +61,7 @@
         <!--Dashboard-->
         <div class="col-lg-8 mb-3">
             <div class="card" style="background-color: white;">
-
+                  
                 <!-- Today's Event Tables -->
                 <div class="container" style="padding-top: 20px;">
                     <h3 style="color: rgb(82, 10, 10); font-weight: bolder;">Today</h3>
@@ -76,7 +76,7 @@
 
                     <!-- Today's Event = true -->
                     <th:block th:each="todayevent : ${today}">
-                        <div class="dash card" th:style="'background-color:' + ${todayevent.color}+'; margin:10px; color:white; padding: 10px 20px 10px 0;'" th:id="${todayevent.id}">
+                        <div class="dash card" th:style="'background-color:' + ${todayevent.color}+'; margin:10px; color:white; padding: 10px 20px 10px 0;'" th:id="${todayevent.id}" data-bs-toggle="tooltip" data-bs-placement="bottom">
                             <ul style="list-style-type: none; margin-top: 12px;"> 
                                 <li th:text="${todayevent.title}" style="font-size: larger; font-weight: bold;"></li>
                                 <li th:text="${todayevent.description}"></li>
@@ -100,7 +100,7 @@
 
                     <!-- Tomorrow's Event = true -->
                     <th:block th:each="tomevent : ${tommorow}">
-                        <div class="dash2 card" th:style="'background-color:' + ${tomevent.color}+'; margin:10px; color:white; padding: 10px 20px 10px 0;'" th:id="${tomevent.id}">
+                        <div class="dash2 card" th:style="'background-color:' + ${tomevent.color}+'; margin:10px; color:white; padding: 10px 20px 10px 0;'" th:id="${tomevent.id}" data-bs-toggle="tooltip" data-bs-placement="bottom">
                             <ul style="list-style-type: none; margin-top: 12px;">
                                 <li th:text="${tomevent.title}" style="font-size: larger; font-weight: bold;"></li>
                                 <li th:text="${tomevent.description}"></li>
@@ -128,21 +128,6 @@
                 <p><b>Temperature:</b> [[${weatherData.main.temp}]]&deg;C</p>
                 <p><b>Humidity:</b> [[${weatherData.main.humidity}]]%</p>
                 <p><b>Weather Description:</b> <span th:text="${weatherData.weather[0].description}"></span></p>               
-            </div>
-        </div>
-    </div>
-
-    <!-- Participant Modal -->
-    <div class="modal" id="peopleModal">
-        <div class="modal-dialog modal-dialog-centered modal-sm">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Participant</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <ul class="list-group" id="participant"></ul>
-                </div>
             </div>
         </div>
     </div>
