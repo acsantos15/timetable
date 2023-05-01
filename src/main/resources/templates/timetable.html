@@ -74,11 +74,11 @@
           <form id="addEventForm">
           <div class="mb-3 row">
             <div class="col-md-10">
-              <label for="addTitle" class="form-label">Title</label>
+              <label for="addTitle" class="form-label"><i class="fa-solid fa-pen me-2"></i>Title</label>
               <input type="text" class="form-control" id="addTitle" name="title" maxlength="100" required/>
             </div>
-            <div class="col-sm-2">
-              <label for="addColor" class="form-label">Event Color</label>
+            <div class="col-sm-2" style="padding-left: 0%;">
+              <label for="addColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Event Color</label>
               <input type="color" class="form-control form-control-color" id="addColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
               <datalist id="colorPreset">
                 <option>#537C78</option>
@@ -91,12 +91,12 @@
           </div>
 
           <div class="mb-3">
-            <label for="addDesc" class="form-label">Description</label>
+            <label for="addDesc" class="form-label"><i class="fa-solid fa-comments me-2"></i>Description</label>
             <textarea type="textarea" class="form-control" id="addDesc" name="description" maxlength="100" rows="3" required></textarea>
           </div>
 
           <div class="mb-3">
-            <label for="addLoc" class="form-label">Location</label>
+            <label for="addLoc" class="form-label"><i class="fa-solid fa-location-dot me-2"></i>Location</label>
             <select class="form-select" aria-label="Default select example" id="addLoc" name="location" required>
               <option value="" selected disabled></option>
               <option value="Center of Excellence 1">Center of Excellence 1</option>
@@ -106,19 +106,19 @@
           </div>
 
           <div class="mb-3">
-            <label for="addPart" class="form-label">Participant/s:</label>
+            <label for="addPart" class="form-label"><i class="fa-solid fa-users me-2"></i>Participant/s:</label>
             <select class="participant" id="userSelect" name="peoples[]" multiple="multiple" style="width: 100%" required></select>
           </div> 
 
           <div class="row g-3">
             <div class="col">
-              <label class="control-label col-sm-2" for="addStart">Start</label>
+              <label class="control-label col-sm-2" for="addStart"><i class="fa-solid fa-hourglass-start me-2"></i>Start</label>
               <div class="col-sm-15">          
                 <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" min="T06:00" max="T19:30" required/>
               </div>
             </div>
             <div class="col">
-              <label class="control-label col-sm-2" for="addEnd">End</label>
+              <label class="control-label col-sm-2" for="addEnd"><i class="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
               <div class="col-sm-15">          
                 <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" min="06:30:00" max="20:00:00" required/>
               </div>
@@ -149,17 +149,17 @@
           <button type="buttonThis meeting w" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
 
-        <div class="modal-body">
+        <div class="modal-body" style="font-weight: bold;">
           <form id="editEventForm" method="put" th:action="@{/edit/{id}(id=${#editId})}">
           <input type="hidden" id="editId">
 
           <div class="mb-3 row">
             <div class="col-md-10">
-              <label for="editTitle" class="form-label">Title</label>
+              <label for="editTitle" class="form-label"><i class="fa-solid fa-pen me-2"></i>Title</label>
               <input type="text" class="form-control" id="editTitle" name="title" maxlength="100" required/>
             </div>
-            <div class="col-sm-2">
-              <label for="editColor" class="form-label">Event Color</label>
+            <div class="col-sm-2" style="padding-left: 0%;">
+              <label for="editColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Event Color</label>
               <input type="color" class="form-control form-control-color" id="editColor" name="color" value="#537C78" list="colorPreset" title="Choose your color">
               <datalist id="colorPreset">
                 <option>#537C78</option>
@@ -172,12 +172,12 @@
           </div>
 
           <div class="mb-3">
-            <label for="editDesc" class="form-label">Description</label>
+            <label for="editDesc" class="form-label"><i class="fa-solid fa-comments me-2"></i>Description</label>
             <textarea type="textarea" class="form-control" id="editDesc" name="description" maxlength="100" rows="3" required></textarea>
           </div>
 
           <div class="mb-3">
-            <label for="editLoc" class="form-label">Location</label>
+            <label for="editLoc" class="form-label"><i class="fa-solid fa-location-dot me-2"></i>Location</label>
             <select class="form-select" aria-label="Default select example" id="editLoc" name="location" required>
               <option value="" selected disabled></option>
               <option value="Center of Excellence 1">Center of Excellence 1</option>
@@ -187,19 +187,19 @@
           </div>
 
           <div class="mb-3">
-            <label for="edituserSelect" class="form-label">Participant/s:</label>
+            <label for="edituserSelect" class="form-label"><i class="fa-solid fa-users me-2"></i>Participant/s:</label>
             <select class="editparticipant" id="edituserSelect" name="editpeoples[]" multiple="multiple" style="width: 100%"></select>
           </div>
 
           <div class="row g-3">
             <div class="col">
-              <label class="control-label col-sm-2" for="addStart">Start</label>
+              <label class="control-label col-sm-2" for="addStart"><i class="fa-solid fa-hourglass-start me-2"></i>Start</label>
               <div class="col-sm-15">          
                 <input class="form-control" type="datetime-local" id="editStart" name="start" required/>
               </div>
             </div>
             <div class="col">
-              <label class="control-label col-sm-2" for="addEnd">End</label>
+              <label class="control-label col-sm-2" for="addEnd"><i class="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
               <div class="col-sm-15">          
                 <input class="form-control" type="datetime-local" id="editEnd" name="end" required/>
               </div>
@@ -232,21 +232,21 @@
 
         <div class="modal-body">
           <input type="hidden" id="eventId"></input>
-          <p class="fw-bold">Title: </p><p id="eventTitle"></p>
-          <p class="fw-bold">Description: </p><p id="eventDescription"></p>
-          <p class="fw-bold">Location: </p><p id="eventLocation"></p>
-          <p class="fw-bold">Participant:</p>
+          <p class="fw-bold"><i class="fa-solid fa-pen me-2"></i>Title: </p><p id="eventTitle"></p>
+          <p class="fw-bold"><i class="fa-solid fa-comments me-2"></i>Description: </p><p id="eventDescription"></p>
+          <p class="fw-bold"><i class="fa-solid fa-location-dot me-2"></i>Location: </p><p id="eventLocation"></p>
+          <p class="fw-bold"><i class="fa-solid fa-users me-2"></i>Participant:</p>
           <ul class="list-group" id="participant"></ul>
 
           <div class="row align-items-center">
             <div class="col">
-              <p class="fw-bold">Start:</p>
+              <p class="fw-bold"><i class="fa-solid fa-hourglass-start me-2"></i>Start:</p>
               <p style="display: inline;">Date: </p><p id="eventStartDate" style="display: inline;"></p>
               <br/>
               <p style="display: inline;">Time: </p><p id="eventStartTime" style="display: inline;"></p>
             </div>
             <div class="col">
-              <p class="fw-bold">End: </p>
+              <p class="fw-bold"><i class="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End:</p>
               <p style="display: inline;">Date: </p><p id="eventEndDate" style="display: inline;"></p>
               <br/>
               <p style="display: inline;">Time: </p><p id="eventEndTime" style="display: inline;"></p>
