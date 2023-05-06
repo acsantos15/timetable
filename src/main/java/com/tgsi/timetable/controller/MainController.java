@@ -3,11 +3,13 @@
 package com.tgsi.timetable.controller;
 
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -40,57 +42,42 @@ public class MainController {
 
     // Dashboard Page
     @GetMapping("/dashboard")
-    public String dashboard(Model model, HttpSession session) {
-
+    public ResponseEntity<Map<String, Object>> dashboard(HttpSession session) {
         // Check Session If User Is Logged In
         Users user = (Users) session.getAttribute("user");
         if (user == null) {
-            return "redirect:/login";
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
         } else {
             String username = user.getUsername();
             Long userid = user.getId();
-            model.addAttribute("username", username);
 
-            //Fetch Events For Today
+            // Fetch Events For Today
             List<Events> allEvents = eMapper.getUserEvent(userid);
             LocalDateTime today = LocalDateTime.now();
             List<Events> todaysEvents = allEvents.stream()
                     .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
                     .collect(Collectors.toList());
-            model.addAttribute("today", todaysEvents);
 
-            // Dashboard Display Today Event
-            if (todaysEvents.isEmpty()) {
-                model.addAttribute("todayResponse", "NoData");
-            } else {
-                model.addAttribute("todayResponse", todaysEvents);
-            }
-
-            // Fetch Events For Tommorow
+            // Fetch Events For Tomorrow
             LocalDateTime tom = LocalDateTime.now().plusDays(1);
             List<Events> tomEvents = allEvents.stream()
                     .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
                     .collect(Collectors.toList());
-            model.addAttribute("tommorow", tomEvents);
 
-            // Dashboard Display Tommorow Event
-            if (tomEvents.isEmpty()) {
-                model.addAttribute("tommorowResponse", "NoData");
-            } else {
-                model.addAttribute("tommorowResponse", tomEvents);
-            }
-
-            // Open Weather API 
+            // Open Weather API
             String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Pasig&units=metric&appid=b5e35da3557f68bd8edc2b6032dddc77";
             WeatherData weatherData = new RestTemplate().getForObject(apiUrl, WeatherData.class);
-            model.addAttribute("weatherData", weatherData);
 
-            model.addAttribute("user", user);
-            return "dashboard";
+            Map<String, Object> data = new HashMap<>();
+            data.put("username", username);
+            data.put("today", todaysEvents);
+            data.put("tomorrow", tomEvents);
+            data.put("weatherData", weatherData);
+            data.put("user", user);
+
+            return ResponseEntity.ok(data);
         }
-
     }
-
 
     // Get All Events Of Logged User
     @GetMapping("/events")

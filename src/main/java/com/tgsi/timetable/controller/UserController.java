@@ -12,7 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,6 +20,7 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
 import com.tgsi.timetable.entity.Events;
 import com.tgsi.timetable.entity.Users;
@@ -30,19 +30,19 @@ import com.tgsi.timetable.mapper.UserMapper;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
 
-@Controller
+@RestController
 public class UserController {
 
-   @Autowired
-   public UserMapper uMapper;
+    @Autowired
+    public UserMapper uMapper;
 
-   @Autowired
-   private EventMapper eMapper;
+    @Autowired
+    private EventMapper eMapper;
 
-   @Autowired
-   public BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    public BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    //signup page
+    // signup page
     @GetMapping("/signup")
     public String signup() {
         return "signup";
@@ -54,14 +54,14 @@ public class UserController {
         Users user = (Users) session.getAttribute("user");
         Long loggedId = user.getId();
         model.addAttribute("loggedId", loggedId);
-        
+
         Map<String, Object> response = new HashMap<>();
         response.put("loggedId", loggedId);
         response.put("users", uMapper.getAllUser());
-        
+
         return response;
     }
-  
+
     // Register User
     @PostMapping("/createUser")
     @ResponseBody
@@ -118,8 +118,8 @@ public class UserController {
         if (Usernames != null && !Usernames.getId().equals(id)) {
             return ResponseEntity.badRequest().body("Username already exists.");
         }
-        
-        // event object 
+
+        // event object
         existingUser.setFname(updatedUser.getFname());
         existingUser.setLname(updatedUser.getLname());
         existingUser.setAddress(updatedUser.getAddress());
@@ -132,34 +132,32 @@ public class UserController {
         return ResponseEntity.ok(existingUser);
     }
 
-     // Edit User pass
-     @PutMapping("editpass/{id}")
-     @ResponseBody
-     public ResponseEntity<?> updatePass(@Valid @PathVariable("id") Long id, @RequestBody Map<String, String> passMap) {
-         Users existingUser = uMapper.getUserById(id);
-         if (existingUser == null) {
-             return ResponseEntity.notFound().build();
-         }
-     
-         String oldPass = passMap.get("oldpass");
-         String newPass = passMap.get("newpass");
-     
-         // Check if old password is correct
-         if (!BCrypt.checkpw(oldPass, existingUser.getPass())) {
-             return ResponseEntity.badRequest().body("Wrong old password");
-         }
-     
-         // Hash and set the new password
-         String hashedPass = BCrypt.hashpw(newPass, BCrypt.gensalt());
-         existingUser.setPass(hashedPass);
-     
-         // Save the updated user object to the database
-         uMapper.updateUser(existingUser);
-     
-         return ResponseEntity.ok(existingUser);
-    }
+    // Edit User pass
+    @PutMapping("editpass/{id}")
+    @ResponseBody
+    public ResponseEntity<?> updatePass(@Valid @PathVariable("id") Long id, @RequestBody Map<String, String> passMap) {
+        Users existingUser = uMapper.getUserById(id);
+        if (existingUser == null) {
+            return ResponseEntity.notFound().build();
+        }
 
-    
+        String oldPass = passMap.get("oldpass");
+        String newPass = passMap.get("newpass");
+
+        // Check if old password is correct
+        if (!BCrypt.checkpw(oldPass, existingUser.getPass())) {
+            return ResponseEntity.badRequest().body("Wrong old password");
+        }
+
+        // Hash and set the new password
+        String hashedPass = BCrypt.hashpw(newPass, BCrypt.gensalt());
+        existingUser.setPass(hashedPass);
+
+        // Save the updated user object to the database
+        uMapper.updateUser(existingUser);
+
+        return ResponseEntity.ok(existingUser);
+    }
 
     // Login page
     @GetMapping("/login")
@@ -175,18 +173,19 @@ public class UserController {
 
     // Login httpsession
     @PostMapping("/loginUser")
-    public String login(@RequestParam String username, @RequestParam String password, HttpSession session, Model model) {
+    @ResponseBody
+    public Map<String, String> login(@RequestParam String username, @RequestParam String password, HttpSession session) {
+        Map<String, String> response = new HashMap<>();
         Users user = uMapper.findByUsername(username);
-        if (user != null && bCryptPasswordEncoder.matches(password, user.getPass()))  {
+        if (user != null && bCryptPasswordEncoder.matches(password, user.getPass())) {
             session.setAttribute("user", user);
-            model.addAttribute("success", "Login Successfully");
-            return "redirect:/dashboard";
+            response.put("status", "success");
         } else {
-            model.addAttribute("error", "Invalid username or password");
-            return "login";
+            response.put("status", "error");
         }
+        return response;
     }
-    
+
     // Logout remove httpsession
     @GetMapping("/logout")
     public String logout(HttpSession session) {
@@ -211,22 +210,17 @@ public class UserController {
                 model.addAttribute("userresult", "nouser");
             } else {
                 model.addAttribute("users", users);
-                if(events.isEmpty()){
+                if (events.isEmpty()) {
                     model.addAttribute("eventresult", "noevent");
-                }else{
+                } else {
                     model.addAttribute("events", events);
                 }
-                
+
             }
             model.addAttribute("user", loggeduser);
             return "searchresult";
         }
 
-        
     }
 
-    
-
-    
 }
-
