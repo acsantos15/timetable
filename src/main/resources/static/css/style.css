@@ -1,0 +1,129 @@
+/* FullCalendar CSS */
+.fc-day-today{
+	background: #f1f1f1 !important;
+}
+/*optional event color*/
+/* .fc-event {
+    background-color: #355C7D;
+    color: white;
+} */
+.fc-event:hover{
+    color:#000000
+}
+.fc-daygrid-event-dot{
+    border-color: #537557;
+}
+.fc a.fc-event{
+    color: #537557;
+}
+/*calendar header*/
+.fc .fc-toolbar-title{
+    display: inline;
+    vertical-align: middle;
+    color: rgb(82, 10, 10);
+    font-size: 20px;
+    font-weight: 700;
+}
+.fc .fc-prev-button, 
+.fc .fc-next-button{
+    background-color: rgb(82, 10, 10);
+    padding: 7px;
+}
+.fc .fc-prev-button{
+    margin-left:20px;
+}
+.fc .fc-next-button{
+    margin:5px;
+}
+.fc .fc-prev-button:hover, 
+.fc .fc-next-button:hover{
+    background-color: rgb(168, 101, 101);
+    color: white;
+}
+.fc .fc-button-group .fc-dayGridMonth-button, 
+.fc .fc-button-group .fc-timeGridWeek-button, 
+.fc .fc-button-group .fc-timeGridDay-button, 
+.fc .fc-button-group .fc-list-button{
+    background-color: #8aa78d;
+}
+.fc .fc-myCustomButton-button,
+.fc .fc-today-button,
+.fc .fc-button-primary:disabled{
+    background-color: #537557;
+}
+.fc .fc-myCustomButton-button:hover{
+    background-color: #8aa78d;
+}
+.fc .fc-button-primary{
+    border: none;
+}
+.fc a.fc-col-header-cell-cushion{
+    text-decoration: none;
+    color: #1a252f;
+    font-weight: bold;
+}
+.fc a.fc-daygrid-day-number{
+    text-decoration: none;
+    color:#073f6c;
+    font-weight: bold;
+    font-size: 15pt;
+}
+.fc .fc-timegrid-slot-label-cushion{
+    color:#1a252f;
+}
+.fc .fc-list-day-text{
+    color:#1a252f;
+}
+.fc .fc-col-header-cell-cushion{
+    white-space: pre;
+}
+@media screen and (max-width:767px) { 
+    .fc .fc-toolbar.fc-header-toolbar {
+        font-size: 50%;
+        display: block;
+        text-align: center;
+    }
+}
+/* END FullCalendar CSS */
+
+/*  NavBar CSS */
+.nav-tabs .nav-link.active {
+    border-bottom-color: #537557; /* set the line color to green */
+    color: #537557;
+    border-bottom-width: 5px ;
+}
+.nav-tabs .nav-link {
+    color: #a4a1a1; /* set the font color to gray */
+    font-size: large;
+}
+/* END NavBar CSS */
+
+/*Header CSS*/
+.navbar{
+    background-color: #537557;
+}
+.dropdown-item:hover{
+    background-color: #537557;
+    color:white;
+}
+/*End of Header CSS*/
+
+/* Select2 */
+span.select2-container {
+    z-index:9999;
+    width: 100%;
+}
+
+#searchWord + span.select2-container {
+    z-index:0;
+}
+/* End of Select2 */
+
+/* Modal CSS */
+.modal-header{
+    background-color: #537557;
+}
+.modal-title{
+    color:white; 
+    font-weight:bold; 
+}
