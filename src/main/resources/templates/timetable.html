@@ -39,19 +39,6 @@
 
 </head>
 <body style="background-color: #DEDBD3;">
-  <!-- create navigation bar ( header) -->
-  <div th:replace="~{header :: header}"></div>
-
-  <!-- Navigation -->
-  <ul class="nav nav-tabs justify-content-center">
-    <li class="nav-item">
-      <a class="nav-link"  th:href="@{/dashboard}"><i class="fa-solid fa-grip"></i> Dashboard</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link active" th:href="@{/timetable}"><i class="fa-sharp fa-regular fa-calendar-days"></i> Timetable</a>
-    </li>
-  </ul>
-
   <!-- Calendar div -->
   <div class="card" style="width: 85%; margin:50px auto 50px auto; padding:20px;">
     <h3 style="color: rgb(82, 10, 10); font-weight: bolder; margin-left: 5px;"><span th:text="${#strings.capitalize(loggedId.username)}"></span>'s Timetable</h3>
