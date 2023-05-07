@@ -5,7 +5,7 @@ import { BrowserRouter, Routers, Route, Routes} from 'react-router-dom';
 import Login from './component/Login';
 import Signup from './component/Signup';
 import Dashboard from './component/Dashboard';
-import Try from './component/Try';
+import Timetable from './component/Timetable';
 
 
 function App() {
@@ -16,7 +16,7 @@ function App() {
         <Route path="/login" element={<Login/>} />
         <Route path="/signup" element={<Signup/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
-        <Route path="/try" element={<Try/>} />
+        <Route path="/timetable" element={<Timetable/>} />
       </Routes>     
     </BrowserRouter>
   );

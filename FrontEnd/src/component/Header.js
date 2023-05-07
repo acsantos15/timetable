@@ -2,7 +2,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <header>
+    <header style={{width: '100%'}}>
     <nav class="navbar navbar-expand-lg" style={{backgroundColor: '#537557'}}>
       <div class="container-fluid">
         {/* Label */}

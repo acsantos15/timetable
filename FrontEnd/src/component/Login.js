@@ -22,11 +22,12 @@ function Login() {
     event.preventDefault();
     axios.post('http://localhost:8080/loginUser', { username: username, password: password }, { headers: { 'Content-Type': 'application/json' } })
       .then(response => {
-        console.log(response.data);
         if (response.data.status === 'success') {
           navigate('/dashboard');
+          console.log("Success");
         } else {
           setError('Invalid username or password');
+          console.log("Error");
         }
       })
       .catch(error => {
@@ -50,7 +51,7 @@ function Login() {
 
                       <form onSubmit={handleSubmit}>
                         <div className="d-flex mb-3 pb-1" style={{ marginLeft: '35%' }}>
-                          <img src="https://user-images.githubusercontent.com/128556772/231336053-a0291bd4-0486-4ab1-b714-8fa7ec5f0c15.png" style={{ height: '9.8em' }} />
+                          <img src="https://user-images.githubusercontent.com/128556772/231336053-a0291bd4-0486-4ab1-b714-8fa7ec5f0c15.png" alt="login form" style={{ height: '9.8em' }} />
                         </div>
                         <div className="d-flex mb-3 pb-1" style={{ marginLeft: '20%' }}>
                           <p className="h1 fw-bold mb-0" style={{ color: '#7993A0', fontWeight: 'bold', fontSize: '60px', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif' }}>Welcome</p>

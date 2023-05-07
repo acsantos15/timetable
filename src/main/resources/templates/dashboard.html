@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+    <meta charset="ISO-8859-1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard</title>
+    <link rel="shortcut icon" href="https://user-images.githubusercontent.com/128556772/231336053-a0291bd4-0486-4ab1-b714-8fa7ec5f0c15.png" />
+
+
+
+    <!-- Bootstrap CDN -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Jquery CDN -->
+    <script src=https://code.jquery.com/jquery-3.6.0.min.js></script>
+
+    <!-- Fullcalendar CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@6.1.4/index.global.min.js"></script>
+
+    <!-- SweetAlert CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+    <!-- FontAwesome CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css">
+
+    <!-- Moment CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.29.4/moment.min.js"></script>
+
+    <!-- Open Weather CDN -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/weather-icons/2.0.12/css/weather-icons.min.css">
+
+    <!-- Select2 CDN -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/js/select2.min.js"></script>
+
+    <!-- Static files -->
+    <link rel="stylesheet" type="text/css" href="/css/minicalendar.css" />
+    <script src="/js/minicalendar.js"></script>
+    <script src="/js/dashboard.js"></script>
+    <script src="/js/logreg.js"></script>
+    <script src="/js/search.js"></script>
+</head>
+
+<body style="background-color: #DEDBD3;">
+	<!-- create navigation bar ( header) -->
+    <div th:replace="~{header :: header}"></div>
+
+    <!-- Navigation -->
+    <ul class="nav nav-tabs justify-content-center">
+        <li class="nav-item">
+            <a class="nav-link active"  th:href="@{/dashboard}"><i class="fa-solid fa-grip mr-1"></i> Dashboard</h></a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" th:href="@{/timetable}"><i class="fa-sharp fa-regular fa-calendar-days"></i> Timetable</a>
+        </li>
+    </ul>
+
+    <div class="row justify-content-center" style="margin:50px;">
+        <!--Dashboard-->
+        <div class="col-lg-8 mb-3">
+            <div class="card" style="background-color: white;">
+                  
+                <!-- Today's Event Tables -->
+                <div class="container" style="padding-top: 20px;">
+                    <h3 style="color: rgb(82, 10, 10); font-weight: bolder;"><i class="fa-solid fa-calendar-day me-2"></i>Today</h3>
+                    <hr/>
+
+                    <!-- Today's Event = null -->
+                    <th:block th:if="${todayResponse == 'NoData'}">
+                        <div class="dash card" style="margin:10px; color:white; padding: 20px 20px 20px 0; background-color: rgb(68, 66, 66);">
+                            <div class="d-flex align-items-center justify-content-center" style="font-size: larger; font-weight: bold;">No Event for Today</div>
+                        </div>
+                    </th:block>
+
+                    <!-- Today's Event = true -->
+                    <th:block th:each="todayevent : ${today}">
+                        <div class="dash card" th:style="'background-color:' + ${todayevent.color}+'; margin:10px; color:white; padding: 10px 20px 10px 0;'" th:id="${todayevent.id}" data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
+                            <ul style="list-style-type: none; margin-top: 12px;"> 
+                                <li th:text="${todayevent.title}" style="font-size: larger; font-weight: bold;"></li>
+                                <li th:text="${todayevent.description}"></li>
+                                <li><small th:text="${#temporals.format(todayevent.start, 'hh:mm a')}" ></small> - <small th:text="${#temporals.format(todayevent.end, 'hh:mm a')}" ></small></li>
+                            </ul>
+                        </div>
+                    </th:block>
+                </div>
+
+                <!-- Tommorow event table -->
+                <div class="container" style="padding-top: 20px;" >
+                    <h3 style="color: rgb(82, 10, 10); font-weight: bolder;"><i class="fa-solid fa-calendar-day fa-flip-horizontal me-2"></i>Tommorow</h3>
+                    <hr/>
+
+                    <!-- Tomorrow's Event = null -->
+                    <th:block th:if="${tommorowResponse == 'NoData'}">
+                        <div class="dash2 card" style="margin:10px; color:white; padding: 20px 20px 20px 0; background-color: rgb(68, 66, 66);">
+                            <div class="d-flex align-items-center justify-content-center" style="font-size: larger; font-weight: bold;">No Event for Tomorrow</div>
+                        </div>
+                    </th:block>
+
+                    <!-- Tomorrow's Event = true -->
+                    <th:block th:each="tomevent : ${tommorow}">
+                        <div class="dash2 card" th:style="'background-color:' + ${tomevent.color}+'; margin:10px; color:white; padding: 10px 20px 10px 0;'" th:id="${tomevent.id}" data-bs-toggle="tooltip" data-bs-placement="bottom">
+                            <ul style="list-style-type: none; margin-top: 12px;">
+                                <li th:text="${tomevent.title}" style="font-size: larger; font-weight: bold;"></li>
+                                <li th:text="${tomevent.description}"></li>
+                                <li><small th:text="${#temporals.format(tomevent.start, 'hh:mm a')}"></small> - <small th:text="${#temporals.format(tomevent.end, 'hh:mm a')}"></small></li>
+                            </ul>
+                        </div>
+                    </th:block>
+                </div>  
+            </div>
+        </div>
+
+        <div class="col mb-3">
+            <!-- Calendar div -->
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div id="calendar"></div>
+                </div>
+            </div>
+
+            <!-- Weather div -->
+            <div class="card align-items-center" style="padding: 20px;">
+                <h3 style="font-weight: bold; color: #7993A0">Today's Weather</h3>
+                <img th:src="'http://openweathermap.org/img/wn/' +${weatherData.weather[0].icon}+ '@2x.png'" style="width: 150px">
+                <p><b>Location:</b> Pasig</p>
+                <p><b>Temperature:</b> [[${weatherData.main.temp}]]&deg;C</p>
+                <p><b>Humidity:</b> [[${weatherData.main.humidity}]]%</p>
+                <p><b>Weather Description:</b> <span th:text="${weatherData.weather[0].description}"></span></p>               
+            </div>
+        </div>
+    </div>
+</body>
+</html>

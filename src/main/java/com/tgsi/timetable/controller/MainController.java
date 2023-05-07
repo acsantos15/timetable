@@ -42,17 +42,17 @@ public class MainController {
 
     // Dashboard Page
     @GetMapping("/dashboard")
-    public ResponseEntity<Map<String, Object>> dashboard(HttpSession session) {
-        // Check Session If User Is Logged In
-        Users user = (Users) session.getAttribute("user");
-        if (user == null) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        } else {
-            String username = user.getUsername();
-            Long userid = user.getId();
+    public ResponseEntity<Map<String, Object>> dashboard() {
+        // Users user = (Users) session.getAttribute("user");
+        // System.out.println("User session: " + user);
+        // if (user == null) {
+        //     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        // } else {
+        //     String username = user.getUsername();
+        //     Long userid = user.getId();
 
             // Fetch Events For Today
-            List<Events> allEvents = eMapper.getUserEvent(userid);
+            List<Events> allEvents = eMapper.getUserEvent(14L);
             LocalDateTime today = LocalDateTime.now();
             List<Events> todaysEvents = allEvents.stream()
                     .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
@@ -69,14 +69,14 @@ public class MainController {
             WeatherData weatherData = new RestTemplate().getForObject(apiUrl, WeatherData.class);
 
             Map<String, Object> data = new HashMap<>();
-            data.put("username", username);
+            // data.put("username", username);
             data.put("today", todaysEvents);
             data.put("tomorrow", tomEvents);
             data.put("weatherData", weatherData);
-            data.put("user", user);
+            // data.put("user", user);
 
             return ResponseEntity.ok(data);
-        }
+        // }
     }
 
     // Get All Events Of Logged User
@@ -92,6 +92,7 @@ public class MainController {
     @GetMapping("/timetable")
     public String timetablePage(HttpSession session, Model model) {
         Users user = (Users) session.getAttribute("user");
+        System.out.println("User session: " + user);
         if (user == null) {
             return "redirect:/login";
         } else {
