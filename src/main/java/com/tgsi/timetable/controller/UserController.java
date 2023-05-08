@@ -9,11 +9,13 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -29,8 +31,12 @@ import com.tgsi.timetable.entity.Users;
 import com.tgsi.timetable.mapper.EventMapper;
 import com.tgsi.timetable.mapper.UserMapper;
 
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
+
+import org.springframework.web.context.request.RequestContextHolder;
+import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RestController
 @SessionAttributes("userSession")
@@ -165,13 +171,14 @@ public class UserController {
     // Login httpsession
     @PostMapping("/loginUser")
     @ResponseBody
+    @CrossOrigin
     public Map<String, String> login(@RequestBody Map<String, String> loginData, HttpSession session) {
         String username = loginData.get("username");
         String password = loginData.get("password");
         Map<String, String> response = new HashMap<>();
         Users user = uMapper.findByUsername(username);
         if (user != null && bCryptPasswordEncoder.matches(password, user.getPass())) {
-            session.setAttribute("userSession", user); //Sessions set up here correctly
+            session.setAttribute("userSession", user);
             response.put("status", "success");
         } else {
             response.put("status", "error");
@@ -180,25 +187,71 @@ public class UserController {
         return response;
     }
 
-    // Check httpsession
+    @GetMapping("/getUser")
+    @ResponseBody
+    public Map<String, Object> getUser(HttpSession session) {
+        Map<String, Object> response = new HashMap<>();
+        Users user = (Users) session.getAttribute("userSession");
+        if (user != null) {
+            response.put("status", "success");
+            response.put("user", user);
+        } else {
+            response.put("status", "error");
+            response.put("message", "User not found in session.");
+        }
+        return response;
+    }
+
+
     // @GetMapping("/checkSession")
-    // public Map<String, String> checkSession(HttpSession session) {
-    //     Map<String, String> response = new HashMap<>();
-    //     if (session.getAttribute("userSession") != null) {
-    //         response.put("status", "success"); //but when i getit here i becomes null
+    // public ResponseEntity<?> checkSession(HttpSession session) {
+    //     Users userSession = (Users) session.getAttribute("userSession");
+    //     if (userSession != null) {
+    //         return ResponseEntity.ok().build();
     //     } else {
-    //         response.put("status", "error");
+    //         return ResponseEntity.badRequest().build();
     //     }
-    //     System.out.println("Session ID: " + session.getId());
-    //     return response;
     // }
 
-    // Logout remove httpsession
-    // @GetMapping("/logout")
-    // public String logout(HttpSession session) {
-    //     session.removeAttribute("user");
-    //     return "redirect:/login";
+    // @PostMapping("/loginUser")
+    // @ResponseBody
+    // public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> loginData, HttpSession session) {
+    //     String username = loginData.get("username");
+    //     String password = loginData.get("password");
+    //     Map<String, String> response = new HashMap<>();
+    //     Users user = uMapper.findByUsername(username);
+    //     if (user != null && bCryptPasswordEncoder.matches(password, user.getPass())) {
+    //         session.setAttribute("userSession", user); //Sessions set up here correctly
+    //         response.put("status", "success");
+    //         return ResponseEntity.ok(response);
+    //     } else {
+    //         response.put("status", "error");
+    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
+    //     }
     // }
+
+
+    // Check httpsession
+    @GetMapping("/checkSession")
+    public Map<String, String> checkSession(HttpSession session) {
+        Map<String, String> response = new HashMap<>();
+        Users userSession = (Users) session.getAttribute("userSession");
+        if (userSession != null) {
+            response.put("status", "success");
+        } else {
+            response.put("status", "error");
+        }
+        return response;
+    }
+
+    // Logout remove httpsession
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        if (session != null) {
+        session.invalidate();
+        }
+        return "{\"status\":\"success\"}";
+    }
 
     // Search users
     @GetMapping("/search")

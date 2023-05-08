@@ -43,13 +43,29 @@ const Dashboard = () => {
                     <hr/>
 
                     {/* Today's Event = true */}
-                        <div className="dash card" style={{margin: '10px', color: 'green', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">    
-                            <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
-                            {todayEvents.map((event) => (
-                                <li key={event.id}>{event.title} - {event.start}</li>
-                            ))}
-                            </ul>
-                        </div>
+                    <div className="dash card" style={{margin: '10px', color: 'green', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">    
+                        <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
+                        {todayEvents.map((event) => (
+                            <li key={event.id}>{event.title} - {event.start}</li>
+                        ))}
+                        </ul>
+                    </div>
+                </div>
+
+
+                {/* Tommorows's Event Tables */}
+                <div className="container" style={{paddingTop: '20px'}}>
+                    <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder'}}><i class="fa-solid fa-calendar-day fa-flip-horizontal me-2"></i>Tommorow</h3>
+                    <hr/>
+
+                    {/* Today's Event = true */}
+                    <div className="dash card" style={{margin: '10px', color: 'green', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">    
+                        <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
+                        {tomorrowEvents.map((event) => (
+                            <li key={event.id}>{event.title} - {event.start}</li>
+                        ))}
+                        </ul>
+                    </div>
                 </div>
             </div>
         </div>

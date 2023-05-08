@@ -13,6 +13,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -42,41 +43,36 @@ public class MainController {
 
     // Dashboard Page
     @GetMapping("/dashboard")
-    public ResponseEntity<Map<String, Object>> dashboard() {
-        // Users user = (Users) session.getAttribute("user");
-        // System.out.println("User session: " + user);
-        // if (user == null) {
-        //     return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
-        // } else {
-        //     String username = user.getUsername();
-        //     Long userid = user.getId();
+    @CrossOrigin
+    public ResponseEntity<Map<String, Object>> dashboard(HttpSession session) {
+        Users user = (Users) session.getAttribute("userSession");
+        System.out.println("User session: " + user);
+        System.out.println("User Id: " + user.getId());
+        // Fetch Events For Today
+        List<Events> allEvents = eMapper.getUserEvent(user.getId());
+        LocalDateTime today = LocalDateTime.now();
+        List<Events> todaysEvents = allEvents.stream()
+                .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
+                .collect(Collectors.toList());
 
-            // Fetch Events For Today
-            List<Events> allEvents = eMapper.getUserEvent(14L);
-            LocalDateTime today = LocalDateTime.now();
-            List<Events> todaysEvents = allEvents.stream()
-                    .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))
-                    .collect(Collectors.toList());
+        // Fetch Events For Tomorrow
+        LocalDateTime tom = LocalDateTime.now().plusDays(1);
+        List<Events> tomEvents = allEvents.stream()
+                .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
+                .collect(Collectors.toList());
 
-            // Fetch Events For Tomorrow
-            LocalDateTime tom = LocalDateTime.now().plusDays(1);
-            List<Events> tomEvents = allEvents.stream()
-                    .filter(event -> event.getStart().toLocalDate().equals(tom.toLocalDate()))
-                    .collect(Collectors.toList());
+        // Open Weather API
+        String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Pasig&units=metric&appid=b5e35da3557f68bd8edc2b6032dddc77";
+        WeatherData weatherData = new RestTemplate().getForObject(apiUrl, WeatherData.class);
 
-            // Open Weather API
-            String apiUrl = "https://api.openweathermap.org/data/2.5/weather?q=Pasig&units=metric&appid=b5e35da3557f68bd8edc2b6032dddc77";
-            WeatherData weatherData = new RestTemplate().getForObject(apiUrl, WeatherData.class);
+        Map<String, Object> data = new HashMap<>();
+        // data.put("username", username);
+        data.put("today", todaysEvents);
+        data.put("tomorrow", tomEvents);
+        data.put("weatherData", weatherData);
+        // data.put("user", user);
 
-            Map<String, Object> data = new HashMap<>();
-            // data.put("username", username);
-            data.put("today", todaysEvents);
-            data.put("tomorrow", tomEvents);
-            data.put("weatherData", weatherData);
-            // data.put("user", user);
-
-            return ResponseEntity.ok(data);
-        // }
+        return ResponseEntity.ok(data);
     }
 
     // Get All Events Of Logged User

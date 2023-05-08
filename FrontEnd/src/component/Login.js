@@ -20,7 +20,8 @@ function Login() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    axios.post('http://localhost:8080/loginUser', { username: username, password: password }, { headers: { 'Content-Type': 'application/json' } })
+    axios.defaults.withCredentials = true;
+    axios.post('http://localhost:8080/loginUser', { username: username, password: password }, {withCredentials: true}, { headers: { 'Content-Type': 'application/json' } })
       .then(response => {
         if (response.data.status === 'success') {
           navigate('/dashboard');

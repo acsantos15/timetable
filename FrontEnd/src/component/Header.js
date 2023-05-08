@@ -1,4 +1,5 @@
 import React from 'react'
+import LogoutButton from '../component/LogoutButton';
 
 const Header = () => {
   return (
@@ -32,7 +33,7 @@ const Header = () => {
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item"><i class="fa-solid fa-user me-2"></i>My Profile</a></li>
-              <li><a class="dropdown-item" id="logoutBtn" style={{color:'red'}}><i class="fa-solid fa-power-off me-2"></i>Logout</a></li>
+              <LogoutButton/>
             </ul>
           </div>        
         </div>
