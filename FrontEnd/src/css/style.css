@@ -77,6 +77,9 @@
 .fc .fc-col-header-cell-cushion{
     white-space: pre;
 }
+.fc .fc-daygrid-day-frame .fc-daygrid-day-events{
+    min-height: auto;
+}
 @media screen and (max-width:767px) { 
     .fc .fc-toolbar.fc-header-toolbar {
         font-size: 50%;

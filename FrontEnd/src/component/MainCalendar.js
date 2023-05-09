@@ -3,6 +3,7 @@ import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
+import interactionPlugin from '@fullcalendar/interaction';
 
 import axios from 'axios';
 
@@ -28,7 +29,7 @@ const MainCalendar = (props) => {
     };
 
     const customButton = {
-        text: 'Add Appointment',
+        text: '+ Add Appointment',
         click: function() {
             props.handleCustomButtonClick();
         }
@@ -39,18 +40,28 @@ const MainCalendar = (props) => {
         plugins={[
             dayGridPlugin,
             timeGridPlugin,
-            listPlugin
+            listPlugin,
+            interactionPlugin
         ]}
         initialView="timeGridWeek"
+        aspectRatio="2"
+        height={'67vh'}
+        handleWindowResize={true}
+        stickyHeaderDates={true}
+        nowIndicator={true}
+        allDaySlot={false}
+        allDayDefault={false}
+        selectable={true}
+        // select={{
+        //   function(){ 
+        //     alert('Date');
+        //   }
+        // }}
+        slotMinTime="06:00:00"
+        slotMaxTime="20:00:00"
         headerToolbar={headerToolbar}
-        customButtons={{ customButton }}
-        events={events.map(event => ({
-          title: event.title,
-          start: event.start,
-          end: event.end
-        })
-        
-      )}
+        customButtons={{customButton}}
+        events={events}
     />
   );
 };
