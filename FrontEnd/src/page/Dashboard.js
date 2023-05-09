@@ -37,7 +37,7 @@ const Dashboard = () => {
         <Navigation/>
         {/* Dashboard */}
         <div className="col-lg-8 mb-3" >
-            <div className="card" style={{backgroundColor: 'white',margin:'20px'}}>
+            <div className="card" style={{backgroundColor: 'white',margin: '20px 0 0 20px'}}>
                   
                 {/* Today's Event Tables */}
                 <div className="container" style={{paddingTop: '20px'}}>
@@ -87,7 +87,7 @@ const Dashboard = () => {
             </div>
         </div>
 
-        <div class="col mb-3" style={{margin:'20px'}}>  
+        <div class="col mb-3" style={{margin:'20px 20px 0 0'}}>  
             {/* Calendar div */}
             <div class="card mb-3">
                 <div class="card-body">
