@@ -27,15 +27,24 @@ const Dashboard = () => {
       .catch((error) => {
         console.log(error);
       });
-  }, []);
-  Auth();
-  return (
-    <div className="row justify-content-center">
+    }, []);
+        Auth();
+        function changeBackground(color) {
+            document.body.style.background = color;
+          }
+        
+          window.addEventListener("load",function() { changeBackground('#DEDBD3') });
+        
+        
+       
+    return (
+    
+    <div className="row justify-content-center" >
         <Header/>
         <Navigation/>
         {/* Dashboard */}
-        <div className="col-lg-8 mb-3">
-            <div className="card" style={{backgroundColor: 'white'}}>
+        <div className="col-lg-8 mb-3" >
+            <div className="card" style={{backgroundColor: 'white',margin:'20px'}}>
                   
                 {/* Today's Event Tables */}
                 <div className="container" style={{paddingTop: '20px'}}>
@@ -70,7 +79,7 @@ const Dashboard = () => {
             </div>
         </div>
 
-        <div class="col mb-3">
+        <div class="col mb-3" style={{margin:'20px'}}>  
             {/* Calendar div */}
             <div class="card mb-3">
                 <div class="card-body">
