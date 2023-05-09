@@ -1,0 +1,63 @@
+/* FullCalendar CSS */
+.fc-day-today{
+	background: #8aa78d !important;
+}
+/*calendar header*/
+.fc-toolbar{
+    background-color: #8aa78d;
+    border-radius: 5px;
+    padding-left: 10px;
+}
+.fc-toolbar h2{
+    display: inline;
+    vertical-align: middle; 
+    color: white;
+    font-style: normal;
+    font-weight: bolder;
+}
+.fc .fc-prev-button, 
+.fc .fc-next-button{
+    background-color: #8aa78d;
+    padding: 5px;
+    border: none;
+}
+.fc .fc-prev-button{
+    margin-left:20px;
+}
+.fc .fc-next-button{
+    margin:5px;
+}
+.fc a.fc-col-header-cell-cushion{
+    text-decoration: none;
+    color:#517c63;
+    font-weight: bold;
+}
+.fc a.fc-daygrid-day-number{
+    text-decoration: none;
+    color:black;
+    font-weight: bold;
+}
+.fc .fc-daygrid-day-frame .fc-daygrid-day-events{
+    min-height: auto;
+}
+/* END FullCalendar CSS */
+
+
+/*  NavBar CSS */
+.nav-tabs .nav-link.active {
+    border-bottom-color: #537557; /* set the line color to green */
+    color: #537557;
+    border-bottom-width: 5px ;
+}
+.nav-tabs .nav-link {
+    color: #a4a1a1; /* set the font color to gray */
+    font-size: large;
+}
+/* END NavBar CSS */
+
+/*Header CSS*/
+.dropdown-item:hover{
+    background-color: #537557;
+    color:white;
+}
+/*End of Header CSS*/

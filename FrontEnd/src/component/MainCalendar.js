@@ -18,7 +18,7 @@ const MainCalendar = () => {
             timeGridPlugin,
             listPlugin
         ]}
-        initialView="dayGridMonth"
+        initialView="timeGridWeek"
         headerToolbar={headerToolbar}
     />
   );

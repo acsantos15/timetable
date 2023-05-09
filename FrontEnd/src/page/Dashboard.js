@@ -4,6 +4,7 @@ import Header from '../component/Header';
 import MiniCalendar from '../component/MiniCalendar';
 import Navigation from '../component/Navigation';
 import { Auth } from '../component/Auth';
+import "../css/style.css";
 
 
 const Dashboard = () => {
