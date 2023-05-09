@@ -1,7 +1,14 @@
-import React from 'react'
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 import LogoutButton from '../component/LogoutButton';
 
-const Header = () => {
+const Header = (props) => {
+  const [username, setUsername] = useState('');
+  useEffect(() => {
+    axios.get('/header')
+      .then(response => setUsername(response.data))
+      .catch(error => console.error(error));
+  }, []);
   return (
     <header style={{width: '100%'}}>
     <nav class="navbar navbar-expand-lg" style={{backgroundColor: '#537557'}}>
@@ -29,7 +36,7 @@ const Header = () => {
           {/* Dropdown */}
           <div class="btn-group">
             <button type="button" class="btn dropdown-toggle" style={{backgroundColor: '#537557', color: 'white'}} data-bs-toggle="dropdown" aria-expanded="false">
-              <span ></span>&nbsp;<span ></span>
+              <span >Welcome, </span>&nbsp;<span >{username}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item"><i class="fa-solid fa-user me-2"></i>My Profile</a></li>

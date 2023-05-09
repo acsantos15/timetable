@@ -8,17 +8,13 @@ import "../css/style.css";
 
 
 const Dashboard = () => {
-  const [username, setUsername] = useState('');
   const [todayEvents, setTodayEvents] = useState([]);
-  const [todayResponse, setTodayResponse] = useState('');
   const [tomorrowEvents, setTomorrowEvents] = useState([]);
-  const [tomorrowResponse, setTomorrowResponse] = useState('');
   const [weatherData, setWeatherData] = useState({});
   
   useEffect(() => {
     axios.get('http://localhost:8080/dashboard')
       .then((response) => {
-        setUsername(response.data.username);
         setTodayEvents(response.data.today);
         setTomorrowEvents(response.data.tomorrow);
         setWeatherData(response.data.weatherData);
@@ -44,7 +40,7 @@ const Dashboard = () => {
                     <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder'}}><i className="fa-solid fa-calendar-day me-2"></i>Today</h3>
                     <hr/>
                     
-                    {todayEvents ? (
+                    {todayEvents.length ? (
                     todayEvents.map((event) => (
                         <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
                         <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
@@ -98,7 +94,7 @@ const Dashboard = () => {
             {/* Weather div */}
             <div className="card align-items-center" style={{padding: '20px'}}>
               <h3 style={{fontWeight: 'bold', color: '#7993A0'}}>Today's Weather</h3>
-              <img src={`http://openweathermap.org/img/wn/${weatherData?.weather?.[0]?.icon}@2x.png`} style={{width: '150px'}} />
+              <img src={`http://openweathermap.org/img/wn/${weatherData?.weather?.[0]?.icon}@2x.png`} alt="weather icon" style={{width: '150px'}} />
               <p><b>Location:</b> Pasig</p>
               <p><b>Temperature:</b> {weatherData?.main?.temp}&deg;C</p>
               <p><b>Humidity:</b> {weatherData?.main?.humidity}%</p>

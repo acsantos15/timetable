@@ -46,6 +46,7 @@ public class MainController {
     @CrossOrigin
     public ResponseEntity<Map<String, Object>> dashboard(HttpSession session) {
         Users user = (Users) session.getAttribute("userSession");
+        String username = user.getFname() + " " + user.getLname();
         Long userid = user.getId();
         // Fetch Events For Today
         List<Events> allEvents = eMapper.getUserEvent(userid);
@@ -65,7 +66,7 @@ public class MainController {
         WeatherData weatherData = new RestTemplate().getForObject(apiUrl, WeatherData.class);
 
         Map<String, Object> data = new HashMap<>();
-        // data.put("username", username);
+        data.put("username", username);
         data.put("today", todaysEvents);
         data.put("tomorrow", tomEvents);
         data.put("weatherData", weatherData);
@@ -74,10 +75,19 @@ public class MainController {
         return ResponseEntity.ok(data);
     }
 
+    @GetMapping("/header")
+    @CrossOrigin
+    public ResponseEntity<?> header(HttpSession session) {
+        Users user = (Users) session.getAttribute("userSession");
+        String username = user.getFname() + " " + user.getLname();
+        return ResponseEntity.ok(username);
+    }
+
     // Get All Events Of Logged User
     @GetMapping("/events")
+    @CrossOrigin
     public @ResponseBody Iterable<Events> getAllEvents(HttpSession session, Model model) {
-        Users user = (Users) session.getAttribute("user");
+        Users user = (Users) session.getAttribute("userSession");
         Long loggedId = user.getId();
         model.addAttribute("loggedId", loggedId);
         return eMapper.getUserEvent(loggedId);
@@ -86,7 +96,7 @@ public class MainController {
     // Timetable Page
     @GetMapping("/timetable")
     public String timetablePage(HttpSession session, Model model) {
-        Users user = (Users) session.getAttribute("user");
+        Users user = (Users) session.getAttribute("userSession");
         System.out.println("User session: " + user);
         if (user == null) {
             return "redirect:/login";
