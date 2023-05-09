@@ -35,13 +35,7 @@ function Login() {
         console.log(error);
       });
   };
-  function changeBackground(color) {
-    document.body.style.background = color;
-  }
-
-  window.addEventListener("load",function() { changeBackground('#537557') });
-
-
+  document.body.style.backgroundColor = "#537557";
 
   return (
       <section>

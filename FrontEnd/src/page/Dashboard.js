@@ -20,9 +20,7 @@ const Dashboard = () => {
       .then((response) => {
         setUsername(response.data.username);
         setTodayEvents(response.data.today);
-        setTodayResponse(response.data.todayResponse);
         setTomorrowEvents(response.data.tomorrow);
-        setTomorrowResponse(response.data.tomorrowResponse);
         setWeatherData(response.data.weatherData);
       })
       .catch((error) => {
@@ -30,13 +28,7 @@ const Dashboard = () => {
       });
     }, []);
         Auth();
-        function changeBackground(color) {
-            document.body.style.background = color;
-          }
-        
-          window.addEventListener("load",function() { changeBackground('#DEDBD3') });
-        
-        
+    document.body.style.backgroundColor = "#DEDBD3"; 
        
     return (
     
@@ -51,15 +43,23 @@ const Dashboard = () => {
                 <div className="container" style={{paddingTop: '20px'}}>
                     <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder'}}><i className="fa-solid fa-calendar-day me-2"></i>Today</h3>
                     <hr/>
-
-                    {/* Today's Event = true */}
-                    <div className="dash card" style={{margin: '10px', color: 'green', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">    
+                    
+                    {todayEvents ? (
+                    todayEvents.map((event) => (
+                        <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
                         <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
-                        {todayEvents.map((event) => (
-                            <li key={event.id}>{event.title} - {event.start}</li>
-                        ))}
+                            <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
+                            <li> {event.description}</li>
+                            <li><small>{event.start}</small> - <small>{event.end}</small></li>
                         </ul>
-                    </div>
+                        </div>
+                    ))
+                    ) : (
+                        <div class="dash card" style={{margin:'10px', color:'white', padding: '20px 20px 20px 0', backgroundColor: 'rgb(68, 66, 66)'}}>
+                            <div class="d-flex align-items-center justify-content-center" style={{fontSize: 'larger', fontWeight: 'bold'}}>No Event for Today</div>
+                        </div>
+                    )}
+
                 </div>
 
 
@@ -68,14 +68,21 @@ const Dashboard = () => {
                     <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder'}}><i class="fa-solid fa-calendar-day fa-flip-horizontal me-2"></i>Tommorow</h3>
                     <hr/>
 
-                    {/* Today's Event = true */}
-                    <div className="dash card" style={{margin: '10px', color: 'green', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">    
+                    {tomorrowEvents.length ? (
+                    tomorrowEvents.map((event) => (
+                        <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
                         <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
-                        {tomorrowEvents.map((event) => (
-                            <li key={event.id}>{event.title} - {event.start}</li>
-                        ))}
+                            <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
+                            <li> {event.description}</li>
+                            <li><small>{event.start}</small> - <small>{event.end}</small></li>
                         </ul>
-                    </div>
+                        </div>
+                    ))
+                    ) : (
+                        <div class="dash card" style={{margin:'10px', color:'white', padding: '20px 20px 20px 0', backgroundColor: 'rgb(68, 66, 66)'}}>
+                            <div class="d-flex align-items-center justify-content-center" style={{fontSize: 'larger', fontWeight: 'bold'}}>No Event for Tommorow</div>
+                        </div>
+                    )}
                 </div>
             </div>
         </div>

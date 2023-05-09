@@ -7,12 +7,7 @@ const Timetable = () => {
 const username = "user";
 const capitalizedUsername = username.charAt(0).toUpperCase() + username.slice(1);
   
-function changeBackground(color) {
-    document.body.style.background = color;
-  }
-
-  window.addEventListener("load",function() { changeBackground('#DEDBD3') });
-
+document.body.style.backgroundColor = "#DEDBD3";
 
   return (
     <div className="row justify-content-center">
