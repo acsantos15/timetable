@@ -46,10 +46,9 @@ public class MainController {
     @CrossOrigin
     public ResponseEntity<Map<String, Object>> dashboard(HttpSession session) {
         Users user = (Users) session.getAttribute("userSession");
-        System.out.println("User session: " + user);
-        System.out.println("User Id: " + user.getId());
+        Long userid = user.getId();
         // Fetch Events For Today
-        List<Events> allEvents = eMapper.getUserEvent(user.getId());
+        List<Events> allEvents = eMapper.getUserEvent(userid);
         LocalDateTime today = LocalDateTime.now();
         List<Events> todaysEvents = allEvents.stream()
                 .filter(event -> event.getStart().toLocalDate().equals(today.toLocalDate()))

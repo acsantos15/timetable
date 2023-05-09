@@ -66,6 +66,8 @@ const Signup = () => {
     }   
   };
 
+  document.body.style.backgroundColor = "#537557";
+
 
   return (
     <div class="container py-5 h-1000" style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, margin: 'auto'}}>
@@ -108,7 +110,7 @@ const Signup = () => {
                       <input class="form-control" type="email" placeholder="Email" id="email" name="email" maxLength="50" value={email} onChange={handleEmailChange} required/>
                     </div>
                     <div class="mb-4" style={{width: '48%', float: 'left'}}>
-                      <input class="form-control" type="password" placeholder="Password" id="pass" name="pass" maxLength="50" value={pass} onChange={handlePasswordChange} required/>
+                      <input class="form-control" type="password" placeholder="Password" id="pass" name="pass" maxLength="50" minLength="8" value={pass} onChange={handlePasswordChange} required/>
                     </div>
                     <div class="mb-4" style={{width: '48%', float: 'right'}}>
                       <input class="form-control" type="password" id="conpass" placeholder="Confirm Password" maxLength="50" value={conpass} onChange={handleConPassChange} required/>
