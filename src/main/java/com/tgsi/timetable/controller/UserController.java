@@ -74,14 +74,18 @@ public class UserController {
     // Register User
     @PostMapping("/createUser")
     @ResponseBody
-    public ResponseEntity<?> signUp(@Valid @RequestBody Users user) {
+    public Map<String, String>  signUp(@Valid @RequestBody Users user) {
+        Map<String, String> response = new HashMap<>();
         if (uMapper.findByUsername(user.getUsername()) != null) {
-            return ResponseEntity.badRequest().body("Username is already taken.");
+            response.put("status", "taken");
+        } else {
+            user.setPass(bCryptPasswordEncoder.encode(user.getPass()));
+            uMapper.insertUser(user);
+            response.put("status", "success");
         }
-        user.setPass(bCryptPasswordEncoder.encode(user.getPass()));
-        uMapper.insertUser(user);
-        return ResponseEntity.noContent().build();
+        return response;
     }
+
 
     // Display Profile
     @GetMapping("/profile")
@@ -186,50 +190,6 @@ public class UserController {
         System.out.println(session.getAttribute("userSession"));
         return response;
     }
-
-    @GetMapping("/getUser")
-    @ResponseBody
-    public Map<String, Object> getUser(HttpSession session) {
-        Map<String, Object> response = new HashMap<>();
-        Users user = (Users) session.getAttribute("userSession");
-        if (user != null) {
-            response.put("status", "success");
-            response.put("user", user);
-        } else {
-            response.put("status", "error");
-            response.put("message", "User not found in session.");
-        }
-        return response;
-    }
-
-
-    // @GetMapping("/checkSession")
-    // public ResponseEntity<?> checkSession(HttpSession session) {
-    //     Users userSession = (Users) session.getAttribute("userSession");
-    //     if (userSession != null) {
-    //         return ResponseEntity.ok().build();
-    //     } else {
-    //         return ResponseEntity.badRequest().build();
-    //     }
-    // }
-
-    // @PostMapping("/loginUser")
-    // @ResponseBody
-    // public ResponseEntity<Map<String, String>> login(@RequestBody Map<String, String> loginData, HttpSession session) {
-    //     String username = loginData.get("username");
-    //     String password = loginData.get("password");
-    //     Map<String, String> response = new HashMap<>();
-    //     Users user = uMapper.findByUsername(username);
-    //     if (user != null && bCryptPasswordEncoder.matches(password, user.getPass())) {
-    //         session.setAttribute("userSession", user); //Sessions set up here correctly
-    //         response.put("status", "success");
-    //         return ResponseEntity.ok(response);
-    //     } else {
-    //         response.put("status", "error");
-    //         return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(response);
-    //     }
-    // }
-
 
     // Check httpsession
     @GetMapping("/checkSession")

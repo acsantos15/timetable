@@ -2,10 +2,10 @@ import './App.css';
 import { BrowserRouter, Route, Routes} from 'react-router-dom';
 
 
-import Login from './component/Login';
-import Signup from './component/Signup';
-import Dashboard from './component/Dashboard';
-import Timetable from './component/Timetable';
+import Login from './page/Login';
+import Signup from './page/Signup';
+import Dashboard from './page/Dashboard';
+import Timetable from './page/Timetable';
 
 
 function App() {

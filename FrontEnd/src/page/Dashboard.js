@@ -3,7 +3,7 @@ import axios from 'axios';
 import Header from '../component/Header';
 import MiniCalendar from '../component/MiniCalendar';
 import Navigation from '../component/Navigation';
-import { Auth } from './Auth';
+import { Auth } from '../component/Auth';
 
 
 const Dashboard = () => {
