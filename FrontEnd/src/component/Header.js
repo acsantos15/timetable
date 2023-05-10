@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import axios from 'axios';
 import LogoutButton from '../component/LogoutButton';
 
-const Header = (props) => {
+const Header = () => {
   const [username, setUsername] = useState('');
   useEffect(() => {
     axios.get('/header')

@@ -46,7 +46,6 @@ public class MainController {
     @CrossOrigin
     public ResponseEntity<Map<String, Object>> dashboard(HttpSession session) {
         Users user = (Users) session.getAttribute("userSession");
-        String username = user.getFname() + " " + user.getLname();
         Long userid = user.getId();
         // Fetch Events For Today
         List<Events> allEvents = eMapper.getUserEvent(userid);
@@ -66,11 +65,9 @@ public class MainController {
         WeatherData weatherData = new RestTemplate().getForObject(apiUrl, WeatherData.class);
 
         Map<String, Object> data = new HashMap<>();
-        data.put("username", username);
         data.put("today", todaysEvents);
         data.put("tomorrow", tomEvents);
         data.put("weatherData", weatherData);
-        // data.put("user", user);
 
         return ResponseEntity.ok(data);
     }
@@ -111,7 +108,7 @@ public class MainController {
     }
 
     // Save Event
-    @PostMapping("/save")
+    @PostMapping("/saveEvent")
     @ResponseBody
     public ResponseEntity<Long> saveEvent(@Valid @RequestBody Events event) {
         eMapper.insertEvent(event);

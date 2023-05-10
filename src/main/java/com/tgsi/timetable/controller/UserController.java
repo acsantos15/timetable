@@ -51,21 +51,15 @@ public class UserController {
     @Autowired
     public BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    // signup page
-    @GetMapping("/signup")
-    public String signup() {
-        return "signup";
-    }
-
     // Get all users
     @GetMapping("/users")
-    public @ResponseBody Map<String, Object> getAllUsers(HttpSession session, Model model) {
-        Users user = (Users) session.getAttribute("user");
-        Long loggedId = user.getId();
-        model.addAttribute("loggedId", loggedId);
+    @ResponseBody
+    public Map<String, Object> getAllUsers(HttpSession session) {
+        // Users user = (Users) session.getAttribute("user");
+        // Long loggedId = user.getId();
 
         Map<String, Object> response = new HashMap<>();
-        response.put("loggedId", loggedId);
+        // response.put("loggedId", loggedId);
         response.put("users", uMapper.getAllUser());
 
         return response;

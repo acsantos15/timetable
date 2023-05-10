@@ -23,11 +23,11 @@ const Dashboard = () => {
         console.log(error);
       });
     }, []);
-        Auth();
+    
     document.body.style.backgroundColor = "#DEDBD3"; 
        
+    Auth();
     return (
-    
     <div className="row justify-content-center" >
         <Header/>
         <Navigation/>
