@@ -108,7 +108,7 @@ public class MainController {
     }
 
     // Save Event
-    @PostMapping("/save")
+    @PostMapping("/saveEvent")
     @ResponseBody
     public ResponseEntity<Long> saveEvent(@Valid @RequestBody Events event) {
         eMapper.insertEvent(event);
