@@ -110,7 +110,7 @@ public class MainController {
     // Save Event
     @PostMapping("/saveEvent")
     @ResponseBody
-    public ResponseEntity<Long> saveEvent(@RequestBody Events event) {
+    public ResponseEntity<Long> saveEvent(@Valid @RequestBody Events event) {
         eMapper.insertEvent(event);
         Long eventId = event.getId();
         return ResponseEntity.ok(eventId);
@@ -119,12 +119,15 @@ public class MainController {
     // Save Participant
     @PostMapping("/saveEventParticipants")
     @ResponseBody
-    public String saveEventParticipants(@Valid @RequestBody Map<String, Object> payload) {
+    public ResponseEntity<Map<String, String>> saveEventParticipants(@Valid @RequestBody Map<String, Object> payload) {
         Long eventId = ((Number) payload.get("eventId")).longValue();
         List<Long> participantIds = (List<Long>) payload.get("participantIds");
         eMapper.insertEventParticipants(eventId, participantIds);
-        return "Success";
+        Map<String, String> response = new HashMap<>();
+        response.put("message", "Success");
+        return ResponseEntity.ok(response);
     }
+
 
     // Get Invdividual Event
     @GetMapping("/timetable/{id}")

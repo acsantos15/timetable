@@ -123,9 +123,9 @@ span.select2-container {
 /* End of Select2 */
 
 /* Modal CSS */
-.modal-header{
+/* .modal-header{
     background-color: #537557;
-}
+} */
 .modal-title{
     color:white; 
     font-weight:bold; 
