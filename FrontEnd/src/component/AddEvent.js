@@ -8,8 +8,10 @@ function AddEvent(props) {
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [start, setStart] = useState('');
+  const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
   const [end, setEnd] = useState('');
-
+  const fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
+  
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -33,7 +35,7 @@ function AddEvent(props) {
     event.preventDefault();
       axios.defaults.withCredentials = true;
       axios.post('http://localhost:8080/saveEvent', 
-      {title: title, color: color, description: description, location: location, start: start, end: end}, 
+      {title: title, color: color, description: description, location: location, start: fStart, end: fEnd}, 
       {withCredentials: true}, 
       { headers: { 'Content-Type': 'application/json' } })
 
