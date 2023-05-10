@@ -3,6 +3,7 @@ import Header from '../component/Header';
 import Navigation from '../component/Navigation';
 import MainCalendar from '../component/MainCalendar';
 import AddEventModal from '../component/AddEvent';
+import "../css/style.css";
 
 const Timetable = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
