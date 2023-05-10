@@ -90,7 +90,7 @@
 /* END FullCalendar CSS */
 
 /*  NavBar CSS */
-.nav-tabs .nav-link.active {
+.active{
     border-bottom-color: #537557; /* set the line color to green */
     color: #537557;
     border-bottom-width: 5px ;

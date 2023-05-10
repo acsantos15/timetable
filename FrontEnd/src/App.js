@@ -6,6 +6,8 @@ import Login from './page/Login';
 import Signup from './page/Signup';
 import Dashboard from './page/Dashboard';
 import Timetable from './page/Timetable';
+import Profile from './page/Profile';
+import EditProfile from './page/EditProfile';
 
 
 function App() {
@@ -17,6 +19,8 @@ function App() {
         <Route path="/signup" element={<Signup/>} />
         <Route path="/dashboard" element={<Dashboard/>} />
         <Route path="/timetable" element={<Timetable/>} />
+        <Route path="/profile" element={<Profile/>} />
+        <Route path="/editprofile" element={<EditProfile/>} />
       </Routes>     
     </BrowserRouter>
   );

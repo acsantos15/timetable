@@ -39,7 +39,7 @@ const Header = () => {
               <span >Welcome, </span>&nbsp;<span >{username}</span>
             </button>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item"><i class="fa-solid fa-user me-2"></i>My Profile</a></li>
+              <li><a href="/profile" class="dropdown-item"><i class="fa-solid fa-user me-2"></i>My Profile</a></li>
               <LogoutButton/>
             </ul>
           </div>        

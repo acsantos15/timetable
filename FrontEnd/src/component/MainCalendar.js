@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
+import "../css/style.css";
 
 import axios from 'axios';
 
@@ -35,6 +36,12 @@ const MainCalendar = (props) => {
         }
     };
 
+    // const eventTime= { // like '14:30:00'
+    //     hour: '2-digit',
+    //     minute: '2-digit',
+    //     meridiem: 'short'
+    // };
+
   return (
     <FullCalendar
         plugins={[
@@ -59,6 +66,10 @@ const MainCalendar = (props) => {
         // }}
         slotMinTime="06:00:00"
         slotMaxTime="20:00:00"
+        eventTimeFormat={{ 
+            hour: "2-digit", 
+            minute: "2-digit", 
+            meridiem: "short"}} 
         headerToolbar={headerToolbar}
         customButtons={{customButton}}
         events={events}
