@@ -52,11 +52,11 @@ function Login() {
                     <div className="card-body p-4 p-lg-5 text-black" >
 
                       <form onSubmit={handleSubmit}>
-                        <div className="d-flex mb-3 pb-1" style={{ marginLeft: '35%' }}>
-                          <img src="https://user-images.githubusercontent.com/128556772/231336053-a0291bd4-0486-4ab1-b714-8fa7ec5f0c15.png" alt="login form" style={{ height: '9.8em' }} />
+                        <div className="d-flex mb-3 pb-1 justify-content-center">
+                          <img src="/tgsi-2.png" alt="image" style={{ height: '4.8em', margin: '15px'}} />
                         </div>
-                        <div className="d-flex mb-3 pb-1" style={{ marginLeft: '20%' }}>
-                          <p className="h1 fw-bold mb-0" style={{ color: '#7993A0', fontWeight: 'bold', fontSize: '60px', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif' }}>Welcome</p>
+                        <div className="d-flex mb-3 pb-1 justify-content-center">
+                          <label className="h1 fw-bold mb-0" style={{ color: 'rgb(88, 17, 17)', fontWeight: 'bold', fontSize: '60px', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif' }}>Welcome</label>
                         </div>
 
                         <div className="form-outline mb-4">
