@@ -36,7 +36,7 @@ const Dashboard = () => {
             <div className="card" style={{backgroundColor: 'white',margin: '20px 0 0 20px'}}>
                   
                 {/* Today's Event Tables */}
-                <div className="container" style={{paddingTop: '20px'}}>
+                <div className="container" style={{padding: '20px 20px 10px 20px'}}>
                     <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder'}}><i className="fa-solid fa-calendar-day me-2"></i>Today</h3>
                     <hr/>
                     
@@ -60,7 +60,7 @@ const Dashboard = () => {
 
 
                 {/* Tommorows's Event Tables */}
-                <div className="container" style={{paddingTop: '20px'}}>
+                <div className="container" style={{padding: '10px 20px 20px 20px'}}>
                     <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder'}}><i class="fa-solid fa-calendar-day fa-flip-horizontal me-2"></i>Tommorow</h3>
                     <hr/>
 

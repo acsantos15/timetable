@@ -36,11 +36,10 @@ const MainCalendar = (props) => {
         }
     };
 
-    // const eventTime= { // like '14:30:00'
-    //     hour: '2-digit',
-    //     minute: '2-digit',
-    //     meridiem: 'short'
-    // };
+    const handleSelect = () => {
+        props.handleCustomButtonClick();
+    };
+    
 
   return (
     <FullCalendar
@@ -59,6 +58,7 @@ const MainCalendar = (props) => {
         allDaySlot={false}
         allDayDefault={false}
         selectable={true}
+        select={handleSelect}
         // select={{
         //   function(){ 
         //     alert('Date');

@@ -24,8 +24,8 @@ const Timetable = () => {
     <div className="row justify-content-center">
       <Header/>
       <Navigation/>
-      <div className="card" style={{width: '85%', margin: '50px auto 50px auto', padding:'20px'}}>
-          <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', marginLeft: '5px'}}>{capitalizedUsername}'s Timetable</h3>
+      <div className="card" style={{width: '85%', margin: '20px auto 50px auto', padding:'20px'}}>
+          <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', marginLeft: '15px'}}>{capitalizedUsername}'s Timetable</h3>
               <div className="card-body">
               <MainCalendar handleCustomButtonClick={handleCustomButtonClick}/>
               </div>
