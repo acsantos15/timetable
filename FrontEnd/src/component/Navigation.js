@@ -17,7 +17,7 @@ const Navigation = () => {
         </ul> */}
 
         <NavLink to="/dashboard" activeClassName={classNameFunc}>
-          <a className="nav-link" href="/dashboard" ><i class="fa-solid fa-grip me-2" ></i>Dashboard</a>
+          <a className="nav-link active" href="/dashboard" ><i class="fa-solid fa-grip me-2" ></i>Dashboard</a>
         </NavLink>
 
         <NavLink to="/timetable" activeClassName={classNameFunc}>

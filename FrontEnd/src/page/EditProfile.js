@@ -1,27 +1,36 @@
-import React from 'react'
+import React, { useState } from 'react';
 import Header from '../component/Header';
 
 
 document.body.style.backgroundColor = "#DEDBD3";
 
-const ChangePass = () => {
-    $('#picard').hide();
-    $('#aicard').hide();
-    $('#passcard').show();
-}
+// const ChangePass = () => {
+//     $('#picard').hide();
+//     $('#aicard').hide();
+//     $('#passcard').show();
+// }
 
-const CancelPass = () => {
-    $('#picard').show();
-    $('#aicard').show();
-    $('#passcard').hide();
-}
+// const CancelPass = () => {
+//     $('#picard').show();
+//     $('#aicard').show();
+//     $('#passcard').hide();
+// }
 
 const EditProfile = () => {
+    const [isVisible, setIsVisible] = useState(true);
+    const [isPassVisible, setIsPassVisible] = useState(false);
+
+    const toggleVisibility = () => {
+        setIsVisible(!isVisible);
+        setIsPassVisible(!isPassVisible);
+    };
+
     return (
         // <!--EDIT USER HERE-->
     <div class="container1">
         <Header />
         <form id="userForm" method="put">
+        {isVisible ? (
             <div class="row" style={{margin: '60px 60px 0 60px'}}>
 
                 {/* <!-- Personal Information : LEFT --> */}
@@ -75,18 +84,20 @@ const EditProfile = () => {
                             {/* <!-- Buttons --> */}
                             <div style={{float: 'right'}}>
                                 <a href="/profile" type="button" class="btn btn-outline-danger">Cancel</a>&nbsp;
-                                <button type="button" class="btn btn-secondary" id="changePassBtn" onClick={ChangePass}>Change Password</button>&nbsp;
+                                <button type="button" class="btn btn-secondary" id="changePassBtn" onClick={toggleVisibility}>Change Password</button>&nbsp;
                                 <button type="submit" class="btn" style={{backgroundColor: '#537557', color: 'white'}}><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
+        ) : null}
         </form>
 
         {/* <!-- CHANGE PASSWORD --> */}
         <form id="userpassForm">
-            <div class="card" style={{width:'45%', height: '350px', float: 'left', padding: '30px', margin: '0 60px 60px 72px', display: 'none'}} id="passcard">
+        {isPassVisible ? (
+            <div class="card" style={{width:'45%', height: '350px', float: 'left', padding: '30px', margin: '60px 60px 60px 72px'}} id="passcard">
                 <div class="card-headers" style={{marginBottom: '15px'}}>
                     <h5 style={{color: '#7993a0', fontWeight: 'bold'}}>CHANGE PASSWORD</h5>
                 </div>
@@ -107,11 +118,12 @@ const EditProfile = () => {
 
                     {/* <!-- Buttons --> */}
                     <div style={{float: 'right'}}>
-                        <button type="button" class="btn btn-outline-danger" id="cancelPassBtn" onClick={CancelPass}>Cancel</button>&nbsp;
+                        <button type="button" class="btn btn-outline-danger" id="cancelPassBtn" onClick={toggleVisibility}>Cancel</button>&nbsp;
                         <button type="submit" class="btn" style={{backgroundColor: '#537557', color: 'white'}} id="savePassBtn"><i class="fa-solid fa-floppy-disk me-2"></i>Save Password</button>
                     </div>
                 </div>
             </div>
+        ) : null}
         </form>       
     </div>
     )

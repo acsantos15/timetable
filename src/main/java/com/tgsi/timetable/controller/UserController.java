@@ -55,12 +55,13 @@ public class UserController {
     @GetMapping("/users")
     @ResponseBody
     public Map<String, Object> getAllUsers(HttpSession session) {
-        // Users user = (Users) session.getAttribute("user");
-        // Long loggedId = user.getId();
+        Users user = (Users) session.getAttribute("userSession");
+        Long loggedId = user.getId();
 
         Map<String, Object> response = new HashMap<>();
         // response.put("loggedId", loggedId);
         response.put("users", uMapper.getAllUser());
+        response.put("userid", loggedId);
 
         return response;
     }

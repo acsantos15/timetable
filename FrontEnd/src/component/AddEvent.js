@@ -43,6 +43,9 @@ function AddEvent(props) {
           label: user.fname +" "+ user.lname,
         }));
         setOptions(users);
+        // Pre-select user with ID 4
+        const preselectedUser = users.find(user => user.value === response.data.userid);
+        setSelectedPeople([preselectedUser]);
       })
       .catch(error => console.error(error));
   }, []);
