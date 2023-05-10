@@ -14,7 +14,7 @@ const Header = () => {
     <nav class="navbar navbar-expand-lg" style={{backgroundColor: '#537557'}}>
       <div class="container-fluid">
         {/* Label */}
-        <a href="/timetable" class="navbar-brand" style={{color: 'white', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif'}}>
+        <a href="/Dashboard" class="navbar-brand" style={{color: 'white', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif'}}>
           <i class="fa-sharp fa-regular fa-calendar-days" ></i> TIMETABLE
         </a>
 
