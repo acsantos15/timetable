@@ -78,8 +78,8 @@ function AddEvent(props) {
                 <label for="addTitle" class="form-label"><i class="fa-solid fa-pen me-2"></i>Title</label>
                 <input type="text" class="form-control" id="addTitle" name="title" maxlength="100" value={title} onChange={handleTitleChange} required/>
               </div>
-              <div class="col-sm-2" style={{paddingLeft: '0%}'}}>
-                <label for="addColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Event Color</label>
+              <div class="col-sm-2">
+                <label for="addColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Color</label>
                 <input type="color" class="form-control form-control-color" id="addColor" name="color" value="#537C78" list="colorPreset" title="Choose your color" onChange={handleColorChange}/>
                 <datalist id="colorPreset">
                   <option>#537C78</option>
