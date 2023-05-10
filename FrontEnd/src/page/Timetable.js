@@ -19,7 +19,7 @@ const handleCustomButtonClick = () => {
     <div className="row justify-content-center">
         <Header/>
         <Navigation/>
-    <div class="card" style={{width: '85%', margin: '50px auto 50px auto', padding:'20px'}}>
+    <div class="card" style={{width: '85%', margin:'20px', padding:'20px'}}>
         <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', marginLeft: '5px'}}>{capitalizedUsername}'s Timetable</h3>
             <div class="card-body">
             <MainCalendar handleCustomButtonClick={handleCustomButtonClick}/>
