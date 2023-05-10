@@ -18,7 +18,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 
 const MiniCalendar = () => {
   const headerToolbar = {
-      left: 'title,prev,next,today',
+      left: 'today,prev,next,title',
       center: '',
       right: '',
   };

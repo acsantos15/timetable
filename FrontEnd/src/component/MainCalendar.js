@@ -24,7 +24,7 @@ const MainCalendar = (props) => {
     }, []);
 
     const headerToolbar = {
-        left: 'title,prev,next,today',
+        left: 'today,prev,next,title',
         center: '',
         right: 'timeGridWeek,dayGridMonth,timeGridDay,list customButton',
     };

@@ -33,7 +33,7 @@ const Dashboard = () => {
         <Navigation/>
         {/* Dashboard */}
         <div className="col-lg-8 mb-3" >
-            <div className="card" style={{backgroundColor: 'white',margin: '20px 0 0 20px'}}>
+            <div className="card" style={{backgroundColor: 'white',margin: '20px 30px 0 82px'}}>
                   
                 {/* Today's Event Tables */}
                 <div className="container" style={{padding: '20px 20px 10px 20px'}}>
@@ -83,16 +83,16 @@ const Dashboard = () => {
             </div>
         </div>
 
-        <div class="col mb-3" style={{margin:'20px 20px 0 0'}}>  
+        <div class="col mb-3" style={{margin:'20px 82px 0 0'}}>  
             {/* Calendar div */}
-            <div class="card mb-3">
+            <div class="card mb-4">
                 <div class="card-body">
                     <MiniCalendar />
                 </div>
             </div>
 
             {/* Weather div */}
-            <div className="card align-items-center" style={{padding: '20px'}}>
+            <div className="card align-items-center mb-3" style={{padding: '20px'}}>
               <h3 style={{fontWeight: 'bold', color: '#7993A0'}}>Today's Weather</h3>
               <img src={`http://openweathermap.org/img/wn/${weatherData?.weather?.[0]?.icon}@2x.png`} alt="weather icon" style={{width: '150px'}} />
               <p><b>Location:</b> Pasig</p>

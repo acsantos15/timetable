@@ -23,6 +23,7 @@
     color: rgb(82, 10, 10);
     font-size: 20px;
     font-weight: 700;
+    margin-left: 10px;
 }
 .fc .fc-prev-button, 
 .fc .fc-next-button{
