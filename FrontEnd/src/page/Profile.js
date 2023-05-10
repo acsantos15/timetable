@@ -2,6 +2,8 @@ import React from 'react'
 import Header from '../component/Header';
 
 
+document.body.style.backgroundColor = "#DEDBD3";
+
 const Profile = () => {
   return (
     // Label 
@@ -38,7 +40,7 @@ const Profile = () => {
 
             {/*  Buttons  */}
             <div style={{float: 'right'}}>
-                <a href="/timetable" class="btn btn-secondary"><i class="fa-regular fa-circle-left me-2"></i>Back to Timetable</a>
+                <a href="/timetable" class="btn btn-secondary"><i class="fa-regular fa-circle-left me-2"></i>Back to Timetable</a>&nbsp;
                 <a href="/editprofile" class="btn" style={{backgroundColor: '#537557', color: 'white'}}><i class="fa-solid fa-pen-to-square me-2"></i>Edit Profile</a>
             </div>
         </div>
