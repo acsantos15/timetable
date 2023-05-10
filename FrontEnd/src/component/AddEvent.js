@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Select from 'react-select';
 import axios from 'axios';
+import moment from 'moment';
 
 function AddEvent(props) {
   const [title, setTitle] = useState('');
@@ -8,8 +9,10 @@ function AddEvent(props) {
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [start, setStart] = useState('');
+  const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
   const [end, setEnd] = useState('');
-
+  const fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
+  
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
   };
@@ -33,12 +36,12 @@ function AddEvent(props) {
     event.preventDefault();
       axios.defaults.withCredentials = true;
       axios.post('http://localhost:8080/saveEvent', 
-      {title: title, color: color, description: description, location: location, start: start, end: end}, 
+      {title: title, color: color, description: description, location: location, start: fStart, end: fEnd}, 
       {withCredentials: true}, 
       { headers: { 'Content-Type': 'application/json' } })
 
       .then(response => {
-        console.log(response.data.status)
+        alert(response)
       })
       .catch(error => {
         console.log(error);
@@ -63,6 +66,7 @@ function AddEvent(props) {
 
   return (
     <div className={`modal ${props.isOpen ? "show" : ""}`} tabIndex="-1" style={{ display: props.isOpen ? "block" : "none" }}>
+      <form onSubmit={handleSubmit}>
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div style= {{backgroundColor: 'white'}}class="modal-content">
 
@@ -70,9 +74,7 @@ function AddEvent(props) {
             <h5 class="modal-title"><i class="fa-regular fa-calendar-plus me-2"></i>New Appointment</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={props.toggleModal} aria-label="Close"></button>
           </div>
-
           <div class="modal-body" style={{fontWeight: 'bold'}}>
-            <form onSubmit={handleSubmit}>
             <div class="mb-3 row">
               <div class="col-md-10">
                 <label for="addTitle" class="form-label"><i class="fa-solid fa-pen me-2"></i>Title</label>
@@ -100,7 +102,7 @@ function AddEvent(props) {
               <label for="addLoc" class="form-label"><i class="fa-solid fa-location-dot me-2"></i>Location</label>
               <select class="form-select" aria-label="Default select example" id="addLoc" name="location" value={location} onChange={handleLocationChange} required>
                 <option value="" selected disabled></option>
-                <option value="Center of Excellence 1">Center of Excellence 1</option>
+                <option style={{backgroundColor}} value="Center of Excellence 1">Center of Excellence 1</option>
                 <option value="Center of Excellence 2">Center of Excellence 2</option>
                 <option value="Center of Excellence 3">Center of Excellence 3</option>
               </select>
@@ -131,7 +133,7 @@ function AddEvent(props) {
                 </div>
               </div>
             </div>
-            </form>
+            
             {/* Error Message */}
             <span id="errMsg" style={{color:'red' }}></span>   
           </div>
@@ -140,10 +142,10 @@ function AddEvent(props) {
           <div class="modal-footer">
             <button type="reset" class="btn btn-outline-secondary"><i class="fa-solid fa-eraser me-2"></i>Clear</button>
             <button type="submit" class="btn btn-success" id="addEventBtn"><i class="fa-solid fa-floppy-disk me-2"></i>Save Changes</button>
-            
-          </div>
+          </div>            
         </div>                            
       </div>
+      </form>
     </div>
   );
 }
