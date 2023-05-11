@@ -47,12 +47,12 @@
 .fc .fc-button-group .fc-list-button{
     background-color: #8aa78d;
 }
-.fc .fc-myCustomButton-button,
+.fc .fc-customButton-button,
 .fc .fc-today-button,
 .fc .fc-button-primary:disabled{
     background-color: #537557;
 }
-.fc .fc-myCustomButton-button:hover{
+.fc .fc-customButton-button:hover{
     background-color: #8aa78d;
 }
 .fc .fc-button-primary{
