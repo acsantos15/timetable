@@ -2,19 +2,16 @@ import React from 'react'
 import "../css/style.css";
 import { NavLink } from 'react-router-dom';
 
-const classNameFunc = ({ isActive }) => (isActive ? "active" : "inactive");
-
 const Navigation = () => {
   return (
-    <div className="nav nav-tabs justify-content-center">
+    <div className="nav nav-tabs justify-content-center" style={{backgroundColor: '#dedbd3'}}>
 
-        <NavLink to="/dashboard" activeClassName={classNameFunc}>
-          <a className="nav-link active" href="/dashboard" ><i class="fa-solid fa-grip me-2" ></i>Dashboard</a>
-        </NavLink>
+          <NavLink className="nav-link" to="/timetable" activeClassName="active">
+            <span>
+              <i class="fa-sharp fa-regular fa-calendar-days me-2"></i>Timetable
+            </span>
+          </NavLink>
 
-        <NavLink to="/timetable" activeClassName={classNameFunc}>
-          <a className="nav-link" href="/timetable"><i class="fa-sharp fa-regular fa-calendar-days me-2"></i>Timetable</a>
-        </NavLink>
     </div>
   )
 }

@@ -52,8 +52,8 @@ function Login() {
                     <div className="card-body p-4 p-lg-5 text-black" >
 
                       <form onSubmit={handleSubmit}>
-                        <div className="d-flex mb-3 pb-1 justify-content-center">
-                          <img src="/tgsi-2.png" alt="image" style={{ height: '4.8em', margin: '15px'}} />
+                        <div className="d-flex mb-3 pb-1 justify-content-end">
+                          <img src="/tgsilogo.png" alt="Tsukiden logo" style={{ height: '.9em', margin: '15px 0 15px 0'}} />
                         </div>
                         <div className="d-flex mb-3 pb-1 justify-content-center">
                           <label className="h1 fw-bold mb-0" style={{ color: 'rgb(88, 17, 17)', fontWeight: 'bold', fontSize: '60px', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif' }}>Welcome</label>

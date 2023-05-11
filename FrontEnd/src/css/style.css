@@ -47,12 +47,12 @@
 .fc .fc-button-group .fc-list-button{
     background-color: #8aa78d;
 }
-.fc .fc-myCustomButton-button,
+.fc .fc-customButton-button,
 .fc .fc-today-button,
 .fc .fc-button-primary:disabled{
     background-color: #537557;
 }
-.fc .fc-myCustomButton-button:hover{
+.fc .fc-customButton-button:hover{
     background-color: #8aa78d;
 }
 .fc .fc-button-primary{
@@ -91,14 +91,13 @@
 /* END FullCalendar CSS */
 
 /*  NavBar CSS */
-.active{
-    border-bottom-color: #537557; /* set the line color to green */
-    color: #537557;
-    border-bottom-width: 5px ;
-}
 .nav-tabs .nav-link {
     color: #a4a1a1; /* set the font color to gray */
     font-size: large;
+}
+.nav-tabs a.nav-link.active{
+    border-bottom-color: #537557;
+    border-bottom-width: 5px;
 }
 /* END NavBar CSS */
 
