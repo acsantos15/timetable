@@ -5,6 +5,7 @@ import moment from 'moment';
 import Swal from 'sweetalert2';
 
 function AddEvent(props) {
+  const { isOpenAdd, selectStart, selectEnd } = props;
   const [title, setTitle] = useState('');
   const [selectedColor, setSelectedColor] = useState('#537C78');
   const [description, setDescription] = useState('');
@@ -43,7 +44,6 @@ function AddEvent(props) {
           label: user.fname +" "+ user.lname,
         }));
         setOptions(users);
-        // Pre-select user with ID 4
         const preselectedUser = users.find(user => user.value === response.data.userid);
         setSelectedPeople([preselectedUser]);
       })
@@ -99,16 +99,12 @@ function AddEvent(props) {
     setSelectedPeople([]);
   };
   
-  // In the JSX code:
-
- 
-  
   return (
-    <div className="modal" tabIndex="-1" style={{ display: props.isOpenAdd ? "block" : "none" }}>
+    <div className="modal" tabIndex="-1" style={{ display: isOpenAdd ? "block" : "none" }}>
       <form onSubmit={handleSubmit}>
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div style= {{backgroundColor: 'white'}}class="modal-content">
-
+          
           <div class="modal-header" style={{backgroundColor: selectedColor}}>
             <h5 class="modal-title"><i class="fa-regular fa-calendar-plus me-2"></i>New Appointment</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={props.toggleModal} aria-label="Close"></button>
@@ -164,13 +160,13 @@ function AddEvent(props) {
               <div class="col">
                 <label class="control-label col-sm-2" for="addStart"><i class="fa-solid fa-hourglass-start me-2"></i>Start</label>
                 <div class="col-sm-15">          
-                  <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" value={start} onChange={handleStartChange} required/>
+                  <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" value={selectStart} onChange={handleStartChange} required/>
                 </div>
               </div>
               <div class="col">
                 <label class="control-label col-sm-2" for="addEnd"><i class="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
                 <div class="col-sm-15">          
-                  <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" value={end} onChange={handleEndChange} required/>
+                  <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" value={selectEnd} onChange={handleEndChange} required/>
                 </div>
               </div>
             </div>

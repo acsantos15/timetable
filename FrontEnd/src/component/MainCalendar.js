@@ -4,6 +4,7 @@ import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
 import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
+import moment from 'moment';
 import "../css/style.css";
 
 import ViewEventModal from '../component/ViewEvent';
@@ -38,8 +39,10 @@ const MainCalendar = (props) => {
         }
     };
 
-    const handleSelect = () => {
-        props.handleAddShow();
+    const handleSelect = (info) => {
+        const selectStart = moment(info.startStr).format('YYYY-MM-DD HH:mm:ss');
+        const selectEnd = moment(info.endStr).format('YYYY-MM-DD HH:mm:ss');
+        props.handleAddShow(selectStart, selectEnd);
     };
     
 

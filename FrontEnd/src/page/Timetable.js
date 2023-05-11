@@ -15,8 +15,10 @@ const Timetable = () => {
 
   // Add Event Modal Show
   const [isOpenAdd, setIsOpenAdd] = useState(false);
-  const handleAddShow = () => {
+  const handleAddShow = (selectStart, selectEnd) => {
     setIsOpenAdd(!isOpenAdd);
+    setSelectStart(selectStart);
+    setSelectEnd(selectEnd);
   };
 
   // Add View Modal Show
@@ -31,6 +33,8 @@ const Timetable = () => {
     setEventData(data);
   };
 
+  const [selectStart, setSelectStart] = useState('');
+  const [selectEnd, setSelectEnd] = useState('');
 
   Auth();
   return (
@@ -43,7 +47,7 @@ const Timetable = () => {
               <MainCalendar handleAddShow={handleAddShow} handleViewShow={handleViewShow} handleViewData={handleViewData} />
               </div>
       </div> 
-      <AddEventModal isOpenAdd={isOpenAdd} toggleModal={handleAddShow}/>
+      <AddEventModal isOpenAdd={isOpenAdd} toggleModal={handleAddShow} selectStart={selectStart} selectEnd={selectEnd}/>
       <ViewEventModal isOpenView={isOpenView} toggleModal={handleViewShow} eventData={eventData}/>
     </div>
   )

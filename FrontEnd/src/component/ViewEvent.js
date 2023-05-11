@@ -1,11 +1,14 @@
 import React,{useEffect,useState} from 'react';
 import axios from 'axios';
+import moment from 'moment';
+import Swal from 'sweetalert2';
 
 const ViewEvent = (props) => {
   const { isOpenView, eventData } = props;
   const [participants, setParticipants] = useState([]);
   const eventId = eventData.id;
 
+  // Populate Participants
   useEffect(() => {
     axios.get('/events/'+eventId+'/users')
     .then(response => {
@@ -24,7 +27,24 @@ const ViewEvent = (props) => {
     .catch(error => {
         console.log(error);
     });
-  }, []);
+  }, [eventId]);
+
+  const handleDeleteEvent = () => {
+    axios.delete('/delete/'+eventId)
+    .then(response => {
+      Swal.fire({
+          title: 'Event Removed',
+          text: " ",
+          icon: 'success',
+          showCancelButton: false,
+          confirmButtonText: 'Ok'
+      }).then((result) => {
+          if (result.isConfirmed) {
+              window.location.reload(); 
+          }
+      }) 
+    })
+  };
   return (
     <div className="modal" tabIndex="-1" style={{ display: isOpenView ? "block" : "none" }}>
     <div class="modal-dialog modal-dialog-centered">
@@ -47,21 +67,21 @@ const ViewEvent = (props) => {
           <div class="row align-items-center">
             <div class="col">
               <p class="fw-bold"><i class="fa-solid fa-hourglass-start me-2"></i>Start:</p>
-              <p style={{display: 'inline'}}>Date: </p><p id="eventStartDate" style={{display: 'inline'}}></p>
+              <p style={{display: 'inline'}}>Date: </p><p id="eventStartDate" style={{display: 'inline'}}>{moment(eventData.start).format('YYYY-MM-DD')}</p>
               <br/>
-              <p style={{display: 'inline'}}>Time: </p><p id="eventStartTime" style={{display: 'inline'}}></p>
+              <p style={{display: 'inline'}}>Time: </p><p id="eventStartTime" style={{display: 'inline'}}>{moment(eventData.start).format('HH:mm a')}</p>
             </div>
             <div class="col">
               <p class="fw-bold"><i class="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End:</p>
-              <p style={{display: 'inline'}}>Date: </p><p id="eventEndDate" style={{display: 'inline'}}></p>
+              <p style={{display: 'inline'}}>Date: </p><p id="eventEndDate" style={{display: 'inline'}}>{moment(eventData.end).format('YYYY-MM-DD')}</p>
               <br/>
-              <p style={{display: 'inline'}}>Time: </p><p id="eventEndTime" style={{display: 'inline'}}></p>
+              <p style={{display: 'inline'}}>Time: </p><p id="eventEndTime" style={{display: 'inline'}}>{moment(eventData.end).format('HH:mm a')}</p>
             </div>
           </div>
         </div>
 
         <div class="modal-footer">
-          <button type="button" class="btn btn-danger" id="removeEventBtn"><i class="fa-solid fa-trash me-2"></i>Delete</button>
+          <button type="button" class="btn btn-danger" id="removeEventBtn" onClick={handleDeleteEvent}><i class="fa-solid fa-trash me-2" ></i>Delete</button>
           <button type="button" class="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" data-bs-toggle="modal"><i class="fa-solid fa-pen-to-square me-2"></i>Edit</button>
         </div>
       </div>
