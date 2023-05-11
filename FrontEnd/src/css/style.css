@@ -91,14 +91,13 @@
 /* END FullCalendar CSS */
 
 /*  NavBar CSS */
-.active{
-    border-bottom-color: #537557; /* set the line color to green */
-    color: #537557;
-    border-bottom-width: 5px ;
-}
 .nav-tabs .nav-link {
     color: #a4a1a1; /* set the font color to gray */
     font-size: large;
+}
+.nav-tabs a.nav-link.active{
+    border-bottom-color: #537557;
+    border-bottom-width: 5px;
 }
 /* END NavBar CSS */
 
