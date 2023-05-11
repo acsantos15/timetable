@@ -4,18 +4,6 @@ import Header from '../component/Header';
 
 document.body.style.backgroundColor = "#DEDBD3";
 
-// const ChangePass = () => {
-//     $('#picard').hide();
-//     $('#aicard').hide();
-//     $('#passcard').show();
-// }
-
-// const CancelPass = () => {
-//     $('#picard').show();
-//     $('#aicard').show();
-//     $('#passcard').hide();
-// }
-
 const EditProfile = () => {
     const [isVisible, setIsVisible] = useState(true);
     const [isPassVisible, setIsPassVisible] = useState(false);
@@ -31,7 +19,7 @@ const EditProfile = () => {
         <Header />
         <form id="userForm" method="put">
         {isVisible ? (
-            <div class="row" style={{margin: '60px 60px 0 60px'}}>
+            <div class="row" style={{margin: '70px 82px 0 82px'}}>
 
                 {/* <!-- Personal Information : LEFT --> */}
                 <div class="col">
@@ -97,7 +85,7 @@ const EditProfile = () => {
         {/* <!-- CHANGE PASSWORD --> */}
         <form id="userpassForm">
         {isPassVisible ? (
-            <div class="card" style={{width:'45%', height: '350px', float: 'left', padding: '30px', margin: '60px 60px 60px 72px'}} id="passcard">
+            <div class="card" style={{width:'45%', height: '350px', float: 'left', padding: '30px', margin: '70px auto auto 82px'}} id="passcard">
                 <div class="card-headers" style={{marginBottom: '15px'}}>
                     <h5 style={{color: '#7993a0', fontWeight: 'bold'}}>CHANGE PASSWORD</h5>
                 </div>
