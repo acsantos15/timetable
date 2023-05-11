@@ -89,6 +89,17 @@ function AddEvent(props) {
         console.log(error);
       });  
   };
+  const handleClear = () => {
+    setTitle('');
+    setSelectedColor('#537C78');
+    setDescription('');
+    setLocation('');
+    setStart('');
+    setEnd('');
+    setSelectedPeople([]);
+  };
+  
+  // In the JSX code:
 
  
   
@@ -169,7 +180,7 @@ function AddEvent(props) {
 
           {/* Buttons */}
           <div class="modal-footer">
-            <button type="reset" class="btn btn-outline-secondary"><i class="fa-solid fa-eraser me-2"></i>Clear</button>
+            <button type="reset" class="btn btn-outline-secondary" onClick={handleClear}><i class="fa-solid fa-eraser me-2"></i>Clear</button>
             <button type="submit" class="btn btn-success" id="addEventBtn"><i class="fa-solid fa-floppy-disk me-2"></i>Save Changes</button>
           </div>            
         </div>                            
