@@ -9,9 +9,9 @@ function AddEvent(props) {
   const [selectedColor, setSelectedColor] = useState('#537C78');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
-  const [start, setStart] = useState('');
+  const [start, setStart] = useState(moment(new Date().toISOString()).format('YYYY-MM-DD HH:mm:ss'));
   const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
-  const [end, setEnd] = useState('');
+  const [end, setEnd] = useState(moment(new Date().toISOString()).add(30, 'minutes').format('YYYY-MM-DD HH:mm:ss'));
   const fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
   
   const handleTitleChange = (event) => {
@@ -93,7 +93,7 @@ function AddEvent(props) {
  
   
   return (
-    <div className={`modal ${props.isOpen ? "show" : ""}`} tabIndex="-1" style={{ display: props.isOpen ? "block" : "none" }}>
+    <div className="modal" tabIndex="-1" style={{ display: props.isOpenAdd ? "block" : "none" }}>
       <form onSubmit={handleSubmit}>
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div style= {{backgroundColor: 'white'}}class="modal-content">
@@ -152,13 +152,13 @@ function AddEvent(props) {
               <div class="col">
                 <label class="control-label col-sm-2" for="addStart"><i class="fa-solid fa-hourglass-start me-2"></i>Start</label>
                 <div class="col-sm-15">          
-                  <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" min="T06:00" max="T19:30" value={start} onChange={handleStartChange} required/>
+                  <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" value={start} onChange={handleStartChange} required/>
                 </div>
               </div>
               <div class="col">
                 <label class="control-label col-sm-2" for="addEnd"><i class="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
                 <div class="col-sm-15">          
-                  <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" min="06:30:00" max="20:00:00" value={end} onChange={handleEndChange} required/>
+                  <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" value={end} onChange={handleEndChange} required/>
                 </div>
               </div>
             </div>

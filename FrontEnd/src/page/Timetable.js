@@ -3,6 +3,7 @@ import Header from '../component/Header';
 import Navigation from '../component/Navigation';
 import MainCalendar from '../component/MainCalendar';
 import AddEventModal from '../component/AddEvent';
+import ViewEventModal from '../component/ViewEvent';
 import { Auth } from '../component/Auth';
 import "../css/style.css";
 
@@ -13,9 +14,21 @@ const Timetable = () => {
   document.body.style.backgroundColor = "#DEDBD3";
 
   // Add Event Modal Show
-  const [isOpen, setIsOpen] = useState(false);
-  const handleCustomButtonClick = () => {
-    setIsOpen(!isOpen);
+  const [isOpenAdd, setIsOpenAdd] = useState(false);
+  const handleAddShow = () => {
+    setIsOpenAdd(!isOpenAdd);
+  };
+
+  // Add View Modal Show
+  const [isOpenView, setIsOpenView] = useState(false);
+  const handleViewShow = () => {
+    setIsOpenView(!isOpenView);
+  };
+
+  // Add View Modal Show
+  const [eventData, setEventData] = useState('');
+  const handleViewData = (data) => {
+    setEventData(data);
   };
 
 
@@ -27,10 +40,11 @@ const Timetable = () => {
       <div className="card" style={{width: '90%', margin: '20px auto 50px auto', padding:'20px'}}>
           <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', marginLeft: '15px'}}>{capitalizedUsername}'s Timetable</h3>
               <div className="card-body">
-              <MainCalendar handleCustomButtonClick={handleCustomButtonClick}/>
+              <MainCalendar handleAddShow={handleAddShow} handleViewShow={handleViewShow} handleViewData={handleViewData} />
               </div>
       </div> 
-      <AddEventModal isOpen={isOpen} toggleModal={handleCustomButtonClick}/>
+      <AddEventModal isOpenAdd={isOpenAdd} toggleModal={handleAddShow}/>
+      <ViewEventModal isOpenView={isOpenView} toggleModal={handleViewShow} eventData={eventData}/>
     </div>
   )
 }

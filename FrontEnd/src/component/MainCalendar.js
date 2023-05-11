@@ -6,6 +6,8 @@ import listPlugin from '@fullcalendar/list';
 import interactionPlugin from '@fullcalendar/interaction';
 import "../css/style.css";
 
+import ViewEventModal from '../component/ViewEvent';
+
 import axios from 'axios';
 
 const MainCalendar = (props) => {
@@ -32,15 +34,25 @@ const MainCalendar = (props) => {
     const customButton = {
         text: '+ Add Appointment',
         click: function() {
-            props.handleCustomButtonClick();
+            props.handleAddShow();
         }
     };
 
     const handleSelect = () => {
-        props.handleCustomButtonClick();
+        props.handleAddShow();
     };
     
 
+    const handleEventClick = (info) => {
+        axios.get('/timetable/'+info.event.id)
+            .then(response => {
+                props.handleViewData(response.data);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+        props.handleViewShow();
+    };
   return (
     <FullCalendar
         plugins={[
@@ -49,6 +61,7 @@ const MainCalendar = (props) => {
             listPlugin,
             interactionPlugin
         ]}
+        eventClick={handleEventClick} 
         initialView="timeGridWeek"
         aspectRatio="2"
         height={'67vh'}
@@ -59,11 +72,6 @@ const MainCalendar = (props) => {
         allDayDefault={false}
         selectable={true}
         select={handleSelect}
-        // select={{
-        //   function(){ 
-        //     alert('Date');
-        //   }
-        // }}
         slotMinTime="06:00:00"
         slotMaxTime="20:00:00"
         eventTimeFormat={{ 
