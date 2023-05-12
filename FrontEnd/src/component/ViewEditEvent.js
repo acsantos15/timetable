@@ -49,7 +49,7 @@ const ViewEditEvent = (props) => {
     }) 
   };
 
-
+  // Open Edit Event Modal
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const handleEditShow = () => {
     setIsOpenEdit(!isOpenEdit);
@@ -66,8 +66,16 @@ const ViewEditEvent = (props) => {
           label: user.fname +" "+ user.lname,
         }));
         setOptions(users);
-        const preselectedUser = users.find(user => user.value === response.data.userid);
-        setSelectedPeople([preselectedUser]);
+      })
+      .catch(error => console.error(error));
+
+      axios.get('/events/'+eventId+'/users')
+      .then(response => {
+        const users = response.data.map(user => ({
+          value: user.id,
+          label: user.fname + ' ' + user.lname
+        }));
+        setSelectedPeople(users);
       })
       .catch(error => console.error(error));
   }, []);
@@ -75,7 +83,6 @@ const ViewEditEvent = (props) => {
   const handleSelectChange = (selected) => {
     setSelectedPeople(selected);
   };
-
 
   const [title, setTitle] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
@@ -207,11 +214,11 @@ const ViewEditEvent = (props) => {
               <Select
                 isMulti
                 name="peoples[]"
-                // options={options}
+                options={options}
                 className="participant"
                 classNamePrefix="select"
-                // value={selectedPeople}
-                // onChange={handleSelectChange}
+                value={selectedPeople}
+                onChange={handleSelectChange}
               />
             </div> 
 
