@@ -53,11 +53,32 @@ const ViewEditEvent = (props) => {
   const [isOpenEdit, setIsOpenEdit] = useState(false);
   const handleEditShow = () => {
     setIsOpenEdit(!isOpenEdit);
+    setSelectedColor(eventData.color);
+  };
+
+  const [options, setOptions] = useState([]);
+  const [selectedPeople, setSelectedPeople] = useState([]);
+  useEffect(() => {
+    axios.get('/users')
+      .then(response => {
+        const users = response.data.users.map(user => ({
+          value: user.id,
+          label: user.fname +" "+ user.lname,
+        }));
+        setOptions(users);
+        const preselectedUser = users.find(user => user.value === response.data.userid);
+        setSelectedPeople([preselectedUser]);
+      })
+      .catch(error => console.error(error));
+  }, []);
+
+  const handleSelectChange = (selected) => {
+    setSelectedPeople(selected);
   };
 
 
   const [title, setTitle] = useState('');
-  const [selectedColor, setSelectedColor] = useState('#537C78');
+  const [selectedColor, setSelectedColor] = useState('');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [start, setStart] = useState();
@@ -100,7 +121,7 @@ const ViewEditEvent = (props) => {
     <div className="modal" tabIndex="-1" style={{ display: isOpenView ? "block" : "none" }}>
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header">
+        <div class="modal-header" style={{backgroundColor: eventData.color}}>
           <h5 class="modal-title"> <i class="fa-solid fa-circle-info me-2"></i>Event Details</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={props.toggleModal} aria-label="Close"></button>
         </div>
@@ -156,7 +177,7 @@ const ViewEditEvent = (props) => {
               </div>
               <div class="col-sm-2">
               <label for="addColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Color</label>
-              <select class="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={eventData.color} style={{ backgroundColor: selectedColor }}>
+              <select class="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor}}>
                 <option value="#537C78" style={{backgroundColor: '#537C78'}}></option>
                 <option value="#F8B195" style={{backgroundColor: '#F8B195'}}></option>
                 <option value="#6C5B78" style={{backgroundColor: '#6C5B78'}}></option>
