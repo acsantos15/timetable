@@ -139,10 +139,11 @@ function AddEvent(props) {
             <div class="mb-3">
               <label for="addLoc" class="form-label"><i class="fa-solid fa-location-dot me-2"></i>Location</label>
               <select class="form-select" aria-label="Default select example" id="addLoc" name="location" value={location} onChange={handleLocationChange} required>
-                <option value="Online Conference">Online Conference</option>
-                <option value="Center of Excellence 1">Center of Excellence 1</option>
-                <option value="Center of Excellence 2">Center of Excellence 2</option>
-                <option value="Center of Excellence 3">Center of Excellence 3</option>
+              <option value="" selected disabled></option>
+              <option value="Online Conference">Online Conference</option>
+              <option value="Center of Excellence 1">Center of Excellence 1</option>
+              <option value="Center of Excellence 2">Center of Excellence 2</option>
+              <option value="Center of Excellence 3">Center of Excellence 3</option>
               </select>
             </div>
 
