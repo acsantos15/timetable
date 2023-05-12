@@ -32,19 +32,19 @@ const EditProfile = () => {
                             <input type="hidden" id="userId" />
                             <div class="mb-4">
                                 <label style={{fontWeight: 'bold'}}>First Name:</label>
-                                {/* <input class="form-control" id="editFname" type="text" placeholder="First Name" name="firstname"/> */}
+                                <input class="form-control" id="editFname" type="text" placeholder="First Name" name="firstname"/>
                             </div>
                             <div class="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Last Name:</label>
-                                {/* <input class="form-control" id="editLname" type="text" placeholder="Last Name" name="lastname"/> */}
+                                <input class="form-control" id="editLname" type="text" placeholder="Last Name" name="lastname"/>
                             </div>
                             <div class="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Address:</label>
-                                {/* <input class="form-control" id="editAddress" type="text" placeholder="Home Address" name="address"/> */}
+                                <input class="form-control" id="editAddress" type="text" placeholder="Home Address" name="address"/>
                             </div>
                             <div class="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Contact No.:</label>
-                                {/* <input class="form-control" id="editContact" type="text" placeholder="Contact No." name="contactNo"/> */}
+                                <input class="form-control" id="editContact" type="text" placeholder="Contact No." name="contactNo"/>
                             </div>
                         </div>
                     </div>
@@ -59,11 +59,11 @@ const EditProfile = () => {
                         <div class="card-bodys">    
                             <div class="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Username:</label>
-                                {/* <input class="form-control" id="editUsername" type="text" placeholder="Username" name="username"/> */}
+                                <input class="form-control" id="editUsername" type="text" placeholder="Username" name="username"/>
                             </div>
                             <div class="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Email Address:</label>
-                                {/* <input class="form-control" id="editEmail" type="email" placeholder="Email" name="email"/> */}
+                                <input class="form-control" id="editEmail" type="email" placeholder="Email" name="email"/>
                             </div>
 
                             {/* <!-- Error Message --> */}
