@@ -10,7 +10,7 @@ const Profile = () => {
     <div class="container1">
       <Header />
 
-      <div class="card" style={{margin: '60px', padding: '30px'}}>
+      <div class="card" style={{margin: '70px 82px auto 82px', padding: '30px'}}>
         <div class="card-headers" style={{marginBottom: '15px'}}>
             <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder'}}>My Profile</h3>
         </div>
