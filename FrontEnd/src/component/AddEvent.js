@@ -10,10 +10,12 @@ function AddEvent(props) {
   const [selectedColor, setSelectedColor] = useState('#537C78');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
-  const [start, setStart] = useState(moment(new Date().toISOString()).format('YYYY-MM-DD HH:mm:ss'));
-  const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
-  const [end, setEnd] = useState(moment(new Date().toISOString()).add(30, 'minutes').format('YYYY-MM-DD HH:mm:ss'));
-  const fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
+  // const [start, setStart] = useState(moment(new Date().toISOString()).format('YYYY-MM-DD HH:mm:ss'));
+  const [start, setStart] = useState();
+  // const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
+  // const [end, setEnd] = useState(moment(new Date().toISOString()).add(30, 'minutes').format('YYYY-MM-DD HH:mm:ss'));
+  const [end, setEnd] = useState();
+  // const fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
   
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -58,11 +60,10 @@ function AddEvent(props) {
     event.preventDefault();
       axios.defaults.withCredentials = true;
       axios.post('http://localhost:8080/saveEvent', 
-      {title: title, color: selectedColor, description: description, location: location, start: fStart, end: fEnd}, 
+      {title: title, color: selectedColor, description: description, location: location, start: selectStart, end: selectEnd}, 
       {withCredentials: true}, 
       { headers: { 'Content-Type': 'application/json' } })
       .then(response => {
-        alert(response.data)
         const selectedPeopleIds = selectedPeople.map(p => p.value);
         const payload = {eventId: response.data, participantIds: selectedPeopleIds};
         axios.defaults.withCredentials = true;
@@ -70,16 +71,16 @@ function AddEvent(props) {
         { headers: { 'Content-Type': 'application/json' } })
         .then(response => {
           Swal.fire({
-            title: 'Event Added',
-            text: " ",
-            icon: 'success',
-            showCancelButton: false,
-            confirmButtonText: 'Ok'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                window.location.reload(); 
-            }
-        }) 
+              title: 'Event Added',
+              text: " ",
+              icon: 'success',
+              showCancelButton: false,
+              confirmButtonText: 'Ok'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                  window.location.reload(); 
+              }
+          }) 
         })
         .catch(error => {
           console.log(error);
@@ -96,7 +97,10 @@ function AddEvent(props) {
     setLocation('');
     setStart('');
     setEnd('');
-    setSelectedPeople([]);
+    const preselectedUser = options.find(user => user.value === selectedPeople[0].value);
+    const updatedSelectedPeople = preselectedUser ? [preselectedUser] : [];
+
+    setSelectedPeople(updatedSelectedPeople);
   };
   
   return (
@@ -135,7 +139,6 @@ function AddEvent(props) {
             <div class="mb-3">
               <label for="addLoc" class="form-label"><i class="fa-solid fa-location-dot me-2"></i>Location</label>
               <select class="form-select" aria-label="Default select example" id="addLoc" name="location" value={location} onChange={handleLocationChange} required>
-                <option value="" selected disabled></option>
                 <option value="Online Conference">Online Conference</option>
                 <option value="Center of Excellence 1">Center of Excellence 1</option>
                 <option value="Center of Excellence 2">Center of Excellence 2</option>
