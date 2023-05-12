@@ -45,6 +45,10 @@ const MainCalendar = (props) => {
         props.handleAddShow(selectStart, selectEnd);
     };
     
+    const selectionHandler = (selectInfo) => {
+        var currentTime = moment()
+        return currentTime.isBefore(selectInfo.start)
+    } 
 
     const handleEventClick = (info) => {
         axios.get('/timetable/'+info.event.id)
@@ -75,6 +79,7 @@ const MainCalendar = (props) => {
         allDayDefault={false}
         selectable={true}
         select={handleSelect}
+        selectAllow={selectionHandler}
         slotMinTime="06:00:00"
         slotMaxTime="20:00:00"
         eventTimeFormat={{ 
