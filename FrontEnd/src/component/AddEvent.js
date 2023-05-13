@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Select from 'react-select';
 import axios from 'axios';
-import moment from 'moment';
 import Swal from 'sweetalert2';
 
 function AddEvent(props) {

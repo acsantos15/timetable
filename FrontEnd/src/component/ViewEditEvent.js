@@ -28,6 +28,17 @@ const ViewEditEvent = (props) => {
     .catch(error => {
         console.log(error);
     });
+    axios.get('/events/'+eventId+'/users')
+      .then(response => {
+        const users = response.data.map(user => ({
+          value: user.id,
+          label: user.fname + ' ' + user.lname
+        }));
+        setSelectedPeople(users);
+      })
+      .catch(error => console.error(error));
+
+      
   }, [eventId]);
 
   const handleDeleteEvent = () => {
@@ -54,6 +65,11 @@ const ViewEditEvent = (props) => {
   const handleEditShow = () => {
     setIsOpenEdit(!isOpenEdit);
     setSelectedColor(eventData.color);
+    setTitle(eventData.title);
+    setDescription(eventData.description);
+    setLocation(eventData.location);
+    setStart(eventData.start);
+    setEnd(eventData.end)
   };
 
   const [options, setOptions] = useState([]);
@@ -68,16 +84,6 @@ const ViewEditEvent = (props) => {
         setOptions(users);
       })
       .catch(error => console.error(error));
-
-      axios.get('/events/'+eventId+'/users')
-      .then(response => {
-        const users = response.data.map(user => ({
-          value: user.id,
-          label: user.fname + ' ' + user.lname
-        }));
-        setSelectedPeople(users);
-      })
-      .catch(error => console.error(error));
   }, []);
 
   const handleSelectChange = (selected) => {
@@ -86,10 +92,12 @@ const ViewEditEvent = (props) => {
 
   const [title, setTitle] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
-  const [description, setDescription] = useState('');
-  const [location, setLocation] = useState('');
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
+  const [description, setDescription] = useState(eventData.description);
+  const [location, setLocation] = useState(eventData.location);
+  const [start, setStart] = useState(eventData.start);
+  const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
+  const [end, setEnd] = useState(eventData.end);
+  const fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
   
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -113,11 +121,35 @@ const ViewEditEvent = (props) => {
   const handleSubmit = (event) => {
     event.preventDefault();
       axios.defaults.withCredentials = true;
-      axios.post('http://localhost:8080/saveEvent', 
-      {title: title, color: selectedColor, description: description, location: location, start: start, end: end}, 
+      axios.put('/edit/'+eventId, 
+      {title: title, color: selectedColor, description: description, location: location, start: fStart, end: fEnd}, 
       {withCredentials: true}, 
       { headers: { 'Content-Type': 'application/json' } })
       .then(response => {
+        axios.delete('/delete/'+eventId+'/edit')
+        .then(response => {
+          const selectedPeopleIds = selectedPeople.map(p => p.value);
+          const payload = {eventId: response.data, participantIds: selectedPeopleIds};
+          axios.defaults.withCredentials = true;
+          axios.post('http://localhost:8080/saveEventParticipants', payload, {withCredentials: true}, 
+          { headers: { 'Content-Type': 'application/json' } })
+          .then(response => {
+            Swal.fire({
+                title: 'Event Updated',
+                text: " ",
+                icon: 'success',
+                showCancelButton: false,
+                confirmButtonText: 'Ok'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.reload(); 
+                }
+            }) 
+          })
+          .catch(error => {
+            console.log(error);
+          });
+        })  
       })  
       .catch(error => {
         console.log(error);
@@ -173,14 +205,14 @@ const ViewEditEvent = (props) => {
         <div style= {{backgroundColor: 'white'}}class="modal-content">
           
           <div class="modal-header" style={{backgroundColor: selectedColor}}>
-            <h5 class="modal-title"><i class="fa-regular fa-calendar-plus me-2"></i>New Appointment</h5>
+            <h5 class="modal-title"><i class="fa-regular fa-calendar-plus me-2"></i>Edit Appointment</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={handleEditShow} aria-label="Close"></button>
           </div>
           <div class="modal-body" style={{fontWeight: 'bold'}}>
             <div class="mb-3 row">
               <div class="col-md-10">
                 <label for="addTitle" class="form-label"><i class="fa-solid fa-pen me-2"></i>Title</label>
-                <input type="text" class="form-control" id="addTitle" name="title" maxlength="100" value={eventData.title} onChange={handleTitleChange} required/>
+                <input type="text" class="form-control" id="addTitle" name="title" maxlength="100" value={title} onChange={handleTitleChange} required/>
               </div>
               <div class="col-sm-2">
               <label for="addColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Color</label>
@@ -196,12 +228,12 @@ const ViewEditEvent = (props) => {
 
             <div class="mb-3">
               <label for="addDesc" class="form-label"><i class="fa-solid fa-comments me-2"></i>Description</label>
-              <textarea type="textarea" class="form-control" id="addDesc" name="description" maxlength="100" rows="3" value={eventData.description} onChange={handleDescriptionChange} required></textarea>
+              <textarea type="textarea" class="form-control" id="addDesc" name="description" maxlength="100" rows="3" value={description} onChange={handleDescriptionChange} required></textarea>
             </div>
 
             <div class="mb-3">
               <label for="addLoc" class="form-label"><i class="fa-solid fa-location-dot me-2"></i>Location</label>
-              <select class="form-select" aria-label="Default select example" id="addLoc" name="location" value={eventData.location} onChange={handleLocationChange} required>
+              <select class="form-select" aria-label="Default select example" id="addLoc" name="location" value={location} onChange={handleLocationChange} required>
                 <option value="Online Conference">Online Conference</option>
                 <option value="Center of Excellence 1">Center of Excellence 1</option>
                 <option value="Center of Excellence 2">Center of Excellence 2</option>
@@ -226,13 +258,13 @@ const ViewEditEvent = (props) => {
               <div class="col">
                 <label class="control-label col-sm-2" for="addStart"><i class="fa-solid fa-hourglass-start me-2"></i>Start</label>
                 <div class="col-sm-15">          
-                  <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" value={eventData.start} onChange={handleStartChange} required/>
+                  <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" value={start} onChange={handleStartChange} required/>
                 </div>
               </div>
               <div class="col">
                 <label class="control-label col-sm-2" for="addEnd"><i class="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
                 <div class="col-sm-15">          
-                  <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" value={eventData.end} onChange={handleEndChange} required/>
+                  <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" value={end} onChange={handleEndChange} required/>
                 </div>
               </div>
             </div>
