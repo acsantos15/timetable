@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-function handleLogout() {
+export function handleLogout() {
   axios.get('/logout')
     .then(response => {
       if (response.data.status === 'success') {

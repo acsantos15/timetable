@@ -170,7 +170,6 @@ public class UserController {
         } else {
             response.put("status", "error");
         }
-        System.out.println(session.getAttribute("userSession"));
         return response;
     }
 
@@ -218,7 +217,6 @@ public class UserController {
                     response.put("events", events);
                 }
             }
-            response.put("user", loggeduser);
             return ResponseEntity.ok(response);
     }
 

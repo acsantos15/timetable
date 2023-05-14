@@ -47,7 +47,7 @@ const Signup = () => {
       setConPassError('Password dont match');
       setTimeout(() => {
         setConPassError(null);
-      }, 5000);
+      }, 3000);
     }else{
       axios.defaults.withCredentials = true;
       axios.post('http://localhost:8080/createUser', 
@@ -61,7 +61,7 @@ const Signup = () => {
           setUsernameError('Username already taken');
           setTimeout(() => {
             setUsernameError(null);
-          }, 5000);
+          }, 3000);
         }else{
           Swal.fire({
               title: 'Event Added',

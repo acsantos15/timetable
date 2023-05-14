@@ -31,27 +31,33 @@ const Header = (props) => {
   }, []);
 
   const handleSelectChange = (selected) => {
-    const userId = selected.value;
-    setSelectedPeople(userId);
+    setSelectedPeople(selected);
   };
 
   const handleSearchSubmit = (event) => {
     event.preventDefault();
     axios.defaults.withCredentials = true;
     axios.post('/search', 
-    {searchWord: searchword}, 
+    {searchWord: searchword.value}, 
     {withCredentials: true}, 
     { headers: { 'Content-Type': 'application/json' } })
       .then(response => {
-        setSearchName(response.data.user.fname + " "+ response.data.user.lname);
+        setSearchData(response.data);
         setIsOpenSearch(!isOpenSearch);
       })
       .catch(error => console.error(error));
   };
 
+  const handleKeyPress = (event) => {
+    if (event.key === 'Enter') {
+      event.preventDefault();
+      handleSearchSubmit(event);
+    }
+  };
+
   // Passed Data to search component
   const [isOpenSearch, setIsOpenSearch] = useState(false);
-  const [searchName, setSearchName] = useState();
+  const [searchData, setSearchData] = useState('');
 
   return (
   <>
@@ -71,10 +77,9 @@ const Header = (props) => {
         
           {/* SEARCH BAR */}
           <div class="navbar-nav ms-auto me-auto">
-            <form class="d-flex" role="search" onSubmit={handleSearchSubmit}> 
+            <form class="d-flex" role="search" id='searchForm' onSubmit={handleSearchSubmit}> 
             <div class="row-5">
               <Select
-                  isMulti
                   name="peoples[]"
                   options={options}
                   className="participant"
@@ -82,11 +87,12 @@ const Header = (props) => {
                   onChange={handleSelectChange}
                   value={searchword}
                   maximumSelectionLength={1}
+                  onKeyPress={handleKeyPress}
                   styles={{ 
                     container: (provided) => ({
                       ...provided,
                       zIndex: 9999
-                    })
+                    })  
                   }}
                   style={{ width: '300px', marginRight: '100px', minWidth: '300px' }}
                 />
@@ -109,7 +115,7 @@ const Header = (props) => {
       </div>
     </nav>
   </header>
-  <SearchResult isOpenSearch={isOpenSearch} toggleModal={handleSearchSubmit} searchName={searchName}/>
+  <SearchResult isOpenSearch={isOpenSearch} toggleModal={handleSearchSubmit} searchData={searchData}/>
   </>
   )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Select from 'react-select';
 import axios from 'axios';
 import Swal from 'sweetalert2';
+import moment from 'moment';
 
 function AddEvent(props) {
   const { isOpenAdd, selectStart, selectEnd } = props;
@@ -11,9 +12,7 @@ function AddEvent(props) {
   const [selectedColor, setSelectedColor] = useState('#537C78');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
-  // const [start, setStart] = useState(moment(new Date().toISOString()).format('YYYY-MM-DD HH:mm:ss'));
   const [start, setStart] = useState();
-  // const [end, setEnd] = useState(moment(new Date().toISOString()).add(30, 'minutes').format('YYYY-MM-DD HH:mm:ss'));
   const [end, setEnd] = useState();
   
   const handleTitleChange = (event) => {
@@ -60,9 +59,32 @@ function AddEvent(props) {
     }
   };
   
+  const sTime = moment(start).format('HH');
+  const eTime = moment(end).format('HH');
+  const sTimeStamp = Date.parse(start);
+  const eTimeStamp = Date.parse(end);
+
+  const diffMs = Math.abs(sTimeStamp - eTimeStamp);
+  const diffMins = Math.floor(diffMs / 1000 / 60);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    if(sTime > 19 || sTime < 6 || eTime > 19 || eTime < 6){
+      setTimeError('6am to 7pm only');
+      setTimeout(() => {
+        setTimeError(null);
+      }, 3000);
+    }else if(start >= end){
+      setTimeError('Appointment start should be later than end');
+      setTimeout(() => {
+        setTimeError(null);
+      }, 3000);
+    }else if(diffMins < 30){
+      setTimeError('Appointment should be atleast 30 mins');
+      setTimeout(() => {
+        setTimeError(null);
+      }, 3000);
+    }else{
       axios.defaults.withCredentials = true;
       axios.post('http://localhost:8080/saveEvent', 
       {title: title, color: selectedColor, description: description, location: location, start: selectStart, end: selectEnd}, 
@@ -93,7 +115,12 @@ function AddEvent(props) {
       })
       .catch(error => {
         console.log(error);
-      });  
+        setTimeError('Time already passed');
+        setTimeout(() => {
+          setTimeError(null);
+        }, 3000);
+      });
+    }  
   };
   const handleClear = () => {
     setTitle('');
@@ -107,6 +134,14 @@ function AddEvent(props) {
 
     setSelectedPeople(updatedSelectedPeople);
   };
+
+  const handleModalClose = () => {
+    props.toggleModal();
+    handleClear();
+  }
+
+  // Errors
+  const [timeerr, setTimeError] = useState(null);
   
   return (
     <div className="modal" tabIndex="-1" style={{ display: isOpenAdd ? "block" : "none" }}>
@@ -116,7 +151,7 @@ function AddEvent(props) {
           
           <div class="modal-header" style={{backgroundColor: selectedColor}}>
             <h5 class="modal-title"><i class="fa-regular fa-calendar-plus me-2"></i>New Appointment</h5>
-            <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={props.toggleModal} aria-label="Close"></button>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={handleModalClose} aria-label="Close"></button>
           </div>
           <div class="modal-body" style={{fontWeight: 'bold'}}>
             <div class="mb-3 row">
@@ -169,13 +204,15 @@ function AddEvent(props) {
               <div class="col">
                 <label class="control-label col-sm-2" for="addStart"><i class="fa-solid fa-hourglass-start me-2"></i>Start</label>
                 <div class="col-sm-15">          
-                  <input class="form-control" type="datetime-local" id="addStart" name="start" placeholder="Start" value={selectStart} onChange={handleStartChange} required/>
+                  <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addStart" name="start" placeholder="Start" value={selectStart} onChange={handleStartChange} required/>
+                  {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
                 </div>
               </div>
               <div class="col">
                 <label class="control-label col-sm-2" for="addEnd"><i class="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
                 <div class="col-sm-15">          
-                  <input class="form-control" type="datetime-local" id="addEnd" name="end" placeholder="End" value={selectEnd} onChange={handleEndChange} required/>
+                  <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addEnd" name="end" placeholder="End" value={selectEnd} onChange={handleEndChange} required/>
+                  {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
                 </div>
               </div>
             </div>

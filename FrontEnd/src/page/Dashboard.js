@@ -5,6 +5,7 @@ import MiniCalendar from '../component/MiniCalendar';
 import Navigation from '../component/Navigation';
 import { Auth } from '../component/Auth';
 import "../css/style.css";
+import moment from 'moment';
 
 
 const Dashboard = () => {
@@ -46,7 +47,7 @@ const Dashboard = () => {
                         <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                             <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                             <li> {event.description}</li>
-                            <li><small>{event.start}</small> - <small>{event.end}</small></li>
+                            <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
                         </ul>
                         </div>
                     ))
@@ -70,7 +71,7 @@ const Dashboard = () => {
                         <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                             <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                             <li> {event.description}</li>
-                            <li><small>{event.start}</small> - <small>{event.end}</small></li>
+                            <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
                         </ul>
                         </div>
                     ))

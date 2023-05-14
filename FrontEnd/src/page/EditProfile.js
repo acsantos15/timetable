@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../component/Header';
+import LogoutButton, { handleLogout } from '../component/LogoutButton';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -83,6 +84,10 @@ const EditProfile = () => {
             })   
           .catch(error => {
             console.log(error);
+            setUsernameError("Username Already Exist")
+            setTimeout(() => {
+                setUsernameError(null);
+            }, 3000);
           });  
     };
     
@@ -102,18 +107,44 @@ const EditProfile = () => {
 
     const handlePassSubmit = (event) => {
         event.preventDefault();
-          axios.defaults.withCredentials = true;
-          axios.put('/editpass/'+14,
-          {oldpass: oldpass, newpass: newpass}, 
-          {withCredentials: true}, 
-          { headers: { 'Content-Type': 'application/json' } })
-          .then(response => {
-            alert(response);
-            })   
-          .catch(error => {
-            alert(error.response.data);
-          });  
+        if(newpass !== conpass){
+            setConPassError("Password don't match")
+            setTimeout(() => {
+                setConPassError(null);
+            }, 3000);
+        }else{
+            axios.defaults.withCredentials = true;
+            axios.put('/editpass/'+userId,
+            {oldpass: oldpass, newpass: newpass}, 
+            {withCredentials: true}, 
+            { headers: { 'Content-Type': 'application/json' } })
+            .then(response => {
+                Swal.fire({
+                    title: 'Password Updated',
+                    text: "You will be automatically logout",
+                    icon: 'success',
+                    showCancelButton: false,
+                    confirmButtonText: 'Ok'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        handleLogout();
+                    }
+                }) 
+                })   
+            .catch(error => {
+                setOldPassError("Wrong current password")
+                setTimeout(() => {
+                    setOldPassError(null);
+                }, 3000);
+            }); 
+        }
+           
     };
+
+    // Errors
+    const [usernameerr, setUsernameError] = useState(null);
+    const [conpasserr, setConPassError] = useState(null);
+    const [oldpasserr, setOldPassError] = useState(null);
     return (
     // <!--EDIT USER HERE-->
     <div class="container1">
@@ -145,7 +176,7 @@ const EditProfile = () => {
                             </div>
                             <div class="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Contact No.:</label>
-                                <input class="form-control" id="editContact" type="text" placeholder="Contact No." name="contactNo" onChange={handleContactChange} value={contact}/>
+                                <input class="form-control" type="text" pattern="[0-9]{11}" placeholder="Contact No." id="contact" name="contact" maxLength="11" value={contact} onChange={handleContactChange} required/>
                             </div>
                         </div>
                     </div>
@@ -160,7 +191,8 @@ const EditProfile = () => {
                         <div class="card-bodys">    
                             <div class="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Username:</label>
-                                <input class="form-control" id="editUsername" type="text" placeholder="Username" name="username" onChange={handleUsernameChange} value={username}/>
+                                <input className={`form-control ${usernameerr ? 'is-invalid' : ''}`} id="editUsername" type="text" placeholder="Username" name="username" onChange={handleUsernameChange} value={username}/>
+                                {usernameerr && <div style={{height: '10px'}} className="invalid-feedback">{usernameerr}</div>}
                             </div>
                             <div class="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Email Address:</label>
@@ -192,13 +224,16 @@ const EditProfile = () => {
                 <div class="card-bodys">
                 <form onSubmit={handlePassSubmit}>
                     <div class="mb-4">
-                        <input class="form-control" type="password" placeholder="Old Password" name="oldpass" id="oldpass" onChange={handleOldPassChange} value={oldpass}/>
+                        <input className={`form-control ${oldpasserr ? 'is-invalid' : ''}`} type="password" placeholder="Old Password" name="oldpass" id="oldpass" onChange={handleOldPassChange} value={oldpass}/>
+                        {oldpasserr && <div style={{height: '10px'}} className="invalid-feedback">{oldpasserr}</div>}
                     </div>
                     <div class="mb-4">
-                        <input class="form-control" type="password" placeholder="New Password" name="password" id="newpass" onChange={handleNewPassChange} value={newpass}/>
+                        <input className={`form-control ${conpasserr ? 'is-invalid' : ''}`} type="password" placeholder="New Password" name="password" id="newpass" onChange={handleNewPassChange} value={newpass}/>
+                        {conpasserr && <div style={{height: '10px'}} className="invalid-feedback">{conpasserr}</div>}
                     </div>
                     <div class="mb-4">
-                        <input class="form-control" type="password" placeholder="Confirm Password" id="conpass" name="conpass" onChange={handleConPassChange} value={conpass}/>
+                        <input className={`form-control ${conpasserr ? 'is-invalid' : ''}`} type="password" placeholder="Confirm Password" id="conpass" name="conpass" onChange={handleConPassChange} value={conpass}/>
+                        {conpasserr && <div style={{height: '10px'}} className="invalid-feedback">{conpasserr}</div>}
                     </div>   
                      
                     {/* <!-- Error Message --> */}
