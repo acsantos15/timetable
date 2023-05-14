@@ -1,10 +1,17 @@
-import React from 'react'
+import React, {useEffect, useState} from 'react'
 import Header from '../component/Header';
+import axios from 'axios';
 
 
 document.body.style.backgroundColor = "#DEDBD3";
 
 const Profile = () => {
+    const [userdata, setUserData] = useState('');
+    useEffect(() => {
+        axios.get('/loggedUser')
+            .then(response => setUserData(response.data))
+            .catch(error => console.error(error));
+    }, []);
   return (
     // Label 
     <div class="container1">
@@ -19,23 +26,23 @@ const Profile = () => {
         <div class="card-bodys">
             <div class="mb-4">
                 <h6 style={{fontWeight: 'bold'}}>Name</h6>
-                <span id="pname"></span>
+                <span id="pname">{userdata.fname} {userdata.lname}</span>
             </div>
             <div class="mb-4">
                 <h6 style={{fontWeight: 'bold'}}>Address</h6>
-                <span id="paddress"></span>
+                <span id="paddress">{userdata.address}</span>
             </div>
             <div class="mb-4">
                 <h6 style={{fontWeight: 'bold'}}>Contact No.</h6>
-                <span id="pcontact"></span>
+                <span id="pcontact">{userdata.contact}</span>
             </div>
             <div class="mb-4">
                 <h6 style={{fontWeight: 'bold'}}>Username</h6>
-                <span id="pusername"></span>
+                <span id="pusername">{userdata.username}</span>
             </div>
             <div class="mb-4">
                 <h6 style={{fontWeight: 'bold'}}>Email</h6>
-                <span id="pemail"></span>
+                <span id="pemail">{userdata.email}</span>
             </div>
 
             {/*  Buttons  */}

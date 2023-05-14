@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useNavigate , Link } from 'react-router-dom';
 import axios from 'axios';
+import { Auth } from '../component/Auth';
 
 
 
@@ -18,6 +19,7 @@ function Login() {
     setPassword(event.target.value);
   };
 
+  Auth();
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.defaults.withCredentials = true;
@@ -28,6 +30,9 @@ function Login() {
           console.log("Success");
         } else {
           setError('Invalid username or password');
+          setTimeout(() => {
+            setError(null);
+          }, 3000);
           console.log("Error");
         }
       })
@@ -56,24 +61,25 @@ function Login() {
                           <img src="/tgsilogo.png" alt="Tsukiden logo" style={{ height: '.9em', margin: '15px 0 15px 0'}} />
                         </div>
                         <div className="d-flex mb-3 pb-1 justify-content-center">
-                          <label className="h1 fw-bold mb-0" style={{ color: 'rgb(88, 17, 17)', fontWeight: 'bold', fontSize: '60px', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif' }}>Welcome</label>
+                          <label className="h1 fw-bold mb-0" style={{ color: 'rgb(88, 17, 17)', fontWeight: 'bold', fontSize: '60px', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif' }}>Login</label>
                         </div>
 
                         <div className="form-outline mb-4">
-                          <input type="text" id="form2Example17" className="form-control form-control-lg" value={username} onChange={handleUsernameChange}/>
+                          <input type="text" id="form2Example17" className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`} placeholder="Username" value={username} onChange={handleUsernameChange}/>
                         </div>
 
                         <div className="form-outline mb-4">
-                          <input type="password" id="form2Example27" className="form-control form-control-lg" value={password} onChange={handlePasswordChange} />
-                        </div>
+                          <input type="password" id="form2Example27" className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`} placeholder="Password" value={password} onChange={handlePasswordChange} />
+                        </div> 
 
                         {/* Error Message  */}
-                        {error && <span id="errMsg" style={{ color: 'red' }}>{error}</span>}
-                        
+                        <div className="text-center" style={{ height: '20px', overflow: 'hidden' }}>
+                          {error && <p id="errMsg" style={{ color: 'red' }}>{error}</p>}
+                        </div>
 
                         {/* Button  */}
                         <div className="pt-1 mb-4" style={{ float: 'right' }}>
-                          <button className="rounded" style={{ backgroundColor: '#7993A0', fontWeight: 'bold', color: 'white', padding: '10px' }} type="submit">Login</button>
+                          <button className="rounded" style={{ backgroundColor: '#537557', fontWeight: 'bold', color: 'white', padding: '10px', border: "none" }} type="submit">Login</button>
                         </div>
 
 

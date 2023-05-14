@@ -9,11 +9,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -31,12 +29,9 @@ import com.tgsi.timetable.entity.Users;
 import com.tgsi.timetable.mapper.EventMapper;
 import com.tgsi.timetable.mapper.UserMapper;
 
-import jakarta.servlet.http.HttpServletRequest;
+
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
-
-import org.springframework.web.context.request.RequestContextHolder;
-import org.springframework.web.context.request.ServletRequestAttributes;
 
 @RestController
 @SessionAttributes("userSession")
@@ -81,20 +76,13 @@ public class UserController {
         return response;
     }
 
-
-    // Display Profile
-    @GetMapping("/profile")
-    public String showprofile(HttpSession session, Model model) {
-        Users user = (Users) session.getAttribute("user");
-        if (user == null) {
-            return "redirect:/login";
-        } else {
-            // Get User Information
-            Long userid = user.getId();
-            Users dbUser = uMapper.getUserById(userid);
-            model.addAttribute("user", dbUser);
-            return "profile";
-        }
+    @GetMapping("/loggedUser")
+    @CrossOrigin
+    public ResponseEntity<?> header(HttpSession session) {
+        Users user = (Users) session.getAttribute("userSession");
+        Long userid = user.getId();
+        Users dbUser = uMapper.getUserById(userid);
+        return ResponseEntity.ok(dbUser);
     }
 
     // editprofile page
@@ -209,33 +197,30 @@ public class UserController {
     }
 
     // Search users
-    @GetMapping("/search")
-    public String searchUsers(@RequestParam String searchWord, Model model, HttpSession session) {
-        Users loggeduser = (Users) session.getAttribute("user");
+    @PostMapping("/search")
+    public ResponseEntity<Object> searchUsers(@RequestBody Map<String, String> payload, HttpSession session) {
+        String searchWord = payload.get("searchWord");
+        Users loggeduser = (Users) session.getAttribute("userSession");
         List<Users> users = uMapper.searchUser(searchWord);
         List<String> userIds = users.stream().map(user -> String.valueOf(user.getId())).collect(Collectors.toList());
         LocalDateTime startTime = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);
         LocalDateTime endTime = LocalDateTime.now().withHour(23).withMinute(59).withSecond(59);
         List<Events> events = eMapper.getUserbyEventId(String.join(",", userIds), startTime, endTime);
 
-        if (loggeduser == null) {
-            return "redirect:/login";
-        } else {
+            Map<String, Object> response = new HashMap<>();
             if (users.isEmpty()) {
-                model.addAttribute("userresult", "nouser");
+                response.put("userresult", "nouser");
             } else {
-                model.addAttribute("users", users);
+                response.put("users", users);
                 if (events.isEmpty()) {
-                    model.addAttribute("eventresult", "noevent");
+                    response.put("eventresult", "noevent");
                 } else {
-                    model.addAttribute("events", events);
+                    response.put("events", events);
                 }
-
             }
-            model.addAttribute("user", loggeduser);
-            return "searchresult";
-        }
-
+            response.put("user", loggeduser);
+            return ResponseEntity.ok(response);
     }
+
 
 }

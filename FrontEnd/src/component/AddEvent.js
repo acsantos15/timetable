@@ -5,16 +5,16 @@ import Swal from 'sweetalert2';
 
 function AddEvent(props) {
   const { isOpenAdd, selectStart, selectEnd } = props;
+  const [error, setError] = useState(null);
+
   const [title, setTitle] = useState('');
   const [selectedColor, setSelectedColor] = useState('#537C78');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   // const [start, setStart] = useState(moment(new Date().toISOString()).format('YYYY-MM-DD HH:mm:ss'));
   const [start, setStart] = useState();
-  // const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
   // const [end, setEnd] = useState(moment(new Date().toISOString()).add(30, 'minutes').format('YYYY-MM-DD HH:mm:ss'));
   const [end, setEnd] = useState();
-  // const fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
   
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -37,6 +37,7 @@ function AddEvent(props) {
 
   const [options, setOptions] = useState([]);
   const [selectedPeople, setSelectedPeople] = useState([]);
+  
   useEffect(() => {
     axios.get('/users')
       .then(response => {
@@ -52,8 +53,13 @@ function AddEvent(props) {
   }, []);
 
   const handleSelectChange = (selected) => {
-    setSelectedPeople(selected);
+    if (!selected.some(option => option.value === selectedPeople[0].value)) {
+      setSelectedPeople(selectedPeople);
+    } else {
+      setSelectedPeople(selected);
+    }
   };
+  
 
   const handleSubmit = (event) => {
     event.preventDefault();

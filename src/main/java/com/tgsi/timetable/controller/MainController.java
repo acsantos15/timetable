@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -70,14 +69,6 @@ public class MainController {
         data.put("weatherData", weatherData);
 
         return ResponseEntity.ok(data);
-    }
-
-    @GetMapping("/header")
-    @CrossOrigin
-    public ResponseEntity<?> header(HttpSession session) {
-        Users user = (Users) session.getAttribute("userSession");
-        String username = user.getFname() + " " + user.getLname();
-        return ResponseEntity.ok(username);
     }
 
     // Get All Events Of Logged User

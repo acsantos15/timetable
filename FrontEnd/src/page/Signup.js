@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useNavigate } from "react-router-dom";
 import axios from 'axios';
+import Swal from 'sweetalert2'
 
 const Signup = () => {
   const [fname, setFname] = useState('');
@@ -12,7 +13,6 @@ const Signup = () => {
   const [pass, setPassword] = useState('');
   const [conpass, setConPass] = useState('');
   const navigate = useNavigate ();
-  const [error, setError] = useState(null);
 
   const handleFnameChange = (event) => {
     setFname(event.target.value);
@@ -44,7 +44,10 @@ const Signup = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     if (pass !== conpass) {
-      setError('Password dont match');
+      setConPassError('Password dont match');
+      setTimeout(() => {
+        setConPassError(null);
+      }, 5000);
     }else{
       axios.defaults.withCredentials = true;
       axios.post('http://localhost:8080/createUser', 
@@ -55,9 +58,23 @@ const Signup = () => {
       .then(response => {
         console.log(response.data.status)
         if (response.data.status === 'taken'){
-          setError('Username already taken');
+          setUsernameError('Username already taken');
+          setTimeout(() => {
+            setUsernameError(null);
+          }, 5000);
         }else{
-          navigate("/login")
+          Swal.fire({
+              title: 'Event Added',
+              text: " ",
+              icon: 'success',
+              showCancelButton: false,
+              confirmButtonText: 'Ok'
+          }).then((result) => {
+              if (result.isConfirmed) {
+                navigate("/login")
+              }
+          }) 
+          
         }
       })
       .catch(error => {
@@ -65,6 +82,10 @@ const Signup = () => {
       });
     }   
   };
+
+  // Errors
+  const [conpasserr, setConPassError] = useState(null);
+  const [usernameerr, setUsernameError] = useState(null);
 
   document.body.style.backgroundColor = "#537557";
 
@@ -88,37 +109,61 @@ const Signup = () => {
                   <form onSubmit={handleSubmit}>
                     <h5 style={{color: '#7993a0', fontWeight: 'bold',}}>Personal Information</h5>
 
-                    <div class="mb-4" style={{width: '48%', float: 'left'}}>
-                      <input class="form-control" type="text" placeholder="First Name" id="fname" name="fname" maxLength="50" value={fname} onChange={handleFnameChange} required/>
+                    <div class="row align-items-center">
+                      <div class="col">
+                        <div class="mb-4">
+                          <input class="form-control" type="text" placeholder="First Name" id="fname" name="fname" maxLength="50" value={fname} onChange={handleFnameChange} required/>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="mb-4">
+                          <input class="form-control" type="text" placeholder="Last Name" id="lname" name="lname" maxLength="50" value={lname} onChange={handleLnameChange} required/>
+                        </div>
+                      </div>
                     </div>
-                    <div class="mb-4" style={{width: '48%', float: 'right'}}>
-                      <input class="form-control" type="text" placeholder="Last Name" id="lname" name="lname" maxLength="50" value={lname} onChange={handleLnameChange} required/>
-                    </div>
-                    <div class="mb-4" style={{width: '48%', float: 'left'}}>
-                      <input class="form-control" type="text" placeholder="Home Address" id="address" name="address" maxLength="100" value={address} onChange={handleAddressChange} required/> 
-                    </div>
-                    <div class="mb-4" style={{width: '48%', float: 'right'}}>
-                      <input class="form-control" type="text" pattern="[0-9]{11}" placeholder="Contact No." id="contact" name="contact" maxLength="11" value={contact} onChange={handleContactChange} required/>
+                    
+                    <div class="row align-items-center">
+                      <div class="col">
+                        <div class="mb-4">
+                          <input class="form-control" type="text" placeholder="Home Address" id="address" name="address" maxLength="100" value={address} onChange={handleAddressChange} required/> 
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="mb-4">
+                          <input class="form-control" type="text" pattern="[0-9]{11}" placeholder="Contact No." id="contact" name="contact" maxLength="11" value={contact} onChange={handleContactChange} required/>
+                        </div>
+                      </div>
                     </div>
 
                     <h5 style={{float:'left', width: '100%', color: '#7993a0', fontWeight: 'bold'}}>Account Information</h5>
 
-                    <div class="mb-4" style={{width: '48%', float: 'left'}}>
-                      <input class="form-control" type="text" placeholder="Username" id="username" name="username" maxLength="50" value={username} onChange={handleUsernameChange} required/>
+                    <div class="row align-items-center">
+                      <div class="col">
+                        <div class="mb-4">
+                          <input className={`form-control ${usernameerr ? 'is-invalid' : ''}`} type="text" placeholder="Username" id="username" name="username" maxLength="50" value={username} onChange={handleUsernameChange} required/>
+                          {usernameerr && <div style={{height: '10px'}} className="invalid-feedback">{usernameerr}</div>}
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="mb-4">
+                          <input class="form-control" type="email" placeholder="Email" id="email" name="email" maxLength="50" value={email} onChange={handleEmailChange} required/>
+                        </div>
+                      </div>
                     </div>
-                    <div class="mb-4" style={{width: '48%', float: 'right'}}>
-                      <input class="form-control" type="email" placeholder="Email" id="email" name="email" maxLength="50" value={email} onChange={handleEmailChange} required/>
-                    </div>
-                    <div class="mb-4" style={{width: '48%', float: 'left'}}>
-                      <input class="form-control" type="password" placeholder="Password" id="pass" name="pass" maxLength="50" minLength="8" value={pass} onChange={handlePasswordChange} required/>
-                    </div>
-                    <div class="mb-4" style={{width: '48%', float: 'right'}}>
-                      <input class="form-control" type="password" id="conpass" placeholder="Confirm Password" maxLength="50" value={conpass} onChange={handleConPassChange} required/>
-                    </div>
-
-                    {/* Error Message  */}
-                    {error && <span id="errMsg" style={{ color: 'red' }}>{error}</span>}<br></br>
-
+                    <div class="row align-items-center">
+                      <div class="col">
+                        <div class="mb-4">
+                          <input class="form-control" type="password" placeholder="Password" id="pass" name="pass" maxLength="50" minLength="8" value={pass} onChange={handlePasswordChange} required/>
+                        </div>
+                      </div>
+                      <div class="col">
+                        <div class="mb-4">
+                          <input className={`form-control ${conpasserr ? 'is-invalid' : ''}`} type="password" id="conpass" placeholder="Confirm Password" maxLength="50" value={conpass} onChange={handleConPassChange} required/>
+                          {conpasserr && <div style={{height: '10px'}} className="invalid-feedback">{conpasserr}</div>}
+                        </div>
+                      </div>
+                    </div>     
+                   
                     {/* Button */}
                     <div style={{float: 'right'}}>
                       <button type="submit" class="btn" style={{backgroundColor: '#7393a0', color: 'white'}}>Sign Up</button>

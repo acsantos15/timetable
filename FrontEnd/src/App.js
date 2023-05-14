@@ -8,6 +8,7 @@ import Dashboard from './page/Dashboard';
 import Timetable from './page/Timetable';
 import Profile from './page/Profile';
 import EditProfile from './page/EditProfile';
+import Search from './page/Search';
 
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
         <Route path="/timetable" element={<Timetable/>} />
         <Route path="/profile" element={<Profile/>} />
         <Route path="/editprofile" element={<EditProfile/>} />
+        <Route path="/search" element={<Search/>} />
       </Routes>     
     </BrowserRouter>
   );

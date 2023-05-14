@@ -92,11 +92,11 @@ const ViewEditEvent = (props) => {
 
   const [title, setTitle] = useState('');
   const [selectedColor, setSelectedColor] = useState('');
-  const [description, setDescription] = useState(eventData.description);
-  const [location, setLocation] = useState(eventData.location);
-  const [start, setStart] = useState(eventData.start);
+  const [description, setDescription] = useState('');
+  const [location, setLocation] = useState('');
+  const [start, setStart] = useState('');
   const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
-  const [end, setEnd] = useState(eventData.end);
+  const [end, setEnd] = useState('');
   const fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
   
   const handleTitleChange = (event) => {
