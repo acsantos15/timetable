@@ -44,6 +44,7 @@ const Header = (props) => {
       .then(response => {
         setSearchData(response.data);
         setIsOpenSearch(!isOpenSearch);
+        setSelectedPeople('')
       })
       .catch(error => console.error(error));
   };
@@ -88,6 +89,8 @@ const Header = (props) => {
                   value={searchword}
                   maximumSelectionLength={1}
                   onKeyPress={handleKeyPress}
+                  required
+                  placeholder="Search...."
                   styles={{ 
                     container: (provided) => ({
                       ...provided,
