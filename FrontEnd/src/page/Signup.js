@@ -166,7 +166,7 @@ const Signup = () => {
                    
                     {/* Button */}
                     <div style={{float: 'right'}}>
-                      <button class="signup-btn">Sign up</button>
+                      <button class="rounded signup-btn"><b>Sign up</b></button>
                     </div>
 
                     {/* Already Have an Account? */}

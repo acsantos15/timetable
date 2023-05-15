@@ -177,7 +177,7 @@ const ViewEditEvent = (props) => {
     <div className="modal" tabIndex="-1" style={{ display: isOpenView ? "block" : "none" }}>
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header" style={{backgroundColor: eventData.color}}>
+        <div class="modal-header" style={{backgroundColor: '#537557'}}>
           <h5 class="modal-title"> <i class="fa-solid fa-circle-info me-2"></i>Event Details</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={props.toggleModal} aria-label="Close"></button>
         </div>
@@ -221,7 +221,7 @@ const ViewEditEvent = (props) => {
       <div class="modal-dialog modal-dialog-centered modal-lg">
         <div style= {{backgroundColor: 'white'}}class="modal-content">
           
-          <div class="modal-header" style={{backgroundColor: selectedColor}}>
+          <div class="modal-header" style={{backgroundColor: '#537557'}}>
             <h5 class="modal-title"><i class="fa-regular fa-calendar-plus me-2"></i>Edit Appointment</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={handleEditShow} aria-label="Close"></button>
           </div>
@@ -234,11 +234,13 @@ const ViewEditEvent = (props) => {
               <div class="col-sm-2">
               <label for="addColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Color</label>
               <select class="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor}}>
-                <option value="#537C78" style={{backgroundColor: '#537C78'}}></option>
-                <option value="#F8B195" style={{backgroundColor: '#F8B195'}}></option>
-                <option value="#6C5B78" style={{backgroundColor: '#6C5B78'}}></option>
-                <option value="#B26565" style={{backgroundColor: '#B26565'}}></option>
-                <option value="#355C7D" style={{backgroundColor: '#355C7D'}}></option>
+                <option value="#dd766a" style={{backgroundColor: '#dd766a'}}></option>
+                <option value="#dd996a" style={{backgroundColor: '#dd996a'}}></option>
+                <option value="#eddf7d" style={{backgroundColor: '#eddf7d'}}></option>
+                <option value="#5f9e55" style={{backgroundColor: '#5f9e55'}}></option>
+                <option value="#5287ba" style={{backgroundColor: '#5287ba'}}></option>  
+                <option value="#8364a7" style={{backgroundColor: '#8364a7'}}></option>
+                <option value="#c97ab9" style={{backgroundColor: '#c97ab9'}}></option>
               </select>
               </div>
             </div>

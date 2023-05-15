@@ -1,12 +1,10 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import Select from 'react-select';
 import LogoutButton from '../component/LogoutButton';
 import SearchResult from '../page/Search';
 
 const Header = (props) => {
-  const navigate = useNavigate ();
 
   const [username, setUsername] = useState('');
   useEffect(() => {

@@ -134,7 +134,7 @@ span.select2-container {
     background-color: #537557;
     color: white;
     font-weight: bold;
-    padding: 10px;
+    padding: 10px 20px;
     border: none;
     transition: background-color 0.3s ease;
     cursor: pointer;
@@ -160,4 +160,5 @@ span.select2-container {
   .signup-btn:hover {
     background-color: #99c49f;
   }
+
   
