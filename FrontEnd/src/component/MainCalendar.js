@@ -81,7 +81,7 @@ const MainCalendar = (props) => {
         select={handleSelect}
         selectAllow={selectionHandler}
         slotMinTime="06:00:00"
-        slotMaxTime="20:00:00"
+        slotMaxTime="19:00:00"
         eventTimeFormat={{ 
             hour: "2-digit", 
             minute: "2-digit", 
