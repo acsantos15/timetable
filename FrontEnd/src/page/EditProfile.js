@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../component/Header';
-import LogoutButton, { handleLogout } from '../component/LogoutButton';
+import { handleLogout } from '../component/LogoutButton';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
