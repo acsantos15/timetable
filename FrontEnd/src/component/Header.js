@@ -87,8 +87,10 @@ const Header = (props) => {
                   value={searchword}
                   maximumSelectionLength={1}
                   onKeyPress={handleKeyPress}
+                  maxMenuHeight={150}
+                  components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
                   required
-                  placeholder="Search...."
+                  placeholder="Search..."
                   styles={{ 
                     container: (provided) => ({
                       ...provided,

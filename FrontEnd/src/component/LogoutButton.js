@@ -30,7 +30,7 @@ export function handleLogout() {
 
 function LogoutButton() {
   return (
-    <li><a href='/login' class="dropdown-item" id="logoutBtn" style={{color:'red'}} onClick={handleLogout}><i class="fa-solid fa-power-off me-2"></i>Logout</a></li>
+    <li><a class="dropdown-item" id="logoutBtn" style={{color:'red'}} onClick={handleLogout}><i class="fa-solid fa-power-off me-2"></i>Logout</a></li>
   );
 }
 

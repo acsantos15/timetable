@@ -157,7 +157,7 @@ function AddEvent(props) {
   return (
     <div className="modal" tabIndex="-1" style={{ display: isOpenAdd ? "block" : "none" }}>
       <form onSubmit={handleSubmit}>
-      <div className="modal-dialog modal-dialog-centered modal-lg">
+      <div className="modal-dialog modal-dialog-centered modal-lg" style={{marginTop: '8%'}}>
         <div style= {{backgroundColor: 'white'}}class="modal-content">
           
           <div class="modal-header" style={{backgroundColor: selectedColor}}>
@@ -171,14 +171,14 @@ function AddEvent(props) {
                 <input type="text" class="form-control" id="addTitle" name="title" maxlength="100" value={title} onChange={handleTitleChange} required/>
               </div>
               <div class="col-sm-2">
-              <label for="addColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Color</label>
-              <select class="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor }}>
-                <option value="#537C78" style={{backgroundColor: '#537C78'}}></option>
-                <option value="#F8B195" style={{backgroundColor: '#F8B195'}}></option>
-                <option value="#6C5B78" style={{backgroundColor: '#6C5B78'}}></option>
-                <option value="#B26565" style={{backgroundColor: '#B26565'}}></option>
-                <option value="#355C7D" style={{backgroundColor: '#355C7D'}}></option>
-              </select>
+                <label for="addColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Color</label>
+                <select class="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor }}>
+                  <option value="#537C78" style={{backgroundColor: '#537C78'}}></option>
+                  <option value="#F8B195" style={{backgroundColor: '#F8B195'}}></option>
+                  <option value="#6C5B78" style={{backgroundColor: '#6C5B78'}}></option>
+                  <option value="#B26565" style={{backgroundColor: '#B26565'}}></option>
+                  <option value="#355C7D" style={{backgroundColor: '#355C7D'}}></option>
+                </select>
               </div>
             </div>
 
