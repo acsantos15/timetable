@@ -144,7 +144,7 @@ span.select2-container {
     background-color: #99c49f;
   }
   .signup-btn {
-    background-color: #7993a0; 
+    background-color: #537557; 
     border: none;
     color: white;
     padding: 10px 20px;
@@ -158,6 +158,6 @@ span.select2-container {
   }
   
   .signup-btn:hover {
-    background-color: #2e3031;
+    background-color: #99c49f;
   }
   
