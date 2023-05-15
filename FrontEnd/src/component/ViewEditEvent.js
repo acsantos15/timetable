@@ -47,7 +47,7 @@ const ViewEditEvent = (props) => {
         text: " ",
         icon: 'warning',
         showCancelButton: true,
-        confirmButtonColor: '#3085d6',
+        confirmButtonColor: '#537557',
         cancelButtonColor: '#d33',
         confirmButtonText: 'Ok'
     }).then((result) => {

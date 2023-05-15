@@ -91,12 +91,12 @@ const Header = (props) => {
                   onKeyPress={handleKeyPress}
                   required
                   placeholder="Search...."
-                  styles={{ 
-                    container: (provided) => ({
-                      ...provided,
-                      zIndex: 9999
-                    })  
-                  }}
+                  // styles={{ 
+                  //   container: (provided) => ({
+                  //     ...provided,
+                  //     zIndex: 9999
+                  //   })  
+                  // }}
                   style={{ width: '300px', marginRight: '100px', minWidth: '300px' }}
                 />
             </div>   
