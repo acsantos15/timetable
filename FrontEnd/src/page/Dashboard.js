@@ -37,7 +37,7 @@ const Dashboard = () => {
             <div className="card" style={{backgroundColor: 'white',margin: '20px 30px 0 82px'}}>
                   
                 {/* Today's Event Tables */}
-                <div className="container" style={{padding: '0 20px 10px 20px', maxHeight: '350px',overflowY: 'auto'}}>
+                <div className="container" style={{padding: '5px 20px 0 20px', maxHeight: '400px',overflowY: 'auto'}}>
                     <div class="card-header sticky-top" style={{backgroundColor: 'white'}}>
                         <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', height: '40px', margin: '10px 0 0 0'}}>
                             <i className="fa-solid fa-calendar-day me-2"></i>Today
@@ -60,14 +60,14 @@ const Dashboard = () => {
                             <div class="d-flex align-items-center justify-content-center" style={{fontSize: 'larger', fontWeight: 'bold'}}>No Event for Today</div>
                         </div>
                     )}
-
+                    <div class="card-footer sticky-bottom" style={{backgroundColor: 'white'}}></div>
                 </div>
 
 
                 {/* Tommorows's Event Tables */}
-                <div className="container" style={{padding: '0 20px 10px 20px', maxHeight: '350px',overflowY: 'auto'}}>
+                <div className="container" style={{padding: '0 20px 0px 20px', maxHeight: '410px',overflowY: 'auto'}}>
                     <div class="card-header sticky-top" style={{backgroundColor: 'white'}}>
-                        <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', height: '40px', margin: '10px 0 0 0'}}>
+                        <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', height: '40px'}}>
                             <i class="fa-solid fa-calendar-day fa-flip-horizontal me-2"></i>Tommorow
                         </h3>
                     </div>
@@ -88,6 +88,7 @@ const Dashboard = () => {
                             <div class="d-flex align-items-center justify-content-center" style={{fontSize: 'larger', fontWeight: 'bold'}}>No Event for Tommorow</div>
                         </div>
                     )}
+                    <div class="card-footer sticky-bottom" style={{backgroundColor: 'white', paddingBottom: '20px'}}></div>
                 </div>
             </div>
         </div>
