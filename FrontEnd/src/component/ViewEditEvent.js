@@ -218,7 +218,7 @@ const ViewEditEvent = (props) => {
 
 <div className="modal" tabIndex="-1" style={{ display: isOpenEdit ? "block" : "none" }}>
       <form onSubmit={handleSubmit}>
-      <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-dialog modal-dialog-centered modal-lg" style={{marginTop: '8%'}}>
         <div style= {{backgroundColor: 'white'}}class="modal-content">
           
           <div class="modal-header" style={{backgroundColor: '#537557'}}>

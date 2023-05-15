@@ -157,7 +157,11 @@ function AddEvent(props) {
   return (
     <div className="modal" tabIndex="-1" style={{ display: isOpenAdd ? "block" : "none" }}>
       <form onSubmit={handleSubmit}>
+<<<<<<< HEAD
       <div class="modal-dialog modal-dialog-centered modal-lg">
+=======
+      <div className="modal-dialog modal-dialog-centered modal-lg" style={{marginTop: '8%'}}>
+>>>>>>> 484e6d35ca5a69374dc5292e3ddff309fe2134ec
         <div style= {{backgroundColor: 'white'}}class="modal-content">
           
           <div class="modal-header" style={{backgroundColor:'#537557' }}>
@@ -173,6 +177,7 @@ function AddEvent(props) {
               <div class="col-sm-2">
                 <label for="addColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Color</label>
                 <select class="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor }}>
+<<<<<<< HEAD
                   <option value="#dd766a" style={{backgroundColor: '#dd766a'}}></option>
                   <option value="#dd996a" style={{backgroundColor: '#dd996a'}}></option>
                   <option value="#eddf7d" style={{backgroundColor: '#eddf7d'}}></option>
@@ -180,6 +185,13 @@ function AddEvent(props) {
                   <option value="#5287ba" style={{backgroundColor: '#5287ba'}}></option>  
                   <option value="#8364a7" style={{backgroundColor: '#8364a7'}}></option>
                   <option value="#c97ab9" style={{backgroundColor: '#c97ab9'}}></option>
+=======
+                  <option value="#537C78" style={{backgroundColor: '#537C78'}}></option>
+                  <option value="#F8B195" style={{backgroundColor: '#F8B195'}}></option>
+                  <option value="#6C5B78" style={{backgroundColor: '#6C5B78'}}></option>
+                  <option value="#B26565" style={{backgroundColor: '#B26565'}}></option>
+                  <option value="#355C7D" style={{backgroundColor: '#355C7D'}}></option>
+>>>>>>> 484e6d35ca5a69374dc5292e3ddff309fe2134ec
                 </select>
               </div>
 
