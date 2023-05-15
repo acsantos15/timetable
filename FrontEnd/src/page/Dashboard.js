@@ -37,9 +37,9 @@ const Dashboard = () => {
             <div className="card" style={{backgroundColor: 'white',margin: '20px 30px 0 82px'}}>
                   
                 {/* Today's Event Tables */}
-                <div className="container" style={{padding: '5px 20px 0 20px', maxHeight: '400px',overflowY: 'auto'}}>
+                <div className="container" style={{padding: '0 20px 0 20px', maxHeight: '400px',overflowY: 'auto'}}>
                     <div class="card-header sticky-top" style={{backgroundColor: 'white'}}>
-                        <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', height: '40px', margin: '10px 0 0 0'}}>
+                        <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', height: '40px', margin: '15px 0 0 0'}}>
                             <i className="fa-solid fa-calendar-day me-2"></i>Today
                         </h3>
                     </div>
