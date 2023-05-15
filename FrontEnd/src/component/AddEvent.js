@@ -6,14 +6,22 @@ import moment from 'moment';
 
 function AddEvent(props) {
   const { isOpenAdd, selectStart, selectEnd } = props;
-  const [error, setError] = useState(null);
 
   const [title, setTitle] = useState('');
   const [selectedColor, setSelectedColor] = useState('#537C78');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
-  const [start, setStart] = useState();
-  const [end, setEnd] = useState();
+  const [start, setStart] = useState('');
+  const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
+  const [end, setEnd] = useState('');
+  const fEnd = moment(end).format('YYYY-MM-DD HH:mm:ss');
+
+  useEffect(() => {
+    if (selectStart != null && selectEnd != null) {
+      setStart(selectStart);
+      setEnd(selectEnd);
+    }
+  }, [selectStart, selectEnd]);
   
   const handleTitleChange = (event) => {
     setTitle(event.target.value);
@@ -87,7 +95,7 @@ function AddEvent(props) {
     }else{
       axios.defaults.withCredentials = true;
       axios.post('http://localhost:8080/saveEvent', 
-      {title: title, color: selectedColor, description: description, location: location, start: selectStart, end: selectEnd}, 
+      {title: title, color: selectedColor, description: description, location: location, start: fStart, end: fEnd},
       {withCredentials: true}, 
       { headers: { 'Content-Type': 'application/json' } })
       .then(response => {
@@ -115,10 +123,10 @@ function AddEvent(props) {
       })
       .catch(error => {
         console.log(error);
-        setTimeError('Time already passed');
-        setTimeout(() => {
-          setTimeError(null);
-        }, 3000);
+        // setTimeError('Time already passed');
+        // setTimeout(() => {
+        //   setTimeError(null);
+        // }, 3000);
       });
     }  
   };
@@ -204,14 +212,14 @@ function AddEvent(props) {
               <div class="col">
                 <label class="control-label col-sm-2" for="addStart"><i class="fa-solid fa-hourglass-start me-2"></i>Start</label>
                 <div class="col-sm-15">          
-                  <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addStart" name="start" placeholder="Start" value={selectStart} onChange={handleStartChange} required/>
+                  <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addStart" name="start" placeholder="Start" value={start} onChange={handleStartChange} required/>
                   {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
                 </div>
               </div>
               <div class="col">
                 <label class="control-label col-sm-2" for="addEnd"><i class="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
                 <div class="col-sm-15">          
-                  <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addEnd" name="end" placeholder="End" value={selectEnd} onChange={handleEndChange} required/>
+                  <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addEnd" name="end" placeholder="End" value={end} onChange={handleEndChange} required/>
                   {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
                 </div>
               </div>
