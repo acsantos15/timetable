@@ -1,18 +1,31 @@
 import axios from 'axios';
+import Swal from 'sweetalert2';
 
 export function handleLogout() {
-  axios.get('/logout')
-    .then(response => {
-      if (response.data.status === 'success') {
-        console.log('Logged out successfully!');
-        window.location.href = "/login";
-      } else {
-        console.log('Logout error');
+  Swal.fire({
+      title: 'Logout?',
+      text: " ",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#537557',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Ok'
+  }).then((result) => {
+      if (result.isConfirmed) {
+        axios.get('/logout')
+        .then(response => {
+          if (response.data.status === 'success') {
+            console.log('Logged out successfully!');
+            window.location.href = "/login";
+          } else {
+            console.log('Logout error');
+          }
+        })
+        .catch(error => {
+          console.log('Error logging out', error);
+        });
       }
-    })
-    .catch(error => {
-      console.log('Error logging out', error);
-    });
+  }) 
 }
 
 function LogoutButton() {

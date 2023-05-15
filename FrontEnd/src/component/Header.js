@@ -94,10 +94,9 @@ const Header = (props) => {
                   styles={{ 
                     container: (provided) => ({
                       ...provided,
-                      zIndex: 9999
+                      width: '300px'
                     })  
                   }}
-                  style={{ width: '300px', marginRight: '100px', minWidth: '300px' }}
                 />
             </div>   
               <button class="btn btn-outline-light ms-2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
