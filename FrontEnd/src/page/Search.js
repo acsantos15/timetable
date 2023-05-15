@@ -40,7 +40,7 @@ const Search = (props) => {
 
                 {/* Searched User Schedule */}
                 <div class="col-sm-7">
-                    <div class="card" style={{padding: '0 30px 30px 30px', maxHeight: '500px',overflowY: 'auto'}}>
+                    <div class="card" style={{padding: '0 30px 0 30px', maxHeight: '500px',overflowY: 'auto'}}>
                     <div class="card-headers sticky-top" style={{backgroundColor: 'white'}}>
                         <h5 style={{color: '#7993a0', fontWeight: 'bold', height: '40px', marginTop: '30px'}}>SCHEDULE FOR TODAY</h5>
                     </div>
@@ -57,6 +57,7 @@ const Search = (props) => {
                     ) : (
                         <div>No appointment found.</div>
                     )}
+                    <div class="card-footer sticky-bottom" style={{backgroundColor: 'white', paddingBottom: '20px'}}></div>
                     </div>
                 </div>
             </div>
