@@ -154,7 +154,7 @@ function AddEvent(props) {
   return (
     <div className="modal" tabIndex="-1" style={{ display: isOpenAdd ? "block" : "none" }}>
       <form onSubmit={handleSubmit}>
-      <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div className="modal-dialog modal-dialog-centered modal-lg">
         <div style= {{backgroundColor: 'white'}}class="modal-content">
           
           <div class="modal-header" style={{backgroundColor: selectedColor}}>
