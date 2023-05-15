@@ -155,6 +155,23 @@ const ViewEditEvent = (props) => {
         console.log(error);
       });  
   };
+    const handleClear = () => {
+      setTitle('');
+      setSelectedColor('#537C78');
+      setDescription('');
+      setLocation('');
+      setStart('');
+      setEnd('');
+      const preselectedUser = options.find(user => user.value === selectedPeople[0].value);
+      const updatedSelectedPeople = preselectedUser ? [preselectedUser] : [];
+
+      setSelectedPeople(updatedSelectedPeople);
+    };
+
+    const handleModalClose = () => {
+      props.toggleModal();
+      handleClear();
+    }
   return (
     <>
     <div className="modal" tabIndex="-1" style={{ display: isOpenView ? "block" : "none" }}>
@@ -275,7 +292,7 @@ const ViewEditEvent = (props) => {
 
           {/* Buttons */}
           <div class="modal-footer">
-            <button type="reset" class="btn btn-outline-secondary"><i class="fa-solid fa-eraser me-2"></i>Clear</button>
+            <button type="reset" class="btn btn-outline-secondary" onClick={handleClear}><i class="fa-solid fa-eraser me-2"></i>Clear</button>
             <button type="submit" class="btn btn-success" id="addEventBtn"><i class="fa-solid fa-floppy-disk me-2"></i>Save Changes</button>
           </div>            
         </div>                            
