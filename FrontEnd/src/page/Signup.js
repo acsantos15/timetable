@@ -166,7 +166,7 @@ const Signup = () => {
                    
                     {/* Button */}
                     <div style={{float: 'right'}}>
-                      <button type="submit" class="btn" style={{backgroundColor: '#7393a0', color: 'white'}}>Sign Up</button>
+                      <button class="signup-btn">Sign up</button>
                     </div>
 
                     {/* Already Have an Account? */}
