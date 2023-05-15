@@ -37,9 +37,13 @@ const Dashboard = () => {
             <div className="card" style={{backgroundColor: 'white',margin: '20px 30px 0 82px'}}>
                   
                 {/* Today's Event Tables */}
-                <div className="container" style={{padding: '20px 20px 10px 20px'}}>
-                    <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder'}}><i className="fa-solid fa-calendar-day me-2"></i>Today</h3>
-                    <hr/>
+                <div className="container" style={{padding: '0 20px 10px 20px', maxHeight: '350px',overflowY: 'auto'}}>
+                    <div class="card-header sticky-top" style={{backgroundColor: 'white'}}>
+                        <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', height: '40px', margin: '10px 0 0 0'}}>
+                            <i className="fa-solid fa-calendar-day me-2"></i>Today
+                        </h3>
+                    </div>
+                    {/* <hr/> */}
                     
                     {todayEvents.length ? (
                     todayEvents.map((event) => (
@@ -61,9 +65,13 @@ const Dashboard = () => {
 
 
                 {/* Tommorows's Event Tables */}
-                <div className="container" style={{padding: '10px 20px 20px 20px'}}>
-                    <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder'}}><i class="fa-solid fa-calendar-day fa-flip-horizontal me-2"></i>Tommorow</h3>
-                    <hr/>
+                <div className="container" style={{padding: '0 20px 10px 20px', maxHeight: '350px',overflowY: 'auto'}}>
+                    <div class="card-header sticky-top" style={{backgroundColor: 'white'}}>
+                        <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', height: '40px', margin: '10px 0 0 0'}}>
+                            <i class="fa-solid fa-calendar-day fa-flip-horizontal me-2"></i>Tommorow
+                        </h3>
+                    </div>
+                    {/* <hr/> */}
 
                     {tomorrowEvents.length ? (
                     tomorrowEvents.map((event) => (

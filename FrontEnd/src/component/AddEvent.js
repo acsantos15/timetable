@@ -94,12 +94,14 @@ function AddEvent(props) {
       setTimeout(() => {
         setTimeError(null);
       }, 3000);
-    }else if(sTime < currentTime){
-      setTimeError('Time has already passed');
-      setTimeout(() => {
-        setTimeError(null);
-      }, 3000);
-    }else{
+    }
+    // else if(sTime <= currentTime){
+    //   setTimeError('Time has already passed');
+    //   setTimeout(() => {
+    //     setTimeError(null);
+    //   }, 3000);
+    // }
+    else{
       axios.defaults.withCredentials = true;
       axios.post('http://localhost:8080/saveEvent', 
       {title: title, color: selectedColor, description: description, location: location, start: fStart, end: fEnd},
