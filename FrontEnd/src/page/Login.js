@@ -79,9 +79,8 @@ function Login() {
 
                         {/* Button  */}
                         <div className="pt-1 mb-4" style={{ float: 'right' }}>
-                          <button className="rounded" style={{ backgroundColor: '#537557', fontWeight: 'bold', color: 'white', padding: '10px', border: "none" }} type="submit">Login</button>
+                          <button className="rounded login-button" type="submit">Login</button>
                         </div>
-
 
                         {/*  Already Have an Account */}
                         <div style={{ float: 'right' }}>
