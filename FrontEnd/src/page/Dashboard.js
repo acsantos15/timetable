@@ -14,7 +14,7 @@ const Dashboard = () => {
   const [weatherData, setWeatherData] = useState({});
   
   useEffect(() => {
-    axios.get('http://localhost:8080/dashboard')
+    axios.get('/dashboard')
       .then((response) => {
         setTodayEvents(response.data.today);
         setTomorrowEvents(response.data.tomorrow);
@@ -26,6 +26,29 @@ const Dashboard = () => {
     }, []);
     
     document.body.style.backgroundColor = "#DEDBD3"; 
+
+
+    // Div Tooltip Participant
+    const handleHover = async (event, eventId) => {
+        try {
+          const response = await axios.get(`/events/${eventId}/users`);
+          const users = response.data;
+    
+          let num = 1;
+          let names = '';
+    
+          users.forEach((people) => {
+            names += `${num++}.) ${people.fname} ${people.lname}<br>`;
+          });
+    
+          event.target.setAttribute('data-bs-toggle', 'tooltip');
+          event.target.setAttribute('data-bs-html', 'true');
+          event.target.setAttribute('data-bs-original-title', `Participant/s<br>${names}`);
+          window.bootstrap.Tooltip.getOrCreateInstance(event.target).show();
+        } catch (error) {
+          console.error('Error fetching user data:', error);
+        }
+    };
        
     Auth();
     return (
@@ -47,7 +70,7 @@ const Dashboard = () => {
                     
                     {todayEvents.length ? (
                     todayEvents.map((event) => (
-                        <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
+                        <div key={event.id} className="dash card" onMouseEnter={(e) => handleHover(e, event.id)} style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
                         <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                             <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                             <li> {event.description}</li>

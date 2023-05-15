@@ -10,12 +10,13 @@ const ViewEditEvent = (props) => {
   const eventId = eventData.id;
 
   // Populate Participants
+  const [appointmentCreator, setAppointmentCreator] = useState('');
   useEffect(() => {
     axios.get('/events/'+eventId+'/users')
     .then(response => {
         const people = response.data;
         let num = 1;
-        const participantList = people.map((person) => {
+        const participantList = people.slice(1).map((person) => {
         return (
             // Transfer this loop
             <li key={person.id} style={{ listStyleType: 'none', marginBottom: '10px' }}>
@@ -24,6 +25,7 @@ const ViewEditEvent = (props) => {
         );
         });
         setParticipants(participantList);
+        setAppointmentCreator(people[0]?.fname + ' ' + people[0]?.lname);
     })
     .catch(error => {
         console.log(error);
@@ -87,7 +89,11 @@ const ViewEditEvent = (props) => {
   }, []);
 
   const handleSelectChange = (selected) => {
-    setSelectedPeople(selected);
+    if (!selected.some(option => option.value === selectedPeople[0].value)) {
+      setSelectedPeople(selectedPeople);
+    } else {
+      setSelectedPeople(selected);
+    }
   };
 
   const [title, setTitle] = useState('');
@@ -179,7 +185,7 @@ const ViewEditEvent = (props) => {
       <div class="modal-content">
         <div class="modal-header" style={{backgroundColor: '#537557'}}>
           <h5 class="modal-title"> <i class="fa-solid fa-circle-info me-2"></i>Event Details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={props.toggleModal} aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={handleModalClose} aria-label="Close"></button>
         </div>
 
         <div class="modal-body">
@@ -187,6 +193,7 @@ const ViewEditEvent = (props) => {
           <p class="fw-bold"><i class="fa-solid fa-pen me-2"></i>Title: </p><p id="eventTitle" style={{wordBreak: 'break-all'}}>{eventData.title}</p>
           <p class="fw-bold"><i class="fa-solid fa-comments me-2"></i>Description: </p><p id="eventDescription" style={{wordBreak: 'break-all'}}>{eventData.description}</p>
           <p class="fw-bold"><i class="fa-solid fa-location-dot me-2"></i>Location: </p><p id="eventLocation">{eventData.location}</p>
+          <p><i class="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b> {appointmentCreator}</p>
           <p class="fw-bold"><i class="fa-solid fa-users me-2"></i>Participant:</p>
           <ul class="list-group" id="participant">
             {participants}
