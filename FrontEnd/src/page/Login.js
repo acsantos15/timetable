@@ -61,7 +61,7 @@ function Login() {
                           <img src="/tgsilogo.png" alt="Tsukiden logo" style={{ height: '.9em', margin: '15px 0 15px 0'}} />
                         </div>
                         <div className="d-flex mb-3 pb-1 justify-content-center">
-                          <label className="h1 fw-bold mb-0" style={{ color: 'rgb(88, 17, 17)', fontWeight: 'bold', fontSize: '60px', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif' }}>Login</label>
+                          <span class="h1 fw-bold mb-0" style={{color: 'rgb(88, 17, 17)', fontWeight: 'bold', fontSize: '60px'}}>Login</span>
                         </div>
 
                         <div className="form-outline mb-4">

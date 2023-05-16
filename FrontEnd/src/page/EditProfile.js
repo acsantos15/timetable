@@ -75,7 +75,8 @@ const EditProfile = () => {
                 text: " ",
                 icon: 'success',
                 showCancelButton: false,
-                confirmButtonText: 'Ok'
+                confirmButtonColor: '#537557',
+                confirmButtonText: 'OK'
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.reload(); 
@@ -124,7 +125,8 @@ const EditProfile = () => {
                     text: "You will be automatically logout",
                     icon: 'success',
                     showCancelButton: false,
-                    confirmButtonText: 'Ok'
+                    confirmButtonColor: '#537557',
+                    confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.isConfirmed) {
                         handleLogout();

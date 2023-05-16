@@ -49,7 +49,7 @@ const ViewEditEvent = (props) => {
         showCancelButton: true,
         confirmButtonColor: '#537557',
         cancelButtonColor: '#d33',
-        confirmButtonText: 'Ok'
+        confirmButtonText: 'OK'
     }).then((result) => {
         if (result.isConfirmed) {
           axios.delete('/delete/'+eventId)
@@ -152,7 +152,8 @@ const ViewEditEvent = (props) => {
                 text: " ",
                 icon: 'success',
                 showCancelButton: false,
-                confirmButtonText: 'Ok'
+                confirmButtonText: 'OK',
+                confirmButtonColor: '#537557'
             }).then((result) => {
                 if (result.isConfirmed) {
                     window.location.reload(); 
