@@ -43,6 +43,15 @@ function Login() {
   document.body.style.backgroundImage = "url(/bg.png)";
   document.body.style.backgroundRepeat = "no-repeat";
   document.body.style.backgroundSize = "cover";
+
+  function showPass() {
+    var x = document.getElementById("form2Example27");
+    if (x.type === "password") {
+      x.type = "text";
+    } else {
+      x.type = "password";
+    }
+  }
   
   return (
       <section>
@@ -72,6 +81,10 @@ function Login() {
 
                         <div className="form-outline mb-4">
                           <input type="password" id="form2Example27" className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`} placeholder="Password" value={password} onChange={handlePasswordChange} />
+                          <div class="form-check mt-2">
+                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPass}/>
+                            <label class="form-check-label" for="flexCheckDefault" style={{color: '#6C757D'}}>Show Password</label>
+                          </div>
                         </div> 
 
                         {/* Error Message  */}

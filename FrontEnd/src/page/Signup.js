@@ -64,7 +64,7 @@ const Signup = () => {
           }, 3000);
         }else{
           Swal.fire({
-              title: 'Event Added',
+              title: 'Account Created',
               text: " ",
               icon: 'success',
               showCancelButton: false,

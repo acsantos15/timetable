@@ -94,7 +94,8 @@ const Header = (props) => {
                   styles={{ 
                     container: (provided) => ({
                       ...provided,
-                      width: '300px'
+                      width: '300px',
+                      zIndex: '99'
                     })  
                   }}
                 />
