@@ -75,6 +75,8 @@ function AddEvent(props) {
   const diffMs = Math.abs(sTimeStamp - eTimeStamp);
   const diffMins = Math.floor(diffMs / 1000 / 60);
 
+  const currentDatetime = moment().format('YYYY-MM-DDTHH:mm');
+
   const handleSubmit = (event) => {
     event.preventDefault();
     if(sTime > 19 || sTime < 6 || eTime > 19 || eTime < 6){
@@ -82,13 +84,18 @@ function AddEvent(props) {
       setTimeout(() => {
         setTimeError(null);
       }, 3000);
-    }else if(start >= end){
+    }else if(moment(end).isBefore(start)){
       setTimeError('Appointment start should be later than end');
       setTimeout(() => {
         setTimeError(null);
       }, 3000);
     }else if(diffMins < 30){
       setTimeError('Appointment should be atleast 30 mins');
+      setTimeout(() => {
+        setTimeError(null);
+      }, 3000);
+    }else if(moment(start).isBefore(currentDatetime)){
+      setTimeError('Time has already passed');
       setTimeout(() => {
         setTimeError(null);
       }, 3000);
