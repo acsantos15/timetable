@@ -68,7 +68,8 @@ const Signup = () => {
               text: " ",
               icon: 'success',
               showCancelButton: false,
-              confirmButtonText: 'Ok'
+              confirmButtonColor: '#537557',
+              confirmButtonText: 'OK'
           }).then((result) => {
               if (result.isConfirmed) {
                 navigate("/login")

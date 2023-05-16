@@ -9,7 +9,7 @@ export function handleLogout() {
       showCancelButton: true,
       confirmButtonColor: '#537557',
       cancelButtonColor: '#d33',
-      confirmButtonText: 'Ok'
+      confirmButtonText: 'OK'
   }).then((result) => {
       if (result.isConfirmed) {
         axios.get('/logout')

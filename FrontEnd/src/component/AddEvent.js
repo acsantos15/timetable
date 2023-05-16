@@ -118,7 +118,8 @@ function AddEvent(props) {
               text: " ",
               icon: 'success',
               showCancelButton: false,
-              confirmButtonText: 'Ok'
+              confirmButtonText: 'OK',
+              confirmButtonColor: '#537557',
           }).then((result) => {
               if (result.isConfirmed) {
                   window.location.reload(); 
