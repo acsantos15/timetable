@@ -191,7 +191,7 @@ const ViewEditEvent = (props) => {
     <div className="modal" tabIndex="-1" style={{ display: isOpenView ? "block" : "none" }}>
     <div class="modal-dialog modal-dialog-centered">
       <div class="modal-content">
-        <div class="modal-header" style={{backgroundColor: selectedColor}}>
+        <div class="modal-header"  style={{backgroundColor: eventData.color}}>
           <h5 class="modal-title"> <i class="fa-solid fa-circle-info me-2"></i>Event Details</h5>
           <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={props.toggleModal} aria-label="Close"></button>
         </div>
@@ -236,7 +236,7 @@ const ViewEditEvent = (props) => {
       <div class="modal-dialog modal-dialog-centered modal-lg" style={{marginTop: '8%'}}>
         <div style= {{backgroundColor: 'white'}}class="modal-content">
           
-          <div class="modal-header" style={{backgroundColor: selectedColor}}>
+          <div class="modal-header" style={{backgroundColor: eventData.color}}>
             <h5 class="modal-title"><i class="fa-regular fa-calendar-plus me-2"></i>Edit Appointment</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={handleEditShow} aria-label="Close"></button>
           </div>
