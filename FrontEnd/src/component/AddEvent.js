@@ -154,7 +154,7 @@ function AddEvent(props) {
       <div class="modal-dialog modal-dialog-centered modal-lg" style={{marginTop: '8%'}}>
         <div style= {{backgroundColor: 'white'}}class="modal-content">
           
-          <div class="modal-header" style={{backgroundColor:'#537557' }}>
+          <div class="modal-header" style={{backgroundColor:selectedColor}}>
             <h5 class="modal-title"><i class="fa-regular fa-calendar-plus me-2"></i>New Appointment</h5>
             <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={handleModalClose} aria-label="Close"></button>
           </div>
