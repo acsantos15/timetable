@@ -42,6 +42,7 @@ const Dashboard = () => {
           });
     
           event.target.setAttribute('data-bs-toggle', 'tooltip');
+          event.target.setAttribute('data-bs-placement', 'bottom');
           event.target.setAttribute('data-bs-html', 'true');
           event.target.setAttribute('data-bs-original-title', `Participant/s<br>${names}`);
           window.bootstrap.Tooltip.getOrCreateInstance(event.target).show();
@@ -70,7 +71,7 @@ const Dashboard = () => {
                     
                     {todayEvents.length ? (
                     todayEvents.map((event) => (
-                        <div key={event.id} className="dash card" onMouseEnter={(e) => handleHover(e, event.id)} style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
+                        <div key={event.id} className="dash card" onMouseEnter={(e) => handleHover(e, event.id)} style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
                         <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                             <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                             <li> {event.description}</li>
@@ -98,7 +99,7 @@ const Dashboard = () => {
 
                     {tomorrowEvents.length ? (
                     tomorrowEvents.map((event) => (
-                        <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
+                        <div key={event.id} className="dash card" onMouseEnter={(e) => handleHover(e, event.id)} style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
                         <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                             <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                             <li> {event.description}</li>

@@ -38,9 +38,7 @@ const ViewEditEvent = (props) => {
         }));
         setSelectedPeople(users);
       })
-      .catch(error => console.error(error));
-
-      
+      .catch(error => console.error(error)); 
   }, [eventId]);
 
   const handleDeleteEvent = () => {
@@ -72,6 +70,15 @@ const ViewEditEvent = (props) => {
     setLocation(eventData.location);
     setStart(eventData.start);
     setEnd(eventData.end)
+    axios.get('/events/' + eventId + '/users')
+    .then(response => {
+      const users = response.data.map(user => ({
+        value: user.id,
+        label: user.fname + ' ' + user.lname
+      }));
+      setSelectedPeople(users); // Update selectedPeople state with users data
+    })
+    .catch(error => console.error(error));
   };
 
   const [options, setOptions] = useState([]);
@@ -137,7 +144,7 @@ const ViewEditEvent = (props) => {
           const selectedPeopleIds = selectedPeople.map(p => p.value);
           const payload = {eventId: response.data, participantIds: selectedPeopleIds};
           axios.defaults.withCredentials = true;
-          axios.post('http://localhost:8080/saveEventParticipants', payload, {withCredentials: true}, 
+          axios.post('/saveEventParticipants', payload, {withCredentials: true}, 
           { headers: { 'Content-Type': 'application/json' } })
           .then(response => {
             Swal.fire({
@@ -185,7 +192,7 @@ const ViewEditEvent = (props) => {
       <div class="modal-content">
         <div class="modal-header"  style={{backgroundColor: eventData.color}}>
           <h5 class="modal-title"> <i class="fa-solid fa-circle-info me-2"></i>Event Details</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={handleModalClose} aria-label="Close"></button>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={props.toggleModal} aria-label="Close"></button>
         </div>
 
         <div class="modal-body">
