@@ -24,9 +24,9 @@ const Dashboard = () => {
         console.log(error);
       });
     }, []);
-    
-    document.body.style.backgroundColor = "#DEDBD3"; 
 
+    document.body.style.backgroundColor = "#DEDBD3"; 
+    document.body.style.backgroundImage = ""; 
 
     // Div Tooltip Participant
     const handleHover = async (event, eventId) => {

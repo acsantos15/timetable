@@ -15,6 +15,7 @@
 }
 .fc a.fc-event{
     color: #537557;
+    cursor: pointer;
 }
 /*calendar header*/
 .fc .fc-toolbar-title{

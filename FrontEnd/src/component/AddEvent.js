@@ -8,7 +8,7 @@ function AddEvent(props) {
   const { isOpenAdd, selectStart, selectEnd } = props;
 
   const [title, setTitle] = useState('');
-  const [selectedColor, setSelectedColor] = useState('#537C78');
+  const [selectedColor, setSelectedColor] = useState('#dd766a');
   const [description, setDescription] = useState('');
   const [location, setLocation] = useState('');
   const [start, setStart] = useState('');
@@ -118,6 +118,7 @@ function AddEvent(props) {
               text: " ",
               icon: 'success',
               showCancelButton: false,
+              allowOutsideClick: false,
               confirmButtonText: 'OK',
               confirmButtonColor: '#537557',
           }).then((result) => {
@@ -137,7 +138,7 @@ function AddEvent(props) {
   };
   const handleClear = () => {
     setTitle('');
-    setSelectedColor('#537C78');
+    setSelectedColor('#dd766a');
     setDescription('');
     setLocation('');
     setStart('');

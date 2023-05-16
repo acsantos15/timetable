@@ -95,7 +95,7 @@ const Signup = () => {
     <div class="container py-5 h-1000" style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, margin: 'auto'}}>
       <div class="row d-flex justify-content-center align-items-center h-100">
         <div class="col col-xl-10">
-          <div class="card" style={{borderRadius: '1rem', backgroundColor: '#DEDBD3'}}>
+          <div class="card" style={{borderRadius: '1rem', backgroundColor: 'rgb(255 255 255 / 61%)', border: '3px solid white'}}>
 
               {/* Header */}
               <div class="card-header">

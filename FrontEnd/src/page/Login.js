@@ -40,20 +40,22 @@ function Login() {
         console.log(error);
       });
   };
-  document.body.style.backgroundColor = "#537557";
-
+  document.body.style.backgroundImage = "url(/bg.png)";
+  document.body.style.backgroundRepeat = "no-repeat";
+  document.body.style.backgroundSize = "cover";
+  
   return (
       <section>
         <div className="container py-5 h-1000" style={{ position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, margin: 'auto' }}>
           <div className="row d-flex justify-content-center align-items-center h-100">
             <div className="col col-xl-10">
-              <div className="card" style={{ borderRadius: '1rem', backgroundColor: '#DEDBD3' }}>
+              <div className="card" style={{ borderRadius: '1rem', backgroundColor: 'rgb(255 255 255 / 51%)', border: '3px solid white'}}>
                 <div className="row g-0">
                   <div className="col-md-6 col-lg-5 d-none d-md-block">
                     <img src="https://www.tsukiden.com.ph/wp-content/uploads/2018/10/Tsuki_Puzzle-e1580178754271.png"
                       alt="login form" className="img-fluid" style={{ borderRadius: '1rem 0 0 1rem', height: '100%' }} />
                   </div>
-                  <div className="col-md-6 col-lg-7 d-flex align-items-center" >
+                  <div className="col-md-6 col-lg-7 d-flex align-items-center">
                     <div className="card-body p-4 p-lg-5 text-black" >
 
                       <form onSubmit={handleSubmit}>
