@@ -13,43 +13,56 @@ const Dashboard = () => {
   const [tomorrowEvents, setTomorrowEvents] = useState([]);
   const [weatherData, setWeatherData] = useState({});
   
-  useEffect(() => {
-    axios.get('/dashboard')
-      .then((response) => {
-        setTodayEvents(response.data.today);
-        setTomorrowEvents(response.data.tomorrow);
-        setWeatherData(response.data.weatherData);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    useEffect(() => {
+        axios.get('/dashboard')
+        .then((response) => {
+            setTodayEvents(response.data.today);
+            setTomorrowEvents(response.data.tomorrow);
+            setWeatherData(response.data.weatherData);
+        })
+        .catch((error) => {
+            console.log(error);
+        });
     }, []);
 
     document.body.style.backgroundColor = "#DEDBD3"; 
     document.body.style.backgroundImage = ""; 
 
-    // Div Tooltip Participant
-    const handleHover = async (event, eventId) => {
-        try {
-          const response = await axios.get(`/events/${eventId}/users`);
-          const users = response.data;
-    
-          let num = 1;
-          let names = '';
-    
-          users.forEach((people) => {
-            names += `${num++}.) ${people.fname} ${people.lname}<br>`;
-          });
-    
-          event.target.setAttribute('data-bs-toggle', 'tooltip');
-          event.target.setAttribute('data-bs-placement', 'bottom');
-          event.target.setAttribute('data-bs-html', 'true');
-          event.target.setAttribute('data-bs-original-title', `Participant/s<br>${names}`);
-          window.bootstrap.Tooltip.getOrCreateInstance(event.target).show();
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-        }
-    };
+    const [participant, setParticipant] = useState([]);
+
+    useEffect(() => {
+        todayEvents.forEach((event) => {
+          axios.get(`/events/${event.id}/users`)
+            .then((response) => {
+              const users = response.data;
+              const participantNames = users.map((people) => `${people.fname} ${people.lname}`);
+              setParticipant((prevParticipants) => ({
+                ...prevParticipants,
+                [event.id]: participantNames,
+              }));
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      }, [todayEvents]);
+
+    useEffect(() => {
+        tomorrowEvents.forEach((event) => {
+          axios.get(`/events/${event.id}/users`)
+            .then((response) => {
+              const users = response.data;
+              const participantNames = users.map((people) => `${people.fname} ${people.lname}`);
+              setParticipant((prevParticipants) => ({
+                ...prevParticipants,
+                [event.id]: participantNames,
+              }));
+            })
+            .catch((error) => {
+              console.log(error);
+            });
+        });
+      }, [tomorrowEvents]);
        
     Auth();
     return (
@@ -69,15 +82,35 @@ const Dashboard = () => {
                     </div>
                     {/* <hr/> */}
                     
+                    
                     {todayEvents.length ? (
                     todayEvents.map((event) => (
-                        <div key={event.id} className="dash card" onMouseEnter={(e) => handleHover(e, event.id)} style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
-                        <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
-                            <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
-                            <li> {event.description}</li>
-                            <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
-                        </ul>
+                        <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
+                                    <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
+                                    <li> {event.description}</li>
+                                    <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
+                                </ul>
+                                </div>
+                                <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Participant
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        {participant[event.id]?.map((participantName) => (
+                                        <li class="list-group-item">{participantName}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                </div>
+                            </div>
+                        </div>           
                         </div>
+                        
                     ))
                     ) : (
                         <div class="dash card" style={{margin:'10px', color:'white', padding: '20px 20px 20px 0', backgroundColor: 'rgb(68, 66, 66)'}}>
@@ -99,20 +132,39 @@ const Dashboard = () => {
 
                     {tomorrowEvents.length ? (
                     tomorrowEvents.map((event) => (
-                        <div key={event.id} className="dash card" onMouseEnter={(e) => handleHover(e, event.id)} style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
-                        <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
-                            <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
-                            <li> {event.description}</li>
-                            <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
-                        </ul>
+                        <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-sm-8">
+                                <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
+                                    <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
+                                    <li> {event.description}</li>
+                                    <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
+                                </ul>
+                                </div>
+                                <div class="col">
+                                <div class="card">
+                                    <div class="card-header">
+                                        Participant
+                                    </div>
+                                    <ul class="list-group list-group-flush">
+                                        {participant[event.id]?.map((participantName) => (
+                                        <li class="list-group-item">{participantName}</li>
+                                        ))}
+                                    </ul>
+                                </div>
+                                </div>
+                            </div>
+                        </div>           
                         </div>
+                        
                     ))
                     ) : (
                         <div class="dash card" style={{margin:'10px', color:'white', padding: '20px 20px 20px 0', backgroundColor: 'rgb(68, 66, 66)'}}>
-                            <div class="d-flex align-items-center justify-content-center" style={{fontSize: 'larger', fontWeight: 'bold'}}>No Event for Tommorow</div>
+                            <div class="d-flex align-items-center justify-content-center" style={{fontSize: 'larger', fontWeight: 'bold'}}>No Event for Today</div>
                         </div>
                     )}
-                    <div class="card-footer sticky-bottom" style={{backgroundColor: 'white', paddingBottom: '20px'}}></div>
+                    <div class="card-footer sticky-bottom" style={{backgroundColor: 'white'}}></div>
                 </div>
             </div>
         </div>

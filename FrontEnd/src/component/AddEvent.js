@@ -118,7 +118,6 @@ function AddEvent(props) {
               text: " ",
               icon: 'success',
               showCancelButton: false,
-              allowOutsideClick: false,
               confirmButtonText: 'OK',
               confirmButtonColor: '#537557',
           }).then((result) => {

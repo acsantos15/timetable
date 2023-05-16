@@ -42,7 +42,7 @@ function Login() {
   };
   document.body.style.backgroundImage = "url(/bg.png)";
   document.body.style.backgroundRepeat = "no-repeat";
-  document.body.style.backgroundSize = "cover";
+  document.body.style.backgroundSize = "auto";
 
   function showPass() {
     var x = document.getElementById("form2Example27");
