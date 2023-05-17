@@ -64,8 +64,8 @@ const Header = (props) => {
     <nav class="navbar navbar-expand-lg" style={{backgroundColor: '#537557'}}>
       <div class="container-fluid">
         {/* Label */}
-        <a href="/Dashboard" class="navbar-brand" style={{color: 'white', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif'}}>
-          <i class="fa-sharp fa-regular fa-calendar-days" ></i> TIMETABLE
+        <a href="/Dashboard" class="navbar-brand" style={{color: 'white', fontWeight:'bold', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif'}}>
+          <i class="fa-solid fa-calendar-days"></i> TIMETABLE
         </a>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
