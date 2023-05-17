@@ -36,7 +36,13 @@ function App() {
 
   if (isLoading) {
     // Render a loading screen
-    return <div>Loading...</div>;
+    return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <div class="spinner-border" role="status">
+        <span class="visually-hidden">Loading...</span>
+      </div>
+    </div>
+    );
   } else {
     // Render the dashboard or login page depending on the authentication status
     return (
