@@ -160,7 +160,7 @@ const EditProfile = () => {
                     <div class="card" style={{padding: '30px'}} id="picard">
                         <div class="card-headers" style={{marginBottom: '15px'}}>
                             <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', marginBottom: '15px'}}><i class="fa-solid fa-pen-to-square me-2"></i>Edit Profile</h3>
-                            <h5 style={{color: '#7993a', fontWeight: 'bold'}}>PERSONAL INFORMATION</h5>
+                            <h5 style={{color: '#7993a0', fontWeight: 'bold'}}>PERSONAL INFORMATION</h5>
                         </div>
                         <div class="card-bodys">
                             <input type="hidden" id="userId" />

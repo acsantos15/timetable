@@ -110,60 +110,108 @@ const Signup = () => {
                   <form onSubmit={handleSubmit}>
                     <h5 style={{color: '#7993a0', fontWeight: 'bold',}}>Personal Information</h5>
 
-                    <div class="row align-items-center">
-                      <div class="col">
-                        <div class="mb-4">
+                  <div class="row align-items-center">
+                      
+                    <div class="col">
+                      <div class="mb-4">
+                        <div class="input-group">
+                          <span class="input-group-text" style={{backgroundColor:'white'}}>
+                            <i class="fa-solid fa-address-card" style={{color: '#babdb6'}}></i>                          
+                          </span>
                           <input class="form-control" type="text" placeholder="First Name" id="fname" name="fname" maxLength="50" value={fname} onChange={handleFnameChange} required/>
                         </div>
                       </div>
-                      <div class="col">
-                        <div class="mb-4">
+                    </div>
+
+                    <div class="col">
+                      <div class="mb-4">
+                        <div class="input-group">
+                          <span class="input-group-text" style={{backgroundColor:'white'}}>
+                            <i class="fa-solid fa-address-card" style={{color: '#babdb6'}}></i>                          </span>
                           <input class="form-control" type="text" placeholder="Last Name" id="lname" name="lname" maxLength="50" value={lname} onChange={handleLnameChange} required/>
                         </div>
                       </div>
                     </div>
+                  </div>
                     
-                    <div class="row align-items-center">
-                      <div class="col">
-                        <div class="mb-4">
+                  <div class="row align-items-center">
+                    <div class="col">
+                      <div class="mb-4">
+                        <div class="input-group">
+                          <span class="input-group-text" style={{backgroundColor:'white'}}>
+                            <i class="fa-solid fa-house" style={{color: '#babdb6'}}></i>
+                          </span>
                           <input class="form-control" type="text" placeholder="Home Address" id="address" name="address" maxLength="100" value={address} onChange={handleAddressChange} required/> 
                         </div>
                       </div>
-                      <div class="col">
-                        <div class="mb-4">
+                    </div>
+                    
+                    <div class="col">
+                      <div class="mb-4">
+                        <div class="input-group">
+                          <span class="input-group-text" style={{backgroundColor:'white'}}>
+                            <i class="fa-solid fa-phone" style={{color: '#babdb6'}}></i>
+                          </span>
                           <input class="form-control" type="text" pattern="[0-9]{11}" placeholder="Contact No." id="contact" name="contact" maxLength="11" value={contact} onChange={handleContactChange} required/>
                         </div>
                       </div>
                     </div>
+                  </div>
+
 
                     <h5 style={{float:'left', width: '100%', color: '#7993a0', fontWeight: 'bold'}}>Account Information</h5>
 
                     <div class="row align-items-center">
+
                       <div class="col">
                         <div class="mb-4">
-                          <input className={`form-control ${usernameerr ? 'is-invalid' : ''}`} type="text" placeholder="Username" id="username" name="username" maxLength="50" value={username} onChange={handleUsernameChange} required/>
+                          <div class="input-group">
+                            <span class="input-group-text" style={{backgroundColor:'white'}}>
+                              <i class="fa-solid fa-user" style={{color: '#babdb6'}}></i>  
+                            </span>
+                            <input className={`form-control ${usernameerr ? 'is-invalid' : ''}`} type="text" placeholder="Username" id="username" name="username" maxLength="50" value={username} onChange={handleUsernameChange} required/>
                           {usernameerr && <div style={{height: '10px'}} className="invalid-feedback">{usernameerr}</div>}
+                          </div>
                         </div>
                       </div>
+
                       <div class="col">
                         <div class="mb-4">
-                          <input class="form-control" type="email" placeholder="Email" id="email" name="email" maxLength="50" value={email} onChange={handleEmailChange} required/>
+                          <div class="input-group">
+                            <span class="input-group-text" style={{backgroundColor:'white'}}>
+                              <i class="fa-solid fa-at" style={{color: '#babdb6'}}></i>                           </span>
+                            <input class="form-control" type="email" placeholder="Email" id="email" name="email" maxLength="50" value={email} onChange={handleEmailChange} required/>
+                          </div>
                         </div>
                       </div>
                     </div>
+
                     <div class="row align-items-center">
+
+
                       <div class="col">
                         <div class="mb-4">
-                          <input class="form-control" type="password" placeholder="Password" id="pass" name="pass" maxLength="50" minLength="8" value={pass} onChange={handlePasswordChange} required/>
+                          <div class="input-group">
+                            <span class="input-group-text" style={{backgroundColor:'white'}}>
+                              <i class="fa-solid fa-lock" style={{color: '#babdb6'}}></i>
+                            </span>
+                            <input class="form-control" type="password" placeholder="Password" id="pass" name="pass" maxLength="50" minLength="8" value={pass} onChange={handlePasswordChange} required/>
+                          </div>
                         </div>
                       </div>
+
                       <div class="col">
                         <div class="mb-4">
-                          <input className={`form-control ${conpasserr ? 'is-invalid' : ''}`} type="password" id="conpass" placeholder="Confirm Password" maxLength="50" value={conpass} onChange={handleConPassChange} required/>
+                          <div class="input-group">
+                            <span class="input-group-text" style={{backgroundColor:'white'}}>
+                              <i class="fa-solid fa-lock" style={{color: '#babdb6'}}></i>
+                            </span>
+                            <input className={`form-control ${conpasserr ? 'is-invalid' : ''}`} type="password" id="conpass" placeholder="Confirm Password" maxLength="50" value={conpass} onChange={handleConPassChange} required/>
                           {conpasserr && <div style={{height: '10px'}} className="invalid-feedback">{conpasserr}</div>}
+                          </div>
                         </div>
-                      </div>
-                    </div>     
+                      </div>   
+                    </div>
                    
                     {/* Button */}
                     <div style={{float: 'right'}}>

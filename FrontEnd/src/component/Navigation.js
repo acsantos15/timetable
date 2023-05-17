@@ -8,13 +8,13 @@ const Navigation = () => {
 
           <NavLink className="nav-link" to="/dashboard" activeClassName="active">
             <span>
-              <i class="fa-sharp fa-regular fa-calendar-days me-2"></i>Dashboard
+              <i class="fa-solid fa-table-cells-large"></i> Dashboard
             </span>
           </NavLink>
 
           <NavLink className="nav-link" to="/timetable" activeClassName="active">
             <span>
-              <i class="fa-sharp fa-regular fa-calendar-days me-2"></i>Timetable
+              <i class="fa-solid fa-calendar-days"></i> Timetable
             </span>
           </NavLink>
 
