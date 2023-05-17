@@ -76,11 +76,21 @@ function Login() {
                         </div>
 
                         <div className="form-outline mb-4">
-                          <input type="text" id="form2Example17" className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`} placeholder="Username" value={username} onChange={handleUsernameChange}/>
+                          <div className="input-group">
+                            <span className="input-group-text" style={{ backgroundColor: 'white' }}>
+                              <i class="fa-solid fa-user" style={{color: '#babdb6'}}></i>  
+                            </span>
+                              <input type="text" id="form2Example17" className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`} placeholder="Username" value={username} onChange={handleUsernameChange}/>
+                          </div>
                         </div>
 
                         <div className="form-outline mb-4">
-                          <input type="password" id="form2Example27" className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`} placeholder="Password" value={password} onChange={handlePasswordChange} />
+                          <div className="input-group">
+                            <span className="input-group-text" style={{ backgroundColor: 'white' }}>
+                            <i class="fa-solid fa-lock" style={{color: '#babdb6'}}></i>
+                            </span>
+                            <input type="password" id="form2Example27" className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`} placeholder="Password"value={password}onChange={handlePasswordChange}/>
+                          </div>
                           <div class="form-check mt-2">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPass}/>
                             <label class="form-check-label" for="flexCheckDefault" style={{color: '#6C757D'}}>Show Password</label>
