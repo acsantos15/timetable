@@ -14,8 +14,8 @@ import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
-import com.tgsi.timetable.entity.Events;
-import com.tgsi.timetable.entity.Users;
+import com.tgsi.timetable.model.Events;
+import com.tgsi.timetable.model.Users;
 
 @Mapper
 public interface EventMapper {

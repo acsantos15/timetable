@@ -1,5 +1,5 @@
 // Aries
-package com.tgsi.timetable.entity;
+package com.tgsi.timetable.model;
 
 import java.util.List;
 

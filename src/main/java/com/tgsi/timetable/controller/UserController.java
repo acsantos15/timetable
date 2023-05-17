@@ -19,16 +19,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
 
-import com.tgsi.timetable.entity.Events;
-import com.tgsi.timetable.entity.Users;
 import com.tgsi.timetable.mapper.EventMapper;
 import com.tgsi.timetable.mapper.UserMapper;
-
+import com.tgsi.timetable.model.Events;
+import com.tgsi.timetable.model.Users;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -199,7 +197,6 @@ public class UserController {
     @PostMapping("/search")
     public ResponseEntity<Object> searchUsers(@RequestBody Map<String, String> payload, HttpSession session) {
         String searchWord = payload.get("searchWord");
-        Users loggeduser = (Users) session.getAttribute("userSession");
         List<Users> users = uMapper.searchUser(searchWord);
         List<String> userIds = users.stream().map(user -> String.valueOf(user.getId())).collect(Collectors.toList());
         LocalDateTime startTime = LocalDateTime.now().withHour(0).withMinute(0).withSecond(0);

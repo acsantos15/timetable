@@ -146,7 +146,7 @@ const Dashboard = () => {
                                     <div class="card-header" style={{fontSize: 'small', fontWeight: 'bold'}}>
                                         Participant/s
                                     </div>
-                                    <ul style={{listStyleType: 'none', margin: '5px'}}>
+                                    <ul class="list-unstyled pl-1" style={{listStyleType: 'none', margin: '5px'}}>
                                         {participant[event.id]?.map((participantName) => (
                                         <li class="list-group-item" style={{fontSize: 'small'}}>•ㅤ{participantName}</li>
                                         ))}

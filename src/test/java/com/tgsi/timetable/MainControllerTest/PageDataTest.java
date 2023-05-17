@@ -19,10 +19,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
 
 import com.tgsi.timetable.controller.MainController;
-import com.tgsi.timetable.entity.Events;
-import com.tgsi.timetable.entity.Users;
-import com.tgsi.timetable.entity.WeatherData;
 import com.tgsi.timetable.mapper.EventMapper;
+import com.tgsi.timetable.model.Events;
+import com.tgsi.timetable.model.Users;
+import com.tgsi.timetable.model.WeatherData;
 
 import jakarta.servlet.http.HttpSession;
 

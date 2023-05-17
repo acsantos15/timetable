@@ -1,4 +1,4 @@
-package com.tgsi.timetable.entity;
+package com.tgsi.timetable.model;
 
 public class UserEvent {
     private Long id;

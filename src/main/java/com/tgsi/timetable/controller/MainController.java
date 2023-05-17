@@ -22,11 +22,11 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.client.RestTemplate;
 
-import com.tgsi.timetable.entity.Events;
-import com.tgsi.timetable.entity.Users;
-import com.tgsi.timetable.entity.WeatherData;
 import com.tgsi.timetable.mapper.EventMapper;
 import com.tgsi.timetable.mapper.UserMapper;
+import com.tgsi.timetable.model.Events;
+import com.tgsi.timetable.model.Users;
+import com.tgsi.timetable.model.WeatherData;
 
 import jakarta.servlet.http.HttpSession;
 import jakarta.validation.Valid;
@@ -67,7 +67,6 @@ public class MainController {
         data.put("today", todaysEvents);
         data.put("tomorrow", tomEvents);
         data.put("weatherData", weatherData);
-
         return ResponseEntity.ok(data);
     }
 
@@ -79,23 +78,6 @@ public class MainController {
         Long loggedId = user.getId();
         model.addAttribute("loggedId", loggedId);
         return eMapper.getUserEvent(loggedId);
-    }
-
-    // Timetable Page
-    @GetMapping("/timetable")
-    public String timetablePage(HttpSession session, Model model) {
-        Users user = (Users) session.getAttribute("userSession");
-        System.out.println("User session: " + user);
-        if (user == null) {
-            return "redirect:/login";
-        } else {
-            Long loggedId = user.getId();
-            Users dbUser = uMapper.getUserById(loggedId);
-            model.addAttribute("loggedId", dbUser);
-
-            model.addAttribute("user", user);
-            return "timetable";
-        }
     }
 
     // Save Event
@@ -144,7 +126,7 @@ public class MainController {
     // Edit Event
     @PutMapping("edit/{id}")
     @ResponseBody
-    public ResponseEntity<?> updateEvent(@Valid @PathVariable("id") Long id, @RequestBody Events updatedEvent) {
+    public ResponseEntity<?> updateEvent(@Valid @PathVariable Long id, @RequestBody Events updatedEvent) {
         Events existingEvent = eMapper.getEventById(id);
         if (existingEvent == null) {
             return ResponseEntity.notFound().build();

@@ -2,7 +2,6 @@ package com.tgsi.timetable.MainControllerTest;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.doNothing;
 import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -22,8 +21,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.tgsi.timetable.controller.MainController;
-import com.tgsi.timetable.entity.Events;
 import com.tgsi.timetable.mapper.EventMapper;
+import com.tgsi.timetable.model.Events;
 
 public class EventCrudTest {
 
