@@ -60,7 +60,7 @@ const Header = (props) => {
 
   return (
   <>
-    <header style={{width: '100%'}}>
+    <header style={{width: '100%', paddingRight: '0'}}>
     <nav class="navbar navbar-expand-lg" style={{backgroundColor: '#537557'}}>
       <div class="container-fluid">
         {/* Label */}

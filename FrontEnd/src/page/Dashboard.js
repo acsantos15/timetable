@@ -88,7 +88,7 @@ const Dashboard = () => {
                         <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-sm-9">
                                 <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                                     <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                                     <li> {event.description}</li>
@@ -96,13 +96,13 @@ const Dashboard = () => {
                                 </ul>
                                 </div>
                                 <div class="col">
-                                <div class="card">
-                                    <div class="card-header">
-                                        Participant
+                                <div class="card" style={{backgroundColor: 'rgb(0 0 0 / 20%)'}}>
+                                    <div class="card-header" style={{fontSize: 'small', fontWeight: 'bold'}}>
+                                        Participant/s
                                     </div>
-                                    <ul class="list-group list-group-flush">
+                                    <ul style={{listStyleType: 'none', margin: '5px'}}>
                                         {participant[event.id]?.map((participantName) => (
-                                        <li class="list-group-item">{participantName}</li>
+                                        <li class="list-group-item" style={{fontSize: 'small'}}>•ㅤ{participantName}</li>
                                         ))}
                                     </ul>
                                 </div>
@@ -135,7 +135,7 @@ const Dashboard = () => {
                         <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm-8">
+                                <div class="col-sm-9">
                                 <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                                     <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                                     <li> {event.description}</li>
@@ -143,13 +143,13 @@ const Dashboard = () => {
                                 </ul>
                                 </div>
                                 <div class="col">
-                                <div class="card">
-                                    <div class="card-header">
-                                        Participant
+                                <div class="card" style={{backgroundColor: 'rgb(0 0 0 / 20%)'}}>
+                                    <div class="card-header" style={{fontSize: 'small', fontWeight: 'bold'}}>
+                                        Participant/s
                                     </div>
-                                    <ul class="list-group list-group-flush">
+                                    <ul style={{listStyleType: 'none', margin: '5px'}}>
                                         {participant[event.id]?.map((participantName) => (
-                                        <li class="list-group-item">{participantName}</li>
+                                        <li class="list-group-item" style={{fontSize: 'small'}}>•ㅤ{participantName}</li>
                                         ))}
                                     </ul>
                                 </div>
