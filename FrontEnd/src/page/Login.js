@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
-import { useNavigate , Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import axios from 'axios';
-import { Auth } from '../component/Auth';
 
 
 
 function Login() {
-  const navigate = useNavigate ();
   const [error, setError] = useState(null);
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
@@ -19,14 +17,13 @@ function Login() {
     setPassword(event.target.value);
   };
 
-  Auth();
   const handleSubmit = (event) => {
     event.preventDefault();
     axios.defaults.withCredentials = true;
-    axios.post('http://localhost:8080/loginUser', { username: username, password: password }, {withCredentials: true}, { headers: { 'Content-Type': 'application/json' } })
+    axios.post('/loginUser', { username: username, password: password }, { withCredentials: true, headers: { 'Content-Type': 'application/json' } })
       .then(response => {
         if (response.data.status === 'success') {
-          navigate('/dashboard');
+          window.location.href = '/dashboard';
           console.log("Success");
         } else {
           setError('Invalid username or password');

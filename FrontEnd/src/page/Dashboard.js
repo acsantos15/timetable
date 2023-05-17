@@ -3,7 +3,6 @@ import axios from 'axios';
 import Header from '../component/Header';
 import MiniCalendar from '../component/MiniCalendar';
 import Navigation from '../component/Navigation';
-import { Auth } from '../component/Auth';
 import "../css/style.css";
 import moment from 'moment';
 
@@ -64,7 +63,7 @@ const Dashboard = () => {
         });
       }, [tomorrowEvents]);
        
-    Auth();
+    // Auth();
     return (
     <div className="row justify-content-center" >
         <Header/>
@@ -88,7 +87,7 @@ const Dashboard = () => {
                         <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm-9">
+                                <div class="col-sm-9 ">
                                 <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                                     <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                                     <li> {event.description}</li>
@@ -100,7 +99,7 @@ const Dashboard = () => {
                                     <div class="card-header" style={{fontSize: 'small', fontWeight: 'bold'}}>
                                         Participant/s
                                     </div>
-                                    <ul style={{listStyleType: 'none', margin: '5px'}}>
+                                    <ul class="list-unstyled pl-1" style={{listStyleType: 'none', margin: '5px'}}>
                                         {participant[event.id]?.map((participantName) => (
                                         <li class="list-group-item" style={{fontSize: 'small'}}>•ㅤ{participantName}</li>
                                         ))}
