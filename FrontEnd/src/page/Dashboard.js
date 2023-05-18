@@ -63,12 +63,12 @@ const Dashboard = () => {
         });
       }, [tomorrowEvents]);
 
-      const [currentTime, setCurrentTime] = useState(moment().format('hh:mm a'));
+      const [currentTime, setCurrentTime] = useState(moment().format('hh:mm:ss a'));
 
     useEffect(() => {
         const interval = setInterval(() => {
-          setCurrentTime(moment().format('hh:mm a'));
-        }, 10000);
+          setCurrentTime(moment().format('hh:mm:ss a'));
+        }, 1000);
     
         return () => clearInterval(interval);
       }, []);
@@ -100,7 +100,7 @@ const Dashboard = () => {
                                 <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                                     <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                                     <li> {event.description}</li>
-                                    <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
+                                    <li><small>{moment(event.start).format('hh:mm:ss a')}</small> - <small>{moment(event.end).format('hh:mm:ss a')}</small></li>
                                     {moment().isBetween(moment(event.start), moment(event.end)) && (
                                     <li>
                                         <span style={{ color: 'red', fontWeight: 'bold' }}>Ongoing</span>
