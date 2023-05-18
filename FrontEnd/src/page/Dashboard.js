@@ -62,8 +62,17 @@ const Dashboard = () => {
             });
         });
       }, [tomorrowEvents]);
+
+      const [currentTime, setCurrentTime] = useState(moment().format('hh:mm a'));
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+          setCurrentTime(moment().format('hh:mm a'));
+        }, 10000);
+    
+        return () => clearInterval(interval);
+      }, []);
        
-    // Auth();
     return (
     <div className="row justify-content-center" >
         <Header/>
@@ -87,11 +96,19 @@ const Dashboard = () => {
                         <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
                         <div class="container">
                             <div class="row">
-                                <div class="col-sm-9 ">
+                                <div class="col-sm-9">
                                 <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                                     <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                                     <li> {event.description}</li>
                                     <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
+                                    {moment().isBetween(moment(event.start), moment(event.end)) && (
+                                    <li>
+                                        <span style={{ color: 'red', fontWeight: 'bold' }}>Ongoing</span>
+                                        <div class="spinner-border text-danger spinner-border-sm" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                    </li>
+                                    )}
                                 </ul>
                                 </div>
                                 <div class="col">
