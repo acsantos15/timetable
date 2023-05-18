@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Header from '../component/Header';
-import { handleLogout } from '../component/LogoutButton';
+import { directLogout } from '../component/LogoutButton';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
@@ -129,7 +129,7 @@ const EditProfile = () => {
                     confirmButtonText: 'OK'
                 }).then((result) => {
                     if (result.isConfirmed) {
-                        handleLogout();
+                        directLogout();
                     }
                 }) 
                 })   

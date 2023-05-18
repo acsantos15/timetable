@@ -102,7 +102,7 @@ function AddEvent(props) {
     }
     else{
       axios.defaults.withCredentials = true;
-      axios.post('http://localhost:8080/saveEvent', 
+      axios.post('/saveEvent', 
       {title: title, color: selectedColor, description: description, location: location, start: fStart, end: fEnd},
       {withCredentials: true}, 
       { headers: { 'Content-Type': 'application/json' } })
@@ -110,7 +110,7 @@ function AddEvent(props) {
         const selectedPeopleIds = selectedPeople.map(p => p.value);
         const payload = {eventId: response.data, participantIds: selectedPeopleIds};
         axios.defaults.withCredentials = true;
-        axios.post('http://localhost:8080/saveEventParticipants', payload, {withCredentials: true}, 
+        axios.post('/saveEventParticipants', payload, {withCredentials: true}, 
         { headers: { 'Content-Type': 'application/json' } })
         .then(response => {
           Swal.fire({
