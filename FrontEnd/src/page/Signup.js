@@ -50,7 +50,7 @@ const Signup = () => {
       }, 3000);
     }else{
       axios.defaults.withCredentials = true;
-      axios.post('http://localhost:8080/createUser', 
+      axios.post('/createUser', 
       {fname: fname, lname: lname, address: address, contact: contact, username: username, email: email, pass: pass}, 
       {withCredentials: true}, 
       { headers: { 'Content-Type': 'application/json' } })
@@ -111,7 +111,7 @@ const Signup = () => {
                     <h5 style={{color: '#7993a0', fontWeight: 'bold',}}>Personal Information</h5>
 
                   <div class="row align-items-center">
-                      
+                                    
                     <div class="col">
                       <div class="mb-4">
                         <div class="input-group">
