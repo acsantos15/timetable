@@ -63,7 +63,7 @@ const Dashboard = () => {
         });
       }, [tomorrowEvents]);
 
-      const [currentTime, setCurrentTime] = useState(moment().format('hh:mm:ss a'));
+    const [, setCurrentTime] = useState(moment().format('hh:mm:ss a'));
 
     useEffect(() => {
         const interval = setInterval(() => {
@@ -72,6 +72,34 @@ const Dashboard = () => {
     
         return () => clearInterval(interval);
       }, []);
+
+    const [weatherIcon, setWeatherIcon] = useState('');
+
+    useEffect(() => {
+    if (weatherData?.weather?.[0]?.icon === "01d") {
+        setWeatherIcon("/weather/ClearSkyDay.gif");
+    } else if (weatherData?.weather?.[0]?.icon === "01n") {
+        setWeatherIcon("/weather/ClearSkyNight.gif");
+    } else if (weatherData?.weather?.[0]?.icon === "02d") {
+        setWeatherIcon("/weather/FewCloudsDay.gif");
+    } else if (weatherData?.weather?.[0]?.icon === "02n") {
+        setWeatherIcon("/weather/FewCloudsNight.gif");
+    } else if (weatherData?.weather?.[0]?.icon === "03d" || weatherData?.weather?.[0]?.icon === "03n") {
+        setWeatherIcon("/weather/ScatteredClouds.gif");
+    } else if (weatherData?.weather?.[0]?.icon === "04d" || weatherData?.weather?.[0]?.icon === "04n") {
+        setWeatherIcon("/weather/BrokenClouds.gif");
+    } else if (weatherData?.weather?.[0]?.icon === "09d" || weatherData?.weather?.[0]?.icon === "09n") {
+        setWeatherIcon("/weather/ShowerRain.gif");
+    } else if (weatherData?.weather?.[0]?.icon === "10d") {
+        setWeatherIcon("/weather/RainDay.gif");
+    } else if (weatherData?.weather?.[0]?.icon === "10n") {
+        setWeatherIcon("/weather/RainNight.gif");
+    } else if (weatherData?.weather?.[0]?.icon === "11d" || weatherData?.weather?.[0]?.icon === "11n") {
+        setWeatherIcon("/weather/Thunderstorm.gif");
+    } else {
+        setWeatherIcon("/weather/Mist.gif");
+    }
+    }, [weatherData])
        
     return (
     <div className="row justify-content-center" >
@@ -103,10 +131,11 @@ const Dashboard = () => {
                                     <li><small>{moment(event.start).format('hh:mm:ss a')}</small> - <small>{moment(event.end).format('hh:mm:ss a')}</small></li>
                                     {moment().isBetween(moment(event.start), moment(event.end)) && (
                                     <li>
-                                        <span style={{ color: 'red', fontWeight: 'bold' }}>Ongoing</span>
+                                        <span class="badge bg-light" style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }}>ONGOING ​​​​
                                         <div class="spinner-border text-danger spinner-border-sm" role="status">
                                             <span class="visually-hidden">Loading...</span>
                                         </div>
+                                        </span>
                                     </li>
                                     )}
                                 </ul>
@@ -196,7 +225,8 @@ const Dashboard = () => {
             {/* Weather div */}
             <div className="card align-items-center mb-3" style={{padding: '20px'}}>
               <h3 style={{fontWeight: 'bold', color: '#7993A0'}}>Today's Weather</h3>
-              <img src={`http://openweathermap.org/img/wn/${weatherData?.weather?.[0]?.icon}@2x.png`} alt="weather icon" style={{width: '150px'}} />
+              {/* <img src={`http://openweathermap.org/img/wn/${weatherData?.weather?.[0]?.icon}@2x.png`} alt="weather icon" style={{width: '150px'}} /> */}
+              <img src={weatherIcon} alt="weather icon" style={{width: '150px'}} />
               <p><b>Location:</b> Pasig</p>
               <p><b>Temperature:</b> {weatherData?.main?.temp}&deg;C</p>
               <p><b>Humidity:</b> {weatherData?.main?.humidity}%</p>
