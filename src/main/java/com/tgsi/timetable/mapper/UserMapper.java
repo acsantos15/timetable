@@ -41,7 +41,7 @@ public interface UserMapper {
     Long insertUser(Users users);
 
     // Update user
-    @Update("UPDATE users SET fname = #{fname}, lname = #{lname}, address=#{address}, contact=#{contact}, username=#{username}, email = #{email}, pass = #{pass} WHERE id = #{id}")
+    @Update("UPDATE users SET fname = #{fname}, lname = #{lname}, address=#{address}, contact=#{contact}, username=#{username}, email = #{email}, pass = #{pass}, photo = #{photo} WHERE id = #{id}")
     void updateUser(Users users);
     
     // Delete User

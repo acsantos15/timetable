@@ -140,7 +140,7 @@ const Dashboard = () => {
                                     <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                                         <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                                         <li> {event.description}</li>
-                                        <li><small>{moment(event.start).format('hh:mm:ss a')}</small> - <small>{moment(event.end).format('hh:mm:ss a')}</small></li>
+                                        <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
                                         {moment().isBetween(moment(event.start), moment(event.end)) && (
                                         <li>
                                             <span class="badge bg-light" style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }}>ONGOING ​​​​
@@ -207,7 +207,7 @@ const Dashboard = () => {
                                     <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                                         <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                                         <li> {event.description}</li>
-                                        <li><small>{moment(event.start).format('hh:mm:ss a')}</small> - <small>{moment(event.end).format('hh:mm:ss a')}</small></li>
+                                        <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
                                         {moment().isBetween(moment(event.start), moment(event.end)) && (
                                         <li>
                                             <span class="badge bg-light" style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }}>ONGOING ​​​​
@@ -238,7 +238,7 @@ const Dashboard = () => {
                         ))
                         ) : (
                             <div class="dash card" style={{margin:'10px', color:'white', padding: '20px 20px 20px 0', backgroundColor: 'rgb(68, 66, 66)'}}>
-                                <div class="d-flex align-items-center justify-content-center" style={{fontSize: 'larger', fontWeight: 'bold'}}>No Event for Today</div>
+                                <div class="d-flex align-items-center justify-content-center" style={{fontSize: 'larger', fontWeight: 'bold'}}>No Event for Tommorow</div>
                             </div>
                         )}
                         </>
@@ -259,7 +259,6 @@ const Dashboard = () => {
             {/* Weather div */}
             <div className="card align-items-center mb-3" style={{padding: '20px'}}>
               <h3 style={{fontWeight: 'bold', color: '#7993A0'}}>Today's Weather</h3>
-              <div className="d-flex justify-content-center align-items-center" style={{ minHeight: '200px' }}>
                 {Loading ? (
                     // Show the Bootstrap spinner while loading is true
                         <div className="spinner-border text-success" role="status">
@@ -269,13 +268,13 @@ const Dashboard = () => {
                     // Render the content when loading is false
                     <>
                     <img src={weatherIcon} alt="weather icon" style={{width: '150px'}} />
+                    <p><b>Location:</b> Pasig</p>
+                    <p><b>Temperature:</b> {weatherData?.main?.temp}&deg;C</p>
+                    <p><b>Humidity:</b> {weatherData?.main?.humidity}%</p>
+                    <p><b>Weather Description:</b> <span>{weatherData?.weather?.[0]?.description}</span></p>
                     </>
                 )}
-              </div>
-              <p><b>Location:</b> Pasig</p>
-              <p><b>Temperature:</b> {weatherData?.main?.temp}&deg;C</p>
-              <p><b>Humidity:</b> {weatherData?.main?.humidity}%</p>
-              <p><b>Weather Description:</b> <span>{weatherData?.weather?.[0]?.description}</span></p>
+              
             </div>
 
         </div>

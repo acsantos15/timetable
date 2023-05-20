@@ -2,10 +2,16 @@
 
 package com.tgsi.timetable.controller;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,9 +25,12 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.tgsi.timetable.mapper.EventMapper;
 import com.tgsi.timetable.mapper.UserMapper;
@@ -101,30 +110,63 @@ public class UserController {
     // Edit User
     @PutMapping("edituser/{id}")
     @ResponseBody
-    public ResponseEntity<?> updateUser(@Valid @PathVariable Long id, @RequestBody Users updatedUser) {
+    public ResponseEntity<?> updateUser(
+        @Valid @PathVariable Long id,
+        @RequestParam("photo") MultipartFile photo,
+        @RequestParam("fname") String fname,
+        @RequestParam("lname") String lname,
+        @RequestParam("address") String address,
+        @RequestParam("contact") String contact,
+        @RequestParam("username") String username,
+        @RequestParam("email") String email
+    ) {
         Users existingUser = uMapper.getUserById(id);
         if (existingUser == null) {
             return ResponseEntity.notFound().build();
         }
 
         // Check if updated username already exists
-        Users Usernames = uMapper.findByUsername(updatedUser.getUsername());
-        if (Usernames != null && !Usernames.getId().equals(id)) {
-            return ResponseEntity.badRequest().body("Username already exists.");
+        if (username != null && !username.equals(existingUser.getUsername())) {
+            Users usernameExists = uMapper.findByUsername(username);
+            if (usernameExists != null && !usernameExists.getId().equals(id)) {
+                return ResponseEntity.badRequest().body("Username already exists.");
+            }
+        }
+    
+
+        // Update user details
+        existingUser.setFname(fname);
+        existingUser.setLname(lname);
+        existingUser.setAddress(address);
+        existingUser.setContact(contact);
+        existingUser.setUsername(username);
+        existingUser.setEmail(email);
+
+        // Handle profile picture update
+        if (!photo.isEmpty()) {
+            try {
+                // Save the profile picture file to a desired location
+                String originalFileName = photo.getOriginalFilename();
+                String extension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+                String fileName = UUID.randomUUID().toString() + "." + extension;
+                
+                String filePath = "C:/Users/aries/Desktop/Timetable Project/React/timetable/FrontEnd/public/ProfilePhotos/" + fileName;
+                Files.copy(photo.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+
+                // Update the profile picture field in the existing user object
+                existingUser.setPhoto(fileName);
+            } catch (IOException e) {
+                // Handle file upload error
+                return ResponseEntity.badRequest().body("Failed to upload profile picture.");
+            }
         }
 
-        // event object
-        existingUser.setFname(updatedUser.getFname());
-        existingUser.setLname(updatedUser.getLname());
-        existingUser.setAddress(updatedUser.getAddress());
-        existingUser.setContact(updatedUser.getContact());
-        existingUser.setUsername(updatedUser.getUsername());
-        existingUser.setEmail(updatedUser.getEmail());
-
-        // Save the updated event object to the database
+        // Save the updated user object to the database
         uMapper.updateUser(existingUser);
         return ResponseEntity.ok(existingUser);
     }
+
+
 
     // Edit User pass
     @PutMapping("editpass/{id}")

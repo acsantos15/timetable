@@ -20,6 +20,11 @@ const EditProfile = () => {
                 setContact(response.data.contact)
                 setUsername(response.data.username)
                 setEmail(response.data.email)
+                if(response.data.photo === "noimage"){
+                    setPreviewImage("/ProfilePhotos/noimage.png")
+                }else{
+                    setPreviewImage("/ProfilePhotos/"+response.data.photo)
+                }  
                 setId(response.data.id)
             })
             .catch(error => console.error(error));
@@ -42,6 +47,7 @@ const EditProfile = () => {
     const [contact, setContact] = useState('');
     const [username, setUsername] = useState('');
     const [email, setEmail] = useState('');
+    const [photo, setPhoto] = useState(null);
     
     const handleFnameChange = (event) => {
         setFname(event.target.value);
@@ -64,11 +70,22 @@ const EditProfile = () => {
     
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        const formData = new FormData();
+        formData.append('photo', photo);
+
+        // Append other form fields to the formData if needed
+        formData.append('fname', fname);
+        formData.append('lname', lname);
+        formData.append('address', address);
+        formData.append('contact', contact);
+        formData.append('username', username);
+        formData.append('email', email);
+
           axios.defaults.withCredentials = true;
-          axios.put('/edituser/'+userId,
-          {fname: fname, lname: lname, address: address, contact: contact, username: username, email: email}, 
+          axios.put('/edituser/'+userId, formData, 
           {withCredentials: true}, 
-          { headers: { 'Content-Type': 'application/json' } })
+          { headers: { 'Content-Type': 'multipart/form-data' } })
           .then(response => {
             Swal.fire({
                 title: 'Profile Updated',
@@ -143,6 +160,21 @@ const EditProfile = () => {
            
     };
 
+    const [previewImage, setPreviewImage] = useState('');
+
+    const handleImageChange = (event) => {
+        const file = event.target.files[0];
+
+        if (file) {
+        setPhoto(file);
+        const reader = new FileReader();
+        reader.onload = () => {
+            setPreviewImage(reader.result);
+        };
+        reader.readAsDataURL(file);
+        }
+    };
+
     // Errors
     const [usernameerr, setUsernameError] = useState(null);
     const [conpasserr, setConPassError] = useState(null);
@@ -156,6 +188,19 @@ const EditProfile = () => {
             <div class="row" style={{margin: '70px 82px 0 82px'}}>
 
                 {/* <!-- Personal Information : LEFT --> */}
+                <div class="col">
+                    <div class="card" style={{padding: '30px'}} id="picard">
+                        <div class="d-flex justify-content-center mb-4">
+                            <img src={previewImage} class="rounded-circle" alt="example placeholder" style={{width: '200px', height: '200px'}}/>
+                        </div>
+                        <div class="d-flex justify-content-center">
+                            <div class="btn btn-primary btn-rounded">
+                                <label class="form-label text-white m-1" for="customFile2">Choose Image</label>
+                                <input type="file" class="form-control d-none" id="customFile2" onChange={handleImageChange} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <div class="col">
                     <div class="card" style={{padding: '30px'}} id="picard">
                         <div class="card-headers" style={{marginBottom: '15px'}}>

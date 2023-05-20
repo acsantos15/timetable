@@ -38,6 +38,9 @@ public class Users {
     @Size(max = 50)
     private String email;
 
+    @Size(max = 50)
+    private String photo;
+
     @NotBlank
     @Size(max = 100)
     private String password;
@@ -100,6 +103,14 @@ public class Users {
     
       public void setEmail(String email) {
         this.email = email;
+      }
+
+      public String getPhoto() {
+        return photo;
+      }
+    
+      public void setPhoto(String photo) {
+        this.photo = photo;
       }
 
       public String getPass() {

@@ -54,6 +54,15 @@ const Header = (props) => {
     }
   };
 
+  const [previewImage, setPreviewImage] = useState('');
+  useEffect(() => {
+    if(username.photo === "noimage"){
+      setPreviewImage("/ProfilePhotos/noimage.png")
+    }else{
+        setPreviewImage("/ProfilePhotos/"+username.photo)
+    } 
+  }, [username.photo]);
+
   // Passed Data to search component
   const [isOpenSearch, setIsOpenSearch] = useState(false);
   const [searchData, setSearchData] = useState('');
@@ -105,6 +114,7 @@ const Header = (props) => {
           </div>
 
           {/* Dropdown */}
+          <img src={previewImage} class="rounded-circle" alt="example placeholder" style={{width: '30px', height: '30px'}}/>
           <div class="btn-group">
             <button type="button" class="btn dropdown-toggle" style={{backgroundColor: '#537557', color: 'white'}} data-bs-toggle="dropdown" aria-expanded="false">
               <span >{username.fname} {username.lname}</span>
