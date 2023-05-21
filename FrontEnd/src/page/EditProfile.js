@@ -190,21 +190,24 @@ const EditProfile = () => {
                 {/* <!-- Personal Information : LEFT --> */}
                 <div class="col">
                     <div class="card" style={{padding: '30px'}} id="picard">
+                    <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', marginBottom: '15px'}}><i class="fa-solid fa-pen-to-square me-2"></i>Edit Profile</h3>
+                    <div class="card-headers" style={{marginBottom: '15px'}}>
+                            <h5 style={{color: '#7993a0', fontWeight: 'bold'}}>PROFILE PICTURE</h5>
+                        </div>
                         <div class="d-flex justify-content-center mb-4">
                             <img src={previewImage} class="rounded-circle" alt="example placeholder" style={{width: '200px', height: '200px'}}/>
                         </div>
                         <div class="d-flex justify-content-center">
-                            <div class="btn btn-primary btn-rounded">
-                                <label class="form-label text-white m-1" for="customFile2">Choose Image</label>
+                            <div class="btn btn-rounded" style={{backgroundColor: '#537557'}}>
+                                <label class="form-label text-white m-1" for="customFile2"> <i class="fa-solid fa-image-portrait me-2"></i>Choose Image</label>
                                 <input type="file" class="form-control d-none" id="customFile2" onChange={handleImageChange} />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col">
-                    <div class="card" style={{padding: '30px'}} id="picard">
+                    <div class="card" style={{padding: '75px 30px 30px 30px'}} id="picard">
                         <div class="card-headers" style={{marginBottom: '15px'}}>
-                            <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', marginBottom: '15px'}}><i class="fa-solid fa-pen-to-square me-2"></i>Edit Profile</h3>
                             <h5 style={{color: '#7993a0', fontWeight: 'bold'}}>PERSONAL INFORMATION</h5>
                         </div>
                         <div class="card-bodys">
@@ -231,7 +234,7 @@ const EditProfile = () => {
 
                 {/* <!-- Account Information : RIGHT --> */}
                 <div class="col">
-                    <div class="card" style={{padding: '30px'}} id="aicard">
+                    <div class="card" style={{padding: '75px 30px 30px 30px'}} id="aicard">
                         <div class="card-headers" style={{marginBottom: '15px'}}>
                             <h5 style={{color: '#7993a0', fontWeight: 'bold'}}>ACCOUNT INFORMATION</h5>
                         </div>
