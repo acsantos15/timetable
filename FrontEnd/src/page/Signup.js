@@ -88,7 +88,9 @@ const Signup = () => {
   const [conpasserr, setConPassError] = useState(null);
   const [usernameerr, setUsernameError] = useState(null);
 
-  document.body.style.backgroundColor = "#537557";
+  document.body.style.backgroundImage = "url(/bg.png)";
+  document.body.style.backgroundRepeat = "no-repeat";
+  document.body.style.backgroundSize = "auto";
 
 
   return (
