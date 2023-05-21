@@ -220,7 +220,7 @@ const Signup = () => {
 
                     {/* Already Have an Account? */}
                     <label>
-                      <p style={{textAlign: 'left', color: '#726F6C',  margin: '35px 100px 0px 0px'}}>Already have an account? <Link style={{ color: '#517341', fontWeight: 'bold' }} to="/login">Login</Link>
+                      <p style={{textAlign: 'left', color: '#726F6C',  margin: '35px 100px 0px 0px'}}>Already have an account? <Link style={{ color: '#517341', fontWeight: 'bold', textDecoration: 'none'  }} to="/login">Login</Link>
                       </p>
                     </label>
                   </form>
