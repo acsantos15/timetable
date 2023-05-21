@@ -112,7 +112,7 @@ public class UserController {
     @ResponseBody
     public ResponseEntity<?> updateUser(
         @Valid @PathVariable Long id,
-        @RequestParam("photo") MultipartFile photo,
+        @RequestParam(value = "photo", required = false) MultipartFile photo,
         @RequestParam("fname") String fname,
         @RequestParam("lname") String lname,
         @RequestParam("address") String address,
@@ -143,7 +143,7 @@ public class UserController {
         existingUser.setEmail(email);
 
         // Handle profile picture update
-        if (!photo.isEmpty()) {
+        if (photo != null && !photo.isEmpty()) {
             try {
                 // Save the profile picture file to a desired location
                 String originalFileName = photo.getOriginalFilename();
