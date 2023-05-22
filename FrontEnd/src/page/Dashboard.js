@@ -133,7 +133,10 @@ const Dashboard = () => {
                         ) : (
                             <>
                             {todayEvents.length ? (
-                            todayEvents.map((event) => (
+                            todayEvents
+                            .filter((event) => moment(event.end) > moment())
+                            .sort((a, b) => moment(a.start) - moment(b.start))
+                            .map((event) => (
                                 <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
                                 <div class="container">
                                     <div class="row">
