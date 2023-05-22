@@ -45,7 +45,7 @@ export function directLogout() {
 
 function LogoutButton() {
   return (
-    <li><a class="dropdown-item" id="logoutBtn" style={{color:'red'}} onClick={handleLogout}><i class="fa-solid fa-power-off me-2"></i>Logout</a></li>
+    <li><p class="dropdown-item"  id="logoutBtn" style={{color:'red'}} onClick={handleLogout}><i class="fa-solid fa-power-off me-2"></i>Logout</p></li>
   );
 }
 
