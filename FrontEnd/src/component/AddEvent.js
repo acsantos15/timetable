@@ -119,6 +119,7 @@ function AddEvent(props) {
               icon: 'success',
               showCancelButton: false,
               confirmButtonText: 'OK',
+              allowOutsideClick: false,
               confirmButtonColor: '#537557',
           }).then((result) => {
               if (result.isConfirmed) {
