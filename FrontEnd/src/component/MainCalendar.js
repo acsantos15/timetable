@@ -7,8 +7,6 @@ import interactionPlugin from '@fullcalendar/interaction';
 import moment from 'moment';
 import "../css/style.css";
 
-import ViewEventModal from './ViewEditEvent';
-
 import axios from 'axios';
 
 const MainCalendar = (props) => {

@@ -88,7 +88,9 @@ const Signup = () => {
   const [conpasserr, setConPassError] = useState(null);
   const [usernameerr, setUsernameError] = useState(null);
 
-  document.body.style.backgroundColor = "#537557";
+  document.body.style.backgroundImage = "url(/bg.png)";
+  document.body.style.backgroundRepeat = "no-repeat";
+  document.body.style.backgroundSize = "auto";
 
 
   return (
@@ -220,7 +222,7 @@ const Signup = () => {
 
                     {/* Already Have an Account? */}
                     <label>
-                      <p style={{textAlign: 'left', color: '#726F6C',  margin: '35px 100px 0px 0px'}}>Already have an account? <Link style={{ color: '#517341', fontWeight: 'bold' }} to="/login">Login</Link>
+                      <p style={{textAlign: 'left', color: '#726F6C',  margin: '35px 100px 0px 0px'}}>Already have an account? <Link style={{ color: '#517341', fontWeight: 'bold', textDecoration: 'none'  }} to="/login">Login</Link>
                       </p>
                     </label>
                   </form>

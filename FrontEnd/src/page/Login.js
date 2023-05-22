@@ -88,7 +88,7 @@ function Login() {
                             </span>
                             <input type="password" id="form2Example27" className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`} placeholder="Password"value={password}onChange={handlePasswordChange}/>
                           </div>
-                          <div class="form-check mt-2">
+                          <div class="form-check mt-3">
                             <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPass}/>
                             <label class="form-check-label" for="flexCheckDefault" style={{color: '#6C757D'}}>Show Password</label>
                           </div>
@@ -100,13 +100,13 @@ function Login() {
                         </div>
 
                         {/* Button  */}
-                        <div className="pt-1 mb-4" style={{ float: 'right'}}>
-                          <button className="rounded login-button" type="submit">Login</button>
+                        <div className="mt-3 mb-4">
+                          <button className="rounded login-button" style={{width: '100%'}} type="submit">Login</button>
                         </div>
 
                         {/*  Already Have an Account */}
-                        <div style={{ float: 'right' }}>
-                          <p style={{ textAlign: 'left', color: '#726F6C', margin: '60px 30px 0px 0px' }}>Don't have an account? Create an account <Link style={{ color: '#517341', fontWeight: 'bold' }} to="/signup">Signup</Link> </p>
+                        <div style={{ float: 'center' }}>
+                          <p style={{ textAlign: 'left', color: '#726F6C', margin: '60px 30px 0px 0px' }}>Don't have an account? Register <Link style={{ color: '#517341', fontWeight: 'bold', textDecoration: 'none' }} to="/signup">here</Link> </p>
                         </div>
                       </form>
 
