@@ -4,9 +4,6 @@ import { directLogout } from '../component/LogoutButton';
 import axios from 'axios';
 import Swal from 'sweetalert2';
 
-
-document.body.style.backgroundColor = "#DEDBD3";
-
 const EditProfile = () => {
     
 
@@ -30,7 +27,7 @@ const EditProfile = () => {
             .catch(error => console.error(error));
     }, []);
 
-    // Toggle Visibility of PAssword Card
+    // Toggle Visibility of Password
     const [isVisible, setIsVisible] = useState(true);
     const [isPassVisible, setIsPassVisible] = useState(false);
 
@@ -39,7 +36,7 @@ const EditProfile = () => {
         setIsPassVisible(!isPassVisible);
     };
 
-    // Handle User Details
+    // User details variables
     const [userId, setId] = useState('');
     const [fname, setFname] = useState('');
     const [lname, setLname] = useState('');
@@ -49,6 +46,7 @@ const EditProfile = () => {
     const [email, setEmail] = useState('');
     const [photo, setPhoto] = useState(null);
     
+    // User detail inputs handler
     const handleFnameChange = (event) => {
         setFname(event.target.value);
     };
@@ -68,13 +66,13 @@ const EditProfile = () => {
         setEmail(event.target.value);
     };
     
+    // Handle submission of update user
     const handleSubmit = (event) => {
         event.preventDefault();
-
+        
+        // User form data
         const formData = new FormData();
         formData.append('photo', photo);
-
-        // Append other form fields to the formData if needed
         formData.append('fname', fname);
         formData.append('lname', lname);
         formData.append('address', address);
@@ -82,37 +80,39 @@ const EditProfile = () => {
         formData.append('username', username);
         formData.append('email', email);
 
-          axios.defaults.withCredentials = true;
-          axios.put('/edituser/'+userId, formData, 
-          {withCredentials: true}, 
-          { headers: { 'Content-Type': 'multipart/form-data' } })
-          .then(response => {
-            Swal.fire({
-                title: 'Profile Updated',
-                text: " ",
-                icon: 'success',
-                showCancelButton: false,
-                confirmButtonColor: '#537557',
-                confirmButtonText: 'OK'
-            }).then((result) => {
-                if (result.isConfirmed) {
-                    window.location.reload(); 
-                }
-            }) 
-            })   
-          .catch(error => {
-            console.log(error);
-            setUsernameError("Username Already Exist")
-            setTimeout(() => {
-                setUsernameError(null);
-            }, 3000);
-          });  
+        axios.defaults.withCredentials = true;
+        axios.put('/edituser/'+userId, formData, 
+        {withCredentials: true}, 
+        { headers: { 'Content-Type': 'multipart/form-data' } })
+        .then(response => {
+        Swal.fire({
+            title: 'Profile Updated',
+            text: " ",
+            icon: 'success',
+            showCancelButton: false,
+            confirmButtonColor: '#537557',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                window.location.reload(); 
+            }
+        }) 
+        })   
+        .catch(error => {
+        console.log(error);
+        setUsernameError("Username Already Exist")
+        setTimeout(() => {
+            setUsernameError(null);
+        }, 3000);
+        });  
     };
     
+    // Password variables
     const [oldpass, setOldPass] = useState('');
     const [newpass, setNewPass] = useState('');
     const [conpass, setConPass] = useState('');
 
+    // Password input handler
     const handleNewPassChange = (event) => {
         setNewPass(event.target.value);
     };
@@ -123,8 +123,10 @@ const EditProfile = () => {
         setOldPass(event.target.value);
     };
 
+    // Handle submission of password
     const handlePassSubmit = (event) => {
         event.preventDefault();
+        // Password validations
         if(newpass !== conpass){
             setConPassError("Password don't match")
             setTimeout(() => {
@@ -160,8 +162,8 @@ const EditProfile = () => {
            
     };
 
+    // Preview of uploaded image
     const [previewImage, setPreviewImage] = useState('');
-
     const handleImageChange = (event) => {
         const file = event.target.files[0];
 
@@ -175,11 +177,12 @@ const EditProfile = () => {
         }
     };
 
-    // Errors
+    // Error variables
     const [usernameerr, setUsernameError] = useState(null);
     const [conpasserr, setConPassError] = useState(null);
     const [oldpasserr, setOldPassError] = useState(null);
     return (
+
     // <!--EDIT USER HERE-->
     <div class="container1">
         <Header />

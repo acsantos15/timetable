@@ -12,39 +12,43 @@ import Search from './page/Search';
 import NotFound from './page/NotFound';
 
 function App() {
-  const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+    // Authentication variables
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
-  useEffect(() => {
-    axios.defaults.withCredentials = true;
-    axios.get('/checkSession', { withCredentials: true })
-      .then(response => {
-        if (response.data.status === 'success') {
-          setIsAuthenticated(true);
-        } else {
+    // Simple authentication using springboot httpsession
+    useEffect(() => {
+      axios.defaults.withCredentials = true;
+      axios.get('/checkSession', { withCredentials: true })
+        .then(response => {
+          if (response.data.status === 'success') {
+            setIsAuthenticated(true);
+          } else {
+            setIsAuthenticated(false);
+          }
+        })
+        .catch(error => {
+          console.log(error);
           setIsAuthenticated(false);
-        }
-      })
-      .catch(error => {
-        console.log(error);
-        setIsAuthenticated(false);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
-  }, []);
+        })
+        .finally(() => {
+          setIsLoading(false);
+        });
+    }, []);
 
-  if (isLoading) {
-    // Render a loading screen
-    return (
-    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-      <div class="spinner-border" role="status">
-        <span class="visually-hidden">Loading...</span>
+    // Show loading spinner until ajax responds
+    if (isLoading) {
+      // Render a loading screen
+      return (
+      <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+        <div class="spinner-border" role="status">
+          <span class="visually-hidden">Loading...</span>
+        </div>
       </div>
-    </div>
-    );
-  } else {
+      );
+    } else {
     // Render the dashboard or login page depending on the authentication status
+    // Site Routing
     return (
       <BrowserRouter>
         <Routes>

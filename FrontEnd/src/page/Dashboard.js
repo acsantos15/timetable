@@ -8,12 +8,15 @@ import moment from 'moment';
 
 
 const Dashboard = () => {
-  const [todayEvents, setTodayEvents] = useState([]);
-  const [tomorrowEvents, setTomorrowEvents] = useState([]);
-  const [weatherData, setWeatherData] = useState({});
-
-  const [Loading, setLoading] = useState(true);
-  
+    // Dashboard data variables
+    const [todayEvents, setTodayEvents] = useState([]);
+    const [tomorrowEvents, setTomorrowEvents] = useState([]);
+    const [weatherData, setWeatherData] = useState({});
+    
+    // Loading variables
+    const [Loading, setLoading] = useState(true);
+    
+    // Set dashboard data 
     useEffect(() => {
         axios.get('/dashboard')
         .then((response) => {
@@ -28,57 +31,57 @@ const Dashboard = () => {
         });
     }, []);
 
-    document.body.style.backgroundColor = "#DEDBD3"; 
-    document.body.style.backgroundImage = ""; 
-
+    // Participant variables
     const [participant, setParticipant] = useState([]);
 
+    // Fetch participants for todays event
     useEffect(() => {
         todayEvents.forEach((event) => {
-          axios.get(`/events/${event.id}/users`)
+        axios.get('/events/'+event.id+'/users')
             .then((response) => {
-              const users = response.data;
-              const participantNames = users.map((people) => `${people.fname} ${people.lname}`);
-              setParticipant((prevParticipants) => ({
+            const users = response.data;
+            const participantNames = users.map((people) => people.fname+' '+people.lname);
+            setParticipant((prevParticipants) => ({
                 ...prevParticipants,
                 [event.id]: participantNames,
-              }));
+            }));
             })
             .catch((error) => {
-              console.log(error);
+            console.log(error);
             });
         });
-      }, [todayEvents]);
+    }, [todayEvents]);
 
+    // Fetch participants for tommorows event
     useEffect(() => {
         tomorrowEvents.forEach((event) => {
-          axios.get(`/events/${event.id}/users`)
+        axios.get('/events/'+event.id+'/users')
             .then((response) => {
-              const users = response.data;
-              const participantNames = users.map((people) => `${people.fname} ${people.lname}`);
-              setParticipant((prevParticipants) => ({
+            const users = response.data;
+            const participantNames = users.map((people) => people.fname+' '+people.lname);
+            setParticipant((prevParticipants) => ({
                 ...prevParticipants,
                 [event.id]: participantNames,
-              }));
+            }));
             })
             .catch((error) => {
-              console.log(error);
+            console.log(error);
             });
         });
-      }, [tomorrowEvents]);
+    }, [tomorrowEvents]);
 
+    // use to constantly update current time
     const [, setCurrentTime] = useState(moment().format('hh:mm:ss a'));
-
     useEffect(() => {
         const interval = setInterval(() => {
-          setCurrentTime(moment().format('hh:mm:ss a'));
+        setCurrentTime(moment().format('hh:mm:ss a'));
         }, 1000);
     
         return () => clearInterval(interval);
-      }, []);
+    }, []);
 
+    // set weather gif 
     const [weatherIcon, setWeatherIcon] = useState('');
-
     useEffect(() => {
     if (weatherData?.weather?.[0]?.icon === "01d") {
         setWeatherIcon("/weather/ClearSkyDay.gif");
@@ -104,7 +107,7 @@ const Dashboard = () => {
         setWeatherIcon("/weather/Mist.gif");
     }
     }, [weatherData])
-       
+        
     return (
     <div className="justify-content-center">
         <Header/>
@@ -284,7 +287,7 @@ const Dashboard = () => {
             </div>
         </div>
     </div>
-  )
+    )
 }
 
 export default Dashboard

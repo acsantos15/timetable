@@ -2,24 +2,25 @@ import React from 'react'
 import "../css/style.css";
 import { NavLink } from 'react-router-dom';
 
+// Website Navigation Bar
 const Navigation = () => {
-  return (
-    <div className="nav nav-tabs justify-content-center" style={{backgroundColor: '#dedbd3'}}>
+    return (
+      <div className="nav nav-tabs justify-content-center" style={{backgroundColor: '#dedbd3'}}>
 
-          <NavLink className="nav-link" to="/dashboard" activeClassName="active">
-            <span>
-              <i class="fa-solid fa-table-cells-large"></i> Dashboard
-            </span>
-          </NavLink>
+            <NavLink className="nav-link" to="/dashboard" activeClassName="active">
+              <span>
+                <i class="fa-solid fa-table-cells-large"></i> Dashboard
+              </span>
+            </NavLink>
 
-          <NavLink className="nav-link" to="/timetable" activeClassName="active">
-            <span>
-              <i class="fa-solid fa-calendar-days"></i> Timetable
-            </span>
-          </NavLink>
+            <NavLink className="nav-link" to="/timetable" activeClassName="active">
+              <span>
+                <i class="fa-solid fa-calendar-days"></i> Timetable
+              </span>
+            </NavLink>
 
-    </div>
-  )
+      </div>
+    )
 }
 
 export default Navigation
