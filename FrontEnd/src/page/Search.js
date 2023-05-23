@@ -47,7 +47,7 @@ const Search = (props) => {
                         </div>
                         {searchData && searchData.events && searchData.events.length > 0 ? (
                         searchData.events.map((event) => (
-                            <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '2px', color: 'white'}} data-bs-toggle="tooltip" data-bs-className="custom-tooltip" data-bs-placement="bottom">
+                            <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '2px', color: 'white'}} data-bs-toggle="tooltip" data-bs-class="custom-tooltip" data-bs-placement="bottom">
                                 <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                                     <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                                     <li>{event.description}</li>

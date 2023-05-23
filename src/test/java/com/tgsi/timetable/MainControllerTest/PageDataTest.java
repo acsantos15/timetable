@@ -40,6 +40,7 @@ public class PageDataTest {
     }
 
     @Test
+    @SuppressWarnings("unchecked")
     public void testDashboard() {
         // Mock HttpSession and user
         HttpSession session = Mockito.mock(HttpSession.class);

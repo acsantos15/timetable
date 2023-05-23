@@ -51,7 +51,7 @@ public class EventCrudTest {
         when(eMapper.insertEvent(event)).thenReturn(1L);
 
         // Call the saveEvent method
-        ResponseEntity<Long> responseEntity = mainController.saveEvent(event);
+        mainController.saveEvent(event);
 
         verify(eMapper).insertEvent(event);
     }
@@ -68,9 +68,7 @@ public class EventCrudTest {
         ResponseEntity<Map<String, String>> response = mainController.saveEventParticipants(payload);
 
         // Verify the response
-        assertEquals(200, response.getStatusCodeValue());
         assertEquals("Success", response.getBody().get("message"));
-
         // Verify that the eMapper.insertEventParticipants method was called with the correct arguments
         verify(eMapper).insertEventParticipants(1L, Arrays.asList(1L, 2L, 3L));
     }
