@@ -6,7 +6,6 @@ public class WeatherData {
   private MainData main;
   private WindData wind;
   private List<WeatherDescription> weather;
-  // add any other properties you want to include in the JSON response
 
   public MainData getMain() {
       return main;
@@ -31,8 +30,6 @@ public class WeatherData {
   public void setWeather(List<WeatherDescription> weather) {
       this.weather = weather;
   }
-
-  // add any other getters/setters for additional properties
 
   public static class MainData {
       private double temp;

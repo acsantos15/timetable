@@ -62,12 +62,14 @@ const Header = (props) => {
     // User image preview
     const [previewImage, setPreviewImage] = useState('');
     useEffect(() => {
-      if(username.photo === "noimage"){
-        setPreviewImage("/ProfilePhotos/noimage.png")
-      }else{
-          setPreviewImage("/ProfilePhotos/"+username.photo)
-      } 
-    }, [username.photo]);
+      if (username && username.photo) {
+        if (username.photo === 'noimage') {
+          setPreviewImage('/ProfilePhotos/noimage.png');
+        } else {
+          setPreviewImage('/ProfilePhotos/' + username.photo);
+        }
+      }
+    }, [username?.photo]);
 
     // Passed Data to search component
     const [isOpenSearch, setIsOpenSearch] = useState(false);

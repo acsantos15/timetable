@@ -72,13 +72,13 @@ function Login() {
                           <img src="/PageSrc/tgsilogo.png" alt="Tsukiden logo" style={{ height: '.9em', margin: '15px 0 15px 0'}} />
                         </div>
                         <div className="d-flex mb-3 pb-1 justify-content-center">
-                          <span class="h1 fw-bold mb-0" style={{color: 'rgb(88, 17, 17)', fontWeight: 'bold', fontSize: '60px'}}>Login</span>
+                          <span className="h1 fw-bold mb-0" style={{color: 'rgb(88, 17, 17)', fontWeight: 'bold', fontSize: '60px'}}>Login</span>
                         </div>
 
                         <div className="form-outline mb-4">
                           <div className="input-group">
                             <span className="input-group-text" style={{ backgroundColor: 'white' }}>
-                              <i class="fa-solid fa-user" style={{color: '#babdb6'}}></i>  
+                              <i className="fa-solid fa-user" style={{color: '#babdb6'}}></i>  
                             </span>
                               <input type="text" id="form2Example17" className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`} placeholder="Username" value={username} onChange={handleUsernameChange}/>
                           </div>
@@ -87,13 +87,13 @@ function Login() {
                         <div className="form-outline mb-4">
                           <div className="input-group">
                             <span className="input-group-text" style={{ backgroundColor: 'white' }}>
-                            <i class="fa-solid fa-lock" style={{color: '#babdb6'}}></i>
+                            <i className="fa-solid fa-lock" style={{color: '#babdb6'}}></i>
                             </span>
                             <input type={showPassword ? 'text' : 'password'} id="form2Example27" className={`form-control form-control-lg ${error ? 'is-invalid' : ''}`} placeholder="Password"value={password}onChange={handlePasswordChange}/>
                           </div>
-                          <div class="form-check mt-3">
-                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPassToggle}/>
-                            <label class="form-check-label" for="flexCheckDefault" style={{color: '#6C757D'}}>Show Password</label>
+                          <div className="form-check mt-3">
+                            <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPassToggle}/>
+                            <label className="form-check-label" for="flexCheckDefault" style={{color: '#6C757D'}}>Show Password</label>
                           </div>
                         </div> 
 

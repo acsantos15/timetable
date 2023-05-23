@@ -11,7 +11,6 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,10 +72,9 @@ public class MainController {
     // Get All Events Of Logged User
     @GetMapping("/events")
     @CrossOrigin
-    public @ResponseBody Iterable<Events> getAllEvents(HttpSession session, Model model) {
+    public @ResponseBody Iterable<Events> getAllEvents(HttpSession session) {
         Users user = (Users) session.getAttribute("userSession");
         Long loggedId = user.getId();
-        model.addAttribute("loggedId", loggedId);
         return eMapper.getUserEvent(loggedId);
     }
 
@@ -92,6 +90,7 @@ public class MainController {
     // Save Participant
     @PostMapping("/saveEventParticipants")
     @ResponseBody
+    @SuppressWarnings("unchecked")
     public ResponseEntity<Map<String, String>> saveEventParticipants(@Valid @RequestBody Map<String, Object> payload) {
         Long eventId = ((Number) payload.get("eventId")).longValue();
         List<Long> participantIds = (List<Long>) payload.get("participantIds");

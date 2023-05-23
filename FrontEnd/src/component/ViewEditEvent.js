@@ -12,41 +12,42 @@ const ViewEditEvent = (props) => {
     const [participants, setParticipants] = useState([])
 
     // get event data clicked
-    const eventId = eventData.id;
+    const [eventId, setEventId] = useState('');
+
+    useEffect(() => {
+      if (eventData && eventData.id) {
+        setEventId(eventData.id);
+    
+        axios.get('/events/' + eventData.id + '/users')
+          .then(response => {
+            const people = response.data;
+            let num = 1;
+            const participantList = people.slice(1).map((person) => (
+              <li key={person.id} style={{ listStyleType: 'none', marginBottom: '10px' }}>
+                {num++}.) {person.fname} {person.lname}
+              </li>
+            ));
+            setParticipants(participantList);
+            setAppointmentCreator(people[0]?.fname + ' ' + people[0]?.lname);
+          })
+          .catch(error => {
+            console.log(error);
+          });
+    
+        axios.get('/events/' + eventData.id + '/users')
+          .then(response => {
+            const users = response.data.map(user => ({
+              value: user.id,
+              label: user.fname + ' ' + user.lname
+            }));
+            setSelectedPeople(users);
+          })
+          .catch(error => console.error(error));
+      }
+    }, [eventData]);
 
     // Creator id variable
     const [appointmentCreator, setAppointmentCreator] = useState('');
-    
-    // list all participants / Populate participant selector from database
-    useEffect(() => {
-      axios.get('/events/'+eventId+'/users')
-      .then(response => {
-          const people = response.data;
-          let num = 1;
-          const participantList = people.slice(1).map((person) => {
-          return (
-              // Transfer this loop
-              <li key={person.id} style={{ listStyleType: 'none', marginBottom: '10px' }}>
-              {num++}.) {person.fname} {person.lname}
-              </li>
-          );
-          });
-          setParticipants(participantList);
-          setAppointmentCreator(people[0]?.fname + ' ' + people[0]?.lname);
-      })
-      .catch(error => {
-          console.log(error);
-      });
-      axios.get('/events/'+eventId+'/users')
-        .then(response => {
-          const users = response.data.map(user => ({
-            value: user.id,
-            label: user.fname + ' ' + user.lname
-          }));
-          setSelectedPeople(users);
-        })
-        .catch(error => console.error(error)); 
-    }, [eventId]);
 
     // Delete event function
     const handleDeleteEvent = () => {

@@ -14,12 +14,14 @@ const Profile = () => {
     // Set logged user profile photo
     const [previewImage, setPreviewImage] = useState('');
     useEffect(() => {
-        if(userdata.photo === "noimage"){
-        setPreviewImage("/ProfilePhotos/noimage.png")
-        }else{
-            setPreviewImage("/ProfilePhotos/"+userdata.photo)
-        } 
-    }, [userdata.photo]);
+      if (userdata && userdata.photo) {
+        if (userdata.photo === 'noimage') {
+          setPreviewImage('/ProfilePhotos/noimage.png');
+        } else {
+          setPreviewImage('/ProfilePhotos/' + userdata.photo);
+        }
+      }
+    }, [userdata?.photo]);
     
     return (
         // Label 
