@@ -5,7 +5,7 @@ import Swal from 'sweetalert2';
 import moment from 'moment';
 
 function AddEvent(props) {
-    // props variable for modal show
+    // props variable htmlFor modal show
     const { isOpenAdd, selectStart, selectEnd } = props;
 
     // Event data variables
@@ -173,22 +173,22 @@ function AddEvent(props) {
     return (
       <div className="modal" tabIndex="-1" style={{ display: isOpenAdd ? "block" : "none" }}>
         <form onSubmit={handleSubmit}>
-        <div class="modal-dialog modal-dialog-centered modal-lg" style={{marginTop: '8%'}}>
-          <div style= {{backgroundColor: 'white'}}class="modal-content">
+        <div className="modal-dialog modal-dialog-centered modal-lg" style={{marginTop: '8%'}}>
+          <div style= {{backgroundColor: 'white'}}className="modal-content">
             
-            <div class="modal-header" style={{backgroundColor:selectedColor}}>
-              <h5 class="modal-title"><i class="fa-regular fa-calendar-plus me-2"></i>New Appointment</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={handleModalClose} aria-label="Close"></button>
+            <div className="modal-header" style={{backgroundColor:selectedColor}}>
+              <h5 className="modal-title"><i className="fa-regular fa-calendar-plus me-2"></i>New Appointment</h5>
+              <button type="button" className="btn-close" data-bs-dismiss="modal" onClick={handleModalClose} aria-label="Close"></button>
             </div>
-            <div class="modal-body" style={{fontWeight: 'bold'}}>
-              <div class="mb-3 row">
-                <div class="col-md-10">
-                  <label for="addTitle" class="form-label"><i class="fa-solid fa-pen me-2"></i>Title</label>
-                  <input type="text" class="form-control" id="addTitle" name="title" maxlength="100" value={title} onChange={handleTitleChange} required/>
+            <div className="modal-body" style={{fontWeight: 'bold'}}>
+              <div className="mb-3 row">
+                <div className="col-md-10">
+                  <label htmlFor="addTitle" className="form-label"><i className="fa-solid fa-pen me-2"></i>Title</label>
+                  <input type="text" className="form-control" id="addTitle" name="title" maxLength="100" value={title} onChange={handleTitleChange} required/>
                 </div>
-                <div class="col-sm-2">
-                  <label for="addColor" class="form-label"><i class="fa-solid fa-palette me-2"></i>Color</label>
-                  <select class="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor }}>
+                <div className="col-sm-2">
+                  <label htmlFor="addColor" className="form-label"><i className="fa-solid fa-palette me-2"></i>Color</label>
+                  <select className="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor }}>
                     <option value="#dd766a" style={{backgroundColor: '#dd766a'}}></option>
                     <option value="#dd996a" style={{backgroundColor: '#dd996a'}}></option>
                     <option value="#eddf7d" style={{backgroundColor: '#eddf7d'}}></option>
@@ -200,15 +200,15 @@ function AddEvent(props) {
                 </div>
               </div>
 
-              <div class="mb-3">
-                <label for="addDesc" class="form-label"><i class="fa-solid fa-comments me-2"></i>Description</label>
-                <textarea type="textarea" class="form-control" id="addDesc" name="description" maxlength="100" rows="3" value={description} onChange={handleDescriptionChange} required></textarea>
+              <div className="mb-3">
+                <label htmlFor="addDesc" className="form-label"><i className="fa-solid fa-comments me-2"></i>Description</label>
+                <textarea type="textarea" className="form-control" id="addDesc" name="description" maxLength="100" rows="3" value={description} onChange={handleDescriptionChange} required></textarea>
               </div>
 
-              <div class="mb-3">
-                <label for="addLoc" class="form-label"><i class="fa-solid fa-location-dot me-2"></i>Location</label>
-                <select class="form-select" aria-label="Default select example" id="addLoc" name="location" value={location} onChange={handleLocationChange} required>
-                <option value="" selected disabled></option>
+              <div className="mb-3">
+                <label htmlFor="addLoc" className="form-label"><i className="fa-solid fa-location-dot me-2"></i>Location</label>
+                <select className="form-select" aria-label="Default select example" id="addLoc" name="location" value={location} onChange={handleLocationChange} required>
+                <option defaultValue="" disabled></option>
                 <option value="Online Conference">Online Conference</option>
                 <option value="Center of Excellence 1">Center of Excellence 1</option>
                 <option value="Center of Excellence 2">Center of Excellence 2</option>
@@ -216,8 +216,8 @@ function AddEvent(props) {
                 </select>
               </div>
 
-              <div class="mb-3">
-                <label for="addPart" class="form-label"><i class="fa-solid fa-users me-2"></i>Participant/s:</label>
+              <div className="mb-3">
+                <label htmlFor="addPart" className="form-label"><i className="fa-solid fa-users me-2"></i>Participant/s:</label>
                 <Select
                   isMulti
                   name="peoples[]"
@@ -229,17 +229,17 @@ function AddEvent(props) {
                 />
               </div> 
 
-              <div class="row g-3">
-                <div class="col">
-                  <label class="control-label col-sm-2" for="addStart"><i class="fa-solid fa-hourglass-start me-2"></i>Start</label>
-                  <div class="col-sm-15">          
+              <div className="row g-3">
+                <div className="col">
+                  <label className="control-label col-sm-2" htmlFor="addStart"><i className="fa-solid fa-hourglass-start me-2"></i>Start</label>
+                  <div className="col-sm-15">          
                     <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addStart" name="start" placeholder="Start" value={start} onChange={handleStartChange} required/>
                     {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
                   </div>
                 </div>
-                <div class="col">
-                  <label class="control-label col-sm-2" for="addEnd"><i class="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
-                  <div class="col-sm-15">          
+                <div className="col">
+                  <label className="control-label col-sm-2" htmlFor="addEnd"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
+                  <div className="col-sm-15">          
                     <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addEnd" name="end" placeholder="End" value={end} onChange={handleEndChange} required/>
                     {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
                   </div>
@@ -251,9 +251,9 @@ function AddEvent(props) {
             </div>
 
             {/* Buttons */}
-            <div class="modal-footer">
-              <button type="reset" class="btn btn-outline-secondary" onClick={handleClear}><i class="fa-solid fa-eraser me-2"></i>Clear</button>
-              <button type="submit" class="btn btn-success" id="addEventBtn"><i class="fa-solid fa-floppy-disk me-2"></i>Save Changes</button>
+            <div className="modal-footer">
+              <button type="reset" className="btn btn-outline-secondary" onClick={handleClear}><i className="fa-solid fa-eraser me-2"></i>Clear</button>
+              <button type="submit" className="btn btn-success" id="addEventBtn"><i className="fa-solid fa-floppy-disk me-2"></i>Save Changes</button>
             </div>            
           </div>                            
         </div>

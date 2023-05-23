@@ -184,72 +184,72 @@ const EditProfile = () => {
     return (
 
     // <!--EDIT USER HERE-->
-    <div class="container1">
+    <div className="container1">
         <Header />
         <form onSubmit={handleSubmit}>
         {isVisible ? (
-            <div class="row" style={{margin: '70px 82px 0 82px'}}>
+            <div className="row" style={{margin: '70px 82px 0 82px'}}>
 
                 {/* <!-- Personal Information : LEFT --> */}
-                <div class="col">
-                    <div class="card" style={{padding: '30px'}} id="picard">
-                    <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', marginBottom: '15px'}}><i class="fa-solid fa-pen-to-square me-2"></i>Edit Profile</h3>
-                    <div class="card-headers" style={{marginBottom: '15px'}}>
+                <div className="col">
+                    <div className="card" style={{padding: '30px'}} id="picard">
+                    <h3 style={{color: 'rgb(82, 10, 10)', fontWeight: 'bolder', marginBottom: '15px'}}><i className="fa-solid fa-pen-to-square me-2"></i>Edit Profile</h3>
+                    <div className="card-headers" style={{marginBottom: '15px'}}>
                             <h5 style={{color: '#7993a0', fontWeight: 'bold'}}>PROFILE PICTURE</h5>
                         </div>
-                        <div class="d-flex justify-content-center mb-4">
-                            <img src={previewImage} class="rounded-circle" alt="example placeholder" style={{width: '200px', height: '200px'}}/>
+                        <div className="d-flex justify-content-center mb-4">
+                            <img src={previewImage} className="rounded-circle" alt="example placeholder" style={{width: '200px', height: '200px'}}/>
                         </div>
-                        <div class="d-flex justify-content-center">
-                            <div class="btn btn-rounded" style={{backgroundColor: '#537557'}}>
-                                <label class="form-label text-white m-1" for="customFile2"> <i class="fa-solid fa-image-portrait me-2"></i>Choose Image</label>
-                                <input type="file" class="form-control d-none" id="customFile2" onChange={handleImageChange} />
+                        <div className="d-flex justify-content-center">
+                            <div className="btn btn-rounded" style={{backgroundColor: '#537557'}}>
+                                <label className="form-label text-white m-1" htmlFor="customFile2"> <i className="fa-solid fa-image-portrait me-2"></i>Choose Image</label>
+                                <input type="file" className="form-control d-none" id="customFile2" onChange={handleImageChange} />
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col">
-                    <div class="card" style={{padding: '75px 30px 30px 30px'}} id="picard">
-                        <div class="card-headers" style={{marginBottom: '15px'}}>
+                <div className="col">
+                    <div className="card" style={{padding: '75px 30px 30px 30px'}} id="picard">
+                        <div className="card-headers" style={{marginBottom: '15px'}}>
                             <h5 style={{color: '#7993a0', fontWeight: 'bold'}}>PERSONAL INFORMATION</h5>
                         </div>
-                        <div class="card-bodys">
+                        <div className="card-bodys">
                             <input type="hidden" id="userId" />
-                            <div class="mb-4">
+                            <div className="mb-4">
                                 <label style={{fontWeight: 'bold'}}>First Name:</label>
-                                <input class="form-control" id="editFname" type="text" placeholder="First Name" name="firstname" onChange={handleFnameChange} value={fname}/>
+                                <input className="form-control" id="editFname" type="text" placeholder="First Name" name="firstname" onChange={handleFnameChange} value={fname}/>
                             </div>
-                            <div class="mb-4">
+                            <div className="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Last Name:</label>
-                                <input class="form-control" id="editLname" type="text" placeholder="Last Name" name="lastname" onChange={handleLnameChange} value={lname}/>
+                                <input className="form-control" id="editLname" type="text" placeholder="Last Name" name="lastname" onChange={handleLnameChange} value={lname}/>
                             </div>
-                            <div class="mb-4">
+                            <div className="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Address:</label>
-                                <input class="form-control" id="editAddress" type="text" placeholder="Home Address" name="address" onChange={handleAddressChange} value={address}/>
+                                <input className="form-control" id="editAddress" type="text" placeholder="Home Address" name="address" onChange={handleAddressChange} value={address}/>
                             </div>
-                            <div class="mb-4">
+                            <div className="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Contact No.:</label>
-                                <input class="form-control" type="text" pattern="[0-9]{11}" placeholder="Contact No." id="contact" name="contact" maxLength="11" value={contact} onChange={handleContactChange} required/>
+                                <input className="form-control" type="text" pattern="[0-9]{11}" placeholder="Contact No." id="contact" name="contact" maxLength="11" value={contact} onChange={handleContactChange} required/>
                             </div>
                         </div>
                     </div>
                 </div>
 
                 {/* <!-- Account Information : RIGHT --> */}
-                <div class="col">
-                    <div class="card" style={{padding: '75px 30px 30px 30px'}} id="aicard">
-                        <div class="card-headers" style={{marginBottom: '15px'}}>
+                <div className="col">
+                    <div className="card" style={{padding: '75px 30px 30px 30px'}} id="aicard">
+                        <div className="card-headers" style={{marginBottom: '15px'}}>
                             <h5 style={{color: '#7993a0', fontWeight: 'bold'}}>ACCOUNT INFORMATION</h5>
                         </div>
-                        <div class="card-bodys">    
-                            <div class="mb-4">
+                        <div className="card-bodys">    
+                            <div className="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Username:</label>
                                 <input className={`form-control ${usernameerr ? 'is-invalid' : ''}`} id="editUsername" type="text" placeholder="Username" name="username" onChange={handleUsernameChange} value={username}/>
                                 {usernameerr && <div style={{height: '10px'}} className="invalid-feedback">{usernameerr}</div>}
                             </div>
-                            <div class="mb-4">
+                            <div className="mb-4">
                                 <label style={{fontWeight: 'bold'}}>Email Address:</label>
-                                <input class="form-control" id="editEmail" type="email" placeholder="Email" name="email" onChange={handleEmailChange} value={email}/>
+                                <input className="form-control" id="editEmail" type="email" placeholder="Email" name="email" onChange={handleEmailChange} value={email}/>
                             </div>
 
                             {/* <!-- Error Message --> */}
@@ -257,9 +257,9 @@ const EditProfile = () => {
 
                             {/* <!-- Buttons --> */}
                             <div style={{float: 'right'}}>
-                                <a href="/profile" type="button" class="btn btn-outline-danger">Cancel</a>&nbsp;
-                                <button type="button" class="btn btn-secondary" id="changePassBtn" onClick={toggleVisibility}>Change Password</button>&nbsp;
-                                <button type="submit" class="btn" style={{backgroundColor: '#537557', color: 'white'}}><i class="fa-solid fa-floppy-disk me-2"></i>Save</button>
+                                <a href="/profile" type="button" className="btn btn-outline-danger">Cancel</a>&nbsp;
+                                <button type="button" className="btn btn-secondary" id="changePassBtn" onClick={toggleVisibility}>Change Password</button>&nbsp;
+                                <button type="submit" className="btn" style={{backgroundColor: '#537557', color: 'white'}}><i className="fa-solid fa-floppy-disk me-2"></i>Save</button>
                             </div>
                         </div>
                     </div>
@@ -270,21 +270,21 @@ const EditProfile = () => {
 
         {/* <!-- CHANGE PASSWORD --> */}
         {isPassVisible ? (
-            <div class="card" style={{width:'45%', height: '350px', float: 'left', padding: '30px', margin: '70px auto auto 82px'}} id="passcard">
-                <div class="card-headers" style={{marginBottom: '15px'}}>
+            <div className="card" style={{width:'45%', height: '350px', float: 'left', padding: '30px', margin: '70px auto auto 82px'}} id="passcard">
+                <div className="card-headers" style={{marginBottom: '15px'}}>
                     <h5 style={{color: '#7993a0', fontWeight: 'bold'}}>CHANGE PASSWORD</h5>
                 </div>
-                <div class="card-bodys">
+                <div className="card-bodys">
                 <form onSubmit={handlePassSubmit}>
-                    <div class="mb-4">
+                    <div className="mb-4">
                         <input className={`form-control ${oldpasserr ? 'is-invalid' : ''}`} type="password" placeholder="Old Password" name="oldpass" id="oldpass" onChange={handleOldPassChange} value={oldpass}/>
                         {oldpasserr && <div style={{height: '10px'}} className="invalid-feedback">{oldpasserr}</div>}
                     </div>
-                    <div class="mb-4">
+                    <div className="mb-4">
                         <input className={`form-control ${conpasserr ? 'is-invalid' : ''}`} type="password" placeholder="New Password" name="password" id="newpass" onChange={handleNewPassChange} value={newpass}/>
                         {conpasserr && <div style={{height: '10px'}} className="invalid-feedback">{conpasserr}</div>}
                     </div>
-                    <div class="mb-4">
+                    <div className="mb-4">
                         <input className={`form-control ${conpasserr ? 'is-invalid' : ''}`} type="password" placeholder="Confirm Password" id="conpass" name="conpass" onChange={handleConPassChange} value={conpass}/>
                         {conpasserr && <div style={{height: '10px'}} className="invalid-feedback">{conpasserr}</div>}
                     </div>   
@@ -294,8 +294,8 @@ const EditProfile = () => {
 
                     {/* <!-- Buttons --> */}
                     <div style={{float: 'right'}}>
-                        <button type="button" class="btn btn-outline-danger" id="cancelPassBtn" onClick={toggleVisibility}>Cancel</button>&nbsp;
-                        <button type="submit" class="btn" style={{backgroundColor: '#537557', color: 'white'}} id="savePassBtn"><i class="fa-solid fa-floppy-disk me-2"></i>Save Password</button>
+                        <button type="button" className="btn btn-outline-danger" id="cancelPassBtn" onClick={toggleVisibility}>Cancel</button>&nbsp;
+                        <button type="submit" className="btn" style={{backgroundColor: '#537557', color: 'white'}} id="savePassBtn"><i className="fa-solid fa-floppy-disk me-2"></i>Save Password</button>
                     </div>
                 </form>
                 </div>

@@ -80,7 +80,7 @@ const MainCalendar = (props) => {
             stickyHeaderDates={true}
             nowIndicator={true}
             allDaySlot={false}
-            allDayDefault={false}
+            // allDayDefault={false}
             selectable={true}
             select={handleSelect}
             selectAllow={selectionHandler}
