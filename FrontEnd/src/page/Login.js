@@ -93,7 +93,7 @@ function Login() {
                           </div>
                           <div className="form-check mt-3">
                             <input className="form-check-input" type="checkbox" value="" id="flexCheckDefault" onClick={showPassToggle}/>
-                            <label className="form-check-label" for="flexCheckDefault" style={{color: '#6C757D'}}>Show Password</label>
+                            <label className="form-check-label" htmlFor="flexCheckDefault" style={{color: '#6C757D'}}>Show Password</label>
                           </div>
                         </div> 
 

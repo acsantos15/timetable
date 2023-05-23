@@ -97,67 +97,67 @@ const Signup = () => {
     const [usernameerr, setUsernameError] = useState(null);
 
     return (
-      <div class="container py-5 h-1000" style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, margin: 'auto'}}>
-        <div class="row d-flex justify-content-center align-items-center h-100">
-          <div class="col col-xl-10">
-            <div class="card" style={{borderRadius: '1rem', backgroundColor: 'rgb(255 255 255 / 61%)', border: '3px solid white'}}>
+      <div className="container py-5 h-1000" style={{position: 'absolute', left: 0, right: 0, top: 0, bottom: 0, margin: 'auto'}}>
+        <div className="row d-flex justify-content-center align-items-center h-100">
+          <div className="col col-xl-10">
+            <div className="card" style={{borderRadius: '1rem', backgroundColor: 'rgb(255 255 255 / 61%)', border: '3px solid white'}}>
 
                 {/* Header */}
-                <div class="card-header">
+                <div className="card-header">
                   <div style={{margin: '20px 0 20px 30px'}}>
-                    <span class="h1 fw-bold mb-0" style={{color: 'rgb(88, 17, 17)', fontWeight: 'bold', fontSize: '40px'}}>Create Account</span>
+                    <span className="h1 fw-bold mb-0" style={{color: 'rgb(88, 17, 17)', fontWeight: 'bold', fontSize: '40px'}}>Create Account</span>
                   </div>  
                 </div>
 
                 {/* Body */}
-                <div class="d-flex align-items-center">
-                  <div class="card-body" style={{margin: '0 30px 30px 30px'}}>
+                <div className="d-flex align-items-center">
+                  <div className="card-body" style={{margin: '0 30px 30px 30px'}}>
                     <form onSubmit={handleSubmit}>
                       <h5 style={{color: '#7993a0', fontWeight: 'bold',}}>Personal Information</h5>
 
-                    <div class="row align-items-center">
+                    <div className="row align-items-center">
                                       
-                      <div class="col">
-                        <div class="mb-4">
-                          <div class="input-group">
-                            <span class="input-group-text" style={{backgroundColor:'white'}}>
-                              <i class="fa-solid fa-address-card" style={{color: '#babdb6'}}></i>                          
+                      <div className="col">
+                        <div className="mb-4">
+                          <div className="input-group">
+                            <span className="input-group-text" style={{backgroundColor:'white'}}>
+                              <i className="fa-solid fa-address-card" style={{color: '#babdb6'}}></i>                          
                             </span>
-                            <input class="form-control" type="text" placeholder="First Name" id="fname" name="fname" maxLength="50" value={fname} onChange={handleFnameChange} required/>
+                            <input className="form-control" type="text" placeholder="First Name" id="fname" name="fname" maxLength="50" value={fname} onChange={handleFnameChange} required/>
                           </div>
                         </div>
                       </div>
 
-                      <div class="col">
-                        <div class="mb-4">
-                          <div class="input-group">
-                            <span class="input-group-text" style={{backgroundColor:'white'}}>
-                              <i class="fa-solid fa-address-card" style={{color: '#babdb6'}}></i>                          </span>
-                            <input class="form-control" type="text" placeholder="Last Name" id="lname" name="lname" maxLength="50" value={lname} onChange={handleLnameChange} required/>
+                      <div className="col">
+                        <div className="mb-4">
+                          <div className="input-group">
+                            <span className="input-group-text" style={{backgroundColor:'white'}}>
+                              <i className="fa-solid fa-address-card" style={{color: '#babdb6'}}></i>                          </span>
+                            <input className="form-control" type="text" placeholder="Last Name" id="lname" name="lname" maxLength="50" value={lname} onChange={handleLnameChange} required/>
                           </div>
                         </div>
                       </div>
                     </div>
                       
-                    <div class="row align-items-center">
-                      <div class="col">
-                        <div class="mb-4">
-                          <div class="input-group">
-                            <span class="input-group-text" style={{backgroundColor:'white'}}>
-                              <i class="fa-solid fa-house" style={{color: '#babdb6'}}></i>
+                    <div className="row align-items-center">
+                      <div className="col">
+                        <div className="mb-4">
+                          <div className="input-group">
+                            <span className="input-group-text" style={{backgroundColor:'white'}}>
+                              <i className="fa-solid fa-house" style={{color: '#babdb6'}}></i>
                             </span>
-                            <input class="form-control" type="text" placeholder="Home Address" id="address" name="address" maxLength="100" value={address} onChange={handleAddressChange} required/> 
+                            <input className="form-control" type="text" placeholder="Home Address" id="address" name="address" maxLength="100" value={address} onChange={handleAddressChange} required/> 
                           </div>
                         </div>
                       </div>
                       
-                      <div class="col">
-                        <div class="mb-4">
-                          <div class="input-group">
-                            <span class="input-group-text" style={{backgroundColor:'white'}}>
-                              <i class="fa-solid fa-phone" style={{color: '#babdb6'}}></i>
+                      <div className="col">
+                        <div className="mb-4">
+                          <div className="input-group">
+                            <span className="input-group-text" style={{backgroundColor:'white'}}>
+                              <i className="fa-solid fa-phone" style={{color: '#babdb6'}}></i>
                             </span>
-                            <input class="form-control" type="text" pattern="[0-9]{11}" placeholder="Contact No." id="contact" name="contact" maxLength="11" value={contact} onChange={handleContactChange} required/>
+                            <input className="form-control" type="text" pattern="[0-9]{11}" placeholder="Contact No." id="contact" name="contact" maxLength="11" value={contact} onChange={handleContactChange} required/>
                           </div>
                         </div>
                       </div>
@@ -166,13 +166,13 @@ const Signup = () => {
 
                       <h5 style={{float:'left', width: '100%', color: '#7993a0', fontWeight: 'bold'}}>Account Information</h5>
 
-                      <div class="row align-items-center">
+                      <div className="row align-items-center">
 
-                        <div class="col">
-                          <div class="mb-4">
-                            <div class="input-group">
-                              <span class="input-group-text" style={{backgroundColor:'white'}}>
-                                <i class="fa-solid fa-user" style={{color: '#babdb6'}}></i>  
+                        <div className="col">
+                          <div className="mb-4">
+                            <div className="input-group">
+                              <span className="input-group-text" style={{backgroundColor:'white'}}>
+                                <i className="fa-solid fa-user" style={{color: '#babdb6'}}></i>  
                               </span>
                               <input className={`form-control ${usernameerr ? 'is-invalid' : ''}`} type="text" placeholder="Username" id="username" name="username" maxLength="50" value={username} onChange={handleUsernameChange} required/>
                             {usernameerr && <div style={{height: '10px'}} className="invalid-feedback">{usernameerr}</div>}
@@ -180,36 +180,36 @@ const Signup = () => {
                           </div>
                         </div>
 
-                        <div class="col">
-                          <div class="mb-4">
-                            <div class="input-group">
-                              <span class="input-group-text" style={{backgroundColor:'white'}}>
-                                <i class="fa-solid fa-at" style={{color: '#babdb6'}}></i>                           </span>
-                              <input class="form-control" type="email" placeholder="Email" id="email" name="email" maxLength="50" value={email} onChange={handleEmailChange} required/>
+                        <div className="col">
+                          <div className="mb-4">
+                            <div className="input-group">
+                              <span className="input-group-text" style={{backgroundColor:'white'}}>
+                                <i className="fa-solid fa-at" style={{color: '#babdb6'}}></i>                           </span>
+                              <input className="form-control" type="email" placeholder="Email" id="email" name="email" maxLength="50" value={email} onChange={handleEmailChange} required/>
                             </div>
                           </div>
                         </div>
                       </div>
 
-                      <div class="row align-items-center">
+                      <div className="row align-items-center">
 
 
-                        <div class="col">
-                          <div class="mb-4">
-                            <div class="input-group">
-                              <span class="input-group-text" style={{backgroundColor:'white'}}>
-                                <i class="fa-solid fa-lock" style={{color: '#babdb6'}}></i>
+                        <div className="col">
+                          <div className="mb-4">
+                            <div className="input-group">
+                              <span className="input-group-text" style={{backgroundColor:'white'}}>
+                                <i className="fa-solid fa-lock" style={{color: '#babdb6'}}></i>
                               </span>
-                              <input class="form-control" type="password" placeholder="Password" id="pass" name="pass" maxLength="50" minLength="8" value={pass} onChange={handlePasswordChange} required/>
+                              <input className="form-control" type="password" placeholder="Password" id="pass" name="pass" maxLength="50" minLength="8" value={pass} onChange={handlePasswordChange} required/>
                             </div>
                           </div>
                         </div>
 
-                        <div class="col">
-                          <div class="mb-4">
-                            <div class="input-group">
-                              <span class="input-group-text" style={{backgroundColor:'white'}}>
-                                <i class="fa-solid fa-lock" style={{color: '#babdb6'}}></i>
+                        <div className="col">
+                          <div className="mb-4">
+                            <div className="input-group">
+                              <span className="input-group-text" style={{backgroundColor:'white'}}>
+                                <i className="fa-solid fa-lock" style={{color: '#babdb6'}}></i>
                               </span>
                               <input className={`form-control ${conpasserr ? 'is-invalid' : ''}`} type="password" id="conpass" placeholder="Confirm Password" maxLength="50" value={conpass} onChange={handleConPassChange} required/>
                             {conpasserr && <div style={{height: '10px'}} className="invalid-feedback">{conpasserr}</div>}
@@ -220,7 +220,7 @@ const Signup = () => {
                     
                       {/* Button */}
                       <div style={{float: 'right'}}>
-                        <button class="rounded signup-btn"><b>Sign up</b></button>
+                        <button className="rounded signup-btn"><b>Sign up</b></button>
                       </div>
 
                       {/* Already Have an Account? */}

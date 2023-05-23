@@ -41,8 +41,8 @@ function App() {
       // Render a loading screen
       return (
       <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
-        <div class="spinner-border" role="status">
-          <span class="visually-hidden">Loading...</span>
+        <div className="spinner-border" role="status">
+          <span className="visually-hidden">Loading...</span>
         </div>
       </div>
       );

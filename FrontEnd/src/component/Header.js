@@ -6,7 +6,7 @@ import SearchResult from '../page/Search';
 
 const Header = (props) => {
 
-    // Logged user username
+    // Logged user usernamevariables
     const [username, setUsername] = useState('');
     useEffect(() => {
       axios.get('/loggedUser')
@@ -78,23 +78,23 @@ const Header = (props) => {
     return (
     <>
       <header style={{width: '100%', paddingRight: '0'}}>
-      <nav class="navbar navbar-expand-lg" style={{backgroundColor: '#537557'}}>
-        <div class="container-fluid">
+      <nav className="navbar navbar-expand-lg" style={{backgroundColor: '#537557'}}>
+        <div className="container-fluid">
           {/* Label */}
-          <a href="/Dashboard" class="navbar-brand" style={{color: 'white', fontWeight:'bold', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif'}}>
-            <i class="fa-solid fa-calendar-days"></i> TIMETABLE
+          <a href="/Dashboard" className="navbar-brand" style={{color: 'white', fontWeight:'bold', fontFamily: 'Verdana, Geneva, Tahoma, sans-serif'}}>
+            <i className="fa-solid fa-calendar-days"></i> TIMETABLE
           </a>
 
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
           </button>
 
-          <div class="collapse navbar-collapse float-end" id="navbarSupportedContent">
+          <div className="collapse navbar-collapse float-end" id="navbarSupportedContent">
           
             {/* SEARCH BAR */}
-            <div class="navbar-nav ms-auto me-auto">
-              <form class="d-flex" role="search" id='searchForm' onSubmit={handleSearchSubmit}> 
-              <div class="row-5">
+            <div className="navbar-nav ms-auto me-auto">
+              <form className="d-flex" role="search" id='searchForm' onSubmit={handleSearchSubmit}> 
+              <div className="row-5">
                 <Select
                     name="peoples[]"
                     options={options}
@@ -117,18 +117,18 @@ const Header = (props) => {
                     }}
                   />
               </div>   
-                <button class="btn btn-outline-light ms-2" type="submit"><i class="fa-solid fa-magnifying-glass"></i></button>
+                <button className="btn btn-outline-light ms-2" type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
               </form>
             </div>
 
             {/* Dropdown */}
-            <img src={previewImage} class="rounded-circle" alt="example placeholder" style={{width: '30px', height: '30px'}}/>
-            <div class="btn-group">
-              <button type="button" class="btn dropdown-toggle" style={{backgroundColor: '#537557', color: 'white'}} data-bs-toggle="dropdown" aria-expanded="false">
+            <img src={previewImage} className="rounded-circle" alt="example placeholder" style={{width: '30px', height: '30px'}}/>
+            <div className="btn-group">
+              <button type="button" className="btn dropdown-toggle" style={{backgroundColor: '#537557', color: 'white'}} data-bs-toggle="dropdown" aria-expanded="false">
                 <span >{username.fname} {username.lname}</span>
               </button>
-              <ul class="dropdown-menu dropdown-menu-end">
-                <li><a href="/profile" class="dropdown-item"><i class="fa-solid fa-user me-2"></i>My Profile</a></li>
+              <ul className="dropdown-menu dropdown-menu-end">
+                <li><a href="/profile" className="dropdown-item"><i className="fa-solid fa-user me-2"></i>My Profile</a></li>
                 <LogoutButton/>
               </ul>
             </div>        
