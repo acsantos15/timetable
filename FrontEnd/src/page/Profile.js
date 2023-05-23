@@ -21,7 +21,7 @@ const Profile = () => {
           setPreviewImage('/ProfilePhotos/' + userdata.photo);
         }
       }
-    }, [userdata?.photo]);
+    }, [userdata, setPreviewImage]);
     
     return (
         // Label 

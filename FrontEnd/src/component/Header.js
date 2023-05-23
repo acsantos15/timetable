@@ -69,7 +69,7 @@ const Header = (props) => {
           setPreviewImage('/ProfilePhotos/' + username.photo);
         }
       }
-    }, [username?.photo]);
+    }, [username, setPreviewImage]);
 
     // Passed Data to search component
     const [isOpenSearch, setIsOpenSearch] = useState(false);

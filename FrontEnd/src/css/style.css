@@ -89,6 +89,12 @@
         text-align: center;
     }
 }
+
+.fc-highlight {
+    background-color: red; 
+    opacity: 0.8; 
+}
+
 /* END FullCalendar CSS */
 
 /*  NavBar CSS */

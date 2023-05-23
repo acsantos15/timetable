@@ -81,32 +81,37 @@ const Dashboard = () => {
     }, []);
 
     // set weather gif 
+    const icon = weatherData?.weather?.[0]?.icon;
     const [weatherIcon, setWeatherIcon] = useState('');
     useEffect(() => {
-    if (weatherData?.weather?.[0]?.icon === "01d") {
+    if (icon === "01d") {
         setWeatherIcon("/weather/ClearSkyDay.gif");
-    } else if (weatherData?.weather?.[0]?.icon === "01n") {
+    } else if (icon === "01n") {
         setWeatherIcon("/weather/ClearSkyNight.gif");
-    } else if (weatherData?.weather?.[0]?.icon === "02d") {
+    } else if (icon === "02d") {
         setWeatherIcon("/weather/FewCloudsDay.gif");
-    } else if (weatherData?.weather?.[0]?.icon === "02n") {
+    } else if (icon === "02n") {
         setWeatherIcon("/weather/FewCloudsNight.gif");
-    } else if (weatherData?.weather?.[0]?.icon === "03d" || weatherData?.weather?.[0]?.icon === "03n") {
+    } else if (icon === "03d" || icon === "03n") {
         setWeatherIcon("/weather/ScatteredClouds.gif");
-    } else if (weatherData?.weather?.[0]?.icon === "04d" || weatherData?.weather?.[0]?.icon === "04n") {
+    } else if (icon === "04d" || icon === "04n") {
         setWeatherIcon("/weather/BrokenClouds.gif");
-    } else if (weatherData?.weather?.[0]?.icon === "09d" || weatherData?.weather?.[0]?.icon === "09n") {
+    } else if (icon === "09d" || icon === "09n") {
         setWeatherIcon("/weather/ShowerRain.gif");
-    } else if (weatherData?.weather?.[0]?.icon === "10d") {
+    } else if (icon === "10d") {
         setWeatherIcon("/weather/RainDay.gif");
-    } else if (weatherData?.weather?.[0]?.icon === "10n") {
+    } else if (icon === "10n") {
         setWeatherIcon("/weather/RainNight.gif");
-    } else if (weatherData?.weather?.[0]?.icon === "11d" || weatherData?.weather?.[0]?.icon === "11n") {
+    } else if (icon === "11d" || icon === "11n") {
         setWeatherIcon("/weather/Thunderstorm.gif");
     } else {
         setWeatherIcon("/weather/Mist.gif");
     }
-    }, [weatherData])
+    }, [icon, weatherData])
+
+    const filteredEvents = todayEvents
+    .filter((event) => moment(event.end) > moment())
+    .sort((a, b) => moment(a.start) - moment(b.start));
         
     return (
     <div className="justify-content-center">
@@ -135,10 +140,8 @@ const Dashboard = () => {
                             </div>
                         ) : (
                             <>
-                            {todayEvents.length ? (
-                            todayEvents
-                            .filter((event) => moment(event.end) > moment())
-                            .sort((a, b) => moment(a.start) - moment(b.start))
+                            {filteredEvents.length ? (
+                            filteredEvents
                             .map((event) => (
                                 <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
                                     <div className="container">
