@@ -26,22 +26,42 @@ const MainCalendar = (props) => {
     }, []);
 
     useEffect(() => {
-        axios.defaults.withCredentials = true;
-        axios.get('/events')
-            .then(response => {
-                const updatedEvents = response.data.map(event => {
-                    if (moment().isAfter(moment(event.end))) {
-                        return { ...event, color: '#3D4849' };
-                    } else {
-                        return event;
-                    }
-                });
-                setEvents(updatedEvents);
+        const fetchEvents = () => {
+          axios.defaults.withCredentials = true;
+          axios
+            .get('/events')
+            .then((response) => {
+              const updatedEvents = response.data.map((event) => {
+                let color = event.color; // Default color from the server response
+                const storedColor = localStorage.getItem(`eventColor_${event.id}`);
+                if (storedColor) {
+                  // If a color is stored in localStorage, use it
+                  color = storedColor;
+                } else if (moment().isAfter(moment(event.end))) {
+                  // If the current time is after the event end and no color is stored, set the color to '#3D4849'
+                  color = '#808080';
+                  localStorage.setItem(`eventColor_${event.id}`, color); // Store the updated color in localStorage
+                }
+                return { ...event, color };
+              });
+              setEvents(updatedEvents);
             })
-            .catch(error => {
-                console.log(error);
+            .catch((error) => {
+              console.log(error);
             });
-    }, []);
+        };
+      
+        // Fetch events initially
+        fetchEvents();
+      
+        // Fetch events repeatedly every 5 seconds (adjust the interval duration as needed)
+        const interval = setInterval(fetchEvents, 100);
+      
+        // Clean up the interval when the component is unmounted
+        return () => clearInterval(interval);
+      }, []);
+      
+      
 
     // Fullcalendar toolbar
     const headerToolbar = {

@@ -140,16 +140,18 @@ const Dashboard = () => {
                             </div>
                         ) : (
                             <>
+                            <div class="row">
                             {filteredEvents.length ? (
                             filteredEvents
                             .map((event) => (
-                                <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
+                                <div key={event.id} className="dash card col" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-sm-9">
                                             <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                                                 <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                                                 <li> {event.description}</li>
+                                                <li> {event.location}</li>
                                                 <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
                                                 {moment().isBetween(moment(event.start), moment(event.end)) && (
                                                 <li>
@@ -180,10 +182,11 @@ const Dashboard = () => {
                                 
                             ))
                             ) : (
-                                <div className="dash card" style={{margin:'10px', color:'white', padding: '20px 20px 20px 0', backgroundColor: 'rgb(68, 66, 66)'}}>
+                                <div className="dash card col" style={{margin:'10px', color:'white', padding: '20px 20px 20px 0', backgroundColor: 'rgb(68, 66, 66)'}}>
                                     <div className="d-flex align-items-center justify-content-center" style={{fontSize: 'larger', fontWeight: 'bold'}}>No Event for Today</div>
                                 </div>
                             )}
+                            </div>
                             </>
                         )}  
                         <div className="card-footer sticky-bottom" style={{backgroundColor: 'white'}}></div>
@@ -208,15 +211,17 @@ const Dashboard = () => {
                             </div>
                         ) : (
                             <>
+                            <div class="row">
                             {tomorrowEvents.length ? (
                             tomorrowEvents.map((event) => (
-                                <div key={event.id} className="dash card" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
+                                <div key={event.id} className="dash card col" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
                                 <div className="container">
                                     <div className="row">
                                         <div className="col-sm-9">
                                         <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
                                             <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
                                             <li> {event.description}</li>
+                                            <li> {event.location}</li>
                                             <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
                                             {moment().isBetween(moment(event.start), moment(event.end)) && (
                                             <li>
@@ -247,10 +252,11 @@ const Dashboard = () => {
                                 
                             ))
                             ) : (
-                                <div className="dash card" style={{margin:'10px', color:'white', padding: '20px 20px 20px 0', backgroundColor: 'rgb(68, 66, 66)'}}>
+                                <div className="dash card col" style={{margin:'10px', color:'white', padding: '20px 20px 20px 0', backgroundColor: 'rgb(68, 66, 66)'}}>
                                     <div className="d-flex align-items-center justify-content-center" style={{fontSize: 'larger', fontWeight: 'bold'}}>No Event for Tommorow</div>
                                 </div>
                             )}
+                            </div>
                             </>
                         )}  
                         <div className="card-footer sticky-bottom" style={{backgroundColor: 'white'}}></div>

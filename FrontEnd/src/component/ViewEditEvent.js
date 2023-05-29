@@ -274,10 +274,10 @@ const ViewEditEvent = (props) => {
             <p className="fw-bold"><i className="fa-solid fa-location-dot me-2"></i>Location: </p><p id="eventLocation">{eventData.location}</p>
             <p><i className="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b> {appointmentCreator}</p>
             <p className="fw-bold"><i className="fa-solid fa-users me-2"></i>Participant:</p>
-            <p className="fw-bold"><i className="fa-solid fa-comments me-2"></i>Online Details: </p><p id="eventDescription" style={{wordBreak: 'break-all'}}>{eventData.links}</p>
             <ul className="list-group" id="participant">
               {participants}
             </ul>
+            <p className="fw-bold"><i className="fa-solid fa-comments me-2"></i>Online Details: </p><p id="eventDescription" style={{wordBreak: 'break-all'}}>{eventData.links}</p>
 
             <div className="row align-items-center">
               <div className="col">
