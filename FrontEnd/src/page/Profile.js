@@ -38,10 +38,10 @@ const Profile = () => {
             <div className="row">
                 <div className="col-sm-4">
                     <div className="d-flex justify-content-center mb-4">
-                        <img src={previewImage} className="rounded-circle" alt="example placeholder" style={{width: '200px', height: '200px'}}/>
+                        <img src={previewImage} className="rounded-circle" alt="example placeholder" style={{width: '300px', height: '300px'}}/>
                     </div>
-                    <h6 className="text-center" style={{ fontWeight: 'bold' ,fontSize:'20px'}}>
-                        <i className="fa-solid fa-image-portrait"></i> Profile Picture</h6>
+                    {/*<h6 className="text-center" style={{ fontWeight: 'bold' ,fontSize:'20px'}}>
+                        <i className="fa-solid fa-image-portrait"></i> Profile Picture</h6> */}
                 </div>
                 <div className="col">
                     <div className="mb-4">
@@ -52,12 +52,12 @@ const Profile = () => {
 
                     <div className="mb-4">
                         <h6 style={{fontWeight: 'bold', fontSize:'20px'}}> 
-                            <i className= "fa-solid fa-house" style={{color:'black'}} ></i> Address</h6>
+                            <i className= "fa-solid fa-location-dot" style={{color:'black'}} ></i> Address</h6>
                         <span id="paddress">{userdata.address}</span>
                     </div>
                     <div className="mb-4">
                         <h6 style={{fontWeight: 'bold' , fontSize:'20px'}}>
-                            <i className= "fa-solid fa-phone" style={{color: 'black'}}></i> Contact No.</h6>
+                            <i className= "fa-solid fa-address-book" style={{color: 'black'}}></i> Contact Information</h6>
                         <span id="pcontact">{userdata.contact}</span>
                     </div>
                     <div className="mb-4">
