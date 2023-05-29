@@ -33,12 +33,12 @@ public interface EventMapper {
     List<Events> getAllEvents();
 
     // Insert event
-    @Insert("INSERT INTO events (title, description, location, start, end, color) VALUES (#{title}, #{description}, #{location}, #{start}, #{end}, #{color})")
+    @Insert("INSERT INTO events (title, description, links, location, start, end, color) VALUES (#{title}, #{description}, #{links}, #{location}, #{start}, #{end}, #{color})")
     @Options(useGeneratedKeys = true, keyProperty = "id")
     Long insertEvent(Events events);
 
     // Update event
-    @Update("UPDATE events SET title = #{title}, description = #{description}, location = #{location}, start = #{start}, end= #{end}, color= #{color} WHERE id = #{id}")
+    @Update("UPDATE events SET title = #{title}, description = #{description}, links = #{links}, location = #{location}, start = #{start}, end= #{end}, color= #{color} WHERE id = #{id}")
     void updatedEvent(Events event);
     
     // Delete event

@@ -79,6 +79,7 @@ const ViewEditEvent = (props) => {
       const initialValue = eventData.location 
       const initialOption = locOptions.find(option => option.label === initialValue);
       setSelectedLocation(initialOption);
+      setOnDetails(eventData.links)
       setStart(eventData.start);
       setEnd(eventData.end)
       axios.get('/events/' + eventId + '/users')
@@ -138,6 +139,7 @@ const ViewEditEvent = (props) => {
     const [title, setTitle] = useState('');
     const [selectedColor, setSelectedColor] = useState('');
     const [description, setDescription] = useState('');
+    const [links, setOnDetails] = useState('');
     const [start, setStart] = useState('');
     const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
     const [end, setEnd] = useState('');
@@ -152,6 +154,9 @@ const ViewEditEvent = (props) => {
     };
     const handleDescriptionChange = (event) => {
       setDescription(event.target.value);
+    };
+    const handleOnDetailsChange = (event) => {
+      setOnDetails(event.target.value);
     };
     const handleStartChange = (event) => {
       setStart(event.target.value);
@@ -199,7 +204,7 @@ const ViewEditEvent = (props) => {
       }else{
         axios.defaults.withCredentials = true;
         axios.put('/edit/'+eventId, 
-        {title: title, color: selectedColor, description: description, location: selectedLocVal, start: fStart, end: fEnd}, 
+        {title: title, color: selectedColor, description: description, links: links, location: selectedLocVal, start: fStart, end: fEnd}, 
         {withCredentials: true}, 
         { headers: { 'Content-Type': 'application/json' } })
         .then(response => {
@@ -240,6 +245,7 @@ const ViewEditEvent = (props) => {
         setSelectedColor('#537C78');
         setDescription('');
         setSelectedLocation('');
+        setOnDetails('');
         setStart('');
         setEnd('');
         const preselectedUser = options.find(user => user.value === selectedPeople[0].value);
@@ -268,6 +274,7 @@ const ViewEditEvent = (props) => {
             <p className="fw-bold"><i className="fa-solid fa-location-dot me-2"></i>Location: </p><p id="eventLocation">{eventData.location}</p>
             <p><i className="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b> {appointmentCreator}</p>
             <p className="fw-bold"><i className="fa-solid fa-users me-2"></i>Participant:</p>
+            <p className="fw-bold"><i className="fa-solid fa-comments me-2"></i>Online Details: </p><p id="eventDescription" style={{wordBreak: 'break-all'}}>{eventData.links}</p>
             <ul className="list-group" id="participant">
               {participants}
             </ul>
@@ -354,6 +361,11 @@ const ViewEditEvent = (props) => {
                   onChange={handleSelectChange}
                 />
               </div> 
+
+              <div className="mb-3">
+                <label htmlFor="addODetails" className="form-label"><i className="fa-solid fa-comments me-2"></i>Online Details</label>
+                <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="3" value={links} onChange={handleOnDetailsChange} required></textarea>
+              </div>
 
               <div className="row g-3">
                 <div className="col">

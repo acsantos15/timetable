@@ -12,6 +12,7 @@ function AddEvent(props) {
     const [title, setTitle] = useState('');
     const [selectedColor, setSelectedColor] = useState('#dd766a');
     const [description, setDescription] = useState('');
+    const [links, setOnDetails] = useState('');
     const [start, setStart] = useState('');
     const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
     const [end, setEnd] = useState('');
@@ -34,6 +35,9 @@ function AddEvent(props) {
     };
     const handleDescriptionChange = (event) => {
       setDescription(event.target.value);
+    };
+    const handleOnDetailsChange = (event) => {
+      setOnDetails(event.target.value);
     };
     const handleStartChange = (event) => {
       setStart(event.target.value);
@@ -126,7 +130,7 @@ function AddEvent(props) {
       else{
         axios.defaults.withCredentials = true;
         axios.post('/saveEvent', 
-        {title: title, color: selectedColor, description: description, location: selectedLocVal, start: fStart, end: fEnd},
+        {title: title, color: selectedColor, description: description, links: links, location: selectedLocVal, start: fStart, end: fEnd},
         {withCredentials: true}, 
         { headers: { 'Content-Type': 'application/json' } })
         .then(response => {
@@ -242,6 +246,11 @@ function AddEvent(props) {
                   onChange={handleSelectChange}
                 />
               </div> 
+
+              <div className="mb-3">
+                <label htmlFor="addODetails" className="form-label"><i className="fa-solid fa-comments me-2"></i>Online Details</label>
+                <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="2" value={links} onChange={handleOnDetailsChange} required></textarea>
+              </div>
 
               <div className="row g-3">
                 <div className="col">

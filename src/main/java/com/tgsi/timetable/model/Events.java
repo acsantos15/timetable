@@ -30,6 +30,8 @@ public class Events {
   @Size(max = 100)
   private String location;
 
+  private String links;
+
   @NotBlank
   @Size(max = 15)
   private String color;
@@ -77,6 +79,14 @@ public class Events {
     
       public void setLocation(String location) {
         this.location = location;
+      }
+
+      public String getLinks() {
+        return links;
+      }
+    
+      public void setLinks(String links) {
+        this.links = links;
       }
 
       public String getColor() {

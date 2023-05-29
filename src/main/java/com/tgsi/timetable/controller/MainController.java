@@ -135,6 +135,7 @@ public class MainController {
         existingEvent.setTitle(updatedEvent.getTitle());
         existingEvent.setDescription(updatedEvent.getDescription());
         existingEvent.setLocation(updatedEvent.getLocation());
+        existingEvent.setLinks(updatedEvent.getLinks());
         existingEvent.setColor(updatedEvent.getColor());
         existingEvent.setStart(updatedEvent.getStart());
         existingEvent.setEnd(updatedEvent.getEnd());
