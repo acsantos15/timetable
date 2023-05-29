@@ -297,7 +297,7 @@ const ViewEditEvent = (props) => {
 
           <div className="modal-footer">
             <button type="button" className="btn btn-danger" id="removeEventBtn" onClick={handleDeleteEvent}><i className="fa-solid fa-trash me-2" ></i>Delete</button>
-            <button type="button" className="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" onClick={handleEditShow}><i className="fa-solid fa-pen-to-square me-2"></i>Edit</button>
+            <button style={{ display: moment(eventData.end).isAfter(moment()) ? "block" : "none" }} type="button" className="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" onClick={handleEditShow}><i className="fa-solid fa-pen-to-square me-2"></i>Edit</button>
           </div>
         </div>
       </div>

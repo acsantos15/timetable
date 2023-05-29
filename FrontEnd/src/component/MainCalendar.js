@@ -25,6 +25,24 @@ const MainCalendar = (props) => {
             });
     }, []);
 
+    useEffect(() => {
+        axios.defaults.withCredentials = true;
+        axios.get('/events')
+            .then(response => {
+                const updatedEvents = response.data.map(event => {
+                    if (moment().isAfter(moment(event.end))) {
+                        return { ...event, color: '#3D4849' };
+                    } else {
+                        return event;
+                    }
+                });
+                setEvents(updatedEvents);
+            })
+            .catch(error => {
+                console.log(error);
+            });
+    }, []);
+
     // Fullcalendar toolbar
     const headerToolbar = {
         left: 'today,prev,next,title',
