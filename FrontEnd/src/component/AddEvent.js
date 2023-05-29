@@ -12,7 +12,6 @@ function AddEvent(props) {
     const [title, setTitle] = useState('');
     const [selectedColor, setSelectedColor] = useState('#dd766a');
     const [description, setDescription] = useState('');
-    const [location, setLocation] = useState('');
     const [start, setStart] = useState('');
     const fStart = moment(start).format('YYYY-MM-DD HH:mm:ss');
     const [end, setEnd] = useState('');
@@ -36,9 +35,6 @@ function AddEvent(props) {
     const handleDescriptionChange = (event) => {
       setDescription(event.target.value);
     };
-    const handleLocationChange = (event) => {
-      setLocation(event.target.value);
-    };
     const handleStartChange = (event) => {
       setStart(event.target.value);
     };
@@ -49,7 +45,10 @@ function AddEvent(props) {
     // Participant selector variables
     const [options, setOptions] = useState([]);
     const [selectedPeople, setSelectedPeople] = useState([]);
-    
+    const [locOptions, setLocOptions] = useState([]);
+    const [selectedLoc, setSelectedLocation] = useState('');
+    const [selectedLocVal, setSelectedLocationValue] = useState('');
+
     // Populate participant selector
     useEffect(() => {
       axios.get('/users')
@@ -63,7 +62,21 @@ function AddEvent(props) {
           setSelectedPeople([preselectedUser]);
         })
         .catch(error => console.error(error));
+        axios.get('/locations')
+        .then(response => {
+          const locations = response.data.locations.map(locations => ({
+            value: locations.name,
+            label: locations.name,
+          }));
+          setLocOptions(locations);
+        })
+        .catch(error => console.error(error));
     }, []);
+
+    const handleSelectLocChange = (selectedOption) => {
+      setSelectedLocation(selectedOption);
+      setSelectedLocationValue(selectedOption.value);
+    };
 
     // Preselect event creator name
     const handleSelectChange = (selected) => {
@@ -113,7 +126,7 @@ function AddEvent(props) {
       else{
         axios.defaults.withCredentials = true;
         axios.post('/saveEvent', 
-        {title: title, color: selectedColor, description: description, location: location, start: fStart, end: fEnd},
+        {title: title, color: selectedColor, description: description, location: selectedLocVal, start: fStart, end: fEnd},
         {withCredentials: true}, 
         { headers: { 'Content-Type': 'application/json' } })
         .then(response => {
@@ -152,7 +165,7 @@ function AddEvent(props) {
       setTitle('');
       setSelectedColor('#dd766a');
       setDescription('');
-      setLocation('');
+      setSelectedLocation('');
       setStart('');
       setEnd('');
       const preselectedUser = options.find(user => user.value === selectedPeople[0].value);
@@ -182,12 +195,12 @@ function AddEvent(props) {
             </div>
             <div className="modal-body" style={{fontWeight: 'bold'}}>
               <div className="mb-3 row">
-                <div className="col-md-10">
+                <div className="col-md-9">
                   <label htmlFor="addTitle" className="form-label"><i className="fa-solid fa-pen me-2"></i>Title</label>
                   <input type="text" className="form-control" id="addTitle" name="title" maxLength="100" value={title} onChange={handleTitleChange} required/>
                 </div>
-                <div className="col-sm-2">
-                  <label htmlFor="addColor" className="form-label"><i className="fa-solid fa-palette me-2"></i>Color</label>
+                <div className="col-sm-3">
+                  <label htmlFor="addColor" className="form-label"><i className="fa-solid fa-palette me-2"></i>Event Color</label>
                   <select className="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor }}>
                     <option value="#dd766a" style={{backgroundColor: '#dd766a'}}></option>
                     <option value="#dd996a" style={{backgroundColor: '#dd996a'}}></option>
@@ -207,13 +220,14 @@ function AddEvent(props) {
 
               <div className="mb-3">
                 <label htmlFor="addLoc" className="form-label"><i className="fa-solid fa-location-dot me-2"></i>Location</label>
-                <select className="form-select" aria-label="Default select example" id="addLoc" name="location" value={location} onChange={handleLocationChange} required>
-                <option defaultValue="" disabled></option>
-                <option value="Online Conference">Online Conference</option>
-                <option value="Center of Excellence 1">Center of Excellence 1</option>
-                <option value="Center of Excellence 2">Center of Excellence 2</option>
-                <option value="Center of Excellence 3">Center of Excellence 3</option>
-                </select>
+                <Select
+                  name="locations[]"
+                  options={locOptions}
+                  className="locations"
+                  classNamePrefix="select"
+                  onChange={handleSelectLocChange}
+                  value={selectedLoc}
+                />
               </div>
 
               <div className="mb-3">

@@ -151,4 +151,14 @@ public class MainController {
         eMapper.deleteParticipant(eventId);
         return eventId;
     }
+
+    // Get all locations
+    @GetMapping("/locations")
+    @ResponseBody
+    public Map<String, Object> getAllUsers() {
+        Map<String, Object> response = new HashMap<>();
+        response.put("locations", eMapper.getAllLocations());
+
+        return response;
+    }
 }

@@ -15,6 +15,7 @@ import org.apache.ibatis.annotations.Select;
 import org.apache.ibatis.annotations.Update;
 
 import com.tgsi.timetable.model.Events;
+import com.tgsi.timetable.model.Locations;
 import com.tgsi.timetable.model.Users;
 
 @Mapper
@@ -83,4 +84,8 @@ public interface EventMapper {
     // // Update participant
     @Delete("DELETE FROM user_event WHERE event_id = #{eventId}")
     void deleteParticipant(Long eventId);
+
+    // List all locations
+    @Select("SELECT * FROM locations")
+    List<Locations> getAllLocations();
 }
