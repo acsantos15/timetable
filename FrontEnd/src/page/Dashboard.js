@@ -31,44 +31,35 @@ const Dashboard = () => {
         });
     }, []);
 
-    // Participant variables
-    const [participant, setParticipant] = useState([]);
+    // Participants variable
+    const [participants, setParticipants] = useState([])
+
+    // Creator id variable
+    const [appointmentCreator, setAppointmentCreator] = useState('');
 
     // Fetch participants for todays event
-    useEffect(() => {
-        todayEvents.forEach((event) => {
-        axios.get('/events/'+event.id+'/users')
-            .then((response) => {
-            const users = response.data;
-            const participantNames = users.map((people) => people.fname+' '+people.lname);
-            setParticipant((prevParticipants) => ({
-                ...prevParticipants,
-                [event.id]: participantNames,
-            }));
-            })
-            .catch((error) => {
+    const [showModal, setShowModal] = useState(false);
+    const handleEventClick = (clickedEvent) => {
+        axios.get('/events/' + clickedEvent.id + '/users')
+          .then(response => {
+            const people = response.data;
+            const participantList = people.slice(1).map((person) => (
+              <li key={person.id} style={{ listStyleType: 'none', marginBottom: '10px' }}>
+                • {person.fname} {person.lname}
+              </li>
+            ));
+            setParticipants(participantList);
+            setAppointmentCreator(people[0]?.fname + ' ' + people[0]?.lname);
+          })
+          .catch(error => {
             console.log(error);
-            });
-        });
-    }, [todayEvents]);
+          });
+          setShowModal(true);
+    };
 
-    // Fetch participants for tommorows event
-    useEffect(() => {
-        tomorrowEvents.forEach((event) => {
-        axios.get('/events/'+event.id+'/users')
-            .then((response) => {
-            const users = response.data;
-            const participantNames = users.map((people) => people.fname+' '+people.lname);
-            setParticipant((prevParticipants) => ({
-                ...prevParticipants,
-                [event.id]: participantNames,
-            }));
-            })
-            .catch((error) => {
-            console.log(error);
-            });
-        });
-    }, [tomorrowEvents]);
+    const handleCloseModal = () => {
+        setShowModal(false);
+    };
 
     // use to constantly update current time
     const [, setCurrentTime] = useState(moment().format('hh:mm:ss a'));
@@ -140,41 +131,22 @@ const Dashboard = () => {
                             </div>
                         ) : (
                             <>
+                            <div class="container horizontal-scrollable">
                             <div class="row">
                             {filteredEvents.length ? (
                             filteredEvents
                             .map((event) => (
-                                <div key={event.id} className="dash card col" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
+                                <div key={event.id} className="dash card col" onClick={() => handleEventClick(event)} style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 10px 10px 0'}}>
                                     <div className="container">
                                         <div className="row">
                                             <div className="col-sm-9">
-                                            <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
-                                                <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
-                                                <li> {event.description}</li>
-                                                <li> {event.location}</li>
-                                                <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
+                                                <p style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</p>
+                                                <p> {event.description}</p>
+                                                <p> {event.location}</p>
+                                                <p><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></p>
                                                 {moment().isBetween(moment(event.start), moment(event.end)) && (
-                                                <li>
-                                                    <span className="badge bg-light" style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }}>ONGOING ​​​​
-                                                    <div className="spinner-border text-danger spinner-border-sm" role="status">
-                                                        <span className="visually-hidden">Loading...</span>
-                                                    </div>
-                                                    </span>
-                                                </li>
+                                                <span className="badge bg-light" style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }}>ONGOING ​​​​</span>
                                                 )}
-                                            </ul>
-                                            </div>
-                                            <div className="col">
-                                            <div className="card" style={{backgroundColor: 'rgb(0 0 0 / 20%)'}}>
-                                                <div className="card-header" style={{fontSize: 'small', fontWeight: 'bold'}}>
-                                                    Participant/s
-                                                </div>
-                                                <ul className="list-unstyled pl-1" style={{listStyleType: 'none', margin: '5px'}}>
-                                                    {participant[event.id]?.map((participantName, index) => (
-                                                    <li key={index} className="list-group-item" style={{fontSize: 'small'}}>•ㅤ{participantName}</li>
-                                                    ))}
-                                                </ul>
-                                            </div>
                                             </div>
                                         </div>
                                     </div>           
@@ -187,11 +159,31 @@ const Dashboard = () => {
                                 </div>
                             )}
                             </div>
+                            </div>
                             </>
                         )}  
                         <div className="card-footer sticky-bottom" style={{backgroundColor: 'white'}}></div>
                     </div>
-
+                    <div class="modal" tabindex="-1" style={{ display: showModal ? "block" : "none" }}>
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" style={{color: '#212529'}}>Participants</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" onClick={handleCloseModal} aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <p><i className="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b> {appointmentCreator}</p>
+                                <p className="fw-bold"><i className="fa-solid fa-users me-2"></i>Participant:</p>
+                                <ul className="list-group" id="participant">
+                                {participants}
+                                </ul>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
 
                     {/* Tommorows's Event Tables */}
                     <div className="container" style={{padding: '0 20px 0px 20px', maxHeight: '410px',overflowY: 'auto'}}>
@@ -214,37 +206,17 @@ const Dashboard = () => {
                             <div class="row">
                             {tomorrowEvents.length ? (
                             tomorrowEvents.map((event) => (
-                                <div key={event.id} className="dash card col" style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
+                                <div key={event.id} className="dash card col" onClick={() => handleEventClick(event)} style={{backgroundColor: event.color, margin: '10px', color: 'white', padding: '10px 20px 10px 0'}}>
                                 <div className="container">
                                     <div className="row">
                                         <div className="col-sm-9">
-                                        <ul style={{listStyleType: 'none', marginTop: '12px'}}> 
-                                            <li style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</li>
-                                            <li> {event.description}</li>
-                                            <li> {event.location}</li>
-                                            <li><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></li>
+                                            <p style={{fontSize: 'larger', fontWeight: 'bold'}}>{event.title}</p>
+                                            <p> {event.description}</p>
+                                            <p> {event.location}</p>
+                                            <p><small>{moment(event.start).format('hh:mm a')}</small> - <small>{moment(event.end).format('hh:mm a')}</small></p>
                                             {moment().isBetween(moment(event.start), moment(event.end)) && (
-                                            <li>
-                                                <span className="badge bg-light" style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }}>ONGOING ​​​​
-                                                <div className="spinner-border text-danger spinner-border-sm" role="status">
-                                                    <span className="visually-hidden">Loading...</span>
-                                                </div>
-                                                </span>
-                                            </li>
+                                            <span className="badge bg-light" style={{ color: 'red', fontWeight: 'bold', fontSize: '15px' }}>ONGOING ​​​​</span>
                                             )}
-                                        </ul>
-                                        </div>
-                                        <div className="col">
-                                        <div className="card" style={{backgroundColor: 'rgb(0 0 0 / 20%)'}}>
-                                            <div className="card-header" style={{fontSize: 'small', fontWeight: 'bold'}}>
-                                                Participant/s
-                                            </div>
-                                            <ul className="list-unstyled pl-1" style={{listStyleType: 'none', margin: '5px'}}>
-                                                {participant[event.id]?.map((participantName, index) => (
-                                                <li key={index} className="list-group-item" style={{fontSize: 'small'}}>•ㅤ{participantName}</li>
-                                                ))}
-                                            </ul>
-                                        </div>
                                         </div>
                                     </div>
                                 </div>           

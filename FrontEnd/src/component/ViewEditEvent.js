@@ -21,10 +21,9 @@ const ViewEditEvent = (props) => {
         axios.get('/events/' + eventData.id + '/users')
           .then(response => {
             const people = response.data;
-            let num = 1;
             const participantList = people.slice(1).map((person) => (
               <li key={person.id} style={{ listStyleType: 'none', marginBottom: '10px' }}>
-                {num++}.) {person.fname} {person.lname}
+                • {person.fname} {person.lname}
               </li>
             ));
             setParticipants(participantList);
@@ -253,6 +252,20 @@ const ViewEditEvent = (props) => {
 
         setSelectedPeople(updatedSelectedPeople);
       };
+      
+      // Copy link button
+      const textToCopy = eventData.links;
+
+      const handleCopyText = () => {
+        navigator.clipboard.writeText(textToCopy).then(
+          () => {
+            console.log("Text copied to clipboard.");
+          },
+          (err) => {
+            console.error("Error copying text to clipboard: ", err);
+          }
+        );
+      };
 
       // Error variables
       const [timeerr, setTimeError] = useState(null);
@@ -277,8 +290,15 @@ const ViewEditEvent = (props) => {
             <ul className="list-group" id="participant">
               {participants}
             </ul>
-            <p className="fw-bold"><i className="fa-solid fa-comments me-2"></i>Online Details: </p><p id="eventDescription" style={{wordBreak: 'break-all'}}>{eventData.links}</p>
-
+            <div className="row align-items-center">
+            <p className="fw-bold"><i className="fa-solid fa-comments me-2"></i>Online Details: </p>
+              <div className="col-10">
+              <p id="eventDescription" style={{wordBreak: 'break-all'}}>{textToCopy}</p>
+              </div>
+              <div className="col-sm-2 align-items-right">
+              <button onClick={handleCopyText} type="button" class="btn btn-outline-dark btn-sm"><i class="fa-regular fa-clipboard fa-xs"></i></button>
+              </div>
+            </div>
             <div className="row align-items-center">
               <div className="col">
                 <p className="fw-bold"><i className="fa-solid fa-hourglass-start me-2"></i>Start:</p>
@@ -290,7 +310,7 @@ const ViewEditEvent = (props) => {
                 <p className="fw-bold"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End:</p>
                 <p style={{display: 'inline'}}>Date: </p><p id="eventEndDate" style={{display: 'inline'}}>{moment(eventData.end).format('YYYY-MM-DD')}</p>
                 <br/>
-                <p style={{display: 'inline'}}>Time: </p><p id="eventEndTime" style={{display: 'inline'}}>{moment(eventData.end).format('HH:mm a')}</p>
+                <p style={{display: ' '}}>Time: </p><p id="eventEndTime" style={{display: 'inline'}}>{moment(eventData.end).format('HH:mm a')}</p>
               </div>
             </div>
           </div>
