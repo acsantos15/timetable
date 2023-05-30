@@ -10,7 +10,7 @@ function AddEvent(props) {
 
     // Event data variables
     const [title, setTitle] = useState('');
-    const [selectedColor, setSelectedColor] = useState('#dd766a');
+    const [selectedColor, setSelectedColor] = useState('#5f9e55');
     const [description, setDescription] = useState('');
     const [links, setOnDetails] = useState('');
     const [start, setStart] = useState('');
@@ -167,7 +167,7 @@ function AddEvent(props) {
     // Clear button function
     const handleClear = () => {
       setTitle('');
-      setSelectedColor('#dd766a');
+      setSelectedColor('#5f9e55');
       setDescription('');
       setSelectedLocation('');
       setStart('');
@@ -200,25 +200,25 @@ function AddEvent(props) {
             <div className="modal-body" style={{fontWeight: 'bold'}}>
               <div className="mb-3 row">
                 <div className="col-md-9">
-                  <label htmlFor="addTitle" className="form-label"><i className="fa-solid fa-pen me-2"></i>Title</label>
+                  <label htmlFor="addTitle" className="form-label"><i className="fa-solid fa-handshake me-1"></i>Title</label>
                   <input type="text" className="form-control" id="addTitle" name="title" maxLength="100" value={title} onChange={handleTitleChange} required/>
                 </div>
                 <div className="col-sm-3">
                   <label htmlFor="addColor" className="form-label"><i className="fa-solid fa-palette me-2"></i>Event Color</label>
                   <select className="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor }}>
-                    <option value="#dd766a" style={{backgroundColor: '#dd766a'}}></option>
-                    <option value="#dd996a" style={{backgroundColor: '#dd996a'}}></option>
-                    <option value="#eddf7d" style={{backgroundColor: '#eddf7d'}}></option>
                     <option value="#5f9e55" style={{backgroundColor: '#5f9e55'}}></option>
                     <option value="#5287ba" style={{backgroundColor: '#5287ba'}}></option>  
                     <option value="#8364a7" style={{backgroundColor: '#8364a7'}}></option>
-                    <option value="#c97ab9" style={{backgroundColor: '#c97ab9'}}></option>
+                    <option value="#c97ab9" style={{backgroundColor: '#c97ab9'}}></option>                    
+                    <option value="#dd766a" style={{backgroundColor: '#dd766a'}}></option>
+                    <option value="#dd996a" style={{backgroundColor: '#dd996a'}}></option>
+                    <option value="#eddf7d" style={{backgroundColor: '#eddf7d'}}></option>
                   </select>
                 </div>
               </div>
 
               <div className="mb-3">
-                <label htmlFor="addDesc" className="form-label"><i className="fa-solid fa-comments me-2"></i>Description</label>
+                <label htmlFor="addDesc" className="form-label"><i className="fa-solid fa-circle-info me-2"></i>Description</label>
                 <textarea type="textarea" className="form-control" id="addDesc" name="description" maxLength="100" rows="3" value={description} onChange={handleDescriptionChange} required></textarea>
               </div>
 
@@ -248,20 +248,20 @@ function AddEvent(props) {
               </div> 
 
               <div className="mb-3">
-                <label htmlFor="addODetails" className="form-label"><i className="fa-solid fa-comments me-2"></i>Online Details</label>
+                <label htmlFor="addODetails" className="form-label"><i className="fa-solid fa-cloud me-1"></i> Online Details</label>
                 <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="2" value={links} onChange={handleOnDetailsChange} required></textarea>
               </div>
 
               <div className="row g-3">
                 <div className="col">
-                  <label className="control-label col-sm-2" htmlFor="addStart"><i className="fa-solid fa-hourglass-start me-2"></i>Start</label>
+                  <label className="control-label col-sm-10" htmlFor="addStart"><i className="fa-solid fa-hourglass-start me-2"></i>Start Time</label>
                   <div className="col-sm-15">          
                     <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addStart" name="start" placeholder="Start" value={start} onChange={handleStartChange} required/>
                     {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
                   </div>
                 </div>
                 <div className="col">
-                  <label className="control-label col-sm-2" htmlFor="addEnd"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
+                  <label className="control-label col-sm-10" htmlFor="addEnd"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End Time</label>
                   <div className="col-sm-15">          
                     <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addEnd" name="end" placeholder="End" value={end} onChange={handleEndChange} required/>
                     {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
