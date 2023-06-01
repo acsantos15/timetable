@@ -241,7 +241,7 @@ const ViewEditEvent = (props) => {
       // function htmlFor clear button
       const handleClear = () => {
         setTitle('');
-        setSelectedColor('#537C78');
+        setSelectedColor('#5f9e55');
         setDescription('');
         setSelectedLocation('');
         setOnDetails('');
@@ -286,36 +286,36 @@ const ViewEditEvent = (props) => {
 
           <div className="modal-body">
             <input type="hidden" id="eventId"></input>
-            <p className="fw-bold"><i className="fa-solid fa-pen me-2"></i>Title: </p><p id="eventTitle" style={{wordBreak: 'break-all'}}>{eventData.title}</p>
-            <p className="fw-bold"><i className="fa-solid fa-comments me-2"></i>Description: </p><p id="eventDescription" style={{wordBreak: 'break-all'}}>{eventData.description}</p>
+            <p className="fw-bold"><i className="fa-solid fa-handshake me-2"></i>Title: </p><p id="eventTitle" style={{wordBreak: 'break-all'}}>{eventData.title}</p>
+            <p className="fw-bold"><i className="fa-solid fa-circle-info me-2"></i>Description: </p><p id="eventDescription" style={{wordBreak: 'break-all'}}>{eventData.description}</p>
             <p className="fw-bold"><i className="fa-solid fa-location-dot me-2"></i>Location: </p><p id="eventLocation">{eventData.location}</p>
             <p><i className="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b> {appointmentCreator}</p>
-            <p className="fw-bold"><i className="fa-solid fa-users me-2"></i>Participant:</p>
+            <p className="fw-bold"><i className="fa-solid fa-users me-1"></i>Participant:</p>
             <ul className="list-group" id="participant">
               {participants}
             </ul>
             <div className="row align-items-center">
-            <p className="fw-bold"><i className="fa-solid fa-comments me-2"></i>Online Details: </p>
+            <p className="fw-bold"><i className="fa-solid fa-cloud me-2"></i>Online Details: </p>
               <div className="col-10">
               <a href={textToCopy} style={{wordBreak: 'break-all'}}>{textToCopy}</a>
               </div>
               <div className="col-sm-2 align-items-right">
-              <button onClick={handleCopyText} type="button" class="btn btn-outline-dark btn-sm"><i class="fa-regular fa-clipboard fa-xs"></i></button>
+              <button onClick={handleCopyText} type="button" class="btn btn-outline-dark btn-sm"><i class="fa-regular fa-copy fa-xs"></i></button>
               </div>
               {copyMsg && <div style={{height: '10px'}} className="invalid-feedback">{copyMsg}</div>}
             </div>
             <div className="row align-items-center">
               <div className="col">
-                <p className="fw-bold"><i className="fa-solid fa-hourglass-start me-2"></i>Start:</p>
+                <p className="fw-bold"><i className="fa-solid fa-hourglass-start me-2"></i> Start TIme:</p>
                 <p style={{display: 'inline'}}>Date: </p><p id="eventStartDate" style={{display: 'inline'}}>{moment(eventData.start).format('YYYY-MM-DD')}</p>
                 <br/>
                 <p style={{display: 'inline'}}>Time: </p><p id="eventStartTime" style={{display: 'inline'}}>{moment(eventData.start).format('HH:mm a')}</p>
               </div>
               <div className="col">
-                <p className="fw-bold"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End:</p>
+                <p className="fw-bold"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i> End Time:</p>
                 <p style={{display: 'inline'}}>Date: </p><p id="eventEndDate" style={{display: 'inline'}}>{moment(eventData.end).format('YYYY-MM-DD')}</p>
                 <br/>
-                <p style={{display: ' '}}>Time: </p><p id="eventEndTime" style={{display: 'inline'}}>{moment(eventData.end).format('HH:mm a')}</p>
+                <p style={{display: 'inline'}}>Time: </p><p id="eventEndTime" style={{display: 'inline'}}>{moment(eventData.end).format('HH:mm a')}</p>
               </div>
             </div>
           </div>
@@ -340,25 +340,25 @@ const ViewEditEvent = (props) => {
             <div className="modal-body" style={{fontWeight: 'bold'}}>
               <div className="mb-3 row">
                 <div className="col-md-9">
-                  <label htmlFor="addTitle" className="form-label"><i className="fa-solid fa-pen me-2"></i>Title</label>
+                  <label htmlFor="addTitle" className="form-label"><i className="fa-solid fa-handshake me-1"></i>Title</label>
                   <input type="text" className="form-control" id="addTitle" name="title" maxLength="100" value={title} onChange={handleTitleChange} required/>
                 </div>
                 <div className="col-sm-3">
                 <label htmlFor="addColor" className="form-label"><i className="fa-solid fa-palette me-2"></i>Event Color</label>
                 <select className="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor}}>
-                  <option value="#dd766a" style={{backgroundColor: '#dd766a'}}></option>
-                  <option value="#dd996a" style={{backgroundColor: '#dd996a'}}></option>
-                  <option value="#eddf7d" style={{backgroundColor: '#eddf7d'}}></option>
-                  <option value="#5f9e55" style={{backgroundColor: '#5f9e55'}}></option>
-                  <option value="#5287ba" style={{backgroundColor: '#5287ba'}}></option>  
-                  <option value="#8364a7" style={{backgroundColor: '#8364a7'}}></option>
-                  <option value="#c97ab9" style={{backgroundColor: '#c97ab9'}}></option>
+                <option value="#5f9e55" style={{backgroundColor: '#5f9e55'}}></option>
+                    <option value="#5287ba" style={{backgroundColor: '#5287ba'}}></option>  
+                    <option value="#8364a7" style={{backgroundColor: '#8364a7'}}></option>
+                    <option value="#c97ab9" style={{backgroundColor: '#c97ab9'}}></option>                    
+                    <option value="#dd766a" style={{backgroundColor: '#dd766a'}}></option>
+                    <option value="#dd996a" style={{backgroundColor: '#dd996a'}}></option>
+                    <option value="#eddf7d" style={{backgroundColor: '#eddf7d'}}></option>
                 </select>
                 </div>
               </div>
 
               <div className="mb-3">
-                <label htmlFor="addDesc" className="form-label"><i className="fa-solid fa-comments me-2"></i>Description</label>
+                <label htmlFor="addDesc" className="form-label"><i className="fa-solid fa-circle-info me-2"></i>Description</label>
                 <textarea type="textarea" className="form-control" id="addDesc" name="description" maxLength="100" rows="3" value={description} onChange={handleDescriptionChange} required></textarea>
               </div>
 
@@ -375,7 +375,7 @@ const ViewEditEvent = (props) => {
               </div>
 
               <div className="mb-3">
-                <label htmlFor="addPart" className="form-label"><i className="fa-solid fa-users me-2"></i>Participant/s:</label>
+                <label htmlFor="addPart" className="form-label"><i className="fa-solid fa-users me-1"></i>Participant/s:</label>
                 <Select
                   isMulti
                   name="peoples[]"
@@ -388,20 +388,20 @@ const ViewEditEvent = (props) => {
               </div> 
 
               <div className="mb-3">
-                <label htmlFor="addODetails" className="form-label"><i className="fa-solid fa-comments me-2"></i>Online Details</label>
-                <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="3" value={links} onChange={handleOnDetailsChange}></textarea>
+                <label htmlFor="addODetails" className="form-label"><i className="fa-solid fa-cloud me-1"></i>Online Details</label>
+                <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="3" value={links} onChange={handleOnDetailsChange} required></textarea>
               </div>
 
               <div className="row g-3">
                 <div className="col">
-                  <label className="control-label col-sm-2" htmlFor="addStart"><i className="fa-solid fa-hourglass-start me-2"></i>Start</label>
+                  <label className="control-label col-sm-3" htmlFor="addStart"><i className="fa-solid fa-hourglass-start me-2"></i> Start Time</label>
                   <div className="col-sm-15">          
                     <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addStart" name="start" placeholder="Start" value={start} onChange={handleStartChange} required/>
                     {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
                   </div>
                 </div>
                 <div className="col">
-                  <label className="control-label col-sm-2" htmlFor="addEnd"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End</label>
+                  <label className="control-label col-sm-3" htmlFor="addEnd"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i> End Time</label>
                   <div className="col-sm-15">          
                     <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addEnd" name="end" placeholder="End" value={end} onChange={handleEndChange} required/>
                     {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
