@@ -289,7 +289,11 @@ const ViewEditEvent = (props) => {
             <p className="fw-bold"><i className="fa-solid fa-handshake me-2"></i>Title: </p><p id="eventTitle" style={{wordBreak: 'break-all'}}>{eventData.title}</p>
             <p className="fw-bold"><i className="fa-solid fa-circle-info me-2"></i>Description: </p><p id="eventDescription" style={{wordBreak: 'break-all'}}>{eventData.description}</p>
             <p className="fw-bold"><i className="fa-solid fa-location-dot me-2"></i>Location: </p><p id="eventLocation">{eventData.location}</p>
+<<<<<<< HEAD
             <p><i className="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b></p> <p> {appointmentCreator}</p>
+=======
+            <p><i className="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b></p><p id="eventLocation">{appointmentCreator}</p>
+>>>>>>> 26a667c0808c111f0cf4585a4234ca1ee6d58bc4
             <p className="fw-bold"><i className="fa-solid fa-users me-1"></i>Participant:</p>
             <ul className="list-group" id="participant">
               {participants}
@@ -321,6 +325,7 @@ const ViewEditEvent = (props) => {
           </div>
 
           <div className="modal-footer">
+            <button type="button" onClick={props.toggleModal} class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
             <button type="button" className="btn btn-danger" id="removeEventBtn" onClick={handleDeleteEvent}><i className="fa-solid fa-trash me-2" ></i>Delete</button>
             <button style={{ display: moment(eventData.end).isAfter(moment()) ? "block" : "none" }} type="button" className="btn btn-success" id="editEventBtn" data-bs-target="#editEventModal" onClick={handleEditShow}><i className="fa-solid fa-pen-to-square me-2"></i>Edit</button>
           </div>
@@ -415,6 +420,7 @@ const ViewEditEvent = (props) => {
 
             {/* Buttons */}
             <div className="modal-footer">
+              <button type="button" onClick={handleEditShow} class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
               <button type="reset" className="btn btn-outline-secondary" onClick={handleClear}><i className="fa-solid fa-eraser me-2"></i>Clear</button>
               <button type="submit" className="btn btn-success" id="addEventBtn"><i className="fa-solid fa-floppy-disk me-2"></i>Save Changes</button>
             </div>            
