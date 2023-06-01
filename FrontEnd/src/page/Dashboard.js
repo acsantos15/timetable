@@ -165,7 +165,7 @@ const Dashboard = () => {
                         <div className="card-footer sticky-bottom" style={{backgroundColor: 'white'}}></div>
                     </div>
                     <div class="modal" tabindex="-1" style={{ display: showModal ? "block" : "none" }}>
-                        <div class="modal-dialog">
+                        <div class="modal-dialog modal-dialog-centered">
                             <div class="modal-content">
                             <div class="modal-header">
                                 <h5 class="modal-title" style={{color: '#212529'}}>Participants</h5>
@@ -179,7 +179,7 @@ const Dashboard = () => {
                                 </ul>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" onClick={handleCloseModal} class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                             </div>
                             </div>
                         </div>

@@ -255,11 +255,15 @@ const ViewEditEvent = (props) => {
       
       // Copy link button
       const textToCopy = eventData.links;
-
+      const [copyMsg, setshowCopyMsg] = useState(null);
       const handleCopyText = () => {
         navigator.clipboard.writeText(textToCopy).then(
           () => {
             console.log("Text copied to clipboard.");
+            setshowCopyMsg('Copied to clipboard');
+            setTimeout(() => {
+              setshowCopyMsg(null);
+            }, 3000);
           },
           (err) => {
             console.error("Error copying text to clipboard: ", err);
@@ -293,11 +297,12 @@ const ViewEditEvent = (props) => {
             <div className="row align-items-center">
             <p className="fw-bold"><i className="fa-solid fa-comments me-2"></i>Online Details: </p>
               <div className="col-10">
-              <p id="eventDescription" style={{wordBreak: 'break-all'}}>{textToCopy}</p>
+              <a href={textToCopy} style={{wordBreak: 'break-all'}}>{textToCopy}</a>
               </div>
               <div className="col-sm-2 align-items-right">
               <button onClick={handleCopyText} type="button" class="btn btn-outline-dark btn-sm"><i class="fa-regular fa-clipboard fa-xs"></i></button>
               </div>
+              {copyMsg && <div style={{height: '10px'}} className="invalid-feedback">{copyMsg}</div>}
             </div>
             <div className="row align-items-center">
               <div className="col">
@@ -384,7 +389,7 @@ const ViewEditEvent = (props) => {
 
               <div className="mb-3">
                 <label htmlFor="addODetails" className="form-label"><i className="fa-solid fa-comments me-2"></i>Online Details</label>
-                <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="3" value={links} onChange={handleOnDetailsChange} required></textarea>
+                <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="3" value={links} onChange={handleOnDetailsChange}></textarea>
               </div>
 
               <div className="row g-3">
