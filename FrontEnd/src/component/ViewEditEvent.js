@@ -289,7 +289,7 @@ const ViewEditEvent = (props) => {
             <p className="fw-bold"><i className="fa-solid fa-handshake me-2"></i>Title: </p><p id="eventTitle" style={{wordBreak: 'break-all'}}>{eventData.title}</p>
             <p className="fw-bold"><i className="fa-solid fa-circle-info me-2"></i>Description: </p><p id="eventDescription" style={{wordBreak: 'break-all'}}>{eventData.description}</p>
             <p className="fw-bold"><i className="fa-solid fa-location-dot me-2"></i>Location: </p><p id="eventLocation">{eventData.location}</p>
-            <p><i className="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b> {appointmentCreator}</p>
+            <p><i className="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b></p> <p> {appointmentCreator}</p>
             <p className="fw-bold"><i className="fa-solid fa-users me-1"></i>Participant:</p>
             <ul className="list-group" id="participant">
               {participants}
@@ -394,14 +394,14 @@ const ViewEditEvent = (props) => {
 
               <div className="row g-3">
                 <div className="col">
-                  <label className="control-label col-sm-3" htmlFor="addStart"><i className="fa-solid fa-hourglass-start me-2"></i> Start Time</label>
+                  <label className="control-label col-sm-5" htmlFor="addStart"><i className="fa-solid fa-hourglass-start me-2"></i> Start Time</label>
                   <div className="col-sm-15">          
                     <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addStart" name="start" placeholder="Start" value={start} onChange={handleStartChange} required/>
                     {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
                   </div>
                 </div>
                 <div className="col">
-                  <label className="control-label col-sm-3" htmlFor="addEnd"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i> End Time</label>
+                  <label className="control-label col-sm-5" htmlFor="addEnd"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i> End Time</label>
                   <div className="col-sm-15">          
                     <input className={`form-control ${timeerr ? 'is-invalid' : ''}`} type="datetime-local" id="addEnd" name="end" placeholder="End" value={end} onChange={handleEndChange} required/>
                     {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
