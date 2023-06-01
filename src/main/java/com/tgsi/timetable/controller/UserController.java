@@ -139,20 +139,27 @@ public class UserController {
         existingUser.setContact(contact);
         existingUser.setUsername(username);
         existingUser.setEmail(email);
-
+        long maxFileSize = 5 * 1024 * 1024;
+        String contentType = photo.getContentType();
         // Handle profile picture update
         if (photo != null && !photo.isEmpty()) {
             try {
-                // Save the profile picture file to a desired location
-                String originalFileName = photo.getOriginalFilename();
-                String extension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
-                String fileName = UUID.randomUUID().toString() + "." + extension;
-                
-                String filePath = "/home/aries/Desktop/Timetable Projecty/timetable/FrontEnd/public/ProfilePhotos/" + fileName;
-                Files.copy(photo.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+                if (photo.getSize() > maxFileSize) {
+                    return ResponseEntity.badRequest().body("File size exceeds the maximum limit.");
+                }else if (!contentType.equals("image/jpeg") && !contentType.equals("image/png") && !contentType.equals("image/jpg")){
+                    return ResponseEntity.badRequest().body("Invalid file type. Only image files are allowed.");
+                }else{
+                    // Save the profile picture file to a desired location
+                    String originalFileName = photo.getOriginalFilename();
+                    String extension = originalFileName.substring(originalFileName.lastIndexOf(".") + 1);
+                    String fileName = UUID.randomUUID().toString() + "." + extension;
+                    
+                    String filePath = "/home/aries/Desktop/Timetable Projecty/timetable/FrontEnd/public/ProfilePhotos/" + fileName;
+                    Files.copy(photo.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
+                    // Update the profile picture field in the existing user object
+                    existingUser.setPhoto(fileName);
 
-                // Update the profile picture field in the existing user object
-                existingUser.setPhoto(fileName);
+                };
             } catch (IOException e) {
                 // Handle file upload error
                 return ResponseEntity.badRequest().body("Failed to upload profile picture.");
