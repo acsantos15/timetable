@@ -14,10 +14,11 @@ const ViewEditEvent = (props) => {
     // get event data clicked
     const [eventId, setEventId] = useState('');
 
+    // List all participants on a event
     useEffect(() => {
       if (eventData && eventData.id) {
         setEventId(eventData.id);
-    
+        
         axios.get('/events/' + eventData.id + '/users')
           .then(response => {
             const people = response.data;
@@ -68,7 +69,7 @@ const ViewEditEvent = (props) => {
       }) 
     };
 
-    // Shoe edit event modal and populate its input
+    // Show edit event modal and populate its input
     const [isOpenEdit, setIsOpenEdit] = useState(false);
     const handleEditShow = () => {
       setIsOpenEdit(!isOpenEdit);
@@ -201,16 +202,22 @@ const ViewEditEvent = (props) => {
           setTimeError(null);
         }, 3000);
       }else{
+
+        // Ajax request to call springboot controller that edit events
         axios.defaults.withCredentials = true;
         axios.put('/edit/'+eventId, 
         {title: title, color: selectedColor, description: description, links: links, location: selectedLocVal, start: fStart, end: fEnd}, 
         {withCredentials: true}, 
         { headers: { 'Content-Type': 'application/json' } })
         .then(response => {
+
+          // Ajax request to call springboot controller tdelete participants
           axios.delete('/delete/'+eventId+'/edit')
           .then(response => {
             const selectedPeopleIds = selectedPeople.map(p => p.value);
             const payload = {eventId: response.data, participantIds: selectedPeopleIds};
+
+            // Ajax request to call springboot controller that save the new participants
             axios.defaults.withCredentials = true;
             axios.post('/saveEventParticipants', payload, {withCredentials: true}, 
             { headers: { 'Content-Type': 'application/json' } })
@@ -276,6 +283,7 @@ const ViewEditEvent = (props) => {
 
     return (
       <>
+      {/* Show Event Details */}
       <div className="modal" tabIndex="-1" style={{ display: isOpenView ? "block" : "none" }}>
       <div className="modal-dialog modal-dialog-centered">
         <div className="modal-content">
@@ -328,7 +336,8 @@ const ViewEditEvent = (props) => {
         </div>
       </div>
     </div> 
-
+  
+  {/* Show Edit Event */}
   <div className="modal" tabIndex="-1" style={{ display: isOpenEdit ? "block" : "none" }}>
         <form onSubmit={handleSubmit}>
         <div className="modal-dialog modal-dialog-centered modal-lg" style={{marginTop: '8%'}}>
@@ -372,6 +381,7 @@ const ViewEditEvent = (props) => {
                   classNamePrefix="select"
                   onChange={handleSelectLocChange}
                   value={selectedLoc}
+                  required
                 />
               </div>
 
@@ -390,7 +400,7 @@ const ViewEditEvent = (props) => {
 
               <div className="mb-3">
                 <label htmlFor="addODetails" className="form-label"><i className="fa-solid fa-cloud me-1"></i>Online Details</label>
-                <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="3" value={links} onChange={handleOnDetailsChange} required></textarea>
+                <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="3" value={links} onChange={handleOnDetailsChange}></textarea>
               </div>
 
               <div className="row g-3">

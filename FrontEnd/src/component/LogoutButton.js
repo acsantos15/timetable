@@ -3,6 +3,8 @@ import Swal from 'sweetalert2';
 
 // Logout user
 export function handleLogout() {
+
+    // Sweet alert logout confirmation
     Swal.fire({
         title: 'Logout?',
         text: " ",
@@ -13,6 +15,8 @@ export function handleLogout() {
         confirmButtonText: 'OK'
     }).then((result) => {
         if (result.isConfirmed) {
+
+          // Ajax request to call springboot controller that log out user
           axios.get('/logout')
           .then(response => {
             if (response.data.status === 'success') {

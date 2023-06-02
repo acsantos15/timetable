@@ -15,6 +15,8 @@ const MainCalendar = (props) => {
 
     // Populate calendar with events
     useEffect(() => {
+
+        // Ajax request to call springboot controller that get all events
         axios.defaults.withCredentials = true;
         axios.get('/events')
             .then(response => {
@@ -25,6 +27,7 @@ const MainCalendar = (props) => {
             });
     }, []);
 
+    // Change events color if end time already passed
     useEffect(() => {
         const fetchEvents = () => {
           axios.defaults.withCredentials = true;
@@ -53,8 +56,7 @@ const MainCalendar = (props) => {
       
         // Fetch events initially
         fetchEvents();
-      
-        // Fetch events repeatedly every 5 seconds (adjust the interval duration as needed)
+        
         const interval = setInterval(fetchEvents, 100);
       
         // Clean up the interval when the component is unmounted

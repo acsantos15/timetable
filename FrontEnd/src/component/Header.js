@@ -8,6 +8,8 @@ const Header = (props) => {
 
     // Logged user usernamevariables
     const [username, setUsername] = useState('');
+
+    // Ajax request to call springboot controller that get logged user data
     useEffect(() => {
       axios.get('/loggedUser')
         .then(response => setUsername(response.data))
@@ -20,6 +22,8 @@ const Header = (props) => {
 
     // Populate search user search bar
     useEffect(() => {
+
+      // Ajax request to call springboot controller that get all users
       axios.get('/users')
         .then(response => {
           const users = response.data.users.map(user => ({
@@ -38,6 +42,8 @@ const Header = (props) => {
     // Handle submission of search user
     const handleSearchSubmit = (event) => {
       event.preventDefault();
+
+      // Ajax request to call springboot controller that search user
       axios.defaults.withCredentials = true;
       axios.post('/search', 
       {searchWord: searchword.value}, 
@@ -71,7 +77,7 @@ const Header = (props) => {
       }
     }, [username, setPreviewImage]);
 
-    // Passed Data to search component
+    // Passed Data to search component (using props)
     const [isOpenSearch, setIsOpenSearch] = useState(false);
     const [searchData, setSearchData] = useState('');
 
@@ -121,7 +127,7 @@ const Header = (props) => {
               </form>
             </div>
 
-            {/* Dropdown */}
+            {/* Dropdown User */}
             <img src={previewImage} className="rounded-circle" alt="example placeholder" style={{width: '30px', height: '30px'}}/>
             <div className="btn-group">
               <button type="button" className="btn dropdown-toggle" style={{backgroundColor: '#537557', color: 'white'}} data-bs-toggle="dropdown" aria-expanded="false">

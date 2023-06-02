@@ -37,7 +37,9 @@ function AddEvent(props) {
       setDescription(event.target.value);
     };
     const handleOnDetailsChange = (event) => {
-      setOnDetails(event.target.value);
+      const value = event.target.value;
+      const updatedValue = value === "" ? "-not available-" : value;
+      setOnDetails(updatedValue);
     };
     const handleStartChange = (event) => {
       setStart(event.target.value);
@@ -76,6 +78,7 @@ function AddEvent(props) {
         })
         .catch(error => console.error(error));
     }, []);
+
 
     const handleSelectLocChange = (selectedOption) => {
       setSelectedLocation(selectedOption);
@@ -128,6 +131,8 @@ function AddEvent(props) {
         }, 3000);
       }
       else{
+        
+        // Ajax request to call springboot controller that save events
         axios.defaults.withCredentials = true;
         axios.post('/saveEvent', 
         {title: title, color: selectedColor, description: description, links: links, location: selectedLocVal, start: fStart, end: fEnd},
@@ -136,10 +141,14 @@ function AddEvent(props) {
         .then(response => {
           const selectedPeopleIds = selectedPeople.map(p => p.value);
           const payload = {eventId: response.data, participantIds: selectedPeopleIds};
+
+          // Ajax request to call springboot controller that save participants
           axios.defaults.withCredentials = true;
           axios.post('/saveEventParticipants', payload, {withCredentials: true}, 
           { headers: { 'Content-Type': 'application/json' } })
           .then(response => {
+
+            // SweetAlert Success
             Swal.fire({
                 title: 'Event Added',
                 text: " ",
@@ -172,9 +181,9 @@ function AddEvent(props) {
       setSelectedLocation('');
       setStart('');
       setEnd('');
+      // Clear Preselected User except the creator
       const preselectedUser = options.find(user => user.value === selectedPeople[0].value);
       const updatedSelectedPeople = preselectedUser ? [preselectedUser] : [];
-
       setSelectedPeople(updatedSelectedPeople);
     };
 
@@ -198,11 +207,16 @@ function AddEvent(props) {
               <button type="button" className="btn-close" data-bs-dismiss="modal" onClick={handleModalClose} aria-label="Close"></button>
             </div>
             <div className="modal-body" style={{fontWeight: 'bold'}}>
+
               <div className="mb-3 row">
+
+                {/* Title Input */}
                 <div className="col-md-9">
                   <label htmlFor="addTitle" className="form-label"><i className="fa-solid fa-handshake me-1"></i>Title</label>
                   <input type="text" className="form-control" id="addTitle" name="title" maxLength="100" value={title} onChange={handleTitleChange} required/>
                 </div>
+
+                {/* Color Input */}
                 <div className="col-sm-3">
                   <label htmlFor="addColor" className="form-label"><i className="fa-solid fa-palette me-2"></i>Event Color</label>
                   <select className="form-select" id="addColor" name="color" onChange={handleHeaderColor} value={selectedColor} style={{ backgroundColor: selectedColor }}>
@@ -217,11 +231,13 @@ function AddEvent(props) {
                 </div>
               </div>
 
+              {/* Description Input */}
               <div className="mb-3">
                 <label htmlFor="addDesc" className="form-label"><i className="fa-solid fa-circle-info me-2"></i>Description</label>
                 <textarea type="textarea" className="form-control" id="addDesc" name="description" maxLength="100" rows="3" value={description} onChange={handleDescriptionChange} required></textarea>
               </div>
 
+              {/* Location Input */}
               <div className="mb-3">
                 <label htmlFor="addLoc" className="form-label"><i className="fa-solid fa-location-dot me-2"></i>Location</label>
                 <Select
@@ -231,9 +247,11 @@ function AddEvent(props) {
                   classNamePrefix="select"
                   onChange={handleSelectLocChange}
                   value={selectedLoc}
+                  required
                 />
               </div>
 
+              {/* Participant Input */}
               <div className="mb-3">
                 <label htmlFor="addPart" className="form-label"><i className="fa-solid fa-users me-2"></i>Participant/s:</label>
                 <Select
@@ -246,13 +264,16 @@ function AddEvent(props) {
                   onChange={handleSelectChange}
                 />
               </div> 
-
+              
+              {/* Online Details Input */}
               <div className="mb-3">
                 <label htmlFor="addODetails" className="form-label"><i className="fa-solid fa-cloud me-1"></i> Online Details</label>
-                <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="2" value={links} onChange={handleOnDetailsChange} required></textarea>
+                <textarea type="textarea" className="form-control" id="addODetails" name="onlinedetails" rows="2" value={links} onChange={handleOnDetailsChange}></textarea>
               </div>
 
               <div className="row g-3">
+
+                {/* Start Time Input */}
                 <div className="col">
                   <label className="control-label col-sm-10" htmlFor="addStart"><i className="fa-solid fa-hourglass-start me-2"></i>Start Time</label>
                   <div className="col-sm-15">          
@@ -260,6 +281,8 @@ function AddEvent(props) {
                     {timeerr && <div style={{height: '10px'}} className="invalid-feedback">{timeerr}</div>}
                   </div>
                 </div>
+
+                {/* Ent Time Input */}
                 <div className="col">
                   <label className="control-label col-sm-10" htmlFor="addEnd"><i className="fa-solid fa-hourglass-start fa-rotate-180 me-2"></i>End Time</label>
                   <div className="col-sm-15">          
@@ -268,9 +291,7 @@ function AddEvent(props) {
                   </div>
                 </div>
               </div>
-              
-              {/* Error Message */}
-              <span id="errMsg" style={{color:'red' }}></span>   
+             
             </div>
 
             {/* Buttons */}
