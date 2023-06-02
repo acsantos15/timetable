@@ -289,11 +289,7 @@ const ViewEditEvent = (props) => {
             <p className="fw-bold"><i className="fa-solid fa-handshake me-2"></i>Title: </p><p id="eventTitle" style={{wordBreak: 'break-all'}}>{eventData.title}</p>
             <p className="fw-bold"><i className="fa-solid fa-circle-info me-2"></i>Description: </p><p id="eventDescription" style={{wordBreak: 'break-all'}}>{eventData.description}</p>
             <p className="fw-bold"><i className="fa-solid fa-location-dot me-2"></i>Location: </p><p id="eventLocation">{eventData.location}</p>
-<<<<<<< HEAD
             <p><i className="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b></p> <p> {appointmentCreator}</p>
-=======
-            <p><i className="fa-solid fa-user-tie me-2"></i><b>Appointment Creator:</b></p><p id="eventLocation">{appointmentCreator}</p>
->>>>>>> 26a667c0808c111f0cf4585a4234ca1ee6d58bc4
             <p className="fw-bold"><i className="fa-solid fa-users me-1"></i>Participant:</p>
             <ul className="list-group" id="participant">
               {participants}
