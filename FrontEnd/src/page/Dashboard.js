@@ -56,7 +56,7 @@ const Dashboard = () => {
           });
           setShowModal(true);
     };
-
+    
     const handleCloseModal = () => {
         setShowModal(false);
     };
@@ -100,6 +100,7 @@ const Dashboard = () => {
     }
     }, [icon, weatherData])
 
+    // Filter and sort events according to its time
     const filteredEvents = todayEvents
     .filter((event) => moment(event.end) > moment())
     .sort((a, b) => moment(a.start) - moment(b.start));
