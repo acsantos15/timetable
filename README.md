@@ -38,11 +38,21 @@ or download as zip file
 <h5>Run React App:</h5> navigate FrontEnd folder then open terminal and then run React using npm start command <br>
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-<h3>Timetable</h3>
-MariaDD 10.3.38<br>
+<h3>Database</h3>
+MariaDD 10.3.38 <br>
 
 Tables:
 [calendar_db.docx](https://github.com/acsantos15/timetable/files/11631174/calendar_db.docx)
 
 ERD:
-[Timetable ERD.pdf](https://github.com/acsantos15/timetable/files/11630966/Timetable.ERD.pdf)
+[Timetable ERD.pdf](https://github.com/acsantos15/timetable/files/11630966/Timetable.ERD.pdf)<br>
+
+----------------------------------------------------------------------------------------------------------------------------------------
+<h3>Contributors/Team</h3>
+- Aries Carlo Santos <br>
+- Allysa Aleligay <br>
+- Maria Celyn Lopez <br>
+- Kayeleigh Luluquisin <br>
+
+
+
