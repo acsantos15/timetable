@@ -33,9 +33,13 @@ For a user to access the system, it will require them to provide the information
 Clone project repository https://github.com/acsantos15/timetable.git
 or download as zip file
 
-<h5>Run Springboot:</h5> navigate and run on \src\main\java\com\tgsi\timetable\TimetableApplication.java
+<li>Configure application.properties according to your database</li>
 
-<h5>Run React App:</h5> navigate FrontEnd folder then open terminal and then run React using npm start command <br>
+<li>Profile Picture Save on Project local folder so in order to work you must have copy the file path of ProfilePhotos on your computer and paste it on User Controller ProfilePhotos Path</li>
+
+<li><b>Run Springboot:</b> navigate and run on \src\main\java\com\tgsi\timetable\TimetableApplication.java</li>
+
+<li><b>Run React App:</b> navigate FrontEnd folder then open terminal and then run React using npm start command <br></li>
 ----------------------------------------------------------------------------------------------------------------------------------------
 
 <h3>Database</h3>
