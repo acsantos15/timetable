@@ -48,6 +48,9 @@ MariaDD 10.3.38 <br>
 Tables:
 [calendar_db.docx](https://github.com/acsantos15/timetable/files/11631174/calendar_db.docx)
 
+SQL:
+[calendar_db.zip](https://github.com/acsantos15/timetable/files/11671219/calendar_db.zip)
+
 ERD:
 [Timetable ERD.pdf](https://github.com/acsantos15/timetable/files/11630966/Timetable.ERD.pdf)<br>
 
