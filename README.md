@@ -4,7 +4,7 @@ This system is a schedule maker or a time-table system that contains and organiz
 For a user to access the system, it will require them to provide the information needed to be able to register and after that they can now log-in. Inside it, the user will see a time-table calendar that they can use to add an event, edit its information, and remove if needed.<br>
 ----------------------------------------------------------------------------------------------------------------------------------------
 <h3>Built With</h3>
-- [![SpringBoot](https://img.shields.io/badge/SpringBoot-gray?style=flat&logo=springboot&link=https://spring.io/)](https://spring.io/)<a href="https://spring.io/" target="_blank" >Springboot 3.0.4</a> (Java 19.0.2) <br>
+- <a href="https://spring.io/" target="_blank" >Springboot 3.0.4</a> (Java 19.0.2) <br>
 - <a href="https://react.dev/" target="_blank" >React 18.2.0</a> (Javascript) <br>
 ----------------------------------------------------------------------------------------------------------------------------------------
 <h3> Springboot Dependencies </h3>
