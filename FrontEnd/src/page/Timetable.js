@@ -33,7 +33,7 @@ const Timetable = () => {
     const [selectEnd, setSelectEnd] = useState('');
 
     return (
-      <div className="row justify-content-center">
+      <div className="justify-content-center">
         <Header/>
         <Navigation/>
         <div className="card" style={{width: '90%', margin: '20px auto 50px auto', padding:'20px'}}>

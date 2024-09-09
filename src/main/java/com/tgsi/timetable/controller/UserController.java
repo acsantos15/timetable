@@ -155,7 +155,7 @@ public class UserController {
                     String fileName = UUID.randomUUID().toString() + "." + extension;
                     
                     // ProfilePhotos Path
-                    String filePath = "C:/Users/aries/Desktop/Timetable Project/React/timetable/FrontEnd/public/ProfilePhotos/" + fileName;
+                    String filePath = "C:/Users/acsantos/Desktop/timetable/FrontEnd/public/ProfilePhotos/" + fileName;
                     Files.copy(photo.getInputStream(), Paths.get(filePath), StandardCopyOption.REPLACE_EXISTING);
                     // Update the profile picture field in the existing user object
                     existingUser.setPhoto(fileName);

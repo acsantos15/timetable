@@ -45,7 +45,7 @@ public interface UserMapper {
     void updateUser(Users users);
     
     // Delete User
-    @Delete("DELETE FROM users WHERE id = #{id}")
+    @Delete("DELETE FROM users WHERE id = #{id}") 
     void deleteUserById(Long id);
 
     // Return user by email and password (Login)

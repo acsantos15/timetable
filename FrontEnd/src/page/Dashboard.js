@@ -246,25 +246,27 @@ const Dashboard = () => {
                 </div>
 
                 {/* Weather div */}
-                <div className="card align-items-center mb-3" style={{padding: '20px'}}>
-                <h3 style={{fontWeight: 'bold', color: '#7993A0'}}>Today's Weather</h3>
+                <div className="card align-items-center mb-3" style={{ padding: '10px' }}>
+                    <h3 style={{ fontWeight: 'bold', color: '#7993A0' }}>Today's Weather</h3>
                     {Loading ? (
                         // Show the Bootstrap spinner while loading is true
-                            <div className="spinner-border text-success" role="status">
-                                <span className="visually-hidden">Loading...</span>
-                            </div>
+                        <div className="spinner-border text-success" role="status">
+                            <span className="visually-hidden">Loading...</span>
+                        </div>
                     ) : (
                         // Render the content when loading is false
-                        <>
-                        <img src={weatherIcon} alt="weather icon" style={{width: '150px'}} />
-                        <p><b>Location:</b> Pasig</p>
-                        <p><b>Temperature:</b> {weatherData?.main?.temp}&deg;C</p>
-                        <p><b>Humidity:</b> {weatherData?.main?.humidity}%</p>
-                        <p><b>Weather Description:</b> <span>{weatherData?.weather?.[0]?.description}</span></p>
-                        </>
+                        <div className="d-flex align-items-center">
+                            <img src={weatherIcon} alt="weather icon" style={{ width: '150px', marginRight: '20px' }} />
+                            <div>
+                                <p><b>Location:</b> Pasig</p>
+                                <p><b>Temperature:</b> {weatherData?.main?.temp}&deg;C</p>
+                                <p><b>Humidity:</b> {weatherData?.main?.humidity}%</p>
+                                <p><b>Weather Description:</b> <span>{weatherData?.weather?.[0]?.description}</span></p>
+                            </div>
+                        </div>
                     )}
-                
                 </div>
+
 
             </div>
         </div>
